@@ -1,0 +1,312 @@
+# OpenConductor MCP Production Deployment
+# Complete Docker Compose configuration for MCP integration
+
+version: '3.8'
+
+services:
+  # Main OpenConductor application with MCP integration
+  openconductor-app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      args:
+        - BUILD_MODE=production
+        - FEATURES=trinity,mcp,enterprise
+    image: openconductor/core:latest-mcp
+    container_name: openconductor-main
+    restart: unless-stopped
+    environment:
+      # Core configuration
+      - NODE_ENV=production
+      - PORT=3000
+      - LOG_LEVEL=info
+      
+      # Database configuration
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=redis://redis:6379
+      
+      # Trinity AI configuration (existing)
+      - TRINITY_AI_ENABLED=true
+      - TRINITY_LICENSE_KEY=${TRINITY_LICENSE_KEY}
+      
+      # MCP configuration (new)
+      - MCP_ENABLED=true
+      - MCP_SEMANTIC_SEARCH_ENABLED=true
+      - MCP_COMMUNITY_FEATURES_ENABLED=true
+      - MCP_ANALYTICS_ENABLED=true
+      - MCP_BILLING_ENABLED=true
+      - MCP_ENTERPRISE_SECURITY_ENABLED=true
+      
+      # AI services
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=text-embedding-ada-002
+      
+      # Billing integration
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - STRIPE_PUBLIC_KEY=${STRIPE_PUBLIC_KEY}
+      
+      # WebSocket monitoring
+      - WEBSOCKET_PORT=8080
+      - WEBSOCKET_ENABLED=true
+      
+      # Security
+      - JWT_SECRET=${JWT_SECRET}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - AUDIT_LOGGING_ENABLED=true
+      
+      # Performance monitoring
+      - PERFORMANCE_MONITORING_ENABLED=true
+      - AUTO_SCALING_ENABLED=true
+      - METRICS_COLLECTION_ENABLED=true
+      
+    ports:
+      - "3000:3000"   # Main API
+      - "8080:8080"   # WebSocket monitoring
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - openconductor
+    volumes:
+      - app_logs:/app/logs
+      - app_uploads:/app/uploads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # PostgreSQL with pgvector extension
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: openconductor-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=openconductor
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ../src/mcp/database-schema.sql:/docker-entrypoint-initdb.d/02-mcp-schema.sql
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - openconductor
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d openconductor"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
+
+  # Redis for caching and session management
+  redis:
+    image: redis:7-alpine
+    container_name: openconductor-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --replica-read-only no --maxmemory 512mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - openconductor
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # MCP Worker processes for workflow execution
+  mcp-worker:
+    build:
+      context: ..
+      dockerfile: Dockerfile.worker
+      args:
+        - WORKER_TYPE=mcp_execution
+    image: openconductor/mcp-worker:latest
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=redis://redis:6379
+      - WORKER_TYPE=mcp_execution
+      - WORKER_CONCURRENCY=5
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - LOG_LEVEL=info
+    networks:
+      - openconductor
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  # Prometheus monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: openconductor-monitoring
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+      - '--web.enable-admin-api'
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./monitoring/alerts.yml:/etc/prometheus/alerts.yml
+      - prometheus_data:/prometheus
+    networks:
+      - openconductor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  # Grafana for visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: openconductor-grafana
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_ROOT_URL=http://localhost:3001
+      - GF_ANALYTICS_REPORTING_ENABLED=false
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - openconductor
+    depends_on:
+      - prometheus
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+
+  # Nginx reverse proxy and load balancer
+  nginx:
+    image: nginx:alpine
+    container_name: openconductor-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/logs:/var/log/nginx
+      - nginx_cache:/var/cache/nginx
+    networks:
+      - openconductor
+    depends_on:
+      - openconductor-app
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
+
+  # Vector database for semantic search (optional - if not using pgvector)
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: openconductor-vector-db
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - openconductor
+    environment:
+      - QDRANT__SERVICE__MAX_REQUEST_SIZE_MB=32
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+
+networks:
+  openconductor:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  qdrant_data:
+    driver: local
+  nginx_cache:
+    driver: local
+  app_logs:
+    driver: local
+  app_uploads:
+    driver: local
+
+# Additional configurations for production scaling
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: 10m
+    max-file: 3
+
+x-resource-defaults: &resource-defaults
+  resources:
+    limits:
+      cpus: '1.0'
+      memory: 1G
+    reservations:
+      cpus: '0.5'
+      memory: 512M

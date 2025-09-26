@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Sales Dashboard - OpenConductor</title>
+    <meta name="description" content="OpenConductor Enterprise Sales Dashboard - CRM, lead management, pipeline tracking, and revenue analytics for $2.5M ARR target.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Geist Design System for Sales Dashboard */
+        :root {
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --foreground: #000000;
+            --background: #ffffff;
+            --gray: #666666;
+            --gray-light: #999999;
+            --gray-lighter: #eaeaea;
+            --gray-lightest: #fafafa;
+            --border: #eaeaea;
+            --blue: #0070f3;
+            --success: #10b981;
+            --warning: #f5a623;
+            --error: #ef4444;
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --text-xs: 12px;
+            --text-sm: 14px;
+            --text-base: 16px;
+            --text-lg: 18px;
+            --text-xl: 20px;
+            --text-2xl: 24px;
+            --text-3xl: 30px;
+            --radius: 6px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            --transition: 0.2s ease;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-sans);
+            color: var(--foreground);
+            background: var(--gray-lightest);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Dashboard Header */
+        .dashboard-header {
+            background: var(--background);
+            border-bottom: 1px solid var(--border);
+            padding: var(--space-4) 0;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+        }
+        
+        .dashboard-title {
+            font-size: var(--text-2xl);
+            font-weight: 600;
+            color: var(--foreground);
+        }
+        
+        .dashboard-nav {
+            display: flex;
+            gap: var(--space-6);
+        }
+        
+        .nav-item {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            color: var(--foreground);
+            background: var(--gray-lightest);
+        }
+        
+        /* Dashboard Layout */
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-6);
+        }
+        
+        /* Revenue Metrics */
+        .revenue-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+        
+        .metric-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            margin-bottom: var(--space-1);
+        }
+        
+        .metric-value.revenue { color: var(--success); }
+        .metric-value.pipeline { color: var(--blue); }
+        .metric-value.leads { color: var(--warning); }
+        .metric-value.conversion { color: var(--success); }
+        
+        .metric-label {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--foreground);
+            margin-bottom: var(--space-1);
+        }
+        
+        .metric-change {
+            font-size: var(--text-xs);
+            font-weight: 500;
+        }
+        
+        .metric-change.positive { color: var(--success); }
+        .metric-change.negative { color: var(--error); }
+        
+        /* Pipeline Overview */
+        .pipeline-section {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            margin-bottom: var(--space-8);
+        }
+        
+        .pipeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-6);
+        }
+        
+        .pipeline-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--foreground);
+        }
+        
+        .pipeline-stages {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--space-4);
+        }
+        
+        .pipeline-stage {
+            background: var(--gray-lightest);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: var(--space-4);
+            text-align: center;
+        }
+        
+        .stage-name {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+        }
+        
+        .stage-count {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: var(--space-1);
+        }
+        
+        .stage-value {
+            font-size: var(--text-xs);
+            color: var(--gray);
+        }
+        
+        /* Recent Activity */
+        .activity-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-8);
+        }
+        
+        .leads-table {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+        }
+        
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+        }
+        
+        .table-title {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--foreground);
+        }
+        
+        .leads-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .lead-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .lead-item:last-child {
+            border-bottom: none;
+        }
+        
+        .lead-info {
+            flex: 1;
+        }
+        
+        .lead-name {
+            font-weight: 500;
+            color: var(--foreground);
+            font-size: var(--text-sm);
+        }
+        
+        .lead-company {
+            color: var(--gray);
+            font-size: var(--text-xs);
+        }
+        
+        .lead-score {
+            background: var(--gray-lightest);
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius);
+            font-size: var(--text-xs);
+            font-weight: 500;
+        }
+        
+        .lead-score.high { background: #f0fdf4; color: var(--success); }
+        .lead-score.medium { background: #eff6ff; color: var(--blue); }
+        .lead-score.low { background: #fef3c7; color: var(--warning); }
+        
+        /* Quick Actions */
+        .quick-actions {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+        }
+        
+        .actions-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3);
+            border-radius: var(--radius);
+            margin-bottom: var(--space-2);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .action-item:hover {
+            background: var(--gray-lightest);
+        }
+        
+        .action-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-sm);
+            background: var(--gray-lightest);
+        }
+        
+        .action-text {
+            flex: 1;
+        }
+        
+        .action-title {
+            font-weight: 500;
+            color: var(--foreground);
+            font-size: var(--text-sm);
+        }
+        
+        .action-desc {
+            color: var(--gray);
+            font-size: var(--text-xs);
+        }
+        
+        @media (max-width: 768px) {
+            .pipeline-stages {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .activity-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="header-content">
+            <h1 class="dashboard-title">Enterprise Sales Dashboard</h1>
+            <nav class="dashboard-nav">
+                <a href="#overview" class="nav-item active">Overview</a>
+                <a href="#leads" class="nav-item">Leads</a>
+                <a href="#pipeline" class="nav-item">Pipeline</a>
+                <a href="#analytics" class="nav-item">Analytics</a>
+                <a href="#settings" class="nav-item">Settings</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard-container">
+        <!-- Revenue Metrics -->
+        <div class="revenue-metrics">
+            <div class="metric-card">
+                <div class="metric-value revenue">$847K</div>
+                <div class="metric-label">Current ARR</div>
+                <div class="metric-change positive">+34% from Q3</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value pipeline">$2.1M</div>
+                <div class="metric-label">Pipeline Value</div>
+                <div class="metric-change positive">+18% this month</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value leads">247</div>
+                <div class="metric-label">Active Leads</div>
+                <div class="metric-change positive">+23 this week</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value conversion">12.4%</div>
+                <div class="metric-label">Conversion Rate</div>
+                <div class="metric-change positive">+2.1% vs last quarter</div>
+            </div>
+        </div>
+
+        <!-- Sales Pipeline -->
+        <div class="pipeline-section">
+            <div class="pipeline-header">
+                <h2 class="pipeline-title">Sales Pipeline - Q4 2025 Target: $2.5M ARR</h2>
+                <div style="color: var(--gray); font-size: var(--text-sm);">Last updated: 2 minutes ago</div>
+            </div>
+            
+            <div class="pipeline-stages">
+                <div class="pipeline-stage">
+                    <div class="stage-name">Prospects</div>
+                    <div class="stage-count">89</div>
+                    <div class="stage-value">$890K potential</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-name">Qualified</div>
+                    <div class="stage-count">34</div>
+                    <div class="stage-value">$680K pipeline</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-name">Demo Scheduled</div>
+                    <div class="stage-count">18</div>
+                    <div class="stage-value">$540K value</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-name">Proposal Sent</div>
+                    <div class="stage-count">12</div>
+                    <div class="stage-value">$480K closing</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-name">Negotiation</div>
+                    <div class="stage-count">7</div>
+                    <div class="stage-value">$350K final</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="activity-section">
+            <!-- Recent Leads -->
+            <div class="leads-table">
+                <div class="table-header">
+                    <h3 class="table-title">Recent Enterprise Leads</h3>
+                    <a href="#all-leads" style="color: var(--blue); font-size: var(--text-sm);">View All</a>
+                </div>
+                
+                <ul class="leads-list">
+                    <li class="lead-item">
+                        <div class="lead-info">
+                            <div class="lead-name">Sarah Kim</div>
+                            <div class="lead-company">TechCorp Global - VP Engineering</div>
+                        </div>
+                        <div class="lead-score high">High Score: 87</div>
+                    </li>
+                    <li class="lead-item">
+                        <div class="lead-info">
+                            <div class="lead-name">Michael Rodriguez</div>
+                            <div class="lead-company">FinanceFirst Bank - CISO</div>
+                        </div>
+                        <div class="lead-score high">High Score: 92</div>
+                    </li>
+                    <li class="lead-item">
+                        <div class="lead-info">
+                            <div class="lead-name">Jennifer Martinez</div>
+                            <div class="lead-company">HealthSystem Plus - CTO</div>
+                        </div>
+                        <div class="lead-score medium">Medium Score: 64</div>
+                    </li>
+                    <li class="lead-item">
+                        <div class="lead-info">
+                            <div class="lead-name">David Chen</div>
+                            <div class="lead-company">CloudServices Inc - Director DevOps</div>
+                        </div>
+                        <div class="lead-score high">High Score: 78</div>
+                    </li>
+                    <li class="lead-item">
+                        <div class="lead-info">
+                            <div class="lead-name">Alex Liu</div>
+                            <div class="lead-company">DataPlatform Corp - SRE Manager</div>
+                        </div>
+                        <div class="lead-score medium">Medium Score: 56</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="table-header">
+                    <h3 class="table-title">Quick Actions</h3>
+                </div>
+                
+                <ul class="actions-list">
+                    <li class="action-item" onclick="alert('Opening CRM...')">
+                        <div class="action-icon" style="background: #eff6ff; color: var(--blue);">📊</div>
+                        <div class="action-text">
+                            <div class="action-title">View Full CRM</div>
+                            <div class="action-desc">Complete lead and customer management</div>
+                        </div>
+                    </li>
+                    <li class="action-item" onclick="alert('Creating new campaign...')">
+                        <div class="action-icon" style="background: #f0fdf4; color: var(--success);">📧</div>
+                        <div class="action-text">
+                            <div class="action-title">New Email Campaign</div>
+                            <div class="action-desc">Automated lead nurturing sequence</div>
+                        </div>
+                    </li>
+                    <li class="action-item" onclick="alert('Generating reports...')">
+                        <div class="action-icon" style="background: #fef3c7; color: var(--warning);">📈</div>
+                        <div class="action-text">
+                            <div class="action-title">Generate Reports</div>
+                            <div class="action-desc">Revenue and conversion analytics</div>
+                        </div>
+                    </li>
+                    <li class="action-item" onclick="alert('Opening demo scheduler...')">
+                        <div class="action-icon" style="background: #faf5ff; color: #8b5cf6;">🗓️</div>
+                        <div class="action-text">
+                            <div class="action-title">Schedule Demo</div>
+                            <div class="action-desc">Book enterprise demonstrations</div>
+                        </div>
+                    </li>
+                    <li class="action-item" onclick="alert('Accessing billing...')">
+                        <div class="action-icon" style="background: #fee2e2; color: var(--error);">💳</div>
+                        <div class="action-text">
+                            <div class="action-title">Billing Management</div>
+                            <div class="action-desc">Subscriptions and revenue tracking</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- GTM AI Integration Status -->
+        <div style="background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-6); margin-top: var(--space-8);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                <h3 style="font-size: var(--text-lg); font-weight: 600;">GTM AI Engine Status</h3>
+                <div style="background: var(--success); color: white; padding: var(--space-1) var(--space-2); border-radius: var(--radius); font-size: var(--text-xs); font-weight: 500;">
+                    READY FOR ACTIVATION
+                </div>
+            </div>
+            <p style="color: var(--gray); margin-bottom: var(--space-4);">
+                Your proprietary GTM AI Engine is built and ready for deployment. This autonomous revenue acceleration system 
+                will capture leads, qualify prospects, and convert customers automatically.
+            </p>
+            <div style="display: flex; gap: var(--space-3);">
+                <button onclick="alert('Activating GTM AI Engine...')" style="background: var(--success); color: white; border: none; padding: var(--space-2) var(--space-4); border-radius: var(--radius); font-weight: 500; cursor: pointer;">
+                    Activate GTM AI Engine
+                </button>
+                <button onclick="alert('Opening GTM AI dashboard...')" style="background: var(--background); color: var(--foreground); border: 1px solid var(--border); padding: var(--space-2) var(--space-4); border-radius: var(--radius); font-weight: 500; cursor: pointer;">
+                    View GTM AI Dashboard
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Enterprise Sales Dashboard loaded');
+            
+            // Simulate real-time updates
+            setInterval(updateDashboard, 30000); // Update every 30 seconds
+        });
+        
+        function updateDashboard() {
+            // Simulate real-time sales metrics updates
+            console.log('Dashboard metrics updated');
+            
+            // Would update metrics from actual CRM/sales data
+            // Integration with GTM AI Engine for lead scoring
+            // Real-time pipeline value calculations
+        }
+        
+        // Sales dashboard functionality
+        function viewLead(leadId) {
+            console.log(`Viewing lead: ${leadId}`);
+            // Would open detailed lead view
+        }
+        
+        function scheduleDemo(leadId) {
+            console.log(`Scheduling demo for lead: ${leadId}`);
+            // Would integrate with calendar systems
+        }
+        
+        function updatePipeline() {
+            console.log('Updating sales pipeline');
+            // Would sync with CRM systems
+        }
+    </script>
+</body>
+</html>

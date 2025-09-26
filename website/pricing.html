@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - OpenConductor Enterprise AIOps Platform</title>
+    <meta name="description" content="Transparent pricing for OpenConductor AIOps platform. Free Community Edition, Starter ($2.5K/month), Professional ($7.5K/month), Enterprise ($20K/month). 300% ROI guaranteed.">
+    
+    <link rel="canonical" href="https://openconductor.ai/pricing">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Same Geist design system as homepage */
+        :root {
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --foreground: #000000;
+            --background: #ffffff;
+            --gray: #666666;
+            --gray-light: #999999;
+            --gray-lighter: #eaeaea;
+            --gray-lightest: #fafafa;
+            --border: #eaeaea;
+            --blue: #0070f3;
+            --oracle: #0ea5e9;
+            --sentinel: #10b981;
+            --sage: #8b5cf6;
+            --success: #10b981;
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --space-16: 64px;
+            --space-24: 96px;
+            --text-xs: 12px;
+            --text-sm: 14px;
+            --text-base: 16px;
+            --text-lg: 18px;
+            --text-xl: 20px;
+            --text-2xl: 24px;
+            --text-3xl: 30px;
+            --text-4xl: 36px;
+            --text-5xl: 48px;
+            --text-6xl: 60px;
+            --radius: 6px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.12);
+            --transition: 0.2s ease;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-sans);
+            color: var(--foreground);
+            background: var(--background);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 50;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--foreground);
+        }
+        
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            margin-right: var(--space-3);
+            background: linear-gradient(135deg, var(--oracle), var(--sage));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: var(--space-8);
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--foreground);
+            background: var(--gray-lightest);
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: var(--space-3);
+            align-items: center;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            height: 32px;
+        }
+        
+        .btn-primary {
+            background: var(--foreground);
+            color: var(--background);
+            border-color: var(--foreground);
+        }
+        
+        .btn-primary:hover {
+            background: var(--gray);
+            border-color: var(--gray);
+        }
+        
+        .btn-secondary {
+            background: var(--background);
+            color: var(--foreground);
+            border-color: var(--border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--foreground);
+        }
+        
+        .btn-lg {
+            height: 40px;
+            padding: var(--space-3) var(--space-6);
+            font-size: var(--text-base);
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+        
+        .section {
+            padding: var(--space-24) 0;
+        }
+        
+        /* Pricing Hero */
+        .pricing-hero {
+            padding: var(--space-24) 0;
+            margin-top: 64px;
+            text-align: center;
+        }
+        
+        .pricing-title {
+            font-size: var(--text-5xl);
+            font-weight: 700;
+            margin-bottom: var(--space-6);
+            background: linear-gradient(135deg, var(--foreground) 0%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .pricing-subtitle {
+            font-size: var(--text-lg);
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto var(--space-8);
+        }
+        
+        /* Pricing Toggle */
+        .pricing-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-4);
+            margin-bottom: var(--space-12);
+        }
+        
+        .toggle {
+            display: flex;
+            background: var(--gray-lightest);
+            border-radius: var(--radius);
+            padding: var(--space-1);
+            border: 1px solid var(--border);
+        }
+        
+        .toggle-option {
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            background: transparent;
+            color: var(--gray);
+        }
+        
+        .toggle-option.active {
+            background: var(--background);
+            color: var(--foreground);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .annual-badge {
+            background: var(--success);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: var(--space-2);
+        }
+        
+        /* Pricing Cards */
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-8);
+            margin: var(--space-16) 0;
+        }
+        
+        .pricing-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            border-color: var(--gray-light);
+            box-shadow: var(--shadow);
+        }
+        
+        .pricing-card.popular {
+            border-color: var(--blue);
+        }
+        
+        .pricing-card.popular::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--blue);
+            color: white;
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius);
+            font-size: var(--text-xs);
+            font-weight: 500;
+        }
+        
+        .plan-name {
+            font-size: var(--text-2xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+        }
+        
+        .plan-desc {
+            color: var(--gray);
+            margin-bottom: var(--space-6);
+            font-size: var(--text-sm);
+        }
+        
+        .plan-price {
+            margin-bottom: var(--space-6);
+        }
+        
+        .price-amount {
+            font-size: var(--text-5xl);
+            font-weight: 700;
+            color: var(--foreground);
+            line-height: 1;
+        }
+        
+        .price-period {
+            color: var(--gray);
+            font-size: var(--text-base);
+        }
+        
+        .price-annual {
+            color: var(--success);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            margin-top: var(--space-2);
+        }
+        
+        .feature-category {
+            font-weight: 600;
+            color: var(--foreground);
+            margin: var(--space-4) 0 var(--space-2) 0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: var(--space-1);
+            font-size: var(--text-sm);
+            text-align: left;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-bottom: var(--space-6);
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-2);
+            font-size: var(--text-sm);
+            color: var(--gray);
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            color: var(--blue);
+            font-weight: 600;
+            margin-right: var(--space-3);
+            font-size: var(--text-base);
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-12);
+        }
+        
+        .section-title {
+            font-size: var(--text-4xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-4);
+        }
+        
+        .section-subtitle {
+            font-size: var(--text-lg);
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* ROI Calculator */
+        .roi-section {
+            background: var(--gray-lightest);
+            border-radius: var(--radius-lg);
+            padding: var(--space-12);
+            margin: var(--space-16) 0;
+            border: 1px solid var(--border);
+        }
+        
+        .roi-calculator {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-8);
+            margin-top: var(--space-8);
+        }
+        
+        .roi-inputs, .roi-results {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+        }
+        
+        .input-group {
+            margin-bottom: var(--space-4);
+        }
+        
+        .input-label {
+            display: block;
+            font-weight: 500;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+            font-size: var(--text-sm);
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: var(--space-3);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--foreground);
+            font-size: var(--text-sm);
+            font-family: var(--font-sans);
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--blue);
+        }
+        
+        .roi-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--border);
+            font-size: var(--text-sm);
+        }
+        
+        .roi-metric:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            font-size: var(--text-base);
+        }
+        
+        .roi-label {
+            color: var(--gray);
+        }
+        
+        .roi-value {
+            font-weight: 600;
+            color: var(--foreground);
+        }
+        
+        .roi-value.positive {
+            color: var(--success);
+        }
+        
+        .roi-value.savings {
+            color: var(--blue);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .roi-calculator {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Geist Header -->
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <div class="logo-mark">OC</div>
+                OpenConductor
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="/platform">Platform</a></li>
+                    <li><a href="/pricing" class="active">Pricing</a></li>
+                    <li><a href="/docs">Documentation</a></li>
+                    <li><a href="/enterprise">Enterprise</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/community">Community</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="/auth/login" class="btn btn-secondary">Sign In</a>
+                <a href="/enterprise/demo" class="btn btn-primary">Book Demo</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pricing Hero -->
+    <section class="pricing-hero">
+        <div class="container">
+            <h1 class="pricing-title">Simple, Transparent Pricing</h1>
+            <p class="pricing-subtitle">
+                Start free with our Community Edition. Scale to Enterprise with transparent pricing 
+                and proven ROI. No hidden fees, no vendor lock-in.
+            </p>
+            
+            <!-- Billing Toggle -->
+            <div class="pricing-toggle">
+                <span style="color: var(--gray); font-weight: 500;">Monthly</span>
+                <div class="toggle">
+                    <button class="toggle-option active" onclick="switchToMonthly()">Monthly</button>
+                    <button class="toggle-option" onclick="switchToAnnual()">Annual</button>
+                </div>
+                <span style="color: var(--gray); font-weight: 500;">Annual <span class="annual-badge">Save 15%</span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="section">
+        <div class="container">
+            <div class="pricing-cards">
+                <!-- Community -->
+                <div class="pricing-card">
+                    <h3 class="plan-name">Community</h3>
+                    <p class="plan-desc">Perfect for individual developers and small teams exploring AIOps</p>
+                    
+                    <div class="plan-price">
+                        <span class="price-amount">$0</span>
+                        <span class="price-period">/month</span>
+                        <div class="price-annual">Always free</div>
+                    </div>
+                    
+                    <div style="text-align: left;">
+                        <div class="feature-category">Core Platform</div>
+                        <ul class="feature-list">
+                            <li>Basic Trinity AI agents</li>
+                            <li>Up to 3 agents, 100 targets</li>
+                            <li>Standard alert correlation</li>
+                            <li>Community support</li>
+                            <li>5 standard integrations</li>
+                        </ul>
+                    </div>
+                    
+                    <a href="/start-free" class="btn btn-primary" style="width: 100%;">Start Free</a>
+                </div>
+
+                <!-- Professional -->
+                <div class="pricing-card popular">
+                    <h3 class="plan-name">Professional</h3>
+                    <p class="plan-desc">Mid-market companies with compliance and advanced security needs</p>
+                    
+                    <div class="plan-price">
+                        <span class="price-amount monthly-price">$7,500</span>
+                        <span class="price-amount annual-price" style="display: none;">$6,375</span>
+                        <span class="price-period">/month</span>
+                        <div class="price-annual annual-price" style="display: none;">$76,500 annually (15% savings)</div>
+                    </div>
+                    
+                    <div style="text-align: left;">
+                        <div class="feature-category">Professional Features</div>
+                        <ul class="feature-list">
+                            <li>Up to 100 users, 25 agents, 5,000 targets</li>
+                            <li>Advanced ML correlation (90% reduction)</li>
+                            <li>Full RBAC with custom roles</li>
+                            <li>Compliance reporting (SOX, GDPR, HIPAA)</li>
+                            <li>24/7 priority support</li>
+                            <li>25 custom integrations</li>
+                        </ul>
+                        
+                        <div class="feature-category">Enterprise ROI</div>
+                        <ul class="feature-list">
+                            <li>$560K annual cost savings</li>
+                            <li>520% ROI in Year 1</li>
+                            <li>99.9% uptime SLA</li>
+                        </ul>
+                    </div>
+                    
+                    <a href="/enterprise/demo?tier=professional" class="btn btn-primary" style="width: 100%;">Book Demo</a>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="pricing-card">
+                    <h3 class="plan-name">Enterprise</h3>
+                    <p class="plan-desc">Large enterprises requiring unlimited scale and advanced capabilities</p>
+                    
+                    <div class="plan-price">
+                        <span class="price-amount monthly-price">$20,000</span>
+                        <span class="price-amount annual-price" style="display: none;">$17,000</span>
+                        <span class="price-period">/month</span>
+                        <div class="price-annual annual-price" style="display: none;">$204,000 annually (15% savings)</div>
+                    </div>
+                    
+                    <div style="text-align: left;">
+                        <div class="feature-category">Enterprise Scale</div>
+                        <ul class="feature-list">
+                            <li>Up to 500 users, unlimited agents & targets</li>
+                            <li>Enterprise-grade ML models (95% reduction)</li>
+                            <li>Advanced compliance frameworks</li>
+                            <li>White-glove onboarding</li>
+                            <li>Dedicated customer success manager</li>
+                            <li>On-premises deployment option</li>
+                        </ul>
+                        
+                        <div class="feature-category">Maximum ROI</div>
+                        <ul class="feature-list">
+                            <li>$1.9M annual cost savings</li>
+                            <li>690% ROI in Year 1</li>
+                            <li>99.95% uptime SLA</li>
+                        </ul>
+                    </div>
+                    
+                    <a href="/enterprise/demo?tier=enterprise" class="btn btn-primary" style="width: 100%;">Book Enterprise Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator -->
+    <section class="section">
+        <div class="container">
+            <div class="roi-section">
+                <div class="section-header">
+                    <h2 class="section-title">Calculate Your ROI</h2>
+                    <p class="section-subtitle">
+                        See how much OpenConductor can save your organization through reduced alert fatigue, 
+                        faster incident resolution, and operational efficiency.
+                    </p>
+                </div>
+                
+                <div class="roi-calculator">
+                    <div class="roi-inputs">
+                        <h3 style="margin-bottom: var(--space-4); color: var(--foreground);">Your Environment</h3>
+                        
+                        <div class="input-group">
+                            <label class="input-label">Team Size</label>
+                            <select class="input-field" id="teamSize" onchange="calculateROI()">
+                                <option value="25">Small Team (1-25 people)</option>
+                                <option value="100" selected>Medium Team (26-100 people)</option>
+                                <option value="500">Large Team (101-500 people)</option>
+                                <option value="1000">Enterprise Team (500+ people)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">Daily Alert Volume</label>
+                            <select class="input-field" id="alertVolume" onchange="calculateROI()">
+                                <option value="10000">Low Volume (< 50K/day)</option>
+                                <option value="100000" selected>Medium Volume (50K-500K/day)</option>
+                                <option value="1000000">High Volume (500K-5M/day)</option>
+                                <option value="10000000">Enterprise Volume (5M+/day)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">Average Engineer Salary</label>
+                            <input type="number" class="input-field" id="engineerSalary" value="150000" onchange="calculateROI()" placeholder="150000">
+                        </div>
+                    </div>
+                    
+                    <div class="roi-results">
+                        <h3 style="margin-bottom: var(--space-4); color: var(--foreground);">Annual Savings with OpenConductor</h3>
+                        
+                        <div class="roi-metric">
+                            <span class="roi-label">Time Savings (85% alert reduction)</span>
+                            <span class="roi-value savings" id="timeSavings">$127,500</span>
+                        </div>
+                        
+                        <div class="roi-metric">
+                            <span class="roi-label">OpenConductor Investment</span>
+                            <span class="roi-value" id="platformCost">-$90,000</span>
+                        </div>
+                        
+                        <div class="roi-metric">
+                            <span class="roi-label"><strong>Net Annual Savings</strong></span>
+                            <span class="roi-value positive" id="netSavings"><strong>$162,500</strong></span>
+                        </div>
+                        
+                        <div class="roi-metric">
+                            <span class="roi-label"><strong>ROI Percentage</strong></span>
+                            <span class="roi-value positive" id="roiPercentage"><strong>180%</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function calculateROI() {
+            const teamSize = parseInt(document.getElementById('teamSize').value);
+            const alertVolume = parseInt(document.getElementById('alertVolume').value);
+            const engineerSalary = parseInt(document.getElementById('engineerSalary').value);
+            
+            const hourlyRate = engineerSalary / (52 * 40);
+            const weeklyAlertCost = 20 * hourlyRate; // 20 hours/week on alerts
+            const annualAlertCost = weeklyAlertCost * 52;
+            const timeSavings = annualAlertCost * 0.85;
+            
+            let platformCost;
+            if (teamSize <= 25) platformCost = 30000;
+            else if (teamSize <= 100) platformCost = 90000;
+            else platformCost = 240000;
+            
+            const netSavings = timeSavings - platformCost;
+            const roiPercentage = ((netSavings / platformCost) * 100).toFixed(0);
+            
+            document.getElementById('timeSavings').textContent = `$${timeSavings.toLocaleString()}`;
+            document.getElementById('platformCost').textContent = `-$${platformCost.toLocaleString()}`;
+            document.getElementById('netSavings').textContent = `$${netSavings.toLocaleString()}`;
+            document.getElementById('roiPercentage').textContent = `${roiPercentage}%`;
+        }
+        
+        let isAnnual = false;
+        
+        function switchToMonthly() {
+            isAnnual = false;
+            updatePricing();
+        }
+        
+        function switchToAnnual() {
+            isAnnual = true;
+            updatePricing();
+        }
+        
+        function updatePricing() {
+            const toggleOptions = document.querySelectorAll('.toggle-option');
+            const monthlyPrices = document.querySelectorAll('.monthly-price');
+            const annualPrices = document.querySelectorAll('.annual-price');
+            
+            toggleOptions.forEach((option, index) => {
+                option.classList.toggle('active', isAnnual ? index === 1 : index === 0);
+            });
+            
+            monthlyPrices.forEach(price => {
+                price.style.display = isAnnual ? 'none' : 'inline';
+            });
+            
+            annualPrices.forEach(price => {
+                price.style.display = isAnnual ? 'inline' : 'none';
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateROI();
+            console.log('Pricing page loaded with Geist design system');
+        });
+    </script>
+</body>
+</html>

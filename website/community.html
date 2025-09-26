@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - OpenConductor Open Source AIOps</title>
+    <meta name="description" content="Join the OpenConductor open-source community. 25K+ GitHub stars, active contributors, and thriving ecosystem driving AIOps innovation.">
+    
+    <link rel="canonical" href="https://openconductor.ai/community">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Same Geist design system */
+        :root {
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --foreground: #000000;
+            --background: #ffffff;
+            --gray: #666666;
+            --gray-light: #999999;
+            --gray-lighter: #eaeaea;
+            --gray-lightest: #fafafa;
+            --border: #eaeaea;
+            --blue: #0070f3;
+            --oracle: #0ea5e9;
+            --sentinel: #10b981;
+            --sage: #8b5cf6;
+            --success: #10b981;
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --space-16: 64px;
+            --space-24: 96px;
+            --text-xs: 12px;
+            --text-sm: 14px;
+            --text-base: 16px;
+            --text-lg: 18px;
+            --text-xl: 20px;
+            --text-2xl: 24px;
+            --text-3xl: 30px;
+            --text-4xl: 36px;
+            --text-5xl: 48px;
+            --radius: 6px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            --transition: 0.2s ease;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-sans);
+            color: var(--foreground);
+            background: var(--background);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 50;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--foreground);
+        }
+        
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            margin-right: var(--space-3);
+            background: linear-gradient(135deg, var(--oracle), var(--sage));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: var(--space-8);
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--foreground);
+            background: var(--gray-lightest);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            height: 32px;
+        }
+        
+        .btn-primary {
+            background: var(--foreground);
+            color: var(--background);
+        }
+        
+        .btn-secondary {
+            background: var(--background);
+            color: var(--foreground);
+            border-color: var(--border);
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+        
+        .section {
+            padding: var(--space-24) 0;
+        }
+        
+        /* Community Hero */
+        .community-hero {
+            padding: var(--space-24) 0;
+            margin-top: 64px;
+            text-align: center;
+        }
+        
+        .community-title {
+            font-size: var(--text-5xl);
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+            background: linear-gradient(135deg, var(--foreground) 0%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .community-subtitle {
+            font-size: var(--text-lg);
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto var(--space-8);
+        }
+        
+        /* GitHub Stats */
+        .github-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-6);
+            margin: var(--space-12) 0;
+        }
+        
+        .stat-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .stat-card:hover {
+            border-color: var(--blue);
+            box-shadow: var(--shadow);
+        }
+        
+        .stat-number {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            color: var(--blue);
+            display: block;
+            margin-bottom: var(--space-1);
+        }
+        
+        .stat-label {
+            font-weight: 500;
+            color: var(--foreground);
+            margin-bottom: var(--space-1);
+            font-size: var(--text-sm);
+        }
+        
+        .stat-growth {
+            font-size: var(--text-xs);
+            color: var(--success);
+            font-weight: 500;
+        }
+        
+        /* Community Channels */
+        .community-channels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-8);
+            margin: var(--space-16) 0;
+        }
+        
+        .channel-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            transition: var(--transition);
+        }
+        
+        .channel-card:hover {
+            border-color: var(--channel-color);
+            box-shadow: var(--shadow);
+        }
+        
+        .channel-card.github { --channel-color: #24292e; }
+        .channel-card.discord { --channel-color: #7289da; }
+        .channel-card.slack { --channel-color: #4a154b; }
+        .channel-card.forum { --channel-color: var(--blue); }
+        
+        .channel-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius);
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xl);
+            background: var(--gray-lightest);
+            color: var(--channel-color);
+        }
+        
+        .channel-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+        }
+        
+        .channel-desc {
+            color: var(--gray);
+            margin-bottom: var(--space-4);
+            line-height: 1.6;
+        }
+        
+        .channel-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-4);
+            font-size: var(--text-sm);
+        }
+        
+        .channel-stat {
+            color: var(--gray);
+        }
+        
+        .channel-stat strong {
+            color: var(--foreground);
+            font-weight: 600;
+        }
+        
+        /* Contribution Guidelines */
+        .contribution-section {
+            background: var(--gray-lightest);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-12);
+            margin: var(--space-16) 0;
+        }
+        
+        .contribution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-6);
+            margin-top: var(--space-8);
+        }
+        
+        .contribution-item {
+            text-align: center;
+        }
+        
+        .contribution-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius);
+            margin: 0 auto var(--space-3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-lg);
+            background: var(--background);
+            border: 1px solid var(--border);
+        }
+        
+        .contribution-title {
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+            font-size: var(--text-base);
+        }
+        
+        .contribution-desc {
+            color: var(--gray);
+            font-size: var(--text-sm);
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-12);
+        }
+        
+        .section-title {
+            font-size: var(--text-4xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-4);
+        }
+        
+        .section-subtitle {
+            font-size: var(--text-lg);
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .community-title { font-size: var(--text-4xl); }
+            .community-channels { grid-template-columns: 1fr; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Geist Header -->
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <div class="logo-mark">OC</div>
+                OpenConductor
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="/platform">Platform</a></li>
+                    <li><a href="/pricing">Pricing</a></li>
+                    <li><a href="/docs">Documentation</a></li>
+                    <li><a href="/enterprise">Enterprise</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/community" class="active">Community</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="/auth/login" class="btn btn-secondary">Sign In</a>
+                <a href="/enterprise/demo" class="btn btn-primary">Book Demo</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Community Hero -->
+    <section class="community-hero">
+        <div class="container">
+            <h1 class="community-title">Join the AIOps Revolution</h1>
+            <p class="community-subtitle">
+                Connect with thousands of developers building the future of open-source AIOps. 
+                Contribute code, share knowledge, and drive innovation together.
+            </p>
+            
+            <div style="display: flex; gap: var(--space-3); justify-content: center; margin-top: var(--space-8);">
+                <a href="https://github.com/openconductor/openconductor" class="btn btn-primary" target="_blank">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    Star on GitHub
+                </a>
+                <a href="#join-discord" class="btn btn-secondary">Join Discord</a>
+                <a href="/start-free" class="btn btn-secondary">Start Contributing</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Stats -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Thriving Open Source Community</h2>
+                <p class="section-subtitle">
+                    Our community is growing rapidly with contributors from leading technology companies worldwide.
+                </p>
+            </div>
+            
+            <div class="github-stats">
+                <div class="stat-card" onclick="window.open('https://github.com/openconductor/openconductor', '_blank')">
+                    <span class="stat-number">25.2K</span>
+                    <div class="stat-label">GitHub Stars</div>
+                    <div class="stat-growth">+2.1K this month</div>
+                </div>
+                <div class="stat-card" onclick="window.open('https://github.com/openconductor/openconductor/graphs/contributors', '_blank')">
+                    <span class="stat-number">1,247</span>
+                    <div class="stat-label">Contributors</div>
+                    <div class="stat-growth">+89 this month</div>
+                </div>
+                <div class="stat-card" onclick="window.open('https://github.com/openconductor/openconductor/network/members', '_blank')">
+                    <span class="stat-number">4,892</span>
+                    <div class="stat-label">Forks</div>
+                    <div class="stat-growth">+412 this month</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">156K</span>
+                    <div class="stat-label">Downloads</div>
+                    <div class="stat-growth">+23K this month</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">8,934</span>
+                    <div class="stat-label">Community Members</div>
+                    <div class="stat-growth">+1.2K this month</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">12,847</span>
+                    <div class="stat-label">Active Deployments</div>
+                    <div class="stat-growth">+1.8K this month</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Channels -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Connect with the Community</h2>
+                <p class="section-subtitle">
+                    Multiple ways to get involved, ask questions, share knowledge, and contribute to the future of AIOps.
+                </p>
+            </div>
+            
+            <div class="community-channels">
+                <!-- GitHub -->
+                <div class="channel-card github">
+                    <div class="channel-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="channel-title">GitHub Repository</h3>
+                    <p class="channel-desc">
+                        Contribute code, report issues, request features, and collaborate on the 
+                        open-source development of OpenConductor.
+                    </p>
+                    <div class="channel-stats">
+                        <div class="channel-stat"><strong>25.2K</strong> stars</div>
+                        <div class="channel-stat"><strong>1,247</strong> contributors</div>
+                    </div>
+                    <a href="https://github.com/openconductor/openconductor" target="_blank" class="btn btn-secondary">
+                        View Repository
+                    </a>
+                </div>
+
+                <!-- Discord -->
+                <div class="channel-card discord">
+                    <div class="channel-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019z"/>
+                        </svg>
+                    </div>
+                    <h3 class="channel-title">Discord Community</h3>
+                    <p class="channel-desc">
+                        Real-time chat with developers, get help with implementation, 
+                        and participate in community events and discussions.
+                    </p>
+                    <div class="channel-stats">
+                        <div class="channel-stat"><strong>5,847</strong> members</div>
+                        <div class="channel-stat"><strong>Active</strong> daily chat</div>
+                    </div>
+                    <a href="https://discord.gg/openconductor" target="_blank" class="btn btn-secondary">
+                        Join Discord
+                    </a>
+                </div>
+
+                <!-- Slack -->
+                <div class="channel-card slack">
+                    <div class="channel-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M3.362 10.11c0 .926-.756 1.681-1.681 1.681S0 11.036 0 10.111C0 9.186.756 8.43 1.68 8.43h1.682v1.68zm.846 0c0-.924.756-1.68 1.681-1.68s1.681.756 1.681 1.68v4.21c0 .924-.756 1.68-1.68 1.68a1.685 1.685 0 0 1-1.682-1.68v-4.21zM5.89 3.362c-.926 0-1.682-.756-1.682-1.681S4.964 0 5.89 0s1.68.756 1.68 1.68v1.682H5.89zm0 .846c.924 0 1.68.756 1.68 1.681S6.814 7.57 5.89 7.57H1.68C.757 7.57 0 6.814 0 5.89c0-.926.756-1.682 1.68-1.682h4.21zm6.749 1.682c0-.926.755-1.682 1.68-1.682.925 0 1.681.756 1.681 1.681s-.756 1.681-1.68 1.681h-1.681V5.89zm-.848 0c0 .924-.755 1.68-1.68 1.68A1.685 1.685 0 0 1 8.43 5.89V1.68C8.43.757 9.186 0 10.11 0c.926 0 1.681.756 1.681 1.68v4.21zm-1.681 6.748c.926 0 1.682.756 1.682 1.681S11.036 16 10.11 16s-1.681-.756-1.681-1.68v-1.682h1.68zm0-.847c-.924 0-1.68-.755-1.68-1.68 0-.925.756-1.681 1.68-1.681h4.21c.924 0 1.68.756 1.68 1.68 0 .926-.756 1.681-1.68 1.681h-4.21z"/>
+                        </svg>
+                    </div>
+                    <h3 class="channel-title">Slack Workspace</h3>
+                    <p class="channel-desc">
+                        Enterprise-focused discussions, customer success stories, 
+                        and professional networking with AIOps practitioners.
+                    </p>
+                    <div class="channel-stats">
+                        <div class="channel-stat"><strong>3,241</strong> members</div>
+                        <div class="channel-stat"><strong>Enterprise</strong> focus</div>
+                    </div>
+                    <a href="https://openconductor.slack.com" target="_blank" class="btn btn-secondary">
+                        Join Slack
+                    </a>
+                </div>
+
+                <!-- Community Forum -->
+                <div class="channel-card forum">
+                    <div class="channel-icon">💬</div>
+                    <h3 class="channel-title">Community Forum</h3>
+                    <p class="channel-desc">
+                        Long-form discussions, tutorials, best practices, and 
+                        knowledge sharing with the OpenConductor community.
+                    </p>
+                    <div class="channel-stats">
+                        <div class="channel-stat"><strong>12,483</strong> posts</div>
+                        <div class="channel-stat"><strong>2,847</strong> topics</div>
+                    </div>
+                    <a href="https://forum.openconductor.ai" target="_blank" class="btn btn-secondary">
+                        Join Forum
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contribution Guidelines -->
+    <section class="section">
+        <div class="container">
+            <div class="contribution-section">
+                <div class="section-header">
+                    <h2 class="section-title">How to Contribute</h2>
+                    <p class="section-subtitle">
+                        Whether you're a developer, designer, writer, or AIOps expert, 
+                        there are many ways to contribute to OpenConductor.
+                    </p>
+                </div>
+                
+                <div class="contribution-grid">
+                    <div class="contribution-item">
+                        <div class="contribution-icon">💻</div>
+                        <div class="contribution-title">Code Contributions</div>
+                        <div class="contribution-desc">
+                            Contribute features, fix bugs, improve performance, 
+                            and help build the future of AIOps.
+                        </div>
+                    </div>
+                    <div class="contribution-item">
+                        <div class="contribution-icon">📝</div>
+                        <div class="contribution-title">Documentation</div>
+                        <div class="contribution-desc">
+                            Write guides, improve API docs, create tutorials, 
+                            and help onboard new community members.
+                        </div>
+                    </div>
+                    <div class="contribution-item">
+                        <div class="contribution-icon">🐛</div>
+                        <div class="contribution-title">Bug Reports</div>
+                        <div class="contribution-desc">
+                            Report issues, provide reproduction steps, 
+                            and help improve platform stability.
+                        </div>
+                    </div>
+                    <div class="contribution-item">
+                        <div class="contribution-icon">💡</div>
+                        <div class="contribution-title">Feature Requests</div>
+                        <div class="contribution-desc">
+                            Propose new features, suggest improvements, 
+                            and help shape the product roadmap.
+                        </div>
+                    </div>
+                    <div class="contribution-item">
+                        <div class="contribution-icon">🎨</div>
+                        <div class="contribution-title">Design & UX</div>
+                        <div class="contribution-desc">
+                            Improve user experience, create designs, 
+                            and enhance visual elements.
+                        </div>
+                    </div>
+                    <div class="contribution-item">
+                        <div class="contribution-icon">🚀</div>
+                        <div class="contribution-title">Community Support</div>
+                        <div class="contribution-desc">
+                            Help other users, answer questions, 
+                            and mentor new contributors.
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: var(--space-8);">
+                    <a href="https://github.com/openconductor/openconductor/blob/main/CONTRIBUTING.md" target="_blank" class="btn btn-primary">
+                        View Contribution Guide
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community CTA -->
+    <section class="section" style="background: var(--foreground); color: var(--background);">
+        <div class="container">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <h2 style="color: var(--background); margin-bottom: var(--space-4);">Ready to Join the Community?</h2>
+                <p style="color: var(--gray-light); margin-bottom: var(--space-8);">
+                    Start contributing to the future of open-source AIOps. Whether you're learning, 
+                    building, or leading enterprise transformation, there's a place for you.
+                </p>
+                <div style="display: flex; gap: var(--space-3); justify-content: center; flex-wrap: wrap;">
+                    <a href="/start-free" class="btn" style="background: var(--background); color: var(--foreground); height: 40px; padding: var(--space-3) var(--space-6);">
+                        Start with Community Edition
+                    </a>
+                    <a href="https://github.com/openconductor/openconductor" target="_blank" class="btn" style="background: transparent; color: var(--background); border: 1px solid var(--background); height: 40px; padding: var(--space-3) var(--space-6);">
+                        Contribute on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Community page loaded');
+            
+            // Track community engagement
+            const channelCards = document.querySelectorAll('.channel-card');
+            channelCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const channelTitle = this.querySelector('.channel-title').textContent;
+                    console.log(`Community channel clicked: ${channelTitle}`);
+                });
+            });
+            
+            // Track GitHub stats interactions
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const statLabel = this.querySelector('.stat-label').textContent;
+                    console.log(`GitHub stat clicked: ${statLabel}`);
+                });
+            });
+            
+            // Update GitHub stats periodically
+            function updateGitHubStats() {
+                // Would fetch real GitHub API data
+                console.log('GitHub stats updated');
+            }
+            
+            updateGitHubStats();
+            setInterval(updateGitHubStats, 300000); // Every 5 minutes
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "openconductor-marketing-website",
+  "version": "1.0.0",
+  "description": "OpenConductor Enterprise Marketing Website - Phase 2 Launch Infrastructure",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "openconductor",
+    "aiops",
+    "enterprise",
+    "marketing",
+    "trinity-ai"
+  ],
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

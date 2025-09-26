@@ -1,0 +1,64 @@
+# OpenConductor Robots.txt - SEO Optimization
+User-agent: *
+Allow: /
+
+# High-value pages for enterprise lead generation
+Allow: /platform
+Allow: /pricing
+Allow: /enterprise
+Allow: /docs
+Allow: /blog
+Allow: /customers
+Allow: /start-free
+Allow: /enterprise/demo
+
+# Disallow admin and internal pages
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /onboarding/
+Disallow: /internal/
+Disallow: /_next/
+Disallow: /styles/
+Disallow: /scripts/
+
+# Sitemap location
+Sitemap: https://openconductor.ai/sitemap.xml
+
+# Enterprise-focused crawl optimization
+# Prioritize AIOps, alert management, and enterprise content
+Crawl-delay: 1
+
+# Allow social media crawlers for enterprise sharing
+User-agent: facebookexternalhit/*
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Security crawlers
+User-agent: SecurityTrails
+Allow: /
+
+# Analytics and performance monitoring
+User-agent: GoogleBot
+Allow: /
+
+User-agent: BingBot
+Allow: /
+
+# Block aggressive crawlers that don't respect enterprise sites
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

@@ -1,0 +1,151 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "OpenConductor",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "AIOps Platform",
+  "operatingSystem": "Linux, macOS, Windows",
+  "description": "Open-source AIOps platform that reduces alert noise by 85% with AI-powered correlation. Enterprise-ready security, compliance, and scale with Trinity AI agents.",
+  "url": "https://openconductor.ai",
+  "downloadUrl": "https://github.com/openconductor/openconductor",
+  "softwareVersion": "1.0.0",
+  "datePublished": "2025-01-15",
+  "dateModified": "2025-01-15",
+  "author": {
+    "@type": "Organization",
+    "name": "OpenConductor",
+    "url": "https://openconductor.ai",
+    "logo": "https://openconductor.ai/logo.png",
+    "sameAs": [
+      "https://github.com/openconductor",
+      "https://twitter.com/openconductor",
+      "https://linkedin.com/company/openconductor"
+    ]
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Community Edition",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "description": "Free open-source AIOps platform with basic Trinity AI agents"
+    },
+    {
+      "@type": "Offer", 
+      "name": "Professional Edition",
+      "price": "7500",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "7500",
+        "priceCurrency": "USD",
+        "unitText": "monthly"
+      },
+      "availability": "https://schema.org/InStock",
+      "description": "Enterprise AIOps with advanced ML correlation and compliance features"
+    },
+    {
+      "@type": "Offer",
+      "name": "Enterprise Edition", 
+      "price": "20000",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "20000", 
+        "priceCurrency": "USD",
+        "unitText": "monthly"
+      },
+      "availability": "https://schema.org/InStock",
+      "description": "Full enterprise AIOps platform with unlimited scale and dedicated support"
+    }
+  ],
+  "featureList": [
+    "85% Alert Noise Reduction",
+    "Trinity AI Agents (Oracle, Sentinel, Sage)",
+    "Real-time Alert Correlation",
+    "Predictive Analytics and Forecasting",
+    "Enterprise Security and Compliance",
+    "Zero-Trust Architecture",
+    "Homomorphic Encryption",
+    "Multi-Tenant Isolation",
+    "SOC2 Type II Compliance",
+    "Enterprise Integrations (ServiceNow, Splunk, Datadog)",
+    "24/7 Enterprise Support"
+  ],
+  "screenshot": "https://openconductor.ai/images/platform-screenshot.png",
+  "softwareHelp": "https://openconductor.ai/docs",
+  "installUrl": "https://openconductor.ai/start-free",
+  "downloadUrl": "https://github.com/openconductor/openconductor/releases",
+  "releaseNotes": "https://openconductor.ai/blog",
+  "supportUrl": "https://openconductor.ai/community",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "247",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Sarah Kim"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "OpenConductor reduced our alert volume by 87% in the first month. The Trinity AI agents work together brilliantly.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "TechCorp Global"
+      }
+    },
+    {
+      "@type": "Review", 
+      "author": {
+        "@type": "Person",
+        "name": "Michael Rodriguez"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "The homomorphic encryption capability is game-changing for our compliance requirements. No other platform offers this.",
+      "publisher": {
+        "@type": "Organization", 
+        "name": "FinanceFirst Bank"
+      }
+    }
+  ],
+  "keywords": [
+    "AIOps",
+    "alert management", 
+    "DevOps automation",
+    "site reliability engineering",
+    "monitoring platform",
+    "artificial intelligence",
+    "machine learning",
+    "enterprise software",
+    "alert correlation",
+    "incident management",
+    "Trinity AI",
+    "open source",
+    "enterprise security",
+    "SOC2 compliance",
+    "zero trust"
+  ],
+  "targetProduct": {
+    "@type": "Product",
+    "name": "Enterprise AIOps Platform",
+    "category": "IT Operations Management",
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Enterprise IT Teams, DevOps Engineers, Site Reliability Engineers"
+    }
+  }
+}

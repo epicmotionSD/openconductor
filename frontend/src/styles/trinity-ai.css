@@ -1,0 +1,435 @@
+/**
+ * Trinity AI Design System - Bloomberg Terminal Style
+ * 
+ * Comprehensive glassmorphism design system adapted for Trinity AI agents:
+ * - Oracle (Predictive Intelligence) - Blue themes
+ * - Sentinel (Monitoring Intelligence) - Green themes  
+ * - Sage (Advisory Intelligence) - Purple themes
+ * 
+ * Features professional Bloomberg Terminal aesthetics with advanced visual effects.
+ */
+
+@layer base {
+  :root {
+    /* Trinity AI Core Design System */
+    --trinity-background: 0 0% 0%;                    /* Pure black foundation */
+    --trinity-foreground: 0 0% 98%;                   /* Near-white text */
+    --trinity-card: 0 0% 2%;                          /* Card backgrounds */
+    --trinity-border: 215 40% 15%;                    /* Subtle borders */
+    
+    /* Trinity AI Agent Color Palette */
+    --trinity-oracle: 215 100% 65%;                   /* Oracle blue */
+    --trinity-sentinel: 142 76% 36%;                  /* Sentinel green */
+    --trinity-sage: 258 90% 66%;                      /* Sage purple */
+    --trinity-neutral: 240 10% 50%;                   /* Neutral gray */
+    
+    /* Professional Bloomberg Terminal Gradients */
+    --trinity-gradient-oracle: linear-gradient(135deg, hsl(215 100% 65%) 0%, hsl(200 100% 70%) 100%);
+    --trinity-gradient-sentinel: linear-gradient(135deg, hsl(142 76% 36%) 0%, hsl(120 100% 50%) 100%);
+    --trinity-gradient-sage: linear-gradient(135deg, hsl(258 90% 66%) 0%, hsl(280 100% 70%) 100%);
+    --trinity-gradient-surface: linear-gradient(135deg, hsl(215 40% 8%) 0%, hsl(258 30% 6%) 100%);
+    
+    /* Advanced Visual Effects */
+    --trinity-shadow-premium: 0 20px 50px rgba(59, 130, 246, 0.15);
+    --trinity-shadow-glass: 0 16px 40px rgba(59, 130, 246, 0.1);
+    --trinity-shadow-glow: 0 0 30px rgba(59, 130, 246, 0.3);
+    --trinity-blur-standard: 20px;
+    --trinity-blur-enhanced: 40px;
+    
+    /* Typography - Bloomberg Terminal Style */
+    --trinity-font-display: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --trinity-font-mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+  }
+}
+
+@layer components {
+  /* Trinity AI Base Card System */
+  .trinity-card-base {
+    @apply rounded-lg backdrop-blur-xl border transition-all duration-300;
+    font-family: var(--trinity-font-display);
+  }
+  
+  .trinity-card-default {
+    @apply bg-gray-950/80 border-gray-700/30;
+  }
+  
+  .trinity-card-glass {
+    @apply bg-blue-950/15 border-cyan-500/20 hover:border-cyan-400/30;
+    backdrop-filter: blur(var(--trinity-blur-standard));
+  }
+  
+  .trinity-card-elevated {
+    @apply bg-blue-950/30 border-blue-500/40 shadow-lg;
+    box-shadow: var(--trinity-shadow-premium);
+  }
+  
+  .trinity-card-glow {
+    @apply bg-blue-950/20 border-blue-400/40;
+    backdrop-filter: blur(var(--trinity-blur-enhanced));
+    box-shadow: var(--trinity-shadow-glow);
+  }
+  
+  /* Trinity AI Agent Themes */
+  .trinity-oracle-theme {
+    @apply bg-blue-950/15 border-blue-500/20 hover:border-blue-400/30;
+  }
+  
+  .trinity-oracle-theme.trinity-card-glow {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+  }
+  
+  .trinity-sentinel-theme {
+    @apply bg-green-950/15 border-green-500/20 hover:border-green-400/30;
+  }
+  
+  .trinity-sentinel-theme.trinity-card-glow {
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+  }
+  
+  .trinity-sage-theme {
+    @apply bg-purple-950/15 border-purple-500/20 hover:border-purple-400/30;
+  }
+  
+  .trinity-sage-theme.trinity-card-glow {
+    box-shadow: 0 0 30px rgba(147, 51, 234, 0.3);
+  }
+  
+  .trinity-neutral-theme {
+    @apply bg-gray-950/15 border-gray-500/20 hover:border-gray-400/30;
+  }
+  
+  /* Trinity AI Gradient System */
+  .trinity-gradient-oracle {
+    background: var(--trinity-gradient-oracle);
+  }
+  
+  .trinity-gradient-sentinel {
+    background: var(--trinity-gradient-sentinel);
+  }
+  
+  .trinity-gradient-sage {
+    background: var(--trinity-gradient-sage);
+  }
+  
+  .trinity-gradient-surface {
+    background: var(--trinity-gradient-surface);
+  }
+  
+  .trinity-gradient-text {
+    background: var(--trinity-gradient-oracle);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Enhanced Glass Effects by Agent */
+  .trinity-glass-oracle {
+    background: rgba(59, 130, 246, 0.1);
+    backdrop-filter: blur(var(--trinity-blur-standard));
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+  
+  .trinity-glass-sentinel {
+    background: rgba(34, 197, 94, 0.1);
+    backdrop-filter: blur(var(--trinity-blur-standard));
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+  
+  .trinity-glass-sage {
+    background: rgba(147, 51, 234, 0.1);
+    backdrop-filter: blur(var(--trinity-blur-standard));
+    border: 1px solid rgba(147, 51, 234, 0.2);
+  }
+  
+  /* Bloomberg Terminal Layout Classes */
+  .trinity-terminal-layout {
+    @apply h-screen bg-black text-gray-100 overflow-hidden;
+  }
+  
+  .trinity-panel-left {
+    @apply w-80 flex-shrink-0 bg-gray-900/50 border-r border-gray-700/30;
+  }
+  
+  .trinity-panel-center {
+    @apply flex-1 min-w-0 bg-gray-900/30;
+  }
+  
+  .trinity-panel-right {
+    @apply w-96 flex-shrink-0 bg-gray-900/50 border-l border-gray-700/30;
+  }
+  
+  /* Professional Interactive Effects */
+  .hover-lift {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--trinity-shadow-premium);
+  }
+  
+  .interactive-scale {
+    transition: transform 0.15s ease;
+  }
+  
+  .interactive-scale:hover {
+    transform: scale(1.02);
+  }
+  
+  .interactive-scale:active {
+    transform: scale(0.98);
+  }
+  
+  /* Agent Status Indicators */
+  .trinity-status-oracle {
+    @apply bg-blue-400 text-blue-900;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  }
+  
+  .trinity-status-sentinel {
+    @apply bg-green-400 text-green-900;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+  }
+  
+  .trinity-status-sage {
+    @apply bg-purple-400 text-purple-900;
+    box-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
+  }
+  
+  /* Enhanced Border System with Agent Colors */
+  .trinity-border-oracle {
+    @apply border-blue-400/50;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+  }
+  
+  .trinity-border-sentinel {
+    @apply border-green-400/50;
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+  }
+  
+  .trinity-border-sage {
+    @apply border-purple-400/50;
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.2);
+  }
+  
+  /* Trinity AI Typography System */
+  .trinity-display-lg {
+    @apply text-4xl font-bold tracking-tight;
+  }
+  
+  .trinity-display-md {
+    @apply text-3xl font-semibold tracking-tight;
+  }
+  
+  .trinity-display-sm {
+    @apply text-2xl font-semibold tracking-tight;
+  }
+  
+  .trinity-body-lg {
+    @apply text-lg leading-relaxed;
+  }
+  
+  .trinity-body-md {
+    @apply text-base leading-relaxed;
+  }
+  
+  .trinity-body-sm {
+    @apply text-sm leading-relaxed;
+  }
+  
+  /* Professional Loading States */
+  .trinity-loading-shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(240 10% 12%) 0%,
+      hsl(240 10% 20%) 20%,
+      hsl(240 10% 12%) 40%
+    );
+    background-size: 400% 100%;
+    animation: trinity-shimmer 2s ease-in-out infinite;
+  }
+  
+  /* Agent-Specific Ambient Lighting */
+  .trinity-ambient-oracle {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.15), inset 0 0 20px rgba(59, 130, 246, 0.05);
+  }
+  
+  .trinity-ambient-sentinel {
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.15), inset 0 0 20px rgba(34, 197, 94, 0.05);
+  }
+  
+  .trinity-ambient-sage {
+    box-shadow: 0 0 40px rgba(147, 51, 234, 0.15), inset 0 0 20px rgba(147, 51, 234, 0.05);
+  }
+  
+  /* Text Glow Effects by Agent */
+  .trinity-text-glow-oracle {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  }
+  
+  .trinity-text-glow-sentinel {
+    text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+  }
+  
+  .trinity-text-glow-sage {
+    text-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
+  }
+}
+
+@layer utilities {
+  .shadow-glow {
+    box-shadow: var(--trinity-shadow-glow);
+  }
+  
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Professional Bloomberg Terminal Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(0 0% 0%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, hsl(215 100% 20%) 0%, hsl(258 90% 25%) 100%);
+  border-radius: 4px;
+  border: 1px solid hsl(215 50% 30%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, hsl(215 100% 30%) 0%, hsl(258 90% 35%) 100%);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}
+
+/* Trinity AI Animation System */
+@keyframes trinity-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes trinity-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes trinity-shimmer {
+  0% {
+    background-position: -400% 0;
+  }
+  100% {
+    background-position: 400% 0;
+  }
+}
+
+@keyframes trinity-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+  }
+}
+
+@keyframes trinity-pulse-oracle {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
+  }
+}
+
+@keyframes trinity-pulse-sentinel {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(34, 197, 94, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.8);
+  }
+}
+
+@keyframes trinity-pulse-sage {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(147, 51, 234, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(147, 51, 234, 0.8);
+  }
+}
+
+/* Animation Classes */
+.trinity-animate-fade-in {
+  animation: trinity-fade-in 0.5s ease-out;
+}
+
+.trinity-animate-slide-in {
+  animation: trinity-slide-in 0.3s ease-out;
+}
+
+.trinity-animate-shimmer {
+  animation: trinity-shimmer 2s ease-in-out infinite;
+}
+
+.trinity-animate-glow {
+  animation: trinity-glow 3s ease-in-out infinite;
+}
+
+.trinity-animate-pulse-oracle {
+  animation: trinity-pulse-oracle 2s ease-in-out infinite;
+}
+
+.trinity-animate-pulse-sentinel {
+  animation: trinity-pulse-sentinel 2s ease-in-out infinite;
+}
+
+.trinity-animate-pulse-sage {
+  animation: trinity-pulse-sage 2s ease-in-out infinite;
+}
+
+/* Responsive Trinity AI Layout */
+@media (max-width: 1024px) {
+  .trinity-panel-left {
+    @apply w-64;
+  }
+  
+  .trinity-panel-right {
+    @apply w-80;
+  }
+}
+
+@media (max-width: 768px) {
+  .trinity-terminal-layout {
+    @apply flex-col;
+  }
+  
+  .trinity-panel-left,
+  .trinity-panel-right {
+    @apply w-full h-auto border-r-0 border-l-0 border-b border-gray-700/30;
+  }
+}

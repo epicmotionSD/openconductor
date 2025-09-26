@@ -1,0 +1,457 @@
+# SportIntel Docker Compose - Extends OpenConductor for Sports Analytics
+# Production-ready microservices architecture with TimescaleDB, Redis, and monitoring
+
+version: '3.8'
+
+networks:
+  sportintel-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  timescaledb-data:
+    driver: local
+  redis-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  openconductor-logs:
+    driver: local
+
+services:
+  # =============================================================================
+  # CORE SERVICES
+  # =============================================================================
+  
+  # OpenConductor Core + SportIntel Extensions
+  openconductor-core:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: sportintel-core
+    restart: unless-stopped
+    ports:
+      - "3000:3000"  # HTTP API
+      - "3001:3001"  # WebSocket
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - WS_PORT=3001
+      - DATABASE_URL=postgresql://sportintel:${POSTGRES_PASSWORD:-sportintel_secure_2024}@timescaledb:5432/sportintel_prod
+      - REDIS_URL=redis://redis:6379
+      - REDIS_CACHE_URL=redis://redis:6379/1
+      - LOG_LEVEL=info
+      - JWT_SECRET=${JWT_SECRET:-sportintel_jwt_secret_change_in_production}
+      - API_SPORTS_KEY=${API_SPORTS_KEY}
+      - MYSPORTS_FEEDS_KEY=${MYSPORTS_FEEDS_KEY}
+      - SHAP_SERVICE_URL=http://ml-pipeline:8000
+      - PROMETHEUS_ENABLED=true
+      - PROMETHEUS_PORT=9090
+      - MAX_CONNECTIONS=1000
+      - RATE_LIMIT_WINDOW=900000
+      - RATE_LIMIT_MAX=1000
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - openconductor-logs:/app/logs
+      - ./config:/app/config:ro
+    networks:
+      - sportintel-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "sportintel.service=core"
+      - "sportintel.tier=application"
+
+  # SportIntel Frontend (React/TypeScript)
+  sportintel-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    container_name: sportintel-frontend
+    restart: unless-stopped
+    ports:
+      - "3003:3000"
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_API_URL=http://localhost:3000
+      - REACT_APP_WS_URL=ws://localhost:3001
+      - REACT_APP_VERSION=${SPORTINTEL_VERSION:-1.0.0}
+      - GENERATE_SOURCEMAP=false
+    depends_on:
+      - openconductor-core
+    networks:
+      - sportintel-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "sportintel.service=frontend"
+      - "sportintel.tier=presentation"
+
+  # =============================================================================
+  # DATA SERVICES
+  # =============================================================================
+
+  # TimescaleDB for time-series sports data
+  timescaledb:
+    image: timescale/timescaledb-ha:pg15-latest
+    container_name: sportintel-timescaledb
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=sportintel_prod
+      - POSTGRES_USER=sportintel
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-sportintel_secure_2024}
+      - TIMESCALEDB_TELEMETRY=off
+      - TS_TUNE_MEMORY=2GB
+      - TS_TUNE_NUM_CPUS=2
+      - MAX_CONNECTIONS=200
+      - SHARED_PRELOAD_LIBRARIES=timescaledb
+    volumes:
+      - timescaledb-data:/home/postgres/pgdata/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+      - ./database/sportintel-schema.sql:/docker-entrypoint-initdb.d/02-sportintel-schema.sql:ro
+      - ./database/timescale-config.sql:/docker-entrypoint-initdb.d/03-timescale-config.sql:ro
+    networks:
+      - sportintel-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sportintel -d sportintel_prod"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    labels:
+      - "sportintel.service=database"
+      - "sportintel.tier=data"
+
+  # Redis for caching and real-time data
+  redis:
+    image: redis:7-alpine
+    container_name: sportintel-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-redis_secure_2024}
+    command: >
+      redis-server 
+      --appendonly yes 
+      --maxmemory 1gb 
+      --maxmemory-policy allkeys-lru
+      --save 900 1
+      --save 300 10
+      --save 60 10000
+      --requirepass ${REDIS_PASSWORD:-redis_secure_2024}
+    volumes:
+      - redis-data:/data
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    networks:
+      - sportintel-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    labels:
+      - "sportintel.service=cache"
+      - "sportintel.tier=data"
+
+  # =============================================================================
+  # MCP SERVICES
+  # =============================================================================
+
+  # Sports Data MCP Server
+  mcp-sports-data:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+      args:
+        - MCP_SERVICE=sports-data
+    container_name: sportintel-mcp-sports-data
+    restart: unless-stopped
+    ports:
+      - "8001:8000"
+    environment:
+      - NODE_ENV=production
+      - SERVICE_NAME=sports-data
+      - DATABASE_URL=postgresql://sportintel:${POSTGRES_PASSWORD:-sportintel_secure_2024}@timescaledb:5432/sportintel_prod
+      - REDIS_URL=redis://redis:6379
+      - API_SPORTS_KEY=${API_SPORTS_KEY}
+      - MYSPORTS_FEEDS_KEY=${MYSPORTS_FEEDS_KEY}
+      - LOG_LEVEL=info
+    depends_on:
+      - timescaledb
+      - redis
+    networks:
+      - sportintel-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "sportintel.service=mcp-sports-data"
+      - "sportintel.tier=service"
+
+  # ML Pipeline MCP Server
+  mcp-ml-pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile.ml
+    container_name: sportintel-mcp-ml-pipeline
+    restart: unless-stopped
+    ports:
+      - "8002:8000"
+    environment:
+      - NODE_ENV=production
+      - SERVICE_NAME=ml-pipeline
+      - DATABASE_URL=postgresql://sportintel:${POSTGRES_PASSWORD:-sportintel_secure_2024}@timescaledb:5432/sportintel_prod
+      - REDIS_URL=redis://redis:6379
+      - PYTHON_PATH=/app/ml
+      - MODEL_CACHE_SIZE=500MB
+      - SHAP_CACHE_TTL=3600
+      - LOG_LEVEL=info
+    depends_on:
+      - timescaledb
+      - redis
+    volumes:
+      - ./ml-models:/app/models:ro
+      - ./ml-cache:/app/cache
+    networks:
+      - sportintel-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "sportintel.service=mcp-ml-pipeline"
+      - "sportintel.tier=service"
+
+  # Analytics MCP Server
+  mcp-analytics:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+      args:
+        - MCP_SERVICE=analytics
+    container_name: sportintel-mcp-analytics
+    restart: unless-stopped
+    ports:
+      - "8003:8000"
+    environment:
+      - NODE_ENV=production
+      - SERVICE_NAME=analytics
+      - DATABASE_URL=postgresql://sportintel:${POSTGRES_PASSWORD:-sportintel_secure_2024}@timescaledb:5432/sportintel_prod
+      - REDIS_URL=redis://redis:6379
+      - CLICKHOUSE_URL=${CLICKHOUSE_URL:-}
+      - LOG_LEVEL=info
+    depends_on:
+      - timescaledb
+      - redis
+    networks:
+      - sportintel-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "sportintel.service=mcp-analytics"
+      - "sportintel.tier=service"
+
+  # Alerts MCP Server
+  mcp-alerts:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+      args:
+        - MCP_SERVICE=alerts
+    container_name: sportintel-mcp-alerts
+    restart: unless-stopped
+    ports:
+      - "8004:8000"
+    environment:
+      - NODE_ENV=production
+      - SERVICE_NAME=alerts
+      - DATABASE_URL=postgresql://sportintel:${POSTGRES_PASSWORD:-sportintel_secure_2024}@timescaledb:5432/sportintel_prod
+      - REDIS_URL=redis://redis:6379
+      - WEBHOOK_URL=${WEBHOOK_URL:-}
+      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN:-}
+      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN:-}
+      - EMAIL_SMTP_HOST=${EMAIL_SMTP_HOST:-}
+      - EMAIL_SMTP_USER=${EMAIL_SMTP_USER:-}
+      - EMAIL_SMTP_PASS=${EMAIL_SMTP_PASS:-}
+      - LOG_LEVEL=info
+    depends_on:
+      - timescaledb
+      - redis
+    networks:
+      - sportintel-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "sportintel.service=mcp-alerts"
+      - "sportintel.tier=service"
+
+  # =============================================================================
+  # MONITORING & OBSERVABILITY
+  # =============================================================================
+
+  # Prometheus for metrics collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: sportintel-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+      - '--web.enable-admin-api'
+    volumes:
+      - prometheus-data:/prometheus
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alerts.yml:/etc/prometheus/alerts.yml:ro
+    networks:
+      - sportintel-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "sportintel.service=prometheus"
+      - "sportintel.tier=monitoring"
+
+  # Grafana for visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: sportintel-grafana
+    restart: unless-stopped
+    ports:
+      - "3004:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin_change_me}
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,grafana-worldmap-panel
+      - GF_FEATURE_TOGGLES_ENABLE=ngalert
+      - GF_DATABASE_TYPE=postgres
+      - GF_DATABASE_HOST=timescaledb:5432
+      - GF_DATABASE_NAME=sportintel_prod
+      - GF_DATABASE_USER=sportintel
+      - GF_DATABASE_PASSWORD=${POSTGRES_PASSWORD:-sportintel_secure_2024}
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    depends_on:
+      - prometheus
+      - timescaledb
+    networks:
+      - sportintel-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "sportintel.service=grafana"
+      - "sportintel.tier=monitoring"
+
+  # =============================================================================
+  # INFRASTRUCTURE SERVICES
+  # =============================================================================
+
+  # Nginx reverse proxy and load balancer
+  nginx:
+    image: nginx:alpine
+    container_name: sportintel-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/sportintel.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - openconductor-core
+      - sportintel-frontend
+    networks:
+      - sportintel-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "sportintel.service=nginx"
+      - "sportintel.tier=infrastructure"
+
+  # Log aggregation with Fluent Bit
+  fluent-bit:
+    image: fluent/fluent-bit:latest
+    container_name: sportintel-fluent-bit
+    restart: unless-stopped
+    volumes:
+      - ./logging/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf:ro
+      - openconductor-logs:/var/log/openconductor:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    networks:
+      - sportintel-network
+    depends_on:
+      - openconductor-core
+    labels:
+      - "sportintel.service=logging"
+      - "sportintel.tier=infrastructure"
+
+# =============================================================================
+# ENVIRONMENT-SPECIFIC CONFIGURATIONS
+# =============================================================================
+
+# Development override
+x-development: &development
+  environment:
+    - NODE_ENV=development
+    - LOG_LEVEL=debug
+  volumes:
+    - .:/app
+    - /app/node_modules
+
+# Production optimizations
+x-production: &production
+  deploy:
+    resources:
+      limits:
+        cpus: '2.0'
+        memory: 4G
+      reservations:
+        cpus: '0.5'
+        memory: 512M
+  logging:
+    driver: "json-file"
+    options:
+      max-size: "10m"
+      max-file: "3"

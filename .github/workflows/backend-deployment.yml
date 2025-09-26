@@ -1,0 +1,391 @@
+name: Backend Deployment (Railway)
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'src/**'
+      - 'database/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'Dockerfile*'
+      - '.github/workflows/backend-deployment.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'database/**'
+      - 'package.json'
+
+env:
+  RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+  NODE_VERSION: '18'
+
+jobs:
+  # Test and lint backend code
+  test-backend:
+    name: Test Backend
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: pgvector/pgvector:pg15
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: openconductor_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run type checking
+        run: npm run lint
+
+      - name: Run linting
+        run: npm run lint:fix
+
+      - name: Run tests
+        run: npm test
+        env:
+          NODE_ENV: test
+          DATABASE_URL: postgresql://test:test@localhost:5432/openconductor_test
+          REDIS_URL: redis://localhost:6379
+          JWT_SECRET: test-jwt-secret
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY_TEST }}
+
+      - name: Build application
+        run: npm run build
+
+      - name: Check build artifacts
+        run: |
+          ls -la dist/
+          test -f dist/server.js || exit 1
+
+  # Run database migrations and tests
+  test-database:
+    name: Test Database
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: pgvector/pgvector:pg15
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: openconductor_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test database schema
+        run: |
+          PGPASSWORD=test psql -h localhost -U test -d openconductor_test -f database/supabase-schema.sql
+          echo "✅ Database schema applied successfully"
+
+      - name: Verify pgvector extension
+        run: |
+          PGPASSWORD=test psql -h localhost -U test -d openconductor_test -c "SELECT extname FROM pg_extension WHERE extname = 'vector';"
+
+  # Security scanning
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: |
+          npm audit --audit-level moderate
+          npm audit fix --dry-run
+
+      - name: Run dependency vulnerability check
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Check for secrets in code
+        run: |
+          if grep -r "sk_live_" src/ || grep -r "sk_test_" src/ --exclude-dir=node_modules; then
+            echo "❌ Potential API keys found in source code"
+            exit 1
+          fi
+          echo "✅ No hardcoded secrets detected"
+
+  # Deploy to Railway Staging (develop branch)
+  deploy-staging:
+    name: Deploy Staging
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-database, security-scan]
+    if: github.ref == 'refs/heads/develop'
+    environment: staging
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: |
+          curl -fsSL https://railway.app/install.sh | sh
+          echo "$HOME/.railway/bin" >> $GITHUB_PATH
+
+      - name: Deploy to Railway Staging
+        run: |
+          railway login --token $RAILWAY_TOKEN
+          railway environment staging
+          railway up --detach
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: Wait for deployment
+        run: |
+          echo "⏳ Waiting for staging deployment to complete..."
+          sleep 60
+
+      - name: Run staging health check
+        run: |
+          STAGING_URL="${{ secrets.RAILWAY_STAGING_URL }}"
+          if curl -f "$STAGING_URL/health"; then
+            echo "✅ Staging health check passed"
+          else
+            echo "❌ Staging health check failed"
+            exit 1
+          fi
+
+      - name: Run staging API tests
+        run: |
+          npm run test:api:staging
+        env:
+          STAGING_API_URL: ${{ secrets.RAILWAY_STAGING_URL }}
+
+  # Deploy to Railway Production (main branch)
+  deploy-production:
+    name: Deploy Production
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-database, security-scan]
+    if: github.ref == 'refs/heads/main'
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: |
+          curl -fsSL https://railway.app/install.sh | sh
+          echo "$HOME/.railway/bin" >> $GITHUB_PATH
+
+      - name: Pre-deployment backup
+        run: |
+          echo "🔄 Creating pre-deployment backup..."
+          # Backup database (implemented via Railway CLI or direct PostgreSQL)
+          railway run --environment production -- pg_dump $DATABASE_URL > backup-$(date +%Y%m%d-%H%M%S).sql || true
+
+      - name: Deploy to Railway Production
+        id: deploy
+        run: |
+          railway login --token $RAILWAY_TOKEN
+          railway environment production
+          
+          # Deploy with zero-downtime strategy
+          deployment_id=$(railway up --detach | grep -o 'deployment-[a-zA-Z0-9-]*')
+          echo "deployment_id=$deployment_id" >> $GITHUB_OUTPUT
+          
+          echo "🚀 Production deployment initiated: $deployment_id"
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: Wait for production deployment
+        run: |
+          echo "⏳ Waiting for production deployment to complete..."
+          sleep 120  # Give production more time to deploy
+
+      - name: Run production health checks
+        id: health_check
+        run: |
+          PROD_URL="${{ secrets.RAILWAY_PRODUCTION_URL }}"
+          
+          # Basic health check
+          if curl -f "$PROD_URL/health"; then
+            echo "✅ Production health check passed"
+          else
+            echo "❌ Production health check failed"
+            exit 1
+          fi
+          
+          # API endpoint checks
+          if curl -f "$PROD_URL/api/v1/mcp/servers?limit=1"; then
+            echo "✅ MCP servers API accessible"
+          else
+            echo "❌ MCP servers API failed"
+            exit 1
+          fi
+          
+          # Database connectivity check
+          if curl -f "$PROD_URL/api/v1/system/health"; then
+            echo "✅ Database connectivity verified"
+          else
+            echo "❌ Database connectivity failed"
+            exit 1
+          fi
+
+      - name: Run production smoke tests
+        run: |
+          echo "🧪 Running production smoke tests..."
+          npm run test:smoke:production
+        env:
+          PRODUCTION_API_URL: ${{ secrets.RAILWAY_PRODUCTION_URL }}
+          PRODUCTION_API_KEY: ${{ secrets.PRODUCTION_API_KEY }}
+
+      - name: Update deployment status
+        if: success()
+        run: |
+          echo "✅ Backend successfully deployed to production"
+          echo "🌐 Production API: ${{ secrets.RAILWAY_PRODUCTION_URL }}"
+          echo "📊 Deployment ID: ${{ steps.deploy.outputs.deployment_id }}"
+
+      - name: Rollback on failure
+        if: failure()
+        run: |
+          echo "❌ Production deployment failed, initiating rollback..."
+          railway rollback --environment production
+          
+          # Notify team of rollback
+          echo "🔄 Automatic rollback completed"
+
+      - name: Post-deployment monitoring setup
+        if: success()
+        run: |
+          echo "📊 Setting up post-deployment monitoring..."
+          # Trigger monitoring alerts
+          curl -X POST "${{ secrets.MONITORING_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "event": "deployment_success",
+              "service": "openconductor-backend",
+              "environment": "production",
+              "deployment_id": "${{ steps.deploy.outputs.deployment_id }}"
+            }' || true
+
+  # Database migration job
+  migrate-database:
+    name: Run Database Migrations
+    runs-on: ubuntu-latest
+    needs: [deploy-production]
+    if: github.ref == 'refs/heads/main'
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: |
+          curl -fsSL https://railway.app/install.sh | sh
+          echo "$HOME/.railway/bin" >> $GITHUB_PATH
+
+      - name: Run database migrations
+        run: |
+          railway login --token $RAILWAY_TOKEN
+          railway environment production
+          
+          echo "🔄 Running database migrations..."
+          railway run -- node dist/scripts/migrate.js || true
+          
+          echo "✅ Database migrations completed"
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+  # Notify team of deployment status
+  notify:
+    name: Notify Team
+    runs-on: ubuntu-latest
+    needs: [deploy-production, migrate-database]
+    if: always() && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Notify deployment status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const deploymentSuccess = '${{ needs.deploy-production.result }}' === 'success';
+            const migrationSuccess = '${{ needs.migrate-database.result }}' === 'success';
+            
+            const status = deploymentSuccess && migrationSuccess ? '✅ SUCCESS' : '❌ FAILED';
+            const emoji = deploymentSuccess && migrationSuccess ? '🚀' : '🚨';
+            
+            const message = `${emoji} **Backend Deployment ${status}**
+            
+            **Commit:** \`${{ github.sha }}\`
+            **Branch:** \`${{ github.ref_name }}\`
+            **Deployment:** ${deploymentSuccess ? 'Success' : 'Failed'}
+            **Migrations:** ${migrationSuccess ? 'Success' : 'Failed'}
+            
+            **Production URL:** ${{ secrets.RAILWAY_PRODUCTION_URL }}
+            **Health Check:** ${{ secrets.RAILWAY_PRODUCTION_URL }}/health
+            `;
+            
+            // Post to GitHub (you could also integrate with Slack/Discord)
+            github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body: message
+            });

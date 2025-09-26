@@ -1,0 +1,722 @@
+# SportIntel GraphQL Federation Schema
+# B2B API layer over OpenConductor REST/WebSocket APIs
+# Supports enterprise integrations and partner access
+
+extend schema
+  @link(url: "https://specs.apollographql.com/federation/v2.0", import: ["@key", "@shareable", "@provides", "@requires", "@external", "@tag", "@override"])
+
+# =============================================================================
+# Core Types
+# =============================================================================
+
+scalar DateTime
+scalar JSON
+scalar Upload
+
+# User and Authentication
+type User @key(fields: "id") {
+  id: ID!
+  email: String!
+  subscription: Subscription
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Subscription Management
+type Subscription @key(fields: "id") {
+  id: ID!
+  userId: ID! @external
+  tier: SubscriptionTier!
+  status: SubscriptionStatus!
+  features: SubscriptionFeatures!
+  limits: SubscriptionLimits!
+  usage: SubscriptionUsage!
+  currentPeriodStart: DateTime!
+  currentPeriodEnd: DateTime!
+  cancelAtPeriodEnd: Boolean!
+  trialEnd: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum SubscriptionTier {
+  ROOKIE
+  PRO
+  ELITE
+  CHAMPION
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  UNPAID
+  INCOMPLETE
+  INCOMPLETE_EXPIRED
+  TRIALING
+}
+
+type SubscriptionFeatures {
+  realTimePredictions: Boolean!
+  explainableAI: Boolean!
+  portfolioOptimization: Boolean!
+  alertSystem: Boolean!
+  historicalData: Boolean!
+  advancedMetrics: Boolean!
+  competitorAnalysis: Boolean!
+  weatherData: Boolean!
+  dfsIntegration: Boolean!
+  apiAccess: Boolean!
+  webhooks: Boolean!
+  customReports: Boolean!
+  prioritySupport: Boolean!
+}
+
+type SubscriptionLimits {
+  dailyPredictions: Int!
+  monthlyPredictions: Int!
+  portfolios: Int!
+  alerts: Int!
+  apiCalls: Int!
+  webhookEndpoints: Int!
+  dataRetentionDays: Int!
+  teamMembers: Int!
+  sharedPortfolios: Int!
+}
+
+type SubscriptionUsage {
+  dailyPredictions: Int!
+  monthlyPredictions: Int!
+  apiCalls: Int!
+  totalPredictions: Int!
+  totalApiCalls: Int!
+  dailyResetAt: DateTime!
+  monthlyResetAt: DateTime!
+}
+
+# =============================================================================
+# Sports Data Types
+# =============================================================================
+
+type League @key(fields: "id") {
+  id: ID!
+  name: String!
+  sport: Sport!
+  country: String!
+  active: Boolean!
+  teams: [Team!]!
+  games(
+    week: Int
+    season: Int
+    status: GameStatus
+    limit: Int = 10
+    offset: Int = 0
+  ): GameConnection!
+}
+
+enum Sport {
+  FOOTBALL
+  BASKETBALL
+  BASEBALL
+  HOCKEY
+  SOCCER
+}
+
+type Team @key(fields: "id") {
+  id: ID!
+  name: String!
+  abbreviation: String!
+  city: String!
+  league: League! @provides(fields: "id name")
+  conference: String
+  division: String
+  players: [Player!]!
+  homeGames: [Game!]!
+  awayGames: [Game!]!
+  stats(season: Int): TeamStats
+}
+
+type Player @key(fields: "id") {
+  id: ID!
+  name: String!
+  position: String!
+  team: Team! @provides(fields: "id name abbreviation")
+  jerseyNumber: Int
+  height: String
+  weight: Int
+  experience: Int
+  salary: Int
+  predictions(
+    gameId: ID
+    limit: Int = 5
+    offset: Int = 0
+  ): PredictionConnection!
+  stats(season: Int, gameId: ID): PlayerStats
+  marketData(gameId: ID): MarketData
+}
+
+type Game @key(fields: "id") {
+  id: ID!
+  homeTeam: Team! @provides(fields: "id name abbreviation")
+  awayTeam: Team! @provides(fields: "id name abbreviation")
+  scheduledTime: DateTime!
+  week: Int!
+  season: Int!
+  status: GameStatus!
+  weather: Weather
+  vegas: VegasData
+  predictions: [Prediction!]!
+  marketData: [MarketData!]!
+}
+
+enum GameStatus {
+  SCHEDULED
+  LIVE
+  FINISHED
+  POSTPONED
+  CANCELED
+}
+
+type Weather {
+  temperature: Float
+  humidity: Float
+  windSpeed: Float
+  windDirection: String
+  precipitation: Float
+  conditions: String
+}
+
+type VegasData {
+  spread: Float
+  total: Float
+  moneyline: Moneyline
+  impliedTotal: Float
+}
+
+type Moneyline {
+  home: Int
+  away: Int
+}
+
+# =============================================================================
+# Predictions and Analytics
+# =============================================================================
+
+type Prediction @key(fields: "id") {
+  id: ID!
+  player: Player! @provides(fields: "id name position")
+  game: Game! @provides(fields: "id homeTeam { name } awayTeam { name }")
+  prediction: PredictionData!
+  confidence: Float!
+  explanation: ExplanationData
+  model: String!
+  version: String!
+  timestamp: DateTime!
+  accuracy: Float # Actual vs predicted (populated after game)
+}
+
+type PredictionData {
+  points: Float!
+  ceiling: Float!
+  floor: Float!
+  projectedOwnership: Float
+  value: Float # Points per $1000 salary
+}
+
+type ExplanationData {
+  summary: String!
+  factors: [ExplanationFactor!]!
+  shapValues: JSON
+  confidence: Float!
+  reasoning: String!
+}
+
+type ExplanationFactor {
+  factor: String!
+  impact: Float!
+  description: String!
+  value: JSON
+}
+
+type MarketData @key(fields: "playerId gameId timestamp") {
+  playerId: ID!
+  gameId: ID!
+  timestamp: DateTime!
+  salary: Int!
+  ownership: Float!
+  projectedPoints: Float!
+  ceiling: Float!
+  floor: Float!
+  value: Float!
+  trend: Float # Change from previous data point
+}
+
+# =============================================================================
+# Portfolio and Optimization
+# =============================================================================
+
+type Portfolio @key(fields: "id") {
+  id: ID!
+  userId: ID! @external
+  name: String!
+  bankroll: Float!
+  currentExposure: Float!
+  lineups: [Lineup!]!
+  performance: PortfolioPerformance!
+  alerts: [Alert!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Lineup @key(fields: "id") {
+  id: ID!
+  portfolioId: ID! @external
+  contest: String!
+  players: [Player!]! @requires(fields: "salary")
+  projectedPoints: Float!
+  totalSalary: Int!
+  projectedOwnership: Float!
+  projectedValue: Float!
+  roi: Float # Expected return on investment
+  sharpnessRatio: Float # Risk-adjusted return metric
+  exposure: LineupExposure!
+  status: LineupStatus!
+  actualPoints: Float # Populated after contest completion
+  actualRank: Int
+  payout: Float
+}
+
+type LineupExposure {
+  playerExposures: [PlayerExposure!]!
+  teamExposures: [TeamExposure!]!
+  positionExposures: [PositionExposure!]!
+  gameExposures: [GameExposure!]!
+}
+
+type PlayerExposure {
+  playerId: ID!
+  player: Player! @provides(fields: "name position")
+  percentage: Float!
+  count: Int!
+}
+
+type TeamExposure {
+  teamId: ID!
+  team: Team! @provides(fields: "name abbreviation")
+  percentage: Float!
+  playerCount: Int!
+}
+
+type PositionExposure {
+  position: String!
+  playerCount: Int!
+  averageSalary: Float!
+  averageProjection: Float!
+}
+
+type GameExposure {
+  gameId: ID!
+  game: Game! @provides(fields: "homeTeam { name } awayTeam { name }")
+  playerCount: Int!
+  totalExposure: Float!
+}
+
+enum LineupStatus {
+  DRAFT
+  SUBMITTED
+  LIVE
+  FINISHED
+}
+
+type PortfolioPerformance {
+  totalEntries: Int!
+  totalWins: Int!
+  winRate: Float!
+  totalRevenue: Float!
+  totalFees: Float!
+  netProfit: Float!
+  roi: Float!
+  sharpnessRatio: Float!
+  averageRank: Float!
+  bestFinish: Int!
+  worstFinish: Int!
+}
+
+# =============================================================================
+# Alerts and Notifications
+# =============================================================================
+
+type Alert @key(fields: "id") {
+  id: ID!
+  userId: ID! @external
+  type: AlertType!
+  severity: AlertSeverity!
+  title: String!
+  message: String!
+  player: Player
+  game: Game
+  data: JSON
+  actions: [AlertAction!]!
+  read: Boolean!
+  timestamp: DateTime!
+}
+
+enum AlertType {
+  PLAYER_NEWS
+  INJURY_UPDATE
+  LINEUP_CHANGE
+  WEATHER_UPDATE
+  VEGAS_MOVEMENT
+  OWNERSHIP_SHIFT
+  VALUE_OPPORTUNITY
+  PORTFOLIO_ALERT
+  SYSTEM_NOTIFICATION
+}
+
+enum AlertSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+type AlertAction {
+  type: String!
+  label: String!
+  url: String
+  data: JSON
+}
+
+# =============================================================================
+# Analytics and Reports
+# =============================================================================
+
+type Analytics {
+  player(id: ID!): PlayerAnalytics
+  team(id: ID!): TeamAnalytics
+  game(id: ID!): GameAnalytics
+  market: MarketAnalytics!
+  model: ModelAnalytics!
+  trends: TrendAnalytics!
+}
+
+type PlayerAnalytics {
+  player: Player!
+  seasonStats: PlayerStats!
+  recentForm: [PlayerStats!]!
+  matchupHistory: [MatchupData!]!
+  projectionAccuracy: AccuracyMetrics!
+  valueMetrics: ValueMetrics!
+  ownershipTrends: [OwnershipPoint!]!
+  similarPlayers: [Player!]!
+}
+
+type TeamAnalytics {
+  team: Team!
+  seasonStats: TeamStats!
+  recentForm: [TeamStats!]!
+  homeAwaySpilts: HomeAwaySplits!
+  strengthOfSchedule: Float!
+  paceMetrics: PaceMetrics!
+  defenseRankings: DefenseRankings!
+}
+
+type GameAnalytics {
+  game: Game!
+  gameScript: GameScript!
+  weatherImpact: WeatherImpact!
+  vegasAnalysis: VegasAnalysis!
+  publicBetting: PublicBetting!
+  keyInjuries: [InjuryReport!]!
+  narratives: [Narrative!]!
+}
+
+type MarketAnalytics {
+  ownership: OwnershipAnalytics!
+  salary: SalaryAnalytics!
+  value: ValueAnalytics!
+  contrarian: ContrarianAnalytics!
+  sharp: SharpAnalytics!
+}
+
+type ModelAnalytics {
+  accuracy: ModelAccuracy!
+  performance: ModelPerformance!
+  features: FeatureImportance!
+  calibration: CalibrationData!
+  backtesting: BacktestResults!
+}
+
+# =============================================================================
+# Statistics Types
+# =============================================================================
+
+type PlayerStats {
+  playerId: ID!
+  gameId: ID
+  season: Int!
+  week: Int
+  # Football specific stats
+  passingYards: Float
+  passingTouchdowns: Int
+  interceptions: Int
+  rushingYards: Float
+  rushingTouchdowns: Int
+  receptions: Int
+  receivingYards: Float
+  receivingTouchdowns: Int
+  targets: Int
+  fantasyPoints: Float!
+  snapCount: Int
+  snapPercentage: Float
+  redZoneTargets: Int
+  # Context data
+  gameScript: Float # Positive = team ahead, negative = team behind
+  weatherScore: Float
+  defenseRank: Int
+  timestamp: DateTime!
+}
+
+type TeamStats {
+  teamId: ID!
+  gameId: ID
+  season: Int!
+  week: Int
+  # Offensive stats
+  totalYards: Float!
+  passingYards: Float!
+  rushingYards: Float!
+  points: Int!
+  turnovers: Int!
+  timeOfPossession: Float!
+  redZoneEfficiency: Float!
+  thirdDownPercentage: Float!
+  # Defensive stats
+  yardsAllowed: Float!
+  passYardsAllowed: Float!
+  rushYardsAllowed: Float!
+  pointsAllowed: Int!
+  sacks: Int!
+  interceptions: Int!
+  fumblesRecovered: Int!
+  timestamp: DateTime!
+}
+
+# =============================================================================
+# Connection Types (Pagination)
+# =============================================================================
+
+type GameConnection {
+  edges: [GameEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type GameEdge {
+  node: Game!
+  cursor: String!
+}
+
+type PredictionConnection {
+  edges: [PredictionEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PredictionEdge {
+  node: Prediction!
+  cursor: String!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# =============================================================================
+# Input Types
+# =============================================================================
+
+input PlayerFilter {
+  teamId: ID
+  position: String
+  minSalary: Int
+  maxSalary: Int
+  minProjection: Float
+  maxProjection: Float
+  available: Boolean
+}
+
+input GameFilter {
+  week: Int
+  season: Int
+  status: GameStatus
+  teamId: ID
+  startTime: DateTime
+  endTime: DateTime
+}
+
+input PredictionFilter {
+  playerId: ID
+  gameId: ID
+  minConfidence: Float
+  model: String
+  dateRange: DateRange
+}
+
+input DateRange {
+  start: DateTime!
+  end: DateTime!
+}
+
+input LineupOptimizationInput {
+  contest: String!
+  budget: Int!
+  playerPool: [ID!]
+  exposureLimits: ExposureLimitsInput
+  correlations: CorrelationInput
+  objectives: [OptimizationObjective!]!
+}
+
+input ExposureLimitsInput {
+  maxPlayerExposure: Float
+  maxTeamExposure: Float
+  maxGameExposure: Float
+  minDiversification: Float
+}
+
+input CorrelationInput {
+  stackQBWR: Boolean
+  stackQBTE: Boolean
+  avoidDefenseStack: Boolean
+  gameCorrelations: Boolean
+}
+
+enum OptimizationObjective {
+  MAXIMIZE_POINTS
+  MAXIMIZE_VALUE
+  MAXIMIZE_CEILING
+  MINIMIZE_OWNERSHIP
+  MAXIMIZE_CORRELATION
+}
+
+# =============================================================================
+# Query Root
+# =============================================================================
+
+type Query {
+  # User and Subscription
+  me: User @requires(fields: "id")
+  subscription: Subscription
+
+  # Sports Data
+  leagues: [League!]!
+  league(id: ID!): League
+  teams(leagueId: ID): [Team!]!
+  team(id: ID!): Team
+  players(filter: PlayerFilter, limit: Int = 20, offset: Int = 0): [Player!]!
+  player(id: ID!): Player
+  games(filter: GameFilter, limit: Int = 20, offset: Int = 0): GameConnection!
+  game(id: ID!): Game
+
+  # Predictions
+  predictions(filter: PredictionFilter, limit: Int = 20, offset: Int = 0): PredictionConnection!
+  prediction(id: ID!): Prediction
+
+  # Portfolio
+  portfolios: [Portfolio!]! @requires(fields: "id")
+  portfolio(id: ID!): Portfolio @requires(fields: "id")
+  lineups(portfolioId: ID): [Lineup!]! @requires(fields: "id")
+  lineup(id: ID!): Lineup @requires(fields: "id")
+
+  # Alerts
+  alerts(read: Boolean, limit: Int = 20, offset: Int = 0): [Alert!]! @requires(fields: "id")
+  alert(id: ID!): Alert @requires(fields: "id")
+
+  # Analytics
+  analytics: Analytics!
+
+  # Market Data
+  marketData(gameId: ID!, playerId: ID): MarketData
+  ownership(gameId: ID!): [MarketData!]!
+  salaryChanges(days: Int = 7): [SalaryChange!]!
+}
+
+# =============================================================================
+# Mutation Root
+# =============================================================================
+
+type Mutation {
+  # Portfolio Management
+  createPortfolio(name: String!, bankroll: Float!): Portfolio! @requires(fields: "id")
+  updatePortfolio(id: ID!, name: String, bankroll: Float): Portfolio! @requires(fields: "id")
+  deletePortfolio(id: ID!): Boolean! @requires(fields: "id")
+
+  # Lineup Management
+  createLineup(portfolioId: ID!, contest: String!): Lineup! @requires(fields: "id")
+  updateLineup(id: ID!, players: [ID!]): Lineup! @requires(fields: "id")
+  optimizeLineup(input: LineupOptimizationInput!): [Lineup!]! @requires(fields: "id")
+  deleteLineup(id: ID!): Boolean! @requires(fields: "id")
+
+  # Alert Management
+  markAlertRead(id: ID!): Alert! @requires(fields: "id")
+  markAllAlertsRead: Boolean! @requires(fields: "id")
+  deleteAlert(id: ID!): Boolean! @requires(fields: "id")
+
+  # B2B Operations
+  createWebhook(url: String!, events: [String!]!): Webhook! @requires(fields: "id")
+  updateWebhook(id: ID!, url: String, events: [String!]): Webhook! @requires(fields: "id")
+  deleteWebhook(id: ID!): Boolean! @requires(fields: "id")
+}
+
+# =============================================================================
+# Subscription Root (Real-time)
+# =============================================================================
+
+type Subscription {
+  # Real-time predictions
+  predictionUpdates(playerId: ID, gameId: ID): Prediction!
+  
+  # Market data streams
+  ownershipUpdates(gameId: ID!): MarketData!
+  salaryUpdates(playerId: ID): MarketData!
+  
+  # Live game data
+  gameUpdates(gameId: ID!): Game!
+  
+  # Alerts
+  newAlerts: Alert! @requires(fields: "id")
+  
+  # Portfolio updates
+  portfolioUpdates(portfolioId: ID!): Portfolio! @requires(fields: "id")
+  lineupUpdates(lineupId: ID!): Lineup! @requires(fields: "id")
+}
+
+# =============================================================================
+# B2B Extensions
+# =============================================================================
+
+type Webhook {
+  id: ID!
+  url: String!
+  events: [String!]!
+  secret: String!
+  active: Boolean!
+  lastTriggered: DateTime
+  createdAt: DateTime!
+}
+
+type SalaryChange {
+  playerId: ID!
+  player: Player!
+  oldSalary: Int!
+  newSalary: Int!
+  change: Int!
+  changePercentage: Float!
+  timestamp: DateTime!
+}
+
+# Additional B2B specific types would be added here...
+# Rate limiting info, API usage statistics, batch operations, etc.

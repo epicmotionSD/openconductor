@@ -1,0 +1,42 @@
+# Railway Deployment Configuration for OpenConductor Backend
+# https://docs.railway.app/deploy/config-as-code
+
+[build]
+  # Build command
+  buildCommand = "npm install && npm run build"
+  
+[deploy]
+  # Start command
+  startCommand = "npm start"
+  # Restart policy
+  restartPolicyType = "ON_FAILURE"
+  restartPolicyMaxRetries = 3
+
+[env]
+  # Environment variables (values will be set in Railway dashboard)
+  NODE_ENV = "production"
+  PORT = "3000"
+  HOST = "0.0.0.0"
+
+[service]
+  # Service configuration
+  name = "openconductor-api"
+  
+[healthcheck]
+  # Health check configuration
+  enabled = true
+  path = "/health"
+  intervalSeconds = 30
+  timeoutSeconds = 10
+
+[networking]
+  # Allow public access
+  public = true
+  
+[resources]
+  # Resource allocation
+  cpu = "1"
+  memory = "1GB"
+  
+[volumes]
+  # No persistent volumes needed for stateless API

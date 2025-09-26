@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Overview - OpenConductor Trinity AI AIOps</title>
+    <meta name="description" content="Comprehensive AIOps platform with Trinity AI agents: Oracle (prediction), Sentinel (monitoring), Sage (advisory). 85% alert reduction with enterprise security.">
+    
+    <link rel="canonical" href="https://openconductor.ai/platform">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Same Geist design system */
+        :root {
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --foreground: #000000;
+            --background: #ffffff;
+            --gray: #666666;
+            --gray-light: #999999;
+            --gray-lighter: #eaeaea;
+            --gray-lightest: #fafafa;
+            --border: #eaeaea;
+            --blue: #0070f3;
+            --oracle: #0ea5e9;
+            --sentinel: #10b981;
+            --sage: #8b5cf6;
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --space-16: 64px;
+            --space-24: 96px;
+            --text-sm: 14px;
+            --text-base: 16px;
+            --text-lg: 18px;
+            --text-xl: 20px;
+            --text-2xl: 24px;
+            --text-3xl: 30px;
+            --text-4xl: 36px;
+            --text-5xl: 48px;
+            --radius: 6px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            --transition: 0.2s ease;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-sans);
+            color: var(--foreground);
+            background: var(--background);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 50;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--foreground);
+        }
+        
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            margin-right: var(--space-3);
+            background: linear-gradient(135deg, var(--oracle), var(--sage));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: var(--space-8);
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--foreground);
+            background: var(--gray-lightest);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            height: 32px;
+        }
+        
+        .btn-primary {
+            background: var(--foreground);
+            color: var(--background);
+        }
+        
+        .btn-secondary {
+            background: var(--background);
+            color: var(--foreground);
+            border-color: var(--border);
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+        
+        .section {
+            padding: var(--space-24) 0;
+        }
+        
+        /* Platform Hero */
+        .platform-hero {
+            padding: var(--space-24) 0;
+            margin-top: 64px;
+            text-align: center;
+        }
+        
+        .platform-title {
+            font-size: var(--text-5xl);
+            font-weight: 700;
+            margin-bottom: var(--space-6);
+            background: linear-gradient(135deg, var(--foreground) 0%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .platform-subtitle {
+            font-size: var(--text-lg);
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-8);
+            margin: var(--space-16) 0;
+        }
+        
+        .feature {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            transition: var(--transition);
+        }
+        
+        .feature:hover {
+            border-color: var(--gray-light);
+            box-shadow: var(--shadow);
+            transform: translateY(-4px);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius);
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xl);
+        }
+        
+        .feature-icon.alert { background: #fee2e2; color: #dc2626; }
+        .feature-icon.ai { background: #eff6ff; color: var(--blue); }
+        .feature-icon.security { background: #f0fdf4; color: var(--sentinel); }
+        .feature-icon.opensource { background: #faf5ff; color: var(--sage); }
+        
+        .feature-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-3);
+        }
+        
+        .feature-desc {
+            color: var(--gray);
+            margin-bottom: var(--space-4);
+            line-height: 1.6;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-2);
+            font-size: var(--text-sm);
+            color: var(--gray);
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            color: var(--blue);
+            font-weight: 600;
+            margin-right: var(--space-3);
+        }
+        
+        /* Trinity AI */
+        .trinity-section {
+            background: var(--gray-lightest);
+            border-radius: var(--radius-lg);
+            padding: var(--space-12);
+            margin: var(--space-16) 0;
+            border: 1px solid var(--border);
+        }
+        
+        .trinity-agents {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-8);
+            margin-top: var(--space-8);
+        }
+        
+        .agent {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .agent:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+        
+        .agent.oracle:hover { border-color: var(--oracle); }
+        .agent.sentinel:hover { border-color: var(--sentinel); }
+        .agent.sage:hover { border-color: var(--sage); }
+        
+        .agent-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-lg);
+            margin: 0 auto var(--space-4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-3xl);
+            color: white;
+        }
+        
+        .agent-icon.oracle {
+            background: linear-gradient(135deg, var(--oracle) 0%, #0284c7 100%);
+        }
+        
+        .agent-icon.sentinel {
+            background: linear-gradient(135deg, var(--sentinel) 0%, #059669 100%);
+        }
+        
+        .agent-icon.sage {
+            background: linear-gradient(135deg, var(--sage) 0%, #7c3aed 100%);
+        }
+        
+        .agent-name {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+        }
+        
+        .agent-tagline {
+            font-size: var(--text-sm);
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: var(--space-4);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-12);
+        }
+        
+        .section-title {
+            font-size: var(--text-4xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-4);
+        }
+        
+        .section-subtitle {
+            font-size: var(--text-lg);
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .platform-title { font-size: var(--text-4xl); }
+            .trinity-agents { grid-template-columns: 1fr; }
+            .features { grid-template-columns: 1fr; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Geist Header -->
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <div class="logo-mark">OC</div>
+                OpenConductor
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="/platform" class="active">Platform</a></li>
+                    <li><a href="/pricing">Pricing</a></li>
+                    <li><a href="/docs">Documentation</a></li>
+                    <li><a href="/enterprise">Enterprise</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/community">Community</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="/auth/login" class="btn btn-secondary">Sign In</a>
+                <a href="/enterprise/demo" class="btn btn-primary">Book Demo</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Platform Hero -->
+    <section class="platform-hero">
+        <div class="container">
+            <h1 class="platform-title">The Future of AIOps is Here</h1>
+            <p class="platform-subtitle">
+                OpenConductor revolutionizes IT operations with Trinity AI agents that work together to eliminate alert fatigue, 
+                predict issues before they happen, and provide intelligent recommendations for enterprise environments.
+            </p>
+        </div>
+    </section>
+
+    <!-- Platform Features -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Enterprise AIOps Capabilities</h2>
+                <p class="section-subtitle">
+                    Comprehensive platform designed for enterprise scale with advanced AI, security, and compliance.
+                </p>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon alert">🚨</div>
+                    <h3 class="feature-title">85% Alert Noise Reduction</h3>
+                    <p class="feature-desc">
+                        Eliminate alert fatigue with AI-powered correlation that intelligently filters and prioritizes 
+                        alerts, reducing noise from millions of daily alerts to only actionable insights.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Machine learning alert correlation</li>
+                        <li>Intelligent alert deduplication</li>
+                        <li>Context-aware alert prioritization</li>
+                        <li>False positive elimination</li>
+                        <li>Alert storm protection</li>
+                    </ul>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon ai">🤖</div>
+                    <h3 class="feature-title">AI-Powered Operations</h3>
+                    <p class="feature-desc">
+                        Trinity AI agents provide coordinated intelligence: predictive analytics, real-time monitoring, 
+                        and strategic recommendations working together for comprehensive AIOps automation.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Predictive failure detection</li>
+                        <li>Automated root cause analysis</li>
+                        <li>Intelligent capacity planning</li>
+                        <li>Performance optimization recommendations</li>
+                        <li>Continuous learning and improvement</li>
+                    </ul>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon security">🛡️</div>
+                    <h3 class="feature-title">Enterprise Security & Compliance</h3>
+                    <p class="feature-desc">
+                        Military-grade security with homomorphic encryption, zero-trust architecture, and comprehensive 
+                        compliance for SOC2, ISO27001, GDPR, and enterprise requirements.
+                    </p>
+                    <ul class="feature-list">
+                        <li>End-to-end encryption</li>
+                        <li>Zero-trust security model</li>
+                        <li>SOC2 Type II compliance</li>
+                        <li>Multi-tenant isolation</li>
+                        <li>Advanced audit trails</li>
+                    </ul>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon opensource">💎</div>
+                    <h3 class="feature-title">Open Source Advantage</h3>
+                    <p class="feature-desc">
+                        Built on open-source principles with full transparency, no vendor lock-in, and community-driven 
+                        innovation. Enterprise features when you need them, freedom when you want it.
+                    </p>
+                    <ul class="feature-list">
+                        <li>No vendor lock-in</li>
+                        <li>Full source code transparency</li>
+                        <li>Community-driven development</li>
+                        <li>Flexible deployment options</li>
+                        <li>Extensible architecture</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trinity AI Detailed Section -->
+    <section class="section">
+        <div class="container">
+            <div class="trinity-section">
+                <div class="section-header">
+                    <h2 class="section-title">Trinity AI: Coordinated Intelligence</h2>
+                    <p class="section-subtitle">
+                        Three specialized AI agents working in harmony to provide comprehensive AIOps capabilities 
+                        that exceed what any single solution can deliver.
+                    </p>
+                </div>
+
+                <div class="trinity-agents">
+                    <!-- Oracle Agent -->
+                    <div class="agent oracle">
+                        <div class="agent-icon oracle">🔮</div>
+                        <h3 class="agent-name">Oracle Agent</h3>
+                        <p class="agent-tagline">"The wisdom to see what's coming"</p>
+                        <ul class="feature-list" style="margin-top: var(--space-4);">
+                            <li>Time series forecasting and trend analysis</li>
+                            <li>ML model inference and pattern recognition</li>
+                            <li>Capacity planning and resource optimization</li>
+                            <li>Risk assessment and anomaly prediction</li>
+                        </ul>
+                        <a href="/docs/oracle" class="btn btn-secondary" style="margin-top: var(--space-4);">
+                            Explore Oracle
+                        </a>
+                    </div>
+
+                    <!-- Sentinel Agent -->
+                    <div class="agent sentinel">
+                        <div class="agent-icon sentinel">🛡️</div>
+                        <h3 class="agent-name">Sentinel Agent</h3>
+                        <p class="agent-tagline">"The vigilance to know what's happening"</p>
+                        <ul class="feature-list" style="margin-top: var(--space-4);">
+                            <li>Real-time monitoring and alerting</li>
+                            <li>Health checks and availability tracking</li>
+                            <li>SLA monitoring and compliance</li>
+                            <li>Threshold management and escalation</li>
+                        </ul>
+                        <a href="/docs/sentinel" class="btn btn-secondary" style="margin-top: var(--space-4);">
+                            Explore Sentinel
+                        </a>
+                    </div>
+
+                    <!-- Sage Agent -->
+                    <div class="agent sage">
+                        <div class="agent-icon sage">🧠</div>
+                        <h3 class="agent-name">Sage Agent</h3>
+                        <p class="agent-tagline">"The intelligence to know what to do"</p>
+                        <ul class="feature-list" style="margin-top: var(--space-4);">
+                            <li>Strategic planning and decision support</li>
+                            <li>Multi-criteria decision analysis</li>
+                            <li>Risk management and mitigation strategies</li>
+                            <li>Natural language query processing</li>
+                        </ul>
+                        <a href="/docs/sage" class="btn btn-secondary" style="margin-top: var(--space-4);">
+                            Explore Sage
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform CTA -->
+    <section class="section" style="background: var(--foreground); color: var(--background);">
+        <div class="container">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <h2 style="color: var(--background); margin-bottom: var(--space-4);">Ready to Transform Your AIOps?</h2>
+                <p style="color: var(--gray-light); margin-bottom: var(--space-8);">
+                    Join hundreds of DevOps teams already using OpenConductor to eliminate alert fatigue 
+                    and accelerate incident resolution.
+                </p>
+                <div style="display: flex; gap: var(--space-3); justify-content: center; flex-wrap: wrap;">
+                    <a href="/start-free" class="btn" style="background: var(--background); color: var(--foreground); height: 40px; padding: var(--space-3) var(--space-6);">
+                        Start Free - Community Edition
+                    </a>
+                    <a href="/enterprise/demo" class="btn" style="background: transparent; color: var(--background); border: 1px solid var(--background); height: 40px; padding: var(--space-3) var(--space-6);">
+                        Book Enterprise Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Platform page loaded with Geist design system');
+        });
+    </script>
+</body>
+</html>

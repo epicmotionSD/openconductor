@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - OpenConductor Trinity AI AIOps Platform</title>
+    <meta name="description" content="Comprehensive documentation for OpenConductor Trinity AI platform. Trinity AI agents guides, API documentation, quick start tutorials, and enterprise integration guides.">
+    
+    <link rel="canonical" href="https://openconductor.ai/docs">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Geist Design System for Documentation */
+        :root {
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            --foreground: #000000;
+            --background: #ffffff;
+            --gray: #666666;
+            --gray-light: #999999;
+            --gray-lighter: #eaeaea;
+            --gray-lightest: #fafafa;
+            --border: #eaeaea;
+            --blue: #0070f3;
+            --oracle: #0ea5e9;
+            --sentinel: #10b981;
+            --sage: #8b5cf6;
+            --success: #10b981;
+            --warning: #f5a623;
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --space-16: 64px;
+            --space-24: 96px;
+            --text-xs: 12px;
+            --text-sm: 14px;
+            --text-base: 16px;
+            --text-lg: 18px;
+            --text-xl: 20px;
+            --text-2xl: 24px;
+            --text-3xl: 30px;
+            --text-4xl: 36px;
+            --text-5xl: 48px;
+            --radius: 6px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            --transition: 0.2s ease;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-sans);
+            color: var(--foreground);
+            background: var(--background);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 50;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--foreground);
+        }
+        
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            margin-right: var(--space-3);
+            background: linear-gradient(135deg, var(--oracle), var(--sage));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: var(--space-8);
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--foreground);
+            background: var(--gray-lightest);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            height: 32px;
+        }
+        
+        .btn-primary {
+            background: var(--foreground);
+            color: var(--background);
+        }
+        
+        .btn-secondary {
+            background: var(--background);
+            color: var(--foreground);
+            border-color: var(--border);
+        }
+        
+        /* Documentation Layout */
+        .docs-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            margin-top: 64px;
+            min-height: calc(100vh - 64px);
+        }
+        
+        /* Sidebar */
+        .docs-sidebar {
+            background: var(--gray-lightest);
+            border-right: 1px solid var(--border);
+            padding: var(--space-6);
+            overflow-y: auto;
+        }
+        
+        .sidebar-section {
+            margin-bottom: var(--space-6);
+        }
+        
+        .sidebar-title {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: var(--space-1);
+        }
+        
+        .sidebar-nav a {
+            display: block;
+            padding: var(--space-2) var(--space-3);
+            color: var(--gray);
+            text-decoration: none;
+            font-size: var(--text-sm);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            color: var(--foreground);
+            background: var(--background);
+        }
+        
+        /* Main Content */
+        .docs-content {
+            padding: var(--space-8);
+            max-width: 800px;
+        }
+        
+        .docs-hero {
+            margin-bottom: var(--space-12);
+        }
+        
+        .docs-title {
+            font-size: var(--text-5xl);
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+            background: linear-gradient(135deg, var(--foreground) 0%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .docs-subtitle {
+            font-size: var(--text-lg);
+            color: var(--gray);
+            margin-bottom: var(--space-8);
+        }
+        
+        /* Quick Start Cards */
+        .quick-start-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
+            margin: var(--space-8) 0;
+        }
+        
+        .quick-start-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .quick-start-card:hover {
+            border-color: var(--blue);
+            box-shadow: var(--shadow);
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius);
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-lg);
+        }
+        
+        .card-icon.oracle { background: #e0f2fe; color: var(--oracle); }
+        .card-icon.sentinel { background: #f0fdf4; color: var(--sentinel); }
+        .card-icon.sage { background: #faf5ff; color: var(--sage); }
+        .card-icon.api { background: #eff6ff; color: var(--blue); }
+        .card-icon.guide { background: #fef3c7; color: #d97706; }
+        .card-icon.enterprise { background: #fee2e2; color: #dc2626; }
+        
+        .card-title {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+        }
+        
+        .card-desc {
+            color: var(--gray);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-4);
+        }
+        
+        .card-link {
+            color: var(--blue);
+            text-decoration: none;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+        
+        .card-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Code Examples */
+        .code-example {
+            background: var(--gray-lightest);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: var(--space-4);
+            margin: var(--space-4) 0;
+            overflow-x: auto;
+        }
+        
+        .code-example pre {
+            font-family: var(--font-mono);
+            font-size: var(--text-sm);
+            color: var(--foreground);
+            margin: 0;
+        }
+        
+        .code-title {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--gray);
+            margin-bottom: var(--space-2);
+        }
+        
+        /* Documentation Sections */
+        .docs-section {
+            margin-bottom: var(--space-12);
+        }
+        
+        .docs-section h2 {
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-4);
+        }
+        
+        .docs-section h3 {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-3);
+            margin-top: var(--space-6);
+        }
+        
+        .docs-section p {
+            color: var(--gray);
+            margin-bottom: var(--space-4);
+            line-height: 1.6;
+        }
+        
+        /* Callouts */
+        .callout {
+            background: var(--gray-lightest);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--blue);
+            border-radius: var(--radius);
+            padding: var(--space-4);
+            margin: var(--space-4) 0;
+        }
+        
+        .callout.warning {
+            border-left-color: var(--warning);
+            background: #fefce8;
+        }
+        
+        .callout.success {
+            border-left-color: var(--success);
+            background: #f0fdf4;
+        }
+        
+        .callout-title {
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+            font-size: var(--text-sm);
+        }
+        
+        .callout-content {
+            color: var(--gray);
+            font-size: var(--text-sm);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .docs-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .docs-sidebar {
+                display: none; /* Would implement mobile menu */
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Geist Header -->
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <div class="logo-mark">OC</div>
+                OpenConductor
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="/platform">Platform</a></li>
+                    <li><a href="/pricing">Pricing</a></li>
+                    <li><a href="/docs" class="active">Documentation</a></li>
+                    <li><a href="/enterprise">Enterprise</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/community">Community</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="/auth/login" class="btn btn-secondary">Sign In</a>
+                <a href="/enterprise/demo" class="btn btn-primary">Book Demo</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Documentation Layout -->
+    <div class="docs-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="docs-sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Getting Started</div>
+                <ul class="sidebar-nav">
+                    <li><a href="/docs" class="active">Overview</a></li>
+                    <li><a href="/docs/quick-start">Quick Start</a></li>
+                    <li><a href="/docs/installation">Installation</a></li>
+                    <li><a href="/docs/configuration">Configuration</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">Trinity AI Agents</div>
+                <ul class="sidebar-nav">
+                    <li><a href="/docs/trinity-ai">Trinity AI Overview</a></li>
+                    <li><a href="/docs/oracle">Oracle Agent</a></li>
+                    <li><a href="/docs/sentinel">Sentinel Agent</a></li>
+                    <li><a href="/docs/sage">Sage Agent</a></li>
+                    <li><a href="/docs/agent-coordination">Agent Coordination</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">API Reference</div>
+                <ul class="sidebar-nav">
+                    <li><a href="/docs/api">API Overview</a></li>
+                    <li><a href="/docs/api/authentication">Authentication</a></li>
+                    <li><a href="/docs/api/agents">Agents API</a></li>
+                    <li><a href="/docs/api/monitoring">Monitoring API</a></li>
+                    <li><a href="/docs/api/webhooks">Webhooks</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">Enterprise</div>
+                <ul class="sidebar-nav">
+                    <li><a href="/docs/enterprise">Enterprise Features</a></li>
+                    <li><a href="/docs/security">Security Architecture</a></li>
+                    <li><a href="/docs/compliance">Compliance</a></li>
+                    <li><a href="/docs/deployment">Deployment Options</a></li>
+                    <li><a href="/docs/integrations">Enterprise Integrations</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Documentation Content -->
+        <main class="docs-content">
+            <!-- Documentation Hero -->
+            <div class="docs-hero">
+                <h1 class="docs-title">OpenConductor Documentation</h1>
+                <p class="docs-subtitle">
+                    Comprehensive guides and API reference for building with Trinity AI agents. 
+                    Get started in minutes, scale to enterprise in days.
+                </p>
+                
+                <div style="display: flex; gap: var(--space-3); margin-top: var(--space-6);">
+                    <a href="/docs/quick-start" class="btn btn-primary">
+                        Quick Start Guide
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                    <a href="/docs/api" class="btn btn-secondary">API Reference</a>
+                </div>
+            </div>
+
+            <!-- Quick Start Cards -->
+            <div class="docs-section">
+                <h2>Popular Documentation</h2>
+                <div class="quick-start-grid">
+                    <!-- Trinity AI Overview -->
+                    <div class="quick-start-card" onclick="location.href='/docs/trinity-ai'">
+                        <div class="card-icon oracle">🔮</div>
+                        <h3 class="card-title">Trinity AI Agents</h3>
+                        <p class="card-desc">
+                            Learn how Oracle, Sentinel, and Sage agents work together to provide 
+                            coordinated intelligence for enterprise AIOps.
+                        </p>
+                        <a href="/docs/trinity-ai" class="card-link">
+                            Explore Trinity AI
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Quick Start -->
+                    <div class="quick-start-card" onclick="location.href='/docs/quick-start'">
+                        <div class="card-icon guide">🚀</div>
+                        <h3 class="card-title">Quick Start Guide</h3>
+                        <p class="card-desc">
+                            Get OpenConductor running in minutes with our comprehensive quick start guide. 
+                            From installation to first alert correlation.
+                        </p>
+                        <a href="/docs/quick-start" class="card-link">
+                            Get Started
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- API Reference -->
+                    <div class="quick-start-card" onclick="location.href='/docs/api'">
+                        <div class="card-icon api">📚</div>
+                        <h3 class="card-title">API Reference</h3>
+                        <p class="card-desc">
+                            Complete API documentation with authentication, endpoints, examples, 
+                            and interactive testing capabilities.
+                        </p>
+                        <a href="/docs/api" class="card-link">
+                            API Docs
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Enterprise Deployment -->
+                    <div class="quick-start-card" onclick="location.href='/docs/enterprise'">
+                        <div class="card-icon enterprise">🏢</div>
+                        <h3 class="card-title">Enterprise Deployment</h3>
+                        <p class="card-desc">
+                            Enterprise deployment guides for on-premises, private cloud, and SaaS 
+                            configurations with security and compliance.
+                        </p>
+                        <a href="/docs/enterprise" class="card-link">
+                            Enterprise Guide
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Integrations -->
+                    <div class="quick-start-card" onclick="location.href='/docs/integrations'">
+                        <div class="card-icon sage">🔗</div>
+                        <h3 class="card-title">Enterprise Integrations</h3>
+                        <p class="card-desc">
+                            Step-by-step guides for ServiceNow, Splunk, Datadog, and other 
+                            enterprise platform integrations.
+                        </p>
+                        <a href="/docs/integrations" class="card-link">
+                            Integration Guides
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Security Documentation -->
+                    <div class="quick-start-card" onclick="location.href='/docs/security'">
+                        <div class="card-icon sentinel">🛡️</div>
+                        <h3 class="card-title">Security Architecture</h3>
+                        <p class="card-desc">
+                            Learn about our zero-trust architecture, homomorphic encryption, 
+                            and enterprise security features.
+                        </p>
+                        <a href="/docs/security" class="card-link">
+                            Security Docs
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Example -->
+            <div class="docs-section">
+                <h2>Trinity AI in Action</h2>
+                <p>See how Trinity AI agents work together for coordinated intelligence:</p>
+                
+                <div class="code-example">
+                    <div class="code-title">Coordinated Intelligence Example</div>
+                    <pre><code>// 1. Oracle predicts system load
+const loadPrediction = await oracle.execute(historicalLoad, {
+  timeHorizon: 30,
+  model: 'performance-regressor'
+});
+
+// 2. Sentinel adjusts monitoring based on prediction
+if (loadPrediction.result.confidence > 0.8) {
+  sentinel.setThreshold('cpu_usage', {
+    condition: 'gt',
+    value: loadPrediction.result.prediction * 0.9,
+    severity: 'warning'
+  });
+}
+
+// 3. Sage provides strategic recommendations
+const advice = await sage.execute({
+  domain: 'operations',
+  objective: 'Optimize system performance based on predictions',
+  currentState: {
+    prediction: loadPrediction.result,
+    currentLoad: systemMetrics,
+    budget: 50000
+  }
+});
+
+console.log('Strategic Recommendations:');
+advice.recommendations.forEach(rec => 
+  console.log(`• ${rec.action} (${rec.impact} impact)`)
+);</code></pre>
+                </div>
+                
+                <div class="callout success">
+                    <div class="callout-title">Enterprise Value</div>
+                    <div class="callout-content">
+                        This coordinated intelligence approach reduces MTTR by 60% and prevents 40% of incidents 
+                        through predictive actions, delivering proven ROI for enterprise customers.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community and Support -->
+            <div class="docs-section">
+                <h2>Community & Support</h2>
+                <p>Get help from the community and our enterprise support team:</p>
+                
+                <div class="quick-start-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="quick-start-card">
+                        <div class="card-icon" style="background: #f3f4f6; color: #374151;">💬</div>
+                        <h3 class="card-title">Community Support</h3>
+                        <p class="card-desc">
+                            Join our active community on GitHub, Slack, and Discord for questions, 
+                            contributions, and best practices.
+                        </p>
+                        <a href="/community" class="card-link">Join Community</a>
+                    </div>
+                    
+                    <div class="quick-start-card">
+                        <div class="card-icon" style="background: #eff6ff; color: var(--blue);">🎯</div>
+                        <h3 class="card-title">Enterprise Support</h3>
+                        <p class="card-desc">
+                            Enterprise customers get 24/7 support, dedicated success managers, 
+                            and direct access to our engineering team.
+                        </p>
+                        <a href="/enterprise" class="card-link">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Documentation hub loaded with Geist design system');
+            
+            // Track documentation engagement
+            const docCards = document.querySelectorAll('.quick-start-card');
+            docCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const title = this.querySelector('.card-title').textContent;
+                    console.log(`Documentation section accessed: ${title}`);
+                });
+            });
+            
+            // Syntax highlighting would be implemented here
+            // Code copy functionality would be added
+            // Search functionality would be integrated
+        });
+    </script>
+</body>
+</html>

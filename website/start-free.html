@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Free - OpenConductor Community Edition</title>
+    <meta name="description" content="Get started with OpenConductor Community Edition for free. Basic Trinity AI agents, alert correlation, and community support. No credit card required.">
+    
+    <link rel="canonical" href="https://openconductor.ai/start-free">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Same Geist design system */
+        :root {
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --foreground: #000000;
+            --background: #ffffff;
+            --gray: #666666;
+            --gray-light: #999999;
+            --gray-lighter: #eaeaea;
+            --gray-lightest: #fafafa;
+            --border: #eaeaea;
+            --blue: #0070f3;
+            --oracle: #0ea5e9;
+            --sentinel: #10b981;
+            --sage: #8b5cf6;
+            --success: #10b981;
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --space-16: 64px;
+            --space-24: 96px;
+            --text-xs: 12px;
+            --text-sm: 14px;
+            --text-base: 16px;
+            --text-lg: 18px;
+            --text-xl: 20px;
+            --text-2xl: 24px;
+            --text-3xl: 30px;
+            --text-4xl: 36px;
+            --text-5xl: 48px;
+            --radius: 6px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            --transition: 0.2s ease;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-sans);
+            color: var(--foreground);
+            background: var(--background);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 50;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--foreground);
+        }
+        
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            margin-right: var(--space-3);
+            background: linear-gradient(135deg, var(--oracle), var(--sage));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: var(--space-8);
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--foreground);
+            background: var(--gray-lightest);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            height: 32px;
+        }
+        
+        .btn-primary {
+            background: var(--foreground);
+            color: var(--background);
+        }
+        
+        .btn-secondary {
+            background: var(--background);
+            color: var(--foreground);
+            border-color: var(--border);
+        }
+        
+        /* Signup Layout */
+        .signup-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--space-24) var(--space-6);
+            margin-top: 64px;
+        }
+        
+        .signup-hero {
+            text-align: center;
+            margin-bottom: var(--space-12);
+        }
+        
+        .signup-title {
+            font-size: var(--text-5xl);
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+            background: linear-gradient(135deg, var(--foreground) 0%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .signup-subtitle {
+            font-size: var(--text-lg);
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto var(--space-8);
+        }
+        
+        /* Community Features */
+        .community-features {
+            background: var(--gray-lightest);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            margin-bottom: var(--space-12);
+        }
+        
+        .features-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-4);
+            text-align: center;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-6);
+        }
+        
+        .feature-item {
+            text-align: center;
+        }
+        
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius);
+            margin: 0 auto var(--space-3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-lg);
+        }
+        
+        .feature-icon.agents { background: #eff6ff; color: var(--blue); }
+        .feature-icon.correlation { background: #f0fdf4; color: var(--sentinel); }
+        .feature-icon.support { background: #faf5ff; color: var(--sage); }
+        .feature-icon.integrations { background: #fef3c7; color: #d97706; }
+        
+        .feature-title {
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-1);
+            font-size: var(--text-sm);
+        }
+        
+        .feature-desc {
+            color: var(--gray);
+            font-size: var(--text-xs);
+        }
+        
+        /* Signup Form */
+        .signup-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: var(--space-12);
+            align-items: start;
+        }
+        
+        .signup-info {
+            background: var(--gray-lightest);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+        }
+        
+        .info-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-4);
+        }
+        
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-3);
+            font-size: var(--text-sm);
+            color: var(--gray);
+        }
+        
+        .info-list li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 600;
+            margin-right: var(--space-3);
+            font-size: var(--text-base);
+        }
+        
+        .signup-form {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            box-shadow: var(--shadow);
+        }
+        
+        .form-title {
+            font-size: var(--text-2xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-6);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-4);
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+            font-size: var(--text-sm);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: var(--space-3);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--foreground);
+            font-size: var(--text-sm);
+            font-family: var(--font-sans);
+            transition: var(--transition);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: var(--space-3);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--foreground);
+            font-size: var(--text-sm);
+            font-family: var(--font-sans);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: var(--blue);
+            color: white;
+            border: none;
+            padding: var(--space-3) var(--space-6);
+            border-radius: var(--radius);
+            font-size: var(--text-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            height: 44px;
+        }
+        
+        .submit-btn:hover {
+            background: #0060df;
+        }
+        
+        .submit-btn:disabled {
+            background: var(--gray-lighter);
+            color: var(--gray);
+            cursor: not-allowed;
+        }
+        
+        /* Upgrade Path */
+        .upgrade-path {
+            background: var(--gray-lightest);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            margin-top: var(--space-8);
+            text-align: center;
+        }
+        
+        .upgrade-title {
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+            font-size: var(--text-base);
+        }
+        
+        .upgrade-desc {
+            color: var(--gray);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-4);
+        }
+        
+        /* Progress Steps */
+        .signup-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+        
+        .step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xs);
+            font-weight: 600;
+        }
+        
+        .step-number.inactive {
+            background: var(--gray-lighter);
+            color: var(--gray);
+        }
+        
+        .step-label {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--foreground);
+        }
+        
+        .step-connector {
+            width: 40px;
+            height: 2px;
+            background: var(--border);
+        }
+        
+        @media (max-width: 768px) {
+            .signup-layout {
+                grid-template-columns: 1fr;
+                gap: var(--space-8);
+            }
+            
+            .signup-title {
+                font-size: var(--text-4xl);
+            }
+            
+            .signup-steps {
+                flex-direction: column;
+                gap: var(--space-2);
+            }
+            
+            .step-connector {
+                display: none;
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Geist Header -->
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <div class="logo-mark">OC</div>
+                OpenConductor
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="/platform">Platform</a></li>
+                    <li><a href="/pricing">Pricing</a></li>
+                    <li><a href="/docs">Documentation</a></li>
+                    <li><a href="/enterprise">Enterprise</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/community">Community</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="/auth/login" class="btn btn-secondary">Sign In</a>
+                <a href="/enterprise/demo" class="btn btn-primary">Book Demo</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Signup Content -->
+    <main class="signup-container">
+        <!-- Signup Hero -->
+        <div class="signup-hero">
+            <h1 class="signup-title">Start Free with Community Edition</h1>
+            <p class="signup-subtitle">
+                Get started with OpenConductor's powerful AIOps capabilities at no cost. 
+                Basic Trinity AI agents, alert correlation, and community support included.
+            </p>
+            
+            <!-- Signup Steps -->
+            <div class="signup-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Create Account</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number inactive">2</div>
+                    <div class="step-label">Setup Environment</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number inactive">3</div>
+                    <div class="step-label">Deploy Agents</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Features -->
+        <div class="community-features">
+            <h2 class="features-title">What's Included in Community Edition</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon agents">🔮</div>
+                    <div class="feature-title">Basic Trinity AI Agents</div>
+                    <div class="feature-desc">Oracle, Sentinel, and Sage agents with core capabilities</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon correlation">🤖</div>
+                    <div class="feature-title">Alert Correlation</div>
+                    <div class="feature-desc">AI-powered correlation for up to 100 monitoring targets</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon support">💬</div>
+                    <div class="feature-title">Community Support</div>
+                    <div class="feature-desc">GitHub issues, community forum, and documentation</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon integrations">🔗</div>
+                    <div class="feature-title">5 Standard Integrations</div>
+                    <div class="feature-desc">Connect to popular monitoring and alerting tools</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signup Layout -->
+        <div class="signup-layout">
+            <!-- Signup Benefits -->
+            <div class="signup-info">
+                <h2 class="info-title">Why Start with Community Edition?</h2>
+                <ul class="info-list">
+                    <li>Immediate access to Trinity AI capabilities</li>
+                    <li>No credit card required - completely free</li>
+                    <li>Full source code transparency and control</li>
+                    <li>Active community of 25K+ developers</li>
+                    <li>Seamless upgrade path to Enterprise features</li>
+                    <li>Docker and Kubernetes deployment options</li>
+                    <li>Comprehensive documentation and tutorials</li>
+                    <li>Regular updates and new features</li>
+                </ul>
+                
+                <div class="upgrade-path">
+                    <div class="upgrade-title">Ready for Enterprise Features?</div>
+                    <div class="upgrade-desc">
+                        Upgrade anytime to unlock advanced ML models, enterprise integrations, 
+                        SSO, compliance features, and 24/7 support.
+                    </div>
+                    <a href="/pricing" class="btn btn-secondary" style="margin-top: var(--space-3);">
+                        View Enterprise Plans
+                    </a>
+                </div>
+            </div>
+
+            <!-- Community Signup Form -->
+            <div class="signup-form">
+                <h2 class="form-title">Create Your Free Account</h2>
+                
+                <form id="signupForm" onsubmit="submitSignup(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="signupFirstName">First Name *</label>
+                        <input type="text" id="signupFirstName" name="firstName" class="form-input" required 
+                               placeholder="John">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="signupLastName">Last Name *</label>
+                        <input type="text" id="signupLastName" name="lastName" class="form-input" required 
+                               placeholder="Smith">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="signupEmail">Email Address *</label>
+                        <input type="email" id="signupEmail" name="email" class="form-input" required 
+                               placeholder="john.smith@company.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="signupPassword">Password *</label>
+                        <input type="password" id="signupPassword" name="password" class="form-input" required 
+                               placeholder="Strong password (8+ characters)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="signupCompany">Company (Optional)</label>
+                        <input type="text" id="signupCompany" name="company" class="form-input" 
+                               placeholder="Acme Corporation">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="signupRole">Role (Optional)</label>
+                        <select id="signupRole" name="role" class="form-select">
+                            <option value="">Select your role</option>
+                            <option value="developer">Developer</option>
+                            <option value="devops-engineer">DevOps Engineer</option>
+                            <option value="sre">Site Reliability Engineer</option>
+                            <option value="manager">Engineering Manager</option>
+                            <option value="architect">Solutions Architect</option>
+                            <option value="student">Student</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="signupUseCase">Primary Use Case (Optional)</label>
+                        <select id="signupUseCase" name="useCase" class="form-select">
+                            <option value="">Select use case</option>
+                            <option value="learning">Learning AIOps</option>
+                            <option value="proof-of-concept">Proof of Concept</option>
+                            <option value="development">Development Environment</option>
+                            <option value="small-production">Small Production Deployment</option>
+                            <option value="evaluation">Enterprise Evaluation</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Newsletter Signup -->
+                    <div style="display: flex; align-items: flex-start; gap: var(--space-2); margin: var(--space-4) 0;">
+                        <input type="checkbox" id="newsletter" name="newsletter" checked>
+                        <label for="newsletter" style="font-size: var(--text-sm); color: var(--gray);">
+                            Subscribe to our newsletter for AIOps insights and product updates
+                        </label>
+                    </div>
+                    
+                    <!-- Privacy Consent -->
+                    <div style="display: flex; align-items: flex-start; gap: var(--space-2); margin: var(--space-4) 0;">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms" style="font-size: var(--text-sm); color: var(--gray);">
+                            I agree to the <a href="/terms" style="color: var(--blue);">Terms of Service</a> 
+                            and <a href="/privacy" style="color: var(--blue);">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="signupBtn">
+                        Create Free Account
+                    </button>
+                    
+                    <div style="text-align: center; margin-top: var(--space-4);">
+                        <p style="font-size: var(--text-sm); color: var(--gray);">
+                            Already have an account? 
+                            <a href="/auth/login" style="color: var(--blue); font-weight: 500;">Sign in here</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Next Steps Preview -->
+        <div style="background: var(--gray-lightest); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-8); margin-top: var(--space-12); text-align: center;">
+            <h2 style="font-size: var(--text-xl); font-weight: 600; margin-bottom: var(--space-4);">What Happens Next?</h2>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); margin-top: var(--space-6);">
+                <div>
+                    <div style="font-size: var(--text-2xl); margin-bottom: var(--space-2);">📧</div>
+                    <div style="font-weight: 500; margin-bottom: var(--space-1); font-size: var(--text-sm);">Welcome Email</div>
+                    <div style="color: var(--gray); font-size: var(--text-xs);">Setup instructions and getting started guide</div>
+                </div>
+                <div>
+                    <div style="font-size: var(--text-2xl); margin-bottom: var(--space-2);">🚀</div>
+                    <div style="font-weight: 500; margin-bottom: var(--space-1); font-size: var(--text-sm);">Quick Deployment</div>
+                    <div style="color: var(--gray); font-size: var(--text-xs);">Deploy Trinity AI agents in under 10 minutes</div>
+                </div>
+                <div>
+                    <div style="font-size: var(--text-2xl); margin-bottom: var(--space-2);">📈</div>
+                    <div style="font-weight: 500; margin-bottom: var(--space-1); font-size: var(--text-sm);">See Results</div>
+                    <div style="color: var(--gray); font-size: var(--text-xs);">Start reducing alert noise immediately</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function submitSignup(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const signupData = Object.fromEntries(formData.entries());
+            
+            // Enterprise lead qualification for future upgrade
+            const leadQualification = {
+                businessEmail: signupData.email && !signupData.email.includes('@gmail.com'),
+                hasCompany: !!signupData.company,
+                role: signupData.role,
+                useCase: signupData.useCase,
+                signupSource: 'community_edition'
+            };
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('signupBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Creating Account...';
+            
+            // Simulate account creation
+            setTimeout(() => {
+                alert('Welcome to OpenConductor! Check your email for setup instructions.');
+                console.log('Community signup completed:', signupData);
+                console.log('Lead qualification data:', leadQualification);
+                
+                // Redirect to onboarding
+                window.location.href = '/onboarding/welcome';
+            }, 2000);
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Community Edition signup page loaded');
+            
+            // Track signup form engagement
+            const formInputs = document.querySelectorAll('.form-input, .form-select');
+            formInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    console.log(`Signup form field focused: ${this.name}`);
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (this.value) {
+                        console.log(`Signup form field completed: ${this.name}`);
+                    }
+                });
+            });
+            
+            // Password strength validation
+            const passwordInput = document.getElementById('signupPassword');
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                const strength = calculatePasswordStrength(password);
+                
+                // Visual feedback for password strength
+                if (strength.score < 3) {
+                    this.style.borderColor = '#ef4444';
+                } else if (strength.score < 4) {
+                    this.style.borderColor = '#f5a623';
+                } else {
+                    this.style.borderColor = 'var(--success)';
+                }
+            });
+        });
+        
+        function calculatePasswordStrength(password) {
+            let score = 0;
+            const checks = {
+                length: password.length >= 8,
+                uppercase: /[A-Z]/.test(password),
+                lowercase: /[a-z]/.test(password),
+                numbers: /\d/.test(password),
+                symbols: /[^A-Za-z0-9]/.test(password)
+            };
+            
+            Object.values(checks).forEach(check => {
+                if (check) score++;
+            });
+            
+            return { score, checks };
+        }
+    </script>
+</body>
+</html>

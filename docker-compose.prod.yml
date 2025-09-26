@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  # Trinity AI Frontend
+  trinity-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - trinity-backend
+    environment:
+      - NODE_ENV=production
+    networks:
+      - trinity-network
+    restart: unless-stopped
+
+  # Trinity AI Backend (placeholder for future implementation)
+  trinity-backend:
+    image: node:18-alpine
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+    networks:
+      - trinity-network
+    restart: unless-stopped
+    command: ["sh", "-c", "npm install && npm start"]
+
+  # Redis for session management and caching
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - trinity-network
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+
+  # PostgreSQL for Trinity AI data persistence
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=trinity_ai
+      - POSTGRES_USER=trinity
+      - POSTGRES_PASSWORD=trinity_secure_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - trinity-network
+    restart: unless-stopped
+
+  # Nginx Load Balancer
+  nginx-lb:
+    image: nginx:alpine
+    ports:
+      - "443:443"
+    volumes:
+      - ./nginx/nginx-lb.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - trinity-frontend
+    networks:
+      - trinity-network
+    restart: unless-stopped
+
+networks:
+  trinity-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+    driver: local
+  postgres-data:
+    driver: local

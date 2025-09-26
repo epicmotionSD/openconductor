@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Enterprise Demo - OpenConductor AIOps Platform</title>
+    <meta name="description" content="Book a personalized demo of OpenConductor enterprise AIOps platform. See how we reduce alert noise by 85% and deliver 690% ROI for Fortune 500 companies.">
+    
+    <link rel="canonical" href="https://openconductor.ai/enterprise/demo">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Same Geist design system */
+        :root {
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --foreground: #000000;
+            --background: #ffffff;
+            --gray: #666666;
+            --gray-light: #999999;
+            --gray-lighter: #eaeaea;
+            --gray-lightest: #fafafa;
+            --border: #eaeaea;
+            --blue: #0070f3;
+            --oracle: #0ea5e9;
+            --sentinel: #10b981;
+            --sage: #8b5cf6;
+            --success: #10b981;
+            --error: #ef4444;
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --space-16: 64px;
+            --space-24: 96px;
+            --text-xs: 12px;
+            --text-sm: 14px;
+            --text-base: 16px;
+            --text-lg: 18px;
+            --text-xl: 20px;
+            --text-2xl: 24px;
+            --text-3xl: 30px;
+            --text-4xl: 36px;
+            --text-5xl: 48px;
+            --radius: 6px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            --transition: 0.2s ease;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-sans);
+            color: var(--foreground);
+            background: var(--background);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 50;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--foreground);
+        }
+        
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            margin-right: var(--space-3);
+            background: linear-gradient(135deg, var(--oracle), var(--sage));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: var(--space-8);
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--foreground);
+            background: var(--gray-lightest);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            height: 32px;
+        }
+        
+        .btn-primary {
+            background: var(--foreground);
+            color: var(--background);
+        }
+        
+        .btn-secondary {
+            background: var(--background);
+            color: var(--foreground);
+            border-color: var(--border);
+        }
+        
+        /* Demo Page Layout */
+        .demo-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--space-24) var(--space-6);
+            margin-top: 64px;
+        }
+        
+        .demo-hero {
+            text-align: center;
+            margin-bottom: var(--space-16);
+        }
+        
+        .demo-title {
+            font-size: var(--text-5xl);
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+            background: linear-gradient(135deg, var(--foreground) 0%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .demo-subtitle {
+            font-size: var(--text-lg);
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Demo Form Layout */
+        .demo-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: var(--space-12);
+            align-items: start;
+        }
+        
+        .demo-benefits {
+            background: var(--gray-lightest);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+        }
+        
+        .benefits-title {
+            font-size: var(--text-2xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-4);
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--space-4);
+        }
+        
+        .benefit-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: var(--radius);
+            margin-right: var(--space-3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-sm);
+            margin-top: var(--space-1);
+        }
+        
+        .benefit-icon.metric { background: #eff6ff; color: var(--blue); }
+        .benefit-icon.security { background: #f0fdf4; color: var(--sentinel); }
+        .benefit-icon.ai { background: #faf5ff; color: var(--sage); }
+        .benefit-icon.support { background: #fef3c7; color: #d97706; }
+        
+        .benefit-content {
+            flex: 1;
+        }
+        
+        .benefit-title {
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-1);
+            font-size: var(--text-sm);
+        }
+        
+        .benefit-desc {
+            color: var(--gray);
+            font-size: var(--text-sm);
+        }
+        
+        /* Demo Form */
+        .demo-form {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            box-shadow: var(--shadow);
+        }
+        
+        .form-title {
+            font-size: var(--text-2xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-6);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-4);
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+            font-size: var(--text-sm);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: var(--space-3);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--foreground);
+            font-size: var(--text-sm);
+            font-family: var(--font-sans);
+            transition: var(--transition);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: var(--space-3);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--foreground);
+            font-size: var(--text-sm);
+            font-family: var(--font-sans);
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: var(--space-3);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--foreground);
+            font-size: var(--text-sm);
+            font-family: var(--font-sans);
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-2);
+            margin: var(--space-4) 0;
+        }
+        
+        .form-checkbox input {
+            margin-top: 2px;
+        }
+        
+        .form-checkbox label {
+            font-size: var(--text-sm);
+            color: var(--gray);
+            line-height: 1.4;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: var(--blue);
+            color: white;
+            border: none;
+            padding: var(--space-3) var(--space-6);
+            border-radius: var(--radius);
+            font-size: var(--text-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            height: 44px;
+        }
+        
+        .submit-btn:hover {
+            background: #0060df;
+        }
+        
+        .submit-btn:disabled {
+            background: var(--gray-lighter);
+            color: var(--gray);
+            cursor: not-allowed;
+        }
+        
+        /* Lead Score Indicator */
+        .lead-score {
+            background: var(--gray-lightest);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: var(--space-3);
+            margin-top: var(--space-4);
+            text-align: center;
+        }
+        
+        .score-label {
+            font-size: var(--text-xs);
+            color: var(--gray);
+            margin-bottom: var(--space-1);
+        }
+        
+        .score-value {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--blue);
+        }
+        
+        /* Form Validation */
+        .form-input.error {
+            border-color: var(--error);
+        }
+        
+        .error-message {
+            color: var(--error);
+            font-size: var(--text-xs);
+            margin-top: var(--space-1);
+        }
+        
+        .form-input.success {
+            border-color: var(--success);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .demo-layout {
+                grid-template-columns: 1fr;
+                gap: var(--space-8);
+            }
+            
+            .demo-title {
+                font-size: var(--text-4xl);
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Geist Header -->
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <div class="logo-mark">OC</div>
+                OpenConductor
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="/platform">Platform</a></li>
+                    <li><a href="/pricing">Pricing</a></li>
+                    <li><a href="/docs">Documentation</a></li>
+                    <li><a href="/enterprise">Enterprise</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/community">Community</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="/auth/login" class="btn btn-secondary">Sign In</a>
+                <a href="/enterprise/demo" class="btn btn-primary">Book Demo</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Demo Page Content -->
+    <main class="demo-container">
+        <!-- Demo Hero -->
+        <div class="demo-hero">
+            <h1 class="demo-title">Book Your Enterprise Demo</h1>
+            <p class="demo-subtitle">
+                See how OpenConductor reduces alert noise by 85% and delivers 690% ROI. 
+                Get a personalized demo tailored to your enterprise environment and requirements.
+            </p>
+        </div>
+
+        <!-- Demo Layout -->
+        <div class="demo-layout">
+            <!-- Demo Benefits -->
+            <div class="demo-benefits">
+                <h2 class="benefits-title">What You'll See in Your Demo</h2>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon metric">📊</div>
+                    <div class="benefit-content">
+                        <div class="benefit-title">85% Alert Noise Reduction</div>
+                        <div class="benefit-desc">
+                            See live demonstration of AI-powered alert correlation reducing millions 
+                            of daily alerts to actionable insights.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon ai">🔮</div>
+                    <div class="benefit-content">
+                        <div class="benefit-title">Trinity AI Agents in Action</div>
+                        <div class="benefit-desc">
+                            Watch Oracle, Sentinel, and Sage agents work together for coordinated 
+                            intelligence and predictive operations.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon security">🛡️</div>
+                    <div class="benefit-content">
+                        <div class="benefit-title">Enterprise Security & Compliance</div>
+                        <div class="benefit-desc">
+                            Explore zero-trust architecture, homomorphic encryption, and SOC2/ISO27001 
+                            compliance features for enterprise requirements.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon support">🎯</div>
+                    <div class="benefit-content">
+                        <div class="benefit-title">ROI & Business Case</div>
+                        <div class="benefit-desc">
+                            Review customized ROI analysis showing potential cost savings and business 
+                            impact for your specific environment.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enterprise Demo Form -->
+            <div class="demo-form">
+                <h2 class="form-title">Request Enterprise Demo</h2>
+                
+                <form id="demoForm" onsubmit="submitDemoRequest(event)">
+                    <!-- Contact Information -->
+                    <div class="form-group">
+                        <label class="form-label" for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" class="form-input" required 
+                               onchange="updateLeadScore()" placeholder="John">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" class="form-input" required 
+                               onchange="updateLeadScore()" placeholder="Smith">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Business Email *</label>
+                        <input type="email" id="email" name="email" class="form-input" required 
+                               onchange="validateBusinessEmail()" placeholder="john.smith@company.com">
+                        <div id="emailError" class="error-message" style="display: none;"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-input" 
+                               onchange="updateLeadScore()" placeholder="+1 (555) 123-4567">
+                    </div>
+                    
+                    <!-- Company Information -->
+                    <div class="form-group">
+                        <label class="form-label" for="company">Company Name *</label>
+                        <input type="text" id="company" name="company" class="form-input" required 
+                               onchange="updateLeadScore()" placeholder="Acme Corporation">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="jobTitle">Job Title *</label>
+                        <select id="jobTitle" name="jobTitle" class="form-select" required onchange="updateLeadScore()">
+                            <option value="">Select your role</option>
+                            <option value="cto">CTO</option>
+                            <option value="vp-engineering">VP of Engineering</option>
+                            <option value="director-devops">Director of DevOps</option>
+                            <option value="director-it">Director of IT</option>
+                            <option value="devops-manager">DevOps Manager</option>
+                            <option value="sre-manager">SRE Manager</option>
+                            <option value="devops-engineer">DevOps Engineer</option>
+                            <option value="sre">Site Reliability Engineer</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="companySize">Company Size *</label>
+                        <select id="companySize" name="companySize" class="form-select" required onchange="updateLeadScore()">
+                            <option value="">Select company size</option>
+                            <option value="startup">Startup (1-50 employees)</option>
+                            <option value="small">Small (51-200 employees)</option>
+                            <option value="medium">Medium (201-1000 employees)</option>
+                            <option value="large">Large (1001-5000 employees)</option>
+                            <option value="enterprise">Enterprise (5000+ employees)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Technical Requirements -->
+                    <div class="form-group">
+                        <label class="form-label" for="alertVolume">Daily Alert Volume</label>
+                        <select id="alertVolume" name="alertVolume" class="form-select" onchange="updateLeadScore()">
+                            <option value="">Select alert volume</option>
+                            <option value="low">Low (< 10K alerts/day)</option>
+                            <option value="medium">Medium (10K-100K alerts/day)</option>
+                            <option value="high">High (100K-1M alerts/day)</option>
+                            <option value="enterprise">Enterprise (1M+ alerts/day)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="currentTools">Current Monitoring Tools</label>
+                        <input type="text" id="currentTools" name="currentTools" class="form-input" 
+                               onchange="updateLeadScore()" placeholder="Datadog, Splunk, ServiceNow, etc.">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="useCase">Primary Use Case *</label>
+                        <textarea id="useCase" name="useCase" class="form-textarea" required 
+                                  onchange="updateLeadScore()" 
+                                  placeholder="Describe your main challenges with alert management and monitoring..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="timeline">Implementation Timeline</label>
+                        <select id="timeline" name="timeline" class="form-select" onchange="updateLeadScore()">
+                            <option value="">Select timeline</option>
+                            <option value="immediate">Immediate (< 1 month)</option>
+                            <option value="short">Short term (1-3 months)</option>
+                            <option value="medium">Medium term (3-6 months)</option>
+                            <option value="long">Long term (6+ months)</option>
+                            <option value="evaluating">Just evaluating</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Compliance & Requirements -->
+                    <div class="form-group">
+                        <label class="form-label">Compliance Requirements (check all that apply)</label>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); margin-top: var(--space-2);">
+                            <div class="form-checkbox">
+                                <input type="checkbox" id="soc2" name="compliance" value="soc2" onchange="updateLeadScore()">
+                                <label for="soc2">SOC2 Type II</label>
+                            </div>
+                            <div class="form-checkbox">
+                                <input type="checkbox" id="iso27001" name="compliance" value="iso27001" onchange="updateLeadScore()">
+                                <label for="iso27001">ISO 27001</label>
+                            </div>
+                            <div class="form-checkbox">
+                                <input type="checkbox" id="gdpr" name="compliance" value="gdpr" onchange="updateLeadScore()">
+                                <label for="gdpr">GDPR</label>
+                            </div>
+                            <div class="form-checkbox">
+                                <input type="checkbox" id="hipaa" name="compliance" value="hipaa" onchange="updateLeadScore()">
+                                <label for="hipaa">HIPAA</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Privacy Consent -->
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">
+                            I agree to OpenConductor's <a href="/privacy" style="color: var(--blue);">Privacy Policy</a> 
+                            and consent to being contacted about this demo request.
+                        </label>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        Book Enterprise Demo
+                    </button>
+                    
+                    <!-- Lead Score Display -->
+                    <div class="lead-score" id="leadScore" style="display: none;">
+                        <div class="score-label">Enterprise Lead Score</div>
+                        <div class="score-value" id="scoreValue">0</div>
+                    </div>
+                </form>
+                
+                <div style="text-align: center; margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--border);">
+                    <p style="font-size: var(--text-xs); color: var(--gray);">
+                        Questions? Email us at <a href="mailto:demo@openconductor.ai" style="color: var(--blue);">demo@openconductor.ai</a> 
+                        or call <a href="tel:+1-555-AIOPS-1" style="color: var(--blue);">+1 (555) AIOPS-1</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let leadScore = 0;
+        
+        function updateLeadScore() {
+            leadScore = calculateEnterpriseLeadScore();
+            
+            const scoreElement = document.getElementById('scoreValue');
+            const scoreContainer = document.getElementById('leadScore');
+            
+            if (leadScore > 0) {
+                scoreElement.textContent = leadScore;
+                scoreContainer.style.display = 'block';
+                
+                // Color code the score
+                if (leadScore >= 80) {
+                    scoreElement.style.color = 'var(--success)';
+                } else if (leadScore >= 60) {
+                    scoreElement.style.color = 'var(--blue)';
+                } else {
+                    scoreElement.style.color = 'var(--gray)';
+                }
+            }
+        }
+        
+        function calculateEnterpriseLeadScore() {
+            let score = 0;
+            
+            // Job title scoring
+            const jobTitle = document.getElementById('jobTitle').value;
+            const titleScores = {
+                'cto': 30,
+                'vp-engineering': 25,
+                'director-devops': 20,
+                'director-it': 20,
+                'devops-manager': 15,
+                'sre-manager': 15,
+                'devops-engineer': 10,
+                'sre': 10
+            };
+            score += titleScores[jobTitle] || 0;
+            
+            // Company size scoring
+            const companySize = document.getElementById('companySize').value;
+            const sizeScores = {
+                'enterprise': 25,
+                'large': 20,
+                'medium': 15,
+                'small': 10,
+                'startup': 5
+            };
+            score += sizeScores[companySize] || 0;
+            
+            // Alert volume scoring
+            const alertVolume = document.getElementById('alertVolume').value;
+            const volumeScores = {
+                'enterprise': 20,
+                'high': 15,
+                'medium': 10,
+                'low': 5
+            };
+            score += volumeScores[alertVolume] || 0;
+            
+            // Timeline urgency scoring
+            const timeline = document.getElementById('timeline').value;
+            const timelineScores = {
+                'immediate': 20,
+                'short': 15,
+                'medium': 10,
+                'long': 5,
+                'evaluating': 2
+            };
+            score += timelineScores[timeline] || 0;
+            
+            // Compliance requirements scoring
+            const complianceBoxes = document.querySelectorAll('input[name="compliance"]:checked');
+            score += complianceBoxes.length * 5;
+            
+            // Business email validation
+            const email = document.getElementById('email').value;
+            if (email && !email.includes('@gmail.com') && !email.includes('@yahoo.com') && !email.includes('@hotmail.com')) {
+                score += 10; // Business email bonus
+            }
+            
+            // Use case complexity
+            const useCase = document.getElementById('useCase').value;
+            if (useCase && useCase.length > 100) {
+                score += 10; // Detailed use case bonus
+            }
+            
+            return Math.min(100, score);
+        }
+        
+        function validateBusinessEmail() {
+            const email = document.getElementById('email').value;
+            const emailInput = document.getElementById('email');
+            const errorDiv = document.getElementById('emailError');
+            
+            // Check for business email
+            const personalDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com'];
+            const isPersonalEmail = personalDomains.some(domain => email.includes('@' + domain));
+            
+            if (isPersonalEmail && email) {
+                emailInput.classList.add('error');
+                emailInput.classList.remove('success');
+                errorDiv.textContent = 'Please use your business email address for enterprise demos.';
+                errorDiv.style.display = 'block';
+            } else if (email) {
+                emailInput.classList.remove('error');
+                emailInput.classList.add('success');
+                errorDiv.style.display = 'none';
+            }
+            
+            updateLeadScore();
+        }
+        
+        function submitDemoRequest(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const demoRequest = Object.fromEntries(formData.entries());
+            
+            // Add lead score to submission
+            demoRequest.leadScore = leadScore;
+            demoRequest.qualification = leadScore >= 70 ? 'high' : leadScore >= 40 ? 'medium' : 'low';
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            // Simulate submission
+            setTimeout(() => {
+                alert('Thank you! Your enterprise demo request has been submitted. Our team will contact you within 24 hours.');
+                console.log('Enterprise demo request submitted:', demoRequest);
+                
+                // Reset form
+                event.target.reset();
+                leadScore = 0;
+                document.getElementById('leadScore').style.display = 'none';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Book Enterprise Demo';
+            }, 2000);
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Enterprise demo page loaded');
+            
+            // Track form engagement
+            const formInputs = document.querySelectorAll('.form-input, .form-select, .form-textarea');
+            formInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    console.log(`Form field focused: ${this.name}`);
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (this.value) {
+                        console.log(`Form field completed: ${this.name}`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

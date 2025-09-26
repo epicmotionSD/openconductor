@@ -1,0 +1,65 @@
+# SportIntel MCP Services Dockerfile
+# Specialized build for individual MCP servers
+
+# Build stage
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY tsconfig.json ./
+
+# Copy source code
+COPY src/ ./src/
+
+# Install dependencies
+RUN npm ci --ignore-scripts && npm cache clean --force
+
+# Install TypeScript globally for runtime compilation
+RUN npm install -g ts-node typescript
+
+# Production stage
+FROM node:18-alpine AS production
+
+# Install system dependencies
+RUN apk add --no-cache dumb-init curl python3 py3-pip
+
+# Install ts-node globally for TypeScript runtime
+RUN npm install -g ts-node typescript
+
+# Create app user
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S mcp -u 1001
+
+WORKDIR /app
+
+# Copy from builder
+COPY --from=builder --chown=mcp:nodejs /app/package*.json ./
+COPY --from=builder --chown=mcp:nodejs /app/tsconfig.json ./
+COPY --from=builder --chown=mcp:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=mcp:nodejs /app/src ./src
+
+# Create necessary directories
+RUN mkdir -p logs cache && \
+    chown -R mcp:nodejs /app
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Switch to non-root user
+USER mcp
+
+# Expose port
+EXPOSE 8000
+
+# Use dumb-init for proper signal handling
+ENTRYPOINT ["dumb-init", "--"]
+
+# Dynamic CMD based on MCP_SERVICE build arg
+ARG MCP_SERVICE=sports-data
+ENV SERVICE_NAME=${MCP_SERVICE}
+
+# Start the appropriate MCP server
+CMD ["sh", "-c", "npx ts-node --transpile-only src/mcp/sportintel/${SERVICE_NAME}-server.ts"]

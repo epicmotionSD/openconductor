@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - OpenConductor AIOps Insights & Thought Leadership</title>
+    <meta name="description" content="Expert insights on AIOps, alert management, DevOps, and enterprise IT operations. Thought leadership content from the OpenConductor team and community.">
+    
+    <link rel="canonical" href="https://openconductor.ai/blog">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Same Geist design system */
+        :root {
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --foreground: #000000;
+            --background: #ffffff;
+            --gray: #666666;
+            --gray-light: #999999;
+            --gray-lighter: #eaeaea;
+            --gray-lightest: #fafafa;
+            --border: #eaeaea;
+            --blue: #0070f3;
+            --oracle: #0ea5e9;
+            --sentinel: #10b981;
+            --sage: #8b5cf6;
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --space-16: 64px;
+            --space-24: 96px;
+            --text-xs: 12px;
+            --text-sm: 14px;
+            --text-base: 16px;
+            --text-lg: 18px;
+            --text-xl: 20px;
+            --text-2xl: 24px;
+            --text-3xl: 30px;
+            --text-4xl: 36px;
+            --text-5xl: 48px;
+            --radius: 6px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            --transition: 0.2s ease;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-sans);
+            color: var(--foreground);
+            background: var(--background);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 50;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--foreground);
+        }
+        
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            margin-right: var(--space-3);
+            background: linear-gradient(135deg, var(--oracle), var(--sage));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: var(--space-8);
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--foreground);
+            background: var(--gray-lightest);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            height: 32px;
+        }
+        
+        .btn-primary {
+            background: var(--foreground);
+            color: var(--background);
+        }
+        
+        .btn-secondary {
+            background: var(--background);
+            color: var(--foreground);
+            border-color: var(--border);
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+        
+        .section {
+            padding: var(--space-24) 0;
+        }
+        
+        /* Blog Hero */
+        .blog-hero {
+            padding: var(--space-24) 0;
+            margin-top: 64px;
+            text-align: center;
+        }
+        
+        .blog-title {
+            font-size: var(--text-5xl);
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+            background: linear-gradient(135deg, var(--foreground) 0%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .blog-subtitle {
+            font-size: var(--text-lg);
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Featured Article */
+        .featured-article {
+            background: var(--gray-lightest);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            margin: var(--space-12) 0;
+        }
+        
+        .featured-badge {
+            background: var(--blue);
+            color: white;
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius);
+            font-size: var(--text-xs);
+            font-weight: 500;
+            margin-bottom: var(--space-4);
+            display: inline-block;
+        }
+        
+        .article-title {
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-3);
+        }
+        
+        .article-excerpt {
+            color: var(--gray);
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-4);
+            line-height: 1.6;
+        }
+        
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-4);
+        }
+        
+        .author-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--oracle), var(--sage));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: var(--text-xs);
+        }
+        
+        .author-info {
+            flex: 1;
+        }
+        
+        .author-name {
+            font-weight: 500;
+            color: var(--foreground);
+            font-size: var(--text-sm);
+        }
+        
+        .article-date {
+            color: var(--gray);
+            font-size: var(--text-xs);
+        }
+        
+        .read-time {
+            color: var(--gray);
+            font-size: var(--text-xs);
+        }
+        
+        /* Blog Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-8);
+            margin: var(--space-16) 0;
+        }
+        
+        .article-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .article-card:hover {
+            border-color: var(--blue);
+            box-shadow: var(--shadow);
+        }
+        
+        .article-category {
+            background: var(--gray-lightest);
+            color: var(--gray);
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius);
+            font-size: var(--text-xs);
+            font-weight: 500;
+            margin-bottom: var(--space-3);
+            display: inline-block;
+        }
+        
+        .article-category.aiops { background: #eff6ff; color: var(--blue); }
+        .article-category.trinity { background: #f0fdf4; color: var(--sentinel); }
+        .article-category.enterprise { background: #faf5ff; color: var(--sage); }
+        
+        .card-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+        }
+        
+        .card-excerpt {
+            color: var(--gray);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-4);
+            line-height: 1.6;
+        }
+        
+        .card-link {
+            color: var(--blue);
+            text-decoration: none;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+        
+        /* Categories Filter */
+        .categories-filter {
+            display: flex;
+            gap: var(--space-3);
+            margin-bottom: var(--space-8);
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: var(--space-2) var(--space-4);
+            border: 1px solid var(--border);
+            background: var(--background);
+            color: var(--gray);
+            border-radius: var(--radius);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-btn.active,
+        .filter-btn:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+            background: #eff6ff;
+        }
+        
+        /* Newsletter Signup */
+        .newsletter-signup {
+            background: var(--gray-lightest);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            text-align: center;
+            margin: var(--space-16) 0;
+        }
+        
+        .newsletter-title {
+            font-size: var(--text-2xl);
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: var(--space-2);
+        }
+        
+        .newsletter-desc {
+            color: var(--gray);
+            margin-bottom: var(--space-6);
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: var(--space-2);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: var(--space-3);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: var(--text-sm);
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--blue);
+        }
+        
+        @media (max-width: 768px) {
+            .blog-title { font-size: var(--text-4xl); }
+            .articles-grid { grid-template-columns: 1fr; }
+            .newsletter-form { flex-direction: column; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Geist Header -->
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <div class="logo-mark">OC</div>
+                OpenConductor
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="/platform">Platform</a></li>
+                    <li><a href="/pricing">Pricing</a></li>
+                    <li><a href="/docs">Documentation</a></li>
+                    <li><a href="/enterprise">Enterprise</a></li>
+                    <li><a href="/blog" class="active">Blog</a></li>
+                    <li><a href="/community">Community</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="/auth/login" class="btn btn-secondary">Sign In</a>
+                <a href="/enterprise/demo" class="btn btn-primary">Book Demo</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Blog Hero -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1 class="blog-title">AIOps Insights & Thought Leadership</h1>
+            <p class="blog-subtitle">
+                Expert insights on AIOps, alert management, DevOps best practices, and enterprise IT operations 
+                from the OpenConductor team and community leaders.
+            </p>
+        </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="section">
+        <div class="container">
+            <article class="featured-article">
+                <div class="featured-badge">Featured Article</div>
+                <h2 class="article-title">The $2M Problem Every DevOps Team Faces: Alert Fatigue</h2>
+                <p class="article-excerpt">
+                    Alert fatigue costs enterprises an average of $2M annually through delayed incident response, 
+                    engineering productivity loss, and system downtime. Learn how AI-powered correlation can 
+                    eliminate 85% of alert noise while improving detection accuracy.
+                </p>
+                <div class="article-meta">
+                    <div class="author-avatar">OC</div>
+                    <div class="author-info">
+                        <div class="author-name">OpenConductor Team</div>
+                        <div class="article-date">Published 3 days ago</div>
+                    </div>
+                    <div class="read-time">8 min read</div>
+                </div>
+                <a href="/blog/alert-fatigue-2m-problem" class="btn btn-primary">Read Full Article</a>
+            </article>
+        </div>
+    </section>
+
+    <!-- Categories Filter -->
+    <section class="section">
+        <div class="container">
+            <h2 style="font-size: var(--text-3xl); font-weight: 600; margin-bottom: var(--space-6); text-align: center;">Latest Articles</h2>
+            
+            <div class="categories-filter">
+                <button class="filter-btn active" onclick="filterPosts('all')">All Posts</button>
+                <button class="filter-btn" onclick="filterPosts('aiops')">AIOps</button>
+                <button class="filter-btn" onclick="filterPosts('trinity-ai')">Trinity AI</button>
+                <button class="filter-btn" onclick="filterPosts('enterprise')">Enterprise</button>
+                <button class="filter-btn" onclick="filterPosts('devops')">DevOps</button>
+                <button class="filter-btn" onclick="filterPosts('security')">Security</button>
+            </div>
+            
+            <!-- Blog Articles -->
+            <div class="articles-grid">
+                <!-- AIOps Article -->
+                <article class="article-card" data-category="aiops">
+                    <div class="article-category aiops">AIOps</div>
+                    <h3 class="card-title">How We Achieve 85% Alert Noise Reduction</h3>
+                    <p class="card-excerpt">
+                        Deep dive into the machine learning algorithms and correlation techniques that power 
+                        OpenConductor's industry-leading alert noise reduction capabilities.
+                    </p>
+                    <div class="article-meta">
+                        <div class="author-avatar">SK</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah Kim, VP Engineering</div>
+                            <div class="article-date">5 days ago</div>
+                        </div>
+                        <div class="read-time">12 min read</div>
+                    </div>
+                    <a href="/blog/85-percent-alert-reduction" class="card-link">
+                        Read Article
+                        <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Trinity AI Article -->
+                <article class="article-card" data-category="trinity-ai">
+                    <div class="article-category trinity">Trinity AI</div>
+                    <h3 class="card-title">Trinity AI Architecture: Oracle, Sentinel, and Sage Agents</h3>
+                    <p class="card-excerpt">
+                        Learn how our three specialized AI agents work together to provide coordinated 
+                        intelligence that exceeds what any single AI solution can deliver.
+                    </p>
+                    <div class="article-meta">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <div class="author-name">Michael Rodriguez, CTO</div>
+                            <div class="article-date">1 week ago</div>
+                        </div>
+                        <div class="read-time">15 min read</div>
+                    </div>
+                    <a href="/blog/trinity-ai-architecture" class="card-link">
+                        Read Article
+                        <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Enterprise Article -->
+                <article class="article-card" data-category="enterprise">
+                    <div class="article-category enterprise">Enterprise</div>
+                    <h3 class="card-title">Homomorphic Encryption: The Future of Privacy-Preserving Analytics</h3>
+                    <p class="card-excerpt">
+                        Discover how homomorphic encryption enables analytics on encrypted data without exposure, 
+                        providing unmatched privacy for enterprise AIOps operations.
+                    </p>
+                    <div class="article-meta">
+                        <div class="author-avatar">JM</div>
+                        <div class="author-info">
+                            <div class="author-name">Dr. Jennifer Martinez, CISO</div>
+                            <div class="article-date">1 week ago</div>
+                        </div>
+                        <div class="read-time">10 min read</div>
+                    </div>
+                    <a href="/blog/homomorphic-encryption" class="card-link">
+                        Read Article
+                        <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- DevOps Article -->
+                <article class="article-card" data-category="devops">
+                    <div class="article-category">DevOps</div>
+                    <h3 class="card-title">Building Reliable Systems: SRE Meets AI</h3>
+                    <p class="card-excerpt">
+                        How Site Reliability Engineering practices combined with AI-powered operations 
+                        create more reliable, scalable, and maintainable systems.
+                    </p>
+                    <div class="article-meta">
+                        <div class="author-avatar">DK</div>
+                        <div class="author-info">
+                            <div class="author-name">David Kim, SRE Lead</div>
+                            <div class="article-date">2 weeks ago</div>
+                        </div>
+                        <div class="read-time">7 min read</div>
+                    </div>
+                    <a href="/blog/sre-meets-ai" class="card-link">
+                        Read Article
+                        <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Security Article -->
+                <article class="article-card" data-category="security">
+                    <div class="article-category">Security</div>
+                    <h3 class="card-title">Zero-Trust Architecture for AIOps: A Comprehensive Guide</h3>
+                    <p class="card-excerpt">
+                        Implementing zero-trust security principles in AIOps environments: micro-segmentation, 
+                        continuous verification, and least-privilege access.
+                    </p>
+                    <div class="article-meta">
+                        <div class="author-avatar">AL</div>
+                        <div class="author-info">
+                            <div class="author-name">Alex Liu, Security Architect</div>
+                            <div class="article-date">2 weeks ago</div>
+                        </div>
+                        <div class="read-time">14 min read</div>
+                    </div>
+                    <a href="/blog/zero-trust-aiops" class="card-link">
+                        Read Article
+                        <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Open Source Article -->
+                <article class="article-card" data-category="enterprise">
+                    <div class="article-category enterprise">Enterprise</div>
+                    <h3 class="card-title">Why We Open-Sourced Our AIOps Platform</h3>
+                    <p class="card-excerpt">
+                        The strategic decision to build OpenConductor as an open-source platform and how 
+                        transparency drives innovation and enterprise adoption.
+                    </p>
+                    <div class="article-meta">
+                        <div class="author-avatar">RM</div>
+                        <div class="author-info">
+                            <div class="author-name">Rachel Morgan, CEO</div>
+                            <div class="article-date">3 weeks ago</div>
+                        </div>
+                        <div class="read-time">6 min read</div>
+                    </div>
+                    <a href="/blog/why-open-source" class="card-link">
+                        Read Article
+                        <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="section">
+        <div class="container">
+            <div class="newsletter-signup">
+                <h2 class="newsletter-title">Stay Updated with AIOps Insights</h2>
+                <p class="newsletter-desc">
+                    Get the latest insights on AIOps, Trinity AI developments, and enterprise best practices 
+                    delivered to your inbox weekly.
+                </p>
+                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function filterPosts(category) {
+            const articles = document.querySelectorAll('.article-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter articles
+            articles.forEach(article => {
+                const articleCategory = article.dataset.category;
+                if (category === 'all' || articleCategory === category) {
+                    article.style.display = 'block';
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+            
+            console.log(`Blog filtered by category: ${category}`);
+        }
+        
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input').value;
+            
+            // Newsletter subscription logic would go here
+            alert(`Thank you for subscribing! We'll send AIOps insights to ${email}`);
+            console.log(`Newsletter subscription: ${email}`);
+            
+            // Reset form
+            event.target.reset();
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Blog platform loaded with Geist design system');
+            
+            // Track article engagement
+            const articleCards = document.querySelectorAll('.article-card');
+            articleCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const title = this.querySelector('.card-title').textContent;
+                    const category = this.dataset.category;
+                    console.log(`Blog article clicked: ${title} (${category})`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
