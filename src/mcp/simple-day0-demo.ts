@@ -31,7 +31,7 @@ class SimpleDay0Demo {
   private server: any;
   private port: number;
 
-  constructor(port: number = 3333) {
+  constructor(port: number = 3334) {
     this.port = port;
     this.app = express();
     this.server = createServer(this.app);

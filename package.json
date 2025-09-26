@@ -46,6 +46,7 @@
     "test:day0": "tsx src/mcp/test-day0-day1-experience.ts",
     "dev:day0": "tsx watch src/mcp/day0-day1-dev-server.ts",
     "demo:day0": "tsx src/mcp/simple-day0-demo.ts",
+    "demo:complete": "tsx src/mcp/enhanced-day0-demo-with-aiops.ts",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "format": "prettier --write \"src/**/*.ts\"",
