@@ -6,11 +6,6 @@
   "env": {
     "NEXT_PUBLIC_API_URL": "https://api.openconductor.ai/v1"
   },
-  "functions": {
-    "app/api/**/*.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
