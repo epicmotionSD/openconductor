@@ -249,7 +249,7 @@ function ServerCard({ server }: { server: MCPServer }) {
               </Link>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <a href={server.repository} target="_blank" rel="noopener noreferrer">
+              <a href={server.repository.url} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-3 w-3" />
               </a>
             </Button>
