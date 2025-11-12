@@ -82,7 +82,12 @@ export function getConfig(): ProductionConfig {
   // Development overrides
   if (process.env.NODE_ENV === 'development') {
     baseConfig.database.ssl = false;
-    baseConfig.api.corsOrigins.push('http://localhost:3000');
+    // Parse CORS_ORIGIN environment variable (comma-separated list)
+    const corsOrigins = process.env.CORS_ORIGIN?.split(',').map(o => o.trim()) || ['http://localhost:3000'];
+    baseConfig.api.corsOrigins = [
+      ...baseConfig.api.corsOrigins,
+      ...corsOrigins
+    ];
     baseConfig.launch.maxServers = 100; // Lower limit for dev
     baseConfig.monitoring.alertingEnabled = false;
   }

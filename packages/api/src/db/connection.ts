@@ -3,6 +3,10 @@ import { Redis } from 'ioredis';
 import * as fs from 'fs';
 import * as path from 'path';
 import winston from 'winston';
+import dotenv from 'dotenv';
+
+// Load environment variables FIRST before any config
+dotenv.config();
 
 // Logger setup
 const logger = winston.createLogger({
@@ -196,7 +200,11 @@ export class DatabaseManager {
     }
 
     try {
-      await this.redis.ping();
+      // Add timeout to Redis ping to avoid hanging
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Redis ping timeout')), 2000)
+      );
+      await Promise.race([this.redis.ping(), timeoutPromise]);
       results.redis = true;
     } catch (error) {
       logger.error('Redis health check failed', error);

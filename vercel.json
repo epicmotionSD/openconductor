@@ -1,6 +1,6 @@
 {
-  "buildCommand": "cd packages/frontend && npm run build",
-  "installCommand": "npm install",
+  "buildCommand": "pnpm --filter=shared build && pnpm --filter=frontend build",
+  "installCommand": "pnpm install --no-frozen-lockfile",
   "framework": "nextjs",
   "outputDirectory": "packages/frontend/.next",
   "ignoreCommand": "git diff HEAD^ HEAD --quiet packages/frontend/ packages/shared/",

@@ -39,7 +39,8 @@ export default function DiscoverPage() {
       if (params.limit) queryString.append('limit', params.limit.toString())
 
       // Use new enterprise API endpoint
-      const response = await fetch(`http://localhost:3001/v1/servers?${queryString.toString()}`)
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002/v1'
+      const response = await fetch(`${apiUrl}/servers?${queryString.toString()}`)
       const result = await response.json()
       
       if (result.success) {
