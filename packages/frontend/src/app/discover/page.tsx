@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Search, Star, Download, ExternalLink, Filter } from 'lucide-react'
-import type { MCPServer, MCPServerSearchParams, MCPServerSearchResult } from '../types'
+import type { MCPServer, MCPServerSearchParams, MCPServerSearchResult } from '../../types'
 
 export default function DiscoverPage() {
   const [servers, setServers] = useState<MCPServer[]>([])
