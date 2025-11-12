@@ -5,7 +5,7 @@ export class OpenConductorAPI {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = process.env.OPENCONDUCTOR_API_URL || 'https://api.openconductor.ai';
+    this.baseUrl = process.env.OPENCONDUCTOR_API_URL || 'https://openconductor.ai';
   }
 
   async searchServers(params: MCPServerSearchParams = {}): Promise<MCPServerSearchResult> {
@@ -18,7 +18,7 @@ export class OpenConductorAPI {
     if (params.limit) searchParams.append('limit', params.limit.toString());
     if (params.offset) searchParams.append('offset', params.offset.toString());
 
-    const url = `${this.baseUrl}/api/servers?${searchParams.toString()}`;
+    const url = `${this.baseUrl}/api/v1/servers?${searchParams.toString()}`;
     
     try {
       const response = await fetch(url);
@@ -43,7 +43,7 @@ export class OpenConductorAPI {
   }
 
   async getServer(identifier: string): Promise<MCPServer> {
-    const url = `${this.baseUrl}/api/servers/${encodeURIComponent(identifier)}`;
+    const url = `${this.baseUrl}/api/v1/servers/${encodeURIComponent(identifier)}`;
     
     try {
       const response = await fetch(url);
