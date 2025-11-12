@@ -195,8 +195,8 @@ async function handleDetailsFlow(api, servers) {
   const spinner = ora('Fetching server details...').start();
   const details = await api.getServer(server);
   spinner.stop();
-  
-  displayServerDetails(details);
+
+  await displayServerDetails(details);
 }
 
 async function handleRefineSearch() {
@@ -331,7 +331,7 @@ async function handleCategories(api) {
   }
 }
 
-function displayServerDetails(server) {
+async function displayServerDetails(server) {
   console.log();
   logger.header(`${server.name} ${server.verified ? chalk.green('✓ Verified') : ''}`);
   
