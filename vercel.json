@@ -1,0 +1,9 @@
+{
+  "buildCommand": "cd packages/shared && pnpm run build && cd ../frontend && pnpm run build",
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "framework": "nextjs",
+  "outputDirectory": "packages/frontend/.next",
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://api.openconductor.ai/v1"
+  }
+}
