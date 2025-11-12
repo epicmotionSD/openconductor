@@ -4,7 +4,7 @@
   "framework": "nextjs",
   "outputDirectory": "packages/frontend/.next",
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://openconductor.ai/api/v1",
+    "NEXT_PUBLIC_API_URL": "/api/v1",
     "POSTGRES_URL": "postgres://postgres.fjmzvcipimpctqnhhfrr:29FHVZqmLEcx864X@aws-1-us-east-1.pooler.supabase.com:6543/postgres"
   }
 }
