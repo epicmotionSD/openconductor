@@ -15,11 +15,13 @@
     "build:cli": "cd packages/cli && npm run build",
     "install:all": "npm install && cd packages/shared && npm install && cd ../api && npm install && cd ../frontend && npm install && cd ../cli && npm install",
     "clean": "rm -rf node_modules packages/*/node_modules packages/*/dist packages/frontend/.next",
-  "test": "jest --passWithNoTests || true"
+    "test": "jest --passWithNoTests || true"
   },
   "devDependencies": {
+    "@esbuild/linux-x64": "^0.27.0",
     "@types/node": "^20.0.0",
     "concurrently": "^8.2.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.0.0"
   },
   "keywords": [
@@ -34,5 +36,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/yourusername/openconductor.git"
+  },
+  "dependencies": {
+    "@types/pg": "^8.15.6",
+    "@vercel/node": "^5.5.5",
+    "pg": "^8.16.3"
   }
 }

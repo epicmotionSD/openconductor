@@ -1,20 +1,23 @@
 {
   "version": 2,
+  "installCommand": "cd ../.. && pnpm install --no-frozen-lockfile",
+  "buildCommand": "cd ../../packages/shared && pnpm run build",
   "builds": [
     {
-      "src": "dist/server.js",
+      "src": "src/server.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/server.js"
+      "dest": "src/server.ts"
     }
   ],
   "env": {
     "NODE_ENV": "production",
     "PORT": "3001",
-    "CORS_ORIGIN": "https://openconductor.ai"
+    "CORS_ORIGIN": "https://openconductor.ai",
+    "POSTGRES_URL": "postgres://postgres.fjmzvcipimpctqnhhfrr:29FHVZqmLEcx864X@aws-1-us-east-1.pooler.supabase.com:6543/postgres"
   }
 }

@@ -652,8 +652,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     const db = DatabaseManager.getInstance();
 
     try {
-      logger.info('Running migrations...');
-      await db.migrate();
+      // Skip migrations as schema already exists
+      // logger.info('Running migrations...');
+      // await db.migrate();
 
       logger.info('Seeding 127+ MCP servers...');
       await seed127Servers(db);
