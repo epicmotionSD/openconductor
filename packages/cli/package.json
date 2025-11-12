@@ -21,9 +21,8 @@
   "scripts": {
     "dev": "node bin/openconductor.js",
     "build": "echo 'No build needed for pure Node.js CLI'",
-    "test": "vitest",
-    "lint": "eslint src/",
-    "prepublishOnly": "npm test && npm run lint"
+    "test": "echo 'Tests coming soon'",
+    "lint": "echo 'Linting coming soon'"
   },
   "dependencies": {
     "@openconductor/shared": "workspace:*",

@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowLeft, Star, Download, ExternalLink, Copy, CheckCircle, Terminal, Book } from 'lucide-react'
-import type { MCPServer } from '@openconductor/shared'
+import type { MCPServer } from '../../types'
 
 export default function ServerDetailPage() {
   const params = useParams()
