@@ -170,11 +170,15 @@ export default function DiscoverPage() {
 }
 
 function ServerCard({ server }: { server: MCPServer }) {
-  const categoryColors = {
+  const categoryColors: Record<string, string> = {
     memory: 'bg-blue-100 text-blue-800',
     filesystem: 'bg-green-100 text-green-800',
     database: 'bg-yellow-100 text-yellow-800',
     api: 'bg-purple-100 text-purple-800',
+    search: 'bg-orange-100 text-orange-800',
+    communication: 'bg-pink-100 text-pink-800',
+    monitoring: 'bg-cyan-100 text-cyan-800',
+    development: 'bg-indigo-100 text-indigo-800',
     custom: 'bg-gray-100 text-gray-800'
   }
 
