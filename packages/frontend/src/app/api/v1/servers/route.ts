@@ -114,6 +114,12 @@ export async function GET(request: NextRequest) {
         timestamp: new Date().toISOString(),
         version: '1.0.0'
       }
+    }, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      }
     });
   } catch (error: any) {
     console.error('Error fetching servers:', error);
@@ -123,6 +129,23 @@ export async function GET(request: NextRequest) {
         code: 'INTERNAL_ERROR',
         message: error.message || 'Internal server error'
       }
-    }, { status: 500 });
+    }, {
+      status: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      }
+    });
   }
+}
+
+export async function OPTIONS() {
+  return NextResponse.json({}, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    }
+  });
 }
