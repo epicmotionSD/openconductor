@@ -15,14 +15,12 @@
     "build:cli": "cd packages/cli && npm run build",
     "install:all": "npm install && cd packages/shared && npm install && cd ../api && npm install && cd ../frontend && npm install && cd ../cli && npm install",
     "clean": "rm -rf node_modules packages/*/node_modules packages/*/dist packages/frontend/.next",
-    "test": "jest --passWithNoTests || true",
-    "test:ci": "npm run test"
+  "test": "jest --passWithNoTests || true"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "concurrently": "^8.2.0",
-    "typescript": "^5.0.0",
-    "jest": "^29.7.0"
+    "typescript": "^5.0.0"
   },
   "keywords": [
     "ai",
@@ -31,13 +29,10 @@
     "orchestration",
     "model-context-protocol"
   ],
-  "author": "Sonnier Ventures",
+  "author": "Your Name",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sonnierventures/openconductor.git"
-  },
-  "engines": {
-    "node": ">=18.0.0"
+    "url": "https://github.com/yourusername/openconductor.git"
   }
 }
