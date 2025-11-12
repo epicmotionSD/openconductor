@@ -235,7 +235,7 @@ export default function ServerDetailPage() {
                   <pre className="text-sm overflow-x-auto">
                     <code>{JSON.stringify({
                       mcpServers: {
-                        [server.name.toLowerCase()]: server.configExample
+                        [server.name.toLowerCase()]: server.configuration.example
                       }
                     }, null, 2)}</code>
                   </pre>
@@ -245,7 +245,7 @@ export default function ServerDetailPage() {
                     className="absolute right-2 top-2 h-8 w-8 p-0"
                     onClick={() => copyToClipboard(JSON.stringify({
                       mcpServers: {
-                        [server.name.toLowerCase()]: server.configExample
+                        [server.name.toLowerCase()]: server.configuration.example
                       }
                     }, null, 2), 'config')}
                   >
@@ -274,12 +274,12 @@ export default function ServerDetailPage() {
                     View Repository
                   </a>
                 </Button>
-                
-                {server.npmPackage && (
+
+                {server.packages.npm && (
                   <Button variant="outline" className="w-full" asChild>
-                    <a 
-                      href={`https://www.npmjs.com/package/${server.npmPackage}`} 
-                      target="_blank" 
+                    <a
+                      href={`https://www.npmjs.com/package/${server.packages.npm.name}`}
+                      target="_blank"
                       rel="noopener noreferrer"
                     >
                       NPM Package
