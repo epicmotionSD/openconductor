@@ -1,5 +1,6 @@
 {
-  "buildCommand": "cd ../.. && pnpm install --no-frozen-lockfile && cd packages/shared && pnpm run build && cd ../frontend && pnpm run build",
+  "buildCommand": "cd ../shared && pnpm run build && cd ../frontend && pnpm run build",
+  "installCommand": "cd ../.. && pnpm install --no-frozen-lockfile",
   "framework": "nextjs",
   "outputDirectory": ".next",
   "env": {
