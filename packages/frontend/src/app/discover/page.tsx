@@ -219,7 +219,7 @@ function ServerCard({ server }: { server: MCPServer }) {
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
               <Star className="h-3 w-3" />
-              {server.repository?.stars || server.stats?.stars || 0}
+              {server.repository?.stars || 0}
             </div>
             <div className="flex items-center gap-1">
               <Download className="h-3 w-3" />
