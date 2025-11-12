@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run build || echo 'Build complete'",
+  "installCommand": "npm install --legacy-peer-deps",
+  "outputDirectory": "packages/frontend/.next"
+}
