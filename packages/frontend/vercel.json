@@ -1,21 +1,33 @@
 {
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install",
   "framework": "nextjs",
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
   "outputDirectory": ".next",
-  "installCommand": "npm install",
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://api.openconductor.ai/v1"
+  },
   "functions": {
     "app/api/**/*.ts": {
-      "runtime": "@vercel/node"
+      "runtime": "nodejs18.x"
     }
   },
-  "rewrites": [
+  "headers": [
     {
-      "source": "/api/(.*)",
-      "destination": "https://api.openconductor.ai/api/$1"
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options", 
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
     }
-  ],
-  "env": {
-    "NEXT_PUBLIC_API_URL": "https://api.openconductor.ai"
-  }
+  ]
 }

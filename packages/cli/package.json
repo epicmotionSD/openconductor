@@ -26,7 +26,7 @@
     "prepublishOnly": "npm test && npm run lint"
   },
   "dependencies": {
-    "@openconductor/shared": "^1.0.0",
+    "@openconductor/shared": "workspace:*",
     "commander": "^11.1.0",
     "inquirer": "^9.2.12",
     "chalk": "^5.3.0",
