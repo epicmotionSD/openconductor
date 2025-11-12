@@ -30,11 +30,11 @@ export async function GET(request: NextRequest) {
         s.repository_url,
         s.repository_owner,
         s.repository_name,
-        s.repository_stars,
         s.npm_package,
         s.verified,
         s.featured,
-        st.installs,
+        st.github_stars,
+        st.cli_installs,
         s.created_at
       FROM mcp_servers s
       LEFT JOIN server_stats st ON s.id = st.server_id
@@ -60,7 +60,7 @@ export async function GET(request: NextRequest) {
       sql += ` AND s.verified = true`;
     }
 
-    sql += ` ORDER BY s.repository_stars DESC NULLS LAST, s.created_at DESC`;
+    sql += ` ORDER BY st.github_stars DESC NULLS LAST, s.created_at DESC`;
     sql += ` LIMIT $${paramCount}`;
     params.push(parseInt(limit));
 
@@ -77,11 +77,11 @@ export async function GET(request: NextRequest) {
         url: row.repository_url,
         owner: row.repository_owner,
         name: row.repository_name,
-        stars: row.repository_stars || 0
+        stars: row.github_stars || 0
       },
       stats: {
-        stars: row.repository_stars || 0,
-        installs: row.installs || 0,
+        stars: row.github_stars || 0,
+        installs: row.cli_installs || 0,
         lastCommit: new Date().toISOString()
       },
       installation: {
