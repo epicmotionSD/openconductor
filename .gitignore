@@ -97,4 +97,8 @@ jspm_packages/
 .DS_Store
 
 # VSCode
-.vscode/
+.vscode/.env
+
+# Claude Desktop MCP Configuration (generated file with secrets)
+claude_desktop_config.json
+**/claude_desktop_config.json

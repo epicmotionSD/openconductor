@@ -2,6 +2,10 @@ import { Pool } from 'pg';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import winston from 'winston';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config({ path: join(__dirname, '../../../../.env') });
 
 const logger = winston.createLogger({
   level: 'info',
@@ -14,7 +18,7 @@ const logger = winston.createLogger({
 
 // Supabase connection configuration using pooled connection
 const supabaseConfig = {
-  connectionString: "postgres://postgres.fjmzvcipimpctqnhhfrr:29FHVZqmLEcx864X@aws-1-us-east-1.pooler.supabase.com:6543/postgres",
+  connectionString: process.env.SUPABASE_DATABASE_URL || process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   },
@@ -22,6 +26,11 @@ const supabaseConfig = {
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 15000
 };
+
+// Validate connection string
+if (!supabaseConfig.connectionString) {
+  throw new Error('SUPABASE_DATABASE_URL or DATABASE_URL must be set in environment variables');
+}
 
 async function deployToSupabase() {
   const pool = new Pool(supabaseConfig);

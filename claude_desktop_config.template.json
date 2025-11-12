@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schema.anthropic.com/claude_desktop_config.json",
+  "mcpServers": {
+    "openconductor-filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/roizen/projects/openconductor/packages/api",
+        "/home/roizen/projects/openconductor/packages/cli",
+        "/home/roizen/projects/openconductor/packages/frontend",
+        "/home/roizen/projects/openconductor/packages/shared"
+      ],
+      "env": {}
+    },
+
+    "openconductor-database-local": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgresql",
+        "${DATABASE_URL}"
+      ],
+      "env": {},
+      "description": "Local PostgreSQL database for development"
+    },
+
+    "openconductor-supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgresql",
+        "${SUPABASE_DATABASE_URL}"
+      ],
+      "env": {},
+      "description": "Production Supabase PostgreSQL database"
+    },
+
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "GitHub integration for repository operations"
+    },
+
+    "openconductor-redis": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-redis",
+        "${REDIS_URL}"
+      ],
+      "env": {},
+      "description": "Redis cache and session store"
+    }
+  }
+}
