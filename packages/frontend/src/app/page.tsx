@@ -48,8 +48,8 @@ export default function HomePage() {
           </h1>
           
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            OpenConductor is the missing registry and CLI for Model Context Protocol servers.
-            Find, install, and manage 127+ AI agent tools with professional developer experience.
+            OpenConductor is the missing registry and CLI for the Model Context Protocol.
+            It's the <strong>npm for AI agents</strong>, letting you find, install, and manage 127+ tools with a professional developer experience.
           </p>
           
           {/* CTA Buttons */}
@@ -140,10 +140,10 @@ export default function HomePage() {
               
               <div className="text-center p-6">
                 <Users className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-4">Developer First</h3>
+                <h3 className="text-xl font-semibold mb-4">Built for Your Workflow</h3>
                 <p className="text-gray-600">
-                  Built by developers, for developers. Beautiful CLI experience
-                  with progress tracking and helpful errors.
+                  Beautiful CLI experience with progress tracking, helpful errors,
+                  and seamless integration with your existing tools.
                 </p>
               </div>
             </div>
@@ -203,7 +203,7 @@ export default function HomePage() {
           <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold mb-6">Ready to Supercharge Your AI Agents?</h2>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Join hundreds of developers building the future of AI agent infrastructure.
+              Join developers from around the world building the future of AI agent infrastructure.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
