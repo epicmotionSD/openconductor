@@ -4,6 +4,11 @@
   "framework": "nextjs",
   "outputDirectory": "packages/frontend/.next",
   "ignoreCommand": "git diff HEAD^ HEAD --quiet packages/frontend/",
+  "ignore": [
+    "packages/api/**",
+    "packages/cli/**",
+    "packages/shared/**"
+  ],
   "env": {
     "NEXT_PUBLIC_API_URL": "https://api.openconductor.ai/v1",
     "NODE_ENV": "production"
@@ -13,7 +18,7 @@
       "source": "/(.*)",
       "headers": [
         {
-          "key": "X-Content-Type-Options", 
+          "key": "X-Content-Type-Options",
           "value": "nosniff"
         },
         {
