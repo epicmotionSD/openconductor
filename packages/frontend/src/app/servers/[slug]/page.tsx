@@ -128,11 +128,11 @@ export default function ServerDetailPage() {
                 </Badge>
                 <div className="flex items-center gap-1 text-sm text-muted-foreground">
                   <Star className="h-4 w-4" />
-                  {server.stats.githubStars} stars
+                  {server.repository.stars} stars
                 </div>
                 <div className="flex items-center gap-1 text-sm text-muted-foreground">
                   <Download className="h-4 w-4" />
-                  {server.stats.npmDownloads} downloads
+                  {server.packages.npm?.downloadsTotal || 0} downloads
                 </div>
               </div>
 
@@ -297,16 +297,16 @@ export default function ServerDetailPage() {
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-sm text-muted-foreground">GitHub Stars</span>
-                  <span className="font-medium">{server.stats.githubStars}</span>
+                  <span className="font-medium">{server.repository.stars}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-muted-foreground">NPM Downloads</span>
-                  <span className="font-medium">{server.stats.npmDownloads}</span>
+                  <span className="font-medium">{server.packages.npm?.downloadsTotal || 0}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-muted-foreground">Last Updated</span>
                   <span className="font-medium">
-                    {new Date(server.stats.lastUpdated).toLocaleDateString()}
+                    {new Date(server.repository.lastCommit).toLocaleDateString()}
                   </span>
                 </div>
                 <div className="flex justify-between">
