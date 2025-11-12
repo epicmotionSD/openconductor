@@ -1,6 +1,6 @@
 {
-  "buildCommand": "cd packages/frontend && pnpm run build",
-  "installCommand": "pnpm install --filter=frontend --filter=shared",
+  "buildCommand": "cd packages/frontend && npm run build",
+  "installCommand": "npm install",
   "framework": "nextjs",
   "outputDirectory": "packages/frontend/.next",
   "ignoreCommand": "git diff HEAD^ HEAD --quiet packages/frontend/ packages/shared/",
