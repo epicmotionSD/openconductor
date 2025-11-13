@@ -1,6 +1,6 @@
 # OpenConductor Press Kit
 
-> **The npm for MCP Servers - Professional AI Agent Infrastructure**
+> **The Complete Enterprise Platform for MCP Infrastructure**
 
 ## 📰 **Fact Sheet**
 
