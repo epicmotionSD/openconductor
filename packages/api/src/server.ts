@@ -8,6 +8,8 @@ import { errorHandler, requestLogger, performanceMonitor, securityLogger } from 
 import { healthCheckHandler, livenessHandler, readinessHandler, metricsHandler } from './monitoring/healthChecks';
 import { anonymousLimiter, trackApiUsage } from './middleware/rateLimiter';
 import { config } from './config/production';
+import { githubSyncWorker } from './workers/GitHubSyncWorker';
+import { jobProcessor, jobScheduler } from './workers/JobProcessor';
 
 // Load environment variables
 dotenv.config();
@@ -43,6 +45,33 @@ app.use(express.urlencoded({ extended: true }));
 initializeDatabase().catch(err => {
   console.warn('Database initialization failed, continuing without database:', err.message);
 });
+
+// Initialize Phase 2 Enterprise Features
+if (process.env.OPENCONDUCTOR_PHASE === 'phase2') {
+  console.log('🚀 Initializing Phase 2 Enterprise Features...');
+  
+  // Start background workers
+  if (process.env.AUTO_START_GITHUB_WORKER === 'true') {
+    const syncInterval = parseInt(process.env.GITHUB_SYNC_INTERVAL || '60');
+    githubSyncWorker.start(syncInterval);
+    console.log('✅ GitHub Sync Worker started');
+  }
+  
+  if (process.env.AUTO_START_JOB_PROCESSOR === 'true') {
+    const pollInterval = parseInt(process.env.JOB_POLL_INTERVAL || '30');
+    jobProcessor.start(pollInterval);
+    console.log('✅ Background Job Processor started');
+    
+    // Setup recurring enterprise jobs
+    jobScheduler.setupRecurringJobs().then(() => {
+      console.log('✅ Enterprise job scheduling configured');
+    }).catch(error => {
+      console.warn('Job scheduling setup failed:', error.message);
+    });
+  }
+  
+  console.log('🎯 Phase 2 Enterprise Platform: ACTIVE');
+}
 
 // Health check endpoint
 app.get('/health', (req, res) => {

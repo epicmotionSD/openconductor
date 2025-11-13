@@ -51,7 +51,7 @@ export const captureRawBody = (req: any, res: any, next: any) => {
 /**
  * POST /webhooks/github
  * Receive and process GitHub webhook events
- * Phase 2 Feature - Hidden in Phase 1 launch
+ * Phase 2 Enterprise Feature - NOW ENABLED FOR LAUNCH!
  */
 webhooksRouter.post('/github', requireFeature('githubWebhooks'), captureRawBody, asyncHandler(async (req, res) => {
   const eventType = req.get('X-GitHub-Event');
@@ -106,7 +106,7 @@ webhooksRouter.post('/github', requireFeature('githubWebhooks'), captureRawBody,
 /**
  * GET /webhooks/github/status
  * Get webhook processing status and statistics
- * Phase 2 Feature - Hidden in Phase 1 launch
+ * Phase 2 Enterprise Feature - NOW ENABLED FOR LAUNCH!
  */
 webhooksRouter.get('/github/status', requireFeature('webhookStatus'), asyncHandler(async (req, res) => {
   const stats = await githubSyncWorker.getSyncStats();

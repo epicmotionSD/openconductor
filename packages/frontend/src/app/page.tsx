@@ -15,14 +15,14 @@ export default function HomePage() {
             <Badge variant="secondary" className="ml-2">Launch Week!</Badge>
           </div>
           <nav className="hidden md:flex space-x-6">
-            <Link href="#features" className="text-sm hover:text-blue-600 transition-colors">
-              Features
-            </Link>
-            <Link href="#install" className="text-sm hover:text-blue-600 transition-colors">
-              Install
-            </Link>
             <Link href="/discover" className="text-sm hover:text-blue-600 transition-colors">
-              Browse Servers
+              Discover
+            </Link>
+            <Link href="/submit" className="text-sm hover:text-blue-600 transition-colors">
+              Submit
+            </Link>
+            <Link href="/admin" className="text-sm hover:text-blue-600 transition-colors">
+              Admin
             </Link>
             <a href="https://github.com/epicmotionSD/openconductor" className="text-sm hover:text-blue-600 transition-colors">
               GitHub
@@ -36,20 +36,21 @@ export default function HomePage() {
         <section className="container mx-auto px-4 py-20 text-center">
           {/* Launch Badge */}
           <div className="flex justify-center mb-6">
-            <Badge variant="outline" className="bg-blue-100 text-blue-700 border-blue-300 text-sm px-4 py-2">
-              🚀 Launching Today - The npm for MCP Servers
+            <Badge variant="outline" className="bg-purple-100 text-purple-700 border-purple-300 text-sm px-4 py-2">
+              🚀 Enterprise Platform Launch - Complete MCP Infrastructure
             </Badge>
           </div>
 
           <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent">
-            Discover & Install
+            The Complete Enterprise Platform
             <br />
-            MCP Servers in Seconds
+            for MCP Infrastructure
           </h1>
           
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            OpenConductor is the missing registry and CLI for the Model Context Protocol.
-            It's the <strong>npm for AI agents</strong>, letting you find, install, and manage 127+ tools with a professional developer experience.
+            OpenConductor is the world's first <strong>enterprise platform</strong> for Model Context Protocol infrastructure.
+            Discover, submit, automate, and scale 127+ AI agent tools with GitHub automation,
+            advanced analytics, and real-time monitoring.
           </p>
           
           {/* CTA Buttons */}
