@@ -1,8 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "cd packages/frontend && npm install && npm run build",
+  "buildCommand": "npm install --legacy-peer-deps && cd packages/frontend && npm install --legacy-peer-deps && npm run build",
   "outputDirectory": "packages/frontend/.next",
-  "installCommand": "npm install --legacy-peer-deps",
+  "installCommand": "echo 'Skipping root install'",
   "framework": null,
-  "devCommand": "npm run dev"
+  "devCommand": "npm run dev",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./"
 }

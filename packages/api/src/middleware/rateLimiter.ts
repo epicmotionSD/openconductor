@@ -376,7 +376,7 @@ export const createCustomRateLimiter = (options: {
   skipIf?: (req: any) => boolean;
   message?: string;
 }) => {
-  return rateLimit({
+  const opts: any = {
     store: (new RedisStore({
       sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
       prefix: 'rl:custom:',
@@ -398,16 +398,19 @@ export const createCustomRateLimiter = (options: {
       }
     },
     standardHeaders: true,
-    legacyHeaders: false,
-    onLimitReached: (req, res, options) => {
-      logger.warn('Custom rate limit reached', {
-        ip: req.ip,
-        endpoint: req.path,
-        limit: options.max,
-        windowMs: options.windowMs
-      });
-    }
-  }) as any;
+    legacyHeaders: false
+  };
+
+  opts.onLimitReached = (req: any, res: any, optsLocal: any) => {
+    logger.warn('Custom rate limit reached', {
+      ip: req.ip,
+      endpoint: req.path,
+      limit: optsLocal.max,
+      windowMs: optsLocal.windowMs
+    });
+  };
+
+  return rateLimit(opts) as any;
 };
 
 

@@ -197,7 +197,10 @@ export class SearchService {
     tags: { name: string; count: number }[];
   }> {
     const cacheKey = cache.generateKey('search-filters');
-    const cached = await cache.get(cacheKey);
+    const cached = await cache.get<{
+      categories: { name: ServerCategory; count: number }[];
+      tags: { name: string; count: number }[];
+    }>(cacheKey);
     
     if (cached) {
       return cached;
@@ -229,7 +232,10 @@ export class SearchService {
       return filters;
     } catch (error) {
       logger.error('Error getting search filters', error);
-      return { categories: [], tags: [] };
+      return {
+        categories: [],
+        tags: []
+      };
     }
   }
 

@@ -538,7 +538,11 @@ export class StatsCalculationEngine {
     emergingServers: Array<{ serverId: string; name: string; score: number }>;
   }> {
     const cacheKey = `trending-analysis:${period}`;
-    const cached = await cache.get(cacheKey);
+    const cached = await cache.get<{
+      topGrowing: Array<{ serverId: string; name: string; growthRate: number }>;
+      topAccelerating: Array<{ serverId: string; name: string; acceleration: number }>;
+      emergingServers: Array<{ serverId: string; name: string; score: number }>;
+    }>(cacheKey);
     
     if (cached) {
       return cached;
@@ -602,7 +606,11 @@ export class StatsCalculationEngine {
 
     } catch (error) {
       logger.error('Failed to get trending analysis', { period, error });
-      return { topGrowing: [], topAccelerating: [], emergingServers: [] };
+      return {
+        topGrowing: [],
+        topAccelerating: [],
+        emergingServers: []
+      };
     }
   }
 

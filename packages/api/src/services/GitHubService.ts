@@ -482,7 +482,6 @@ export class GitHubService {
       // Memory-related
       'memory': 'memory',
       'persistence': 'memory',
-      'storage': 'memory',
       'semantic': 'memory',
       
       // Filesystem

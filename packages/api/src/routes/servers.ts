@@ -128,8 +128,8 @@ serversRouter.get('/:identifier', asyncHandler(async (req, res) => {
  */
 serversRouter.post('/', requireFeature('serverSubmission'), asyncHandler(async (req, res) => {
   const validatedData = submitServerSchema.parse(req.body);
-  
-  const result = await registryService.submitServer(validatedData);
+
+  const result = await registryService.submitServer(validatedData as SubmitServerRequest);
   
   res.status(201).json(createAPIResponse(result));
 }));
