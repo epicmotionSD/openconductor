@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { initializeDatabase } from './db/connection';
 import { serversRouter } from './routes/servers';
 import adminRouter from './routes/admin';
+import feedbackRouter from './routes/feedback';
 import { errorHandler, requestLogger, performanceMonitor, securityLogger } from './middleware/errorHandler';
 import { healthCheckHandler, livenessHandler, readinessHandler, metricsHandler } from './monitoring/healthChecks';
 import { anonymousLimiter, trackApiUsage } from './middleware/rateLimiter';
@@ -77,9 +78,11 @@ if (process.env.OPENCONDUCTOR_PHASE === 'phase2') {
 // API routes - mount according to specification
 app.use('/v1/servers', serversRouter);
 app.use('/v1/admin', adminRouter);
+app.use('/v1/feedback', feedbackRouter);
 
 // Legacy API routes for backward compatibility
 app.use('/api/servers', serversRouter);
+app.use('/api/feedback', feedbackRouter);
 
 // Additional API endpoints
 app.get('/v1/search', (req, res) => res.redirect(307, `/v1/servers/search?${req.url.split('?')[1] || ''}`));

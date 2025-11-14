@@ -41,7 +41,7 @@ export default function APIKeysPage() {
     submit: true,
     manage: false
   })
-  const [newKeyData, setNewKeyData] = useState<{key: string; info: APIKey} | null>(null)
+  const [newKeyData, setNewKeyData] = useState<{apiKey: string; keyInfo: APIKey} | null>(null)
 
   useEffect(() => {
     fetchAPIKeys()

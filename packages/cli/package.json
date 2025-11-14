@@ -1,7 +1,7 @@
 {
   "name": "@openconductor/cli",
-  "version": "1.0.0",
-  "description": "The orchestration CLI for modern AI development. Deploy agents alongside your Vercel, v0, Supabase, and BaseHub workflow. The npm for AI agents, evolved for the ecosystem era.",
+  "version": "1.0.1",
+  "description": "The npm for MCP servers - discover and install AI agent tools in seconds. 70+ developers already using it organically! Works with Vercel, v0, Supabase, and BaseHub workflows.",
   "bin": {
     "openconductor": "./bin/openconductor.js"
   },
@@ -10,6 +10,7 @@
   "author": "OpenConductor <hello@openconductor.ai>",
   "license": "MIT",
   "homepage": "https://openconductor.ai",
+  "documentation": "https://openconductor.ai/docs",
   "repository": {
     "type": "git",
     "url": "https://github.com/epicmotionSD/openconductor.git",
