@@ -11,6 +11,17 @@ import {
   AlertTriangle, Zap, Database, Shield
 } from 'lucide-react'
 
+interface ActivityItem {
+  id: string;
+  type: string;
+  message: string;
+  server: string;
+  slug: string;
+  verified: boolean;
+  timestamp: string;
+  timeAgo: string;
+}
+
 interface AdminStats {
   servers: {
     total: number;
@@ -23,6 +34,7 @@ interface AdminStats {
     lastSync: string;
     webhooks: number;
     repos: number;
+    successRate?: number;
   };
   jobs: {
     pending: number;
@@ -36,6 +48,13 @@ interface AdminStats {
     avgResponseTime: number;
     activeKeys: number;
   };
+  health?: {
+    database: boolean;
+    redis: boolean;
+    github: boolean;
+    workers: boolean;
+  };
+  recentActivity?: ActivityItem[];
 }
 
 export default function AdminDashboard() {
@@ -53,8 +72,29 @@ export default function AdminDashboard() {
 
   const fetchAdminStats = async () => {
     try {
-      // In production, these would be real API calls
-      // For now, using mock data to show the interface
+      setLoading(true)
+      const adminKey = localStorage.getItem('admin-api-key')
+
+      if (!adminKey) {
+        console.error('No admin API key found')
+        setLoading(false)
+        return
+      }
+
+      const response = await fetch('/api/admin/dashboard', {
+        headers: {
+          'Authorization': `Bearer ${adminKey}`
+        }
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setStats(result.data)
+      } else {
+        console.error('Failed to fetch stats:', result.error)
+      }
+
       setLoading(false)
     } catch (error) {
       console.error('Failed to fetch admin stats:', error)

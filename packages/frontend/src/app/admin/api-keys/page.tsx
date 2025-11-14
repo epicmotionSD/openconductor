@@ -49,39 +49,38 @@ export default function APIKeysPage() {
 
   const fetchAPIKeys = async () => {
     try {
-      // Mock data for demo - in production would fetch from API
-      const mockKeys: APIKey[] = [
-        {
-          id: '1',
-          name: 'Production CLI',
-          permissions: { read: true, write: true, admin: false, submit: true, manage: false },
-          rateLimitPerHour: 5000,
-          active: true,
-          lastUsed: '2 hours ago',
-          createdAt: '2024-11-01T10:00:00Z',
-          expiresAt: '2025-05-01T10:00:00Z'
-        },
-        {
-          id: '2', 
-          name: 'Analytics Dashboard',
-          permissions: { read: true, write: false, admin: false, submit: false, manage: false },
-          rateLimitPerHour: 1000,
-          active: true,
-          lastUsed: '5 minutes ago',
-          createdAt: '2024-10-15T14:30:00Z'
-        },
-        {
-          id: '3',
-          name: 'GitHub Automation',
-          permissions: { read: true, write: true, admin: true, submit: true, manage: true },
-          rateLimitPerHour: 10000,
-          active: true,
-          lastUsed: 'Just now',
-          createdAt: '2024-11-10T09:00:00Z'
+      setLoading(true)
+      const adminKey = localStorage.getItem('admin-api-key')
+
+      if (!adminKey) {
+        console.error('No admin API key found')
+        setLoading(false)
+        return
+      }
+
+      const response = await fetch('/api/admin/api-keys', {
+        headers: {
+          'Authorization': `Bearer ${adminKey}`
         }
-      ]
-      
-      setApiKeys(mockKeys)
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setApiKeys(result.data.keys.map((key: any) => ({
+          id: key.id,
+          name: key.name,
+          permissions: typeof key.permissions === 'string' ? JSON.parse(key.permissions) : key.permissions,
+          rateLimitPerHour: key.rateLimitPerHour,
+          active: key.active,
+          lastUsed: key.lastUsed,
+          createdAt: key.created,
+          expiresAt: key.expires
+        })))
+      } else {
+        console.error('Failed to fetch API keys:', result.error)
+      }
+
       setLoading(false)
     } catch (error) {
       console.error('Failed to fetch API keys:', error)
@@ -94,26 +93,54 @@ export default function APIKeysPage() {
 
     setCreatingKey(true)
     try {
-      // Mock API key creation
-      const mockResponse = {
-        apiKey: 'oc_live_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-        keyInfo: {
-          id: Date.now().toString(),
+      const adminKey = localStorage.getItem('admin-api-key')
+
+      if (!adminKey) {
+        console.error('No admin API key found')
+        setCreatingKey(false)
+        return
+      }
+
+      const response = await fetch('/api/admin/api-keys', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${adminKey}`
+        },
+        body: JSON.stringify({
           name: newKeyName,
           permissions: newKeyPermissions,
           rateLimitPerHour: 1000,
-          active: true,
-          createdAt: new Date().toISOString()
-        }
-      }
+          expiresIn: null // No expiration
+        })
+      })
 
-      setNewKeyData(mockResponse)
-      setNewKeyName('')
-      setShowCreateForm(false)
-      fetchAPIKeys() // Refresh list
+      const result = await response.json()
+
+      if (result.success) {
+        setNewKeyData({
+          apiKey: result.data.key,
+          keyInfo: {
+            id: result.data.id,
+            name: result.data.name,
+            permissions: result.data.permissions,
+            rateLimitPerHour: result.data.rateLimitPerHour,
+            active: result.data.active,
+            createdAt: result.data.created,
+            expiresAt: result.data.expires
+          }
+        })
+        setNewKeyName('')
+        setShowCreateForm(false)
+        fetchAPIKeys() // Refresh list
+      } else {
+        console.error('Failed to create API key:', result.error)
+        alert('Failed to create API key: ' + result.error.message)
+      }
 
     } catch (error) {
       console.error('Failed to create API key:', error)
+      alert('Failed to create API key')
     } finally {
       setCreatingKey(false)
     }
@@ -121,12 +148,32 @@ export default function APIKeysPage() {
 
   const revokeAPIKey = async (keyId: string) => {
     try {
-      // Mock revocation
-      setApiKeys(prev => prev.map(key => 
-        key.id === keyId ? { ...key, active: false } : key
-      ))
+      const adminKey = localStorage.getItem('admin-api-key')
+
+      if (!adminKey) {
+        console.error('No admin API key found')
+        return
+      }
+
+      const response = await fetch(`/api/admin/api-keys?id=${keyId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${adminKey}`
+        }
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        // Refresh the list
+        fetchAPIKeys()
+      } else {
+        console.error('Failed to revoke API key:', result.error)
+        alert('Failed to revoke API key: ' + result.error.message)
+      }
     } catch (error) {
       console.error('Failed to revoke API key:', error)
+      alert('Failed to revoke API key')
     }
   }
 
