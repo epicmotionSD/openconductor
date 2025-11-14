@@ -90,7 +90,7 @@ export default function SubmitServerPage() {
                 
                 <div className="flex gap-4">
                   <Button asChild className="flex-1">
-                    <a href="https://github.com/epicmotionSD/openconductor/discussions" target="_blank">
+                    <a href="https://github.com/openconductor/openconductor/discussions" target="_blank">
                       <Github className="h-4 w-4 mr-2" />
                       Submit via GitHub
                     </a>

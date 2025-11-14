@@ -1,8 +1,9 @@
 {
-  "name": "OpenConductor Admin",
-  "short_name": "OC Admin",
-  "description": "OpenConductor Admin Panel - Manage MCP servers and marketing campaigns",
-  "start_url": "/admin",
+  "name": "OpenConductor - MCP Server Registry",
+  "short_name": "OpenConductor",
+  "description": "Discover, install, and manage Model Context Protocol (MCP) servers for AI development",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
@@ -15,27 +16,27 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/icon-512.png", 
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "categories": ["business", "productivity", "developer"],
+  "categories": ["developer tools", "productivity", "utilities"],
   "screenshots": [
     {
-      "src": "/screenshot-admin.png",
+      "src": "/screenshot-discover.png",
       "sizes": "1280x720",
       "type": "image/png",
-      "label": "Admin Dashboard"
+      "label": "Discover MCP Servers"
     }
   ],
   "shortcuts": [
     {
-      "name": "Server Management",
-      "short_name": "Servers",
-      "description": "Manage MCP servers",
-      "url": "/admin/servers",
+      "name": "Discover Servers",
+      "short_name": "Discover",
+      "description": "Browse MCP server registry",
+      "url": "/discover",
       "icons": [
         {
           "src": "/icon-192.png",
@@ -44,10 +45,22 @@
       ]
     },
     {
-      "name": "Marketing Campaigns",
-      "short_name": "Marketing",
-      "description": "Manage launch campaigns",
-      "url": "/admin/marketing",
+      "name": "CLI Install Guide",
+      "short_name": "Install",
+      "description": "Install OpenConductor CLI",
+      "url": "/install",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Documentation",
+      "short_name": "Docs",
+      "description": "Read the documentation",
+      "url": "/docs",
       "icons": [
         {
           "src": "/icon-192.png",

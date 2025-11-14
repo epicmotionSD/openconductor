@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#2563eb"/>
+
+  <!-- Terminal Icon -->
+  <g transform="translate(128, 128)">
+    <!-- Terminal Window -->
+    <rect x="0" y="0" width="256" height="256" rx="24" fill="#1e40af"/>
+
+    <!-- Terminal Content -->
+    <path d="M56 96L120 144L56 192" stroke="#ffffff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <line x1="136" y1="192" x2="216" y2="192" stroke="#ffffff" stroke-width="16" stroke-linecap="round"/>
+  </g>
+</svg>

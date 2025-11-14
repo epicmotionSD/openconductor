@@ -20,7 +20,7 @@ export default function HomePage() {
             <Link href="/docs" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
               Docs
             </Link>
-            <a href="https://github.com/epicmotionSD/openconductor" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+            <a href="https://github.com/openconductor/openconductor" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
               GitHub
             </a>
           </nav>
