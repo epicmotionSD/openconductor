@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "buildCommand": "cd packages/frontend && npm install && npm run build",
+  "outputDirectory": "packages/frontend/.next",
+  "installCommand": "npm install --legacy-peer-deps",
+  "framework": null,
+  "devCommand": "npm run dev"
+}
