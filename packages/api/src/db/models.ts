@@ -316,7 +316,7 @@ export class MCPServerRepository extends BaseRepository<MCPServer> {
 
     try {
       let whereConditions = [`s.search_vector @@ plainto_tsquery('english', $1)`];
-      let queryParams = [q];
+      let queryParams: any[] = [q];
       let paramIndex = 2;
 
       if (filters?.category && filters.category.length > 0) {

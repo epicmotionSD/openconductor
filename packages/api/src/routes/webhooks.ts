@@ -64,7 +64,7 @@ webhooksRouter.post('/github', requireFeature('githubWebhooks'), captureRawBody,
 
   // Verify webhook signature in production
   if (process.env.NODE_ENV === 'production') {
-    const isValid = githubService.verifyWebhookSignature(req.rawBody, signature);
+    const isValid = githubService.verifyWebhookSignature((req as any).rawBody, signature);
     if (!isValid) {
       logger.warn('Invalid webhook signature', { delivery, eventType });
       throw createError('Invalid webhook signature', 401);
@@ -73,12 +73,12 @@ webhooksRouter.post('/github', requireFeature('githubWebhooks'), captureRawBody,
 
   try {
     // Process the webhook event
-    await githubService.processWebhook(eventType, req.body);
+    await githubService.processWebhook(eventType, (req as any).body);
     
     logger.info('GitHub webhook processed successfully', {
       eventType,
       delivery,
-      repository: req.body.repository?.full_name
+      repository: (req as any).body.repository?.full_name
     });
 
     res.json(createAPIResponse({

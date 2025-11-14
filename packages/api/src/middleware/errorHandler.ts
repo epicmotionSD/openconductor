@@ -66,14 +66,14 @@ const logger = winston.createLogger({
  */
 export class AppError extends Error {
   public statusCode: number;
-  public errorCode: string;
+  public errorCode: ErrorCode;
   public isOperational: boolean;
   public context?: any;
 
   constructor(
     message: string,
     statusCode: number = 500,
-    errorCode: string = ErrorCodes.INTERNAL_ERROR,
+    errorCode: ErrorCode = ErrorCodes.INTERNAL_ERROR,
     isOperational: boolean = true,
     context?: any
   ) {
@@ -94,7 +94,7 @@ export class AppError extends Error {
 export function createError(
   message: string,
   statusCode: number = 500,
-  errorCode: string = ErrorCodes.INTERNAL_ERROR,
+  errorCode: ErrorCode = ErrorCodes.INTERNAL_ERROR,
   context?: any
 ): AppError {
   return new AppError(message, statusCode, errorCode, true, context);

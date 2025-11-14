@@ -52,7 +52,7 @@ export class SearchEngine {
       const searchQuery = this.buildSearchQuery(q);
       
       let whereConditions = [`s.search_vector @@ to_tsquery('english', $1)`];
-      let queryParams = [searchQuery];
+      let queryParams: any[] = [searchQuery];
       let paramIndex = 2;
 
       // Apply filters
