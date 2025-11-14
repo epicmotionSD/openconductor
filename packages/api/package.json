@@ -1,7 +1,7 @@
 {
   "name": "@openconductor/api",
   "version": "0.1.0",
-  "description": "OpenConductor API server - MCP registry backend",
+  "description": "OpenConductor API server - The orchestration platform backend for modern AI development. Registry and management for Vercel, v0, Supabase, and BaseHub integrations.",
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
@@ -9,6 +9,7 @@
     "start": "node dist/server.js",
     "db:migrate": "tsx src/db/deploy-to-supabase.ts",
     "db:seed": "tsx src/db/seed.ts",
+    "db:seed:127": "tsx src/db/seed-127-servers.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "type-check": "tsc --noEmit"

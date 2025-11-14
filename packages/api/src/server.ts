@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import { initializeDatabase } from './db/connection';
 import { serversRouter } from './routes/servers';
+import adminRouter from './routes/admin';
 import { errorHandler, requestLogger, performanceMonitor, securityLogger } from './middleware/errorHandler';
 import { healthCheckHandler, livenessHandler, readinessHandler, metricsHandler } from './monitoring/healthChecks';
 import { anonymousLimiter, trackApiUsage } from './middleware/rateLimiter';
@@ -73,17 +74,9 @@ if (process.env.OPENCONDUCTOR_PHASE === 'phase2') {
   console.log('🎯 Phase 2 Enterprise Platform: ACTIVE');
 }
 
-// Health check endpoint
-app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
-    timestamp: new Date().toISOString(),
-    version: process.env.npm_package_version || '0.1.0'
-  });
-});
-
 // API routes - mount according to specification
 app.use('/v1/servers', serversRouter);
+app.use('/v1/admin', adminRouter);
 
 // Legacy API routes for backward compatibility
 app.use('/api/servers', serversRouter);
@@ -96,7 +89,7 @@ app.get('/v1/stats/popular', (req, res) => res.redirect(307, `/v1/servers/stats/
 
 // 404 handler
 app.use('*', (req, res) => {
-  res.status(404).json({ 
+  res.status(404).json({
     error: 'Not Found',
     message: `Route ${req.method} ${req.originalUrl} not found`
   });
@@ -104,12 +97,5 @@ app.use('*', (req, res) => {
 
 // Error handling middleware
 app.use(errorHandler);
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 OpenConductor API server running on port ${PORT}`);
-  console.log(`📡 Health check: http://localhost:${PORT}/health`);
-  console.log(`🔍 API docs: http://localhost:${PORT}/api/servers`);
-});
 
 export default app;

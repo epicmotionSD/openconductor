@@ -1,34 +1,34 @@
 # OpenConductor Press Kit
 
-> **The Complete Enterprise Platform for MCP Infrastructure**
+> **The Orchestration Platform for Modern AI Development**
 
 ## 📰 **Fact Sheet**
 
-**Company:** OpenConductor  
-**Founded:** 2024  
-**Website:** https://openconductor.ai  
-**Category:** Developer Tools, AI Infrastructure  
-**License:** MIT (Open Source)  
+**Company:** OpenConductor
+**Founded:** 2024
+**Website:** https://openconductor.ai
+**Category:** AI Infrastructure, Developer Platform, Ecosystem Orchestration
+**License:** MIT (Open Source)
 
 **Key Stats:**
-- 📦 **127+ MCP Servers** indexed and discoverable
-- ⚡ **One-command installation** for any server  
-- 🌍 **Cross-platform support** (macOS, Windows, Linux)
-- 🔍 **Intelligent search** with category filtering
-- ✅ **Community verification** for quality assurance
+- 🌐 **60+ MCP Servers** optimized for modern AI stacks
+- ⚡ **Ecosystem Integration** with Vercel, v0, Supabase, BaseHub
+- 🎯 **Platform Orchestration** - deploy agents like components
+- 🔗 **One-command workflow** integration across your entire stack
+- ✅ **Professional tooling** for AI development teams
 
 ---
 
 ## 🎯 **Product Overview**
 
-**OpenConductor** solves the MCP server discovery problem. While there are 100+ amazing Model Context Protocol servers available, most developers only use 2-3 because finding and installing them is complicated.
+**OpenConductor** solves the modern AI stack integration problem. While developers have incredible tools like Vercel for deployment, v0 for components, Supabase for data, and BaseHub for content—AI agents remain disconnected from this ecosystem.
 
-OpenConductor makes MCP servers as easy to discover and install as npm packages.
+OpenConductor is the missing orchestration layer that completes your modern AI development workflow.
 
 ### **Core Value Proposition:**
-- **Discover:** Search 127+ servers by category, functionality, or popularity
-- **Install:** One command adds any server to your Claude Desktop configuration  
-- **Manage:** List, update, and remove servers with professional tooling
+- **Ecosystem Integration:** Deploy agents alongside components in your Vercel + v0 + Supabase workflow
+- **Platform Orchestration:** One CLI manages AI agents with the same professionalism as your entire stack
+- **The npm for AI agents:** 60+ servers designed for modern development workflows, not legacy tooling
 
 ---
 
@@ -69,17 +69,17 @@ OpenConductor was built by a **self-taught railroad electrician** who needed to 
 
 ## 📊 **Market Context**
 
-### **The MCP Ecosystem:**
-- **Model Context Protocol** is Anthropic's standard for AI agent tools
-- **100+ servers** available but discovery is fragmented
-- **Growing rapidly** as AI agents become mainstream
-- **Enterprise adoption** increasing for workflow automation
+### **The Modern AI Stack Gap:**
+- **Vercel + v0 + Supabase + BaseHub** create powerful development workflows
+- **AI agents** remain disconnected from these modern stacks
+- **60+ MCP servers** exist but lack ecosystem integration
+- **Professional teams** need orchestration that matches their deployment sophistication
 
 ### **Problem OpenConductor Solves:**
-- **Discovery:** No central registry existed
-- **Installation:** Manual config editing was error-prone  
-- **Management:** No tooling for updates or removal
-- **Onboarding:** New developers struggled to get started
+- **Ecosystem Fragmentation:** AI agents don't integrate with modern development workflows
+- **Platform Gap:** Missing orchestration layer between AI agents and deployment stacks
+- **Professional Tooling:** AI development lacks the sophistication of modern frontend/backend workflows
+- **Stack Integration:** No unified way to deploy agents alongside components and data layers
 
 ---
 
@@ -124,20 +124,22 @@ OpenConductor was built by a **self-taught railroad electrician** who needed to 
 
 ## 💬 **Key Messages**
 
-### **Primary Headline:**
-*"The npm for MCP Servers"*
+### **Primary Headlines:**
+- *"Deploy AI agents alongside your components"*
+- *"The orchestration platform for modern AI development"*
+- *"Deploy with Vercel. Build with v0. Orchestrate with OpenConductor"*
 
 ### **Supporting Messages:**
-- "Discover and install AI agent tools in seconds"
-- "Professional infrastructure for AI agent development"  
-- "Making MCP servers as easy as npm packages"
-- "Built by developers, for developers"
+- "The missing orchestration layer that completes your modern AI stack"
+- "Deploy agents as easily as components with professional tooling"
+- "Works with Vercel, v0, Supabase, and BaseHub out of the box"
+- "One CLI. One workflow. Complete control over your AI infrastructure"
 
 ### **Unique Angles:**
-- **Railroad electrician** turned AI infrastructure developer
-- **Solves real industrial problems** with AI agent orchestration
-- **Community-first approach** to developer tooling
-- **Open source from day one** with enterprise-grade quality
+- **Ecosystem Integration:** First platform designed specifically for modern AI development stacks
+- **Professional Orchestration:** Brings deployment sophistication to AI agent management
+- **Railroad electrician** turned AI infrastructure developer (authentic founder story)
+- **Platform-native approach** instead of legacy tooling adapted for AI
 
 ---
 

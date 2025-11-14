@@ -1,7 +1,7 @@
 {
   "name": "@openconductor/frontend",
   "version": "0.1.1",
-  "description": "OpenConductor frontend - MCP server registry and discovery",
+  "description": "OpenConductor frontend - The orchestration platform for modern AI development. Deploy agents alongside your Vercel, v0, Supabase, and BaseHub workflow.",
   "private": true,
   "scripts": {
     "dev": "next dev",

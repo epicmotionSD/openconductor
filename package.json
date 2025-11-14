@@ -1,7 +1,7 @@
 {
   "name": "openconductor",
   "version": "0.1.0",
-  "description": "The control plane for AI agent systems - discover, orchestrate, and monitor MCP servers",
+  "description": "The orchestration platform for modern AI development. Deploy AI agents alongside your Vercel, v0, Supabase, and BaseHub workflow.",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -29,6 +29,13 @@
     "agents",
     "mcp",
     "orchestration",
+    "vercel",
+    "v0",
+    "supabase",
+    "basehub",
+    "ecosystem-integration",
+    "modern-stack",
+    "platform",
     "model-context-protocol"
   ],
   "author": "Your Name",

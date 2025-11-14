@@ -1,7 +1,7 @@
 {
   "name": "@openconductor/cli",
   "version": "1.0.0",
-  "description": "Professional CLI for discovering and installing MCP servers - the npm for AI agent tools",
+  "description": "The orchestration CLI for modern AI development. Deploy agents alongside your Vercel, v0, Supabase, and BaseHub workflow. The npm for AI agents, evolved for the ecosystem era.",
   "bin": {
     "openconductor": "./bin/openconductor.js"
   },
@@ -62,6 +62,13 @@
     "agents",
     "cli",
     "orchestration",
+    "vercel",
+    "v0",
+    "supabase",
+    "basehub",
+    "ecosystem",
+    "modern-stack",
+    "platform",
     "model-context-protocol",
     "claude",
     "anthropic",

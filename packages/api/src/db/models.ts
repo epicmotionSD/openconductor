@@ -569,7 +569,7 @@ export class MCPServerRepository extends BaseRepository<MCPServer> {
       },
       configuration: {
         schema: row.config_schema,
-        example: row.config_example ? JSON.parse(row.config_example) : {}
+        example: row.config_example || {}
       },
       documentation: {
         readme: '', // Would be fetched from GitHub

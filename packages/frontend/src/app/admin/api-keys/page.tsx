@@ -135,39 +135,15 @@ export default function APIKeysPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Key className="h-8 w-8 text-blue-600" />
-            <span className="text-2xl font-bold">API Key Management</span>
-            <Badge variant="secondary" className="ml-2 bg-purple-100 text-purple-700">Enterprise</Badge>
-          </div>
-          <nav className="flex space-x-6">
-            <Link href="/admin" className="text-sm hover:text-blue-600">Admin Dashboard</Link>
-            <Link href="/discover" className="text-sm hover:text-blue-600">Discover</Link>
-          </nav>
+    <div>
+      {/* Page Header */}
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-3xl font-bold mb-2">API Keys</h1>
+          <p className="text-gray-600">
+            Manage API access for enterprise integrations and automation
+          </p>
         </div>
-      </header>
-
-      <div className="container mx-auto px-4 py-8">
-        {/* Back Button */}
-        <Button variant="ghost" asChild className="mb-6">
-          <Link href="/admin">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Admin Dashboard
-          </Link>
-        </Button>
-
-        {/* Page Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-4xl font-bold mb-2">API Keys</h1>
-            <p className="text-xl text-gray-600">
-              Manage API access for enterprise integrations and automation
-            </p>
-          </div>
           <Button onClick={() => setShowCreateForm(true)}>
             <Plus className="h-4 w-4 mr-2" />
             Create API Key
@@ -469,7 +445,6 @@ export default function APIKeysPage() {
             </div>
           </CardContent>
         </Card>
-      </div>
     </div>
   )
 }

@@ -38,9 +38,9 @@ export default function DiscoverPage() {
       if (params.verified) queryString.append('verified', 'true')
       if (params.limit) queryString.append('limit', params.limit.toString())
 
-      // Use new enterprise API endpoint
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002/v1'
-      const response = await fetch(`${apiUrl}/servers?${queryString.toString()}`)
+      // Fix API URL to avoid double /v1 and use direct IP
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3002'
+      const response = await fetch(`${apiUrl}/v1/servers?${queryString.toString()}`)
       const result = await response.json()
       
       if (result.success) {
@@ -76,10 +76,21 @@ export default function DiscoverPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">Discover MCP Servers</h1>
-          <p className="text-xl text-muted-foreground">
-            Find and install Model Context Protocol servers for your AI applications
+          <div className="flex items-center gap-3 mb-4">
+            <h1 className="text-4xl font-bold">Discover AI Agents for Your Stack</h1>
+            <Badge variant="outline" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-none text-sm px-3 py-1">
+              60+ Integrations
+            </Badge>
+          </div>
+          <p className="text-xl text-muted-foreground mb-4">
+            Deploy agents alongside your components. Find MCP servers designed for Vercel, v0, Supabase, and BaseHub developers.
           </p>
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <p className="text-sm text-blue-800">
+              🎯 <strong>Ecosystem Integration:</strong> Works with your modern AI stack out of the box.
+              Deploy with Vercel, build with v0, query Supabase, orchestrate with OpenConductor.
+            </p>
+          </div>
         </div>
 
         {/* Search and Filters */}

@@ -1,0 +1,59 @@
+{
+  "name": "OpenConductor Admin",
+  "short_name": "OC Admin",
+  "description": "OpenConductor Admin Panel - Manage MCP servers and marketing campaigns",
+  "start_url": "/admin",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "developer"],
+  "screenshots": [
+    {
+      "src": "/screenshot-admin.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Admin Dashboard"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Server Management",
+      "short_name": "Servers",
+      "description": "Manage MCP servers",
+      "url": "/admin/servers",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Marketing Campaigns",
+      "short_name": "Marketing",
+      "description": "Manage launch campaigns",
+      "url": "/admin/marketing",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

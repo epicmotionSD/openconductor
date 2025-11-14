@@ -63,31 +63,14 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Terminal className="h-8 w-8 text-blue-600" />
-            <span className="text-2xl font-bold">OpenConductor</span>
-            <Badge variant="secondary" className="ml-2 bg-red-100 text-red-700">Admin Dashboard</Badge>
-          </div>
-          <nav className="flex space-x-6">
-            <Link href="/discover" className="text-sm hover:text-blue-600">Discover</Link>
-            <Link href="/submit" className="text-sm hover:text-blue-600">Submit</Link>
-            <Link href="/admin" className="text-sm text-blue-600 font-medium">Admin</Link>
-          </nav>
-        </div>
-      </header>
-
-      <div className="container mx-auto px-4 py-8">
-        {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Platform Administration</h1>
-          <p className="text-xl text-gray-600">
-            Monitor and manage the OpenConductor enterprise platform
-          </p>
-        </div>
+    <div>
+      {/* Page Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-2">Platform Administration</h1>
+        <p className="text-gray-600">
+          Monitor and manage the OpenConductor platform
+        </p>
+      </div>
 
         {loading ? (
           <div className="flex items-center justify-center py-12">
@@ -278,14 +261,19 @@ export default function AdminDashboard() {
                       Manage Servers
                     </Link>
                   </Button>
+                  <Button asChild>
+                    <Link href="/admin/marketing">
+                      Marketing Campaigns
+                    </Link>
+                  </Button>
                   <Button variant="outline" asChild>
-                    <Link href="/admin/pending">
-                      Review Pending ({stats.servers.pending})
+                    <Link href="/admin/roadmap">
+                      Roadmap Dashboard
                     </Link>
                   </Button>
                   <Button variant="outline" asChild>
                     <Link href="/admin/analytics">
-                      View Analytics
+                      Analytics
                     </Link>
                   </Button>
                 </div>
@@ -472,7 +460,6 @@ export default function AdminDashboard() {
             </Card>
           </div>
         )}
-      </div>
     </div>
   )
 }
