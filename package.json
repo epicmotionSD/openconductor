@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "description": "The orchestration platform for modern AI development. Deploy AI agents alongside your Vercel, v0, Supabase, and BaseHub workflow.",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "dev": "concurrently \"cd packages/frontend && npm run dev\" \"cd packages/api && npm run dev\"",
     "start": "./launch-openconductor.sh",
