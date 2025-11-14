@@ -8,7 +8,21 @@ import dotenv from 'dotenv';
 // Load environment variables FIRST before any config
 dotenv.config();
 
-// Logger setup
+// Logger setup - Use only Console transport in production/serverless environments
+const loggerTransports: winston.transport[] = [new winston.transports.Console()];
+
+// Add file transports only in local development (not in serverless environments like Vercel)
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  try {
+    loggerTransports.push(
+      new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+      new winston.transports.File({ filename: 'logs/combined.log' })
+    );
+  } catch (error) {
+    // Silently fail if logs directory doesn't exist in serverless environment
+  }
+}
+
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || 'info',
   format: winston.format.combine(
@@ -16,11 +30,7 @@ const logger = winston.createLogger({
     winston.format.errors({ stack: true }),
     winston.format.json()
   ),
-  transports: [
-    new winston.transports.Console(),
-    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'logs/combined.log' })
-  ]
+  transports: loggerTransports
 });
 
 // Database configuration - Use Supabase if POSTGRES_URL is provided
