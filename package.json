@@ -8,6 +8,8 @@
   ],
   "scripts": {
     "dev": "concurrently \"cd packages/frontend && npm run dev\" \"cd packages/api && npm run dev\"",
+    "start": "./launch-openconductor.sh",
+    "launch": "./launch-openconductor.sh",
     "build": "npm run build:shared && npm run build:api && npm run build:frontend && npm run build:cli",
     "build:shared": "cd packages/shared && npm run build",
     "build:api": "cd packages/api && npm run build",

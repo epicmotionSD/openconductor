@@ -59,11 +59,10 @@ export default function ServerManagementPage() {
   const fetchServers = async () => {
     setLoading(true)
     try {
-      // Fix API URL and add admin authentication
-      const apiUrl = 'http://127.0.0.1:3002'
+      // Use direct admin API endpoint
       const adminKey = typeof window !== 'undefined' ? localStorage.getItem('admin-api-key') : ''
       
-      const response = await fetch(`${apiUrl}/v1/admin/servers?limit=100`, {
+      const response = await fetch(`/api/admin/servers?limit=100`, {
         headers: {
           'Authorization': `Bearer ${adminKey}`
         }
@@ -132,11 +131,10 @@ export default function ServerManagementPage() {
     e.preventDefault()
     
     try {
-      // Fix API URL - use direct IP to avoid localhost resolution issues
-      const apiUrl = 'http://127.0.0.1:3002'
+      // Use direct admin API endpoint
       const url = editingServer
-        ? `${apiUrl}/v1/admin/servers/${editingServer.id}`
-        : `${apiUrl}/v1/admin/servers`
+        ? `/api/admin/servers/${editingServer.id}`
+        : `/api/admin/servers`
       
       const method = editingServer ? 'PUT' : 'POST'
       
@@ -202,9 +200,8 @@ export default function ServerManagementPage() {
     if (!confirm('Are you sure you want to delete this server?')) return
     
     try {
-      // Fix API URL - use direct IP to avoid localhost resolution issues
-      const apiUrl = 'http://127.0.0.1:3002'
-      const response = await fetch(`${apiUrl}/v1/admin/servers/${serverId}`, {
+      // Use direct admin API endpoint
+      const response = await fetch(`/api/admin/servers/${serverId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${typeof window !== 'undefined' ? localStorage.getItem('admin-api-key') : ''}`

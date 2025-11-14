@@ -29,7 +29,7 @@ export default function DiscoverPage() {
         query: searchQuery || undefined,
         category: selectedCategory as any || undefined,
         verified: showVerifiedOnly || undefined,
-        limit: 20
+        limit: 100
       }
 
       const queryString = new URLSearchParams()
@@ -38,9 +38,9 @@ export default function DiscoverPage() {
       if (params.verified) queryString.append('verified', 'true')
       if (params.limit) queryString.append('limit', params.limit.toString())
 
-      // Fix API URL to avoid double /v1 and use direct IP
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3002'
-      const response = await fetch(`${apiUrl}/v1/servers?${queryString.toString()}`)
+      // Use the configured API URL which already includes /v1
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1'
+      const response = await fetch(`${apiUrl}/servers?${queryString.toString()}`)
       const result = await response.json()
       
       if (result.success) {

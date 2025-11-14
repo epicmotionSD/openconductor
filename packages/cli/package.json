@@ -43,7 +43,7 @@
     "listr2": "^8.0.0"
   },
   "devDependencies": {
-    "@openconductor/shared": "workspace:*",
+    "@openconductor/shared": "file:../shared",
     "vitest": "^1.0.4",
     "eslint": "^8.56.0"
   },

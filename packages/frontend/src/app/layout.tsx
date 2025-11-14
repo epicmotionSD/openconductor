@@ -1,3 +1,4 @@
+// import '../lib/tracing-web'  // Disabled due to XMLHttpRequest SSR errors
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'

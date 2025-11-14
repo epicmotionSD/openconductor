@@ -64,12 +64,12 @@ export async function adminAuth(req: AuthenticatedRequest, res: Response, next: 
       });
     }
 
-    // Check admin permissions
+    // Check admin permissions (simple boolean structure)
     const permissions = keyData.permissions;
-    if (!permissions.admin?.full_access) {
+    if (!permissions.admin) {
       return res.status(403).json({
         success: false,
-        error: 'Insufficient admin permissions'
+        error: 'Insufficient admin permissions - admin access required'
       });
     }
 

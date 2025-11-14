@@ -1,3 +1,5 @@
+// Initialize tracing as early as possible
+import './tracing';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -100,5 +102,28 @@ app.use('*', (req, res) => {
 
 // Error handling middleware
 app.use(errorHandler);
+
+// Start the server
+const server = app.listen(PORT, () => {
+  console.log(`🚀 OpenConductor API Server running on port ${PORT}`);
+  console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`📡 API Base: http://localhost:${PORT}/v1`);
+  console.log(`🔧 Admin: http://localhost:${PORT}/v1/admin`);
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully');
+  server.close(() => {
+    console.log('Process terminated');
+  });
+});
+
+process.on('SIGINT', () => {
+  console.log('SIGINT received, shutting down gracefully');
+  server.close(() => {
+    process.exit(0);
+  });
+});
 
 export default app;
