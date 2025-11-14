@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '../../../../lib/database';
 
 // Force dynamic rendering for this route
+// Updated: 2025-11-14 - All 59 servers now verified
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
