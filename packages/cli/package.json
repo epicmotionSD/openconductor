@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@openconductor/shared": "file:../shared",
+    "@types/inquirer": "^9.0.3",
     "vitest": "^1.0.4",
     "eslint": "^8.56.0"
   },

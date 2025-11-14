@@ -19,10 +19,13 @@ const sdk = new NodeSDK({
 
 try {
   const startResult = sdk.start();
-  if (startResult && typeof (startResult as any).then === 'function') {
-    (startResult as Promise<void>)
+  // Some SDK versions return void, others return a Promise. Cast to `any` first
+  // to avoid testing a value that could be typed as `void`.
+  const _maybePromise: any = startResult as any;
+  if (_maybePromise && typeof _maybePromise.then === 'function') {
+    _maybePromise
       .then(() => console.log('[tracing] OpenTelemetry initialized', { endpoint: otelEndpoint }))
-      .catch((err) => console.warn('[tracing] Failed to initialize OpenTelemetry', err?.message || err));
+      .catch((err: any) => console.warn('[tracing] Failed to initialize OpenTelemetry', err?.message || err));
   } else {
     // SDK start may be synchronous for some versions
     console.log('[tracing] OpenTelemetry initialized (sync)', { endpoint: otelEndpoint });
@@ -35,10 +38,11 @@ try {
 process.on('SIGTERM', () => {
   try {
     const shutdownResult = sdk.shutdown();
-    if (shutdownResult && typeof (shutdownResult as any).then === 'function') {
-      (shutdownResult as Promise<void>)
+    const _maybeShutdown: any = shutdownResult as any;
+    if (_maybeShutdown && typeof _maybeShutdown.then === 'function') {
+      _maybeShutdown
         .then(() => console.log('[tracing] OpenTelemetry shutdown complete'))
-        .catch((e) => console.warn('[tracing] Shutdown error', e));
+        .catch((e: any) => console.warn('[tracing] Shutdown error', e));
     } else {
       console.log('[tracing] OpenTelemetry shutdown (sync)');
     }

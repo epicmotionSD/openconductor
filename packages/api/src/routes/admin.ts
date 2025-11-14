@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import { mcpServerRepository, statsRepository } from '../db/models';
+import { query } from '../db/connection';
 import adminAuth from '../middleware/admin-auth';
 import winston from 'winston';
 
@@ -38,7 +39,7 @@ router.get('/servers', async (req, res) => {
       limit: 100,
       page: 1,
       includeUnverified: true // Admin can see all servers
-    });
+    } as any);
 
     res.json({
       success: true,
@@ -68,7 +69,7 @@ router.post('/servers', async (req, res) => {
     logger.info('Admin created new server', { 
       serverId: server.id, 
       name: server.name,
-      adminKey: req.adminKey?.name 
+      adminKey: (req as any).adminKey?.name 
     });
 
     res.json({
@@ -110,7 +111,7 @@ router.put('/servers/:id', async (req, res) => {
     logger.info('Admin updated server', { 
       serverId: id, 
       updates: Object.keys(validatedData),
-      adminKey: req.adminKey?.name 
+      adminKey: (req as any).adminKey?.name 
     });
 
     res.json({
@@ -150,7 +151,7 @@ router.delete('/servers/:id', async (req, res) => {
 
     logger.info('Admin deleted server', { 
       serverId: id, 
-      adminKey: req.adminKey?.name 
+      adminKey: (req as any).adminKey?.name 
     });
 
     res.json({
@@ -183,7 +184,7 @@ router.post('/servers/:id/verify', async (req, res) => {
     logger.info('Admin verified server', { 
       serverId: id, 
       serverName: server.name,
-      adminKey: req.adminKey?.name 
+      adminKey: (req as any).adminKey?.name 
     });
 
     res.json({
@@ -216,7 +217,7 @@ router.post('/servers/:id/feature', async (req, res) => {
     logger.info('Admin featured server', { 
       serverId: id, 
       serverName: server.name,
-      adminKey: req.adminKey?.name 
+      adminKey: (req as any).adminKey?.name 
     });
 
     res.json({
@@ -283,7 +284,7 @@ router.post('/servers/bulk-import', async (req, res) => {
     logger.info('Admin bulk imported servers', { 
       count: repositories.length,
       successful: results.filter(r => !r.error).length,
-      adminKey: req.adminKey?.name 
+      adminKey: (req as any).adminKey?.name 
     });
 
     res.json({
@@ -309,15 +310,15 @@ router.get('/stats', async (req, res) => {
       pendingServers,
       recentActivity
     ] = await Promise.all([
-      mcpServerRepository.query('SELECT COUNT(*) FROM mcp_servers'),
-      mcpServerRepository.query('SELECT COUNT(*) FROM mcp_servers WHERE verified = true'),
-      mcpServerRepository.query('SELECT COUNT(*) FROM mcp_servers WHERE verified = false'),
-      mcpServerRepository.query(`
-        SELECT name, created_at, verified 
-        FROM mcp_servers 
-        ORDER BY created_at DESC 
-        LIMIT 10
-      `)
+        query('SELECT COUNT(*) FROM mcp_servers'),
+        query('SELECT COUNT(*) FROM mcp_servers WHERE verified = true'),
+        query('SELECT COUNT(*) FROM mcp_servers WHERE verified = false'),
+        query(`
+          SELECT name, created_at, verified 
+          FROM mcp_servers 
+          ORDER BY created_at DESC 
+          LIMIT 10
+        `)
     ]);
 
     res.json({
