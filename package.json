@@ -7,7 +7,7 @@
     "dev": "concurrently \"cd packages/frontend && npm run dev\" \"cd packages/api && npm run dev\"",
     "start": "./launch-openconductor.sh",
     "launch": "./launch-openconductor.sh",
-    "build": "(cd packages/shared && rm -rf node_modules && npm install --legacy-peer-deps) && (cd packages/frontend && rm -rf node_modules && npm install --legacy-peer-deps) && npm run build:shared && npm run build:frontend",
+    "build": "npm run build:shared && npm run build:frontend",
     "build:shared": "cd packages/shared && npm run build",
     "build:api": "cd packages/api && npm run build",
     "build:frontend": "cd packages/frontend && npm run build",
