@@ -52,17 +52,16 @@ jobs:
         
     - name: Install dependencies
       run: |
-        npm install -g pnpm
-        pnpm install
-        
+        npm install --legacy-peer-deps
+
     - name: Lint code
       run: |
-        pnpm run lint --if-present
-        
+        npm run lint --if-present
+
     - name: Type check
       run: |
-        pnpm run type-check --if-present
-        
+        npm run type-check --if-present
+
     - name: Test API
       env:
         POSTGRES_URL: postgresql://postgres:postgres@localhost:5432/openconductor_test
@@ -70,11 +69,11 @@ jobs:
         NODE_ENV: test
       run: |
         cd packages/api
-        pnpm test --if-present
-        
+        npm test --if-present
+
     - name: Build packages
       run: |
-        pnpm run build --if-present
+        npm run build --if-present
         
   publish-cli:
     needs: test
@@ -94,13 +93,12 @@ jobs:
         
     - name: Install dependencies
       run: |
-        npm install -g pnpm
-        pnpm install
-        
+        npm install --legacy-peer-deps
+
     - name: Build CLI
       run: |
         cd packages/cli
-        pnpm run build --if-present
+        npm run build --if-present
         
     - name: Publish to npm
       env:
