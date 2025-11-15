@@ -60,28 +60,28 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="w-full max-w-md">
           <CardContent className="p-8 text-center">
-            <Terminal className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold mb-2">OpenConductor Admin</h1>
-            <p className="text-gray-600 mb-6">
+            <Terminal className="h-12 w-12 text-primary mx-auto mb-4" />
+            <h1 className="text-2xl font-bold mb-2 text-foreground">OpenConductor Admin</h1>
+            <p className="text-muted-foreground mb-6">
               Enter your admin API key to access the management interface
             </p>
-            
+
             <div className="space-y-4">
-              <Button onClick={handleSetApiKey} className="w-full bg-blue-600 hover:bg-blue-700">
+              <Button onClick={handleSetApiKey} className="w-full">
                 <Key className="mr-2 h-4 w-4" />
                 Enter Admin Key
               </Button>
-              
-              <div className="text-sm text-gray-500">
+
+              <div className="text-sm text-muted-foreground">
                 <p>Need your API key?</p>
-                <code className="bg-gray-100 px-2 py-1 rounded mt-1 block text-xs">
+                <code className="bg-muted px-2 py-1 rounded mt-1 block text-xs">
                   oc_admin_78736a4a7469d09858a283a024a4de4a9f07025cb350a2282127a1412876acf2
                 </code>
               </div>
-              
+
               <Button variant="outline" asChild className="w-full">
                 <Link href="/">
                   Back to Homepage
@@ -95,20 +95,20 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   }
 
   return (
-    <div className="h-screen bg-gray-50">
+    <div className="h-screen bg-background">
       {/* Top Navbar */}
-      <header className="bg-white border-b border-gray-200 h-16 flex items-center px-4">
+      <header className="bg-card border-b h-16 flex items-center px-4">
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center space-x-3">
-            <Terminal className="h-6 w-6 text-blue-600" />
-            <span className="font-bold text-lg">OpenConductor</span>
-            <Badge variant="secondary" className="bg-green-100 text-green-800">
+            <Terminal className="h-6 w-6 text-primary" />
+            <span className="font-bold text-lg text-foreground">OpenConductor</span>
+            <Badge variant="secondary" className="bg-success/10 text-success border-success/20">
               Admin
             </Badge>
           </div>
-          
+
           <div className="flex items-center space-x-4">
-            <div className="text-sm text-gray-600">
+            <div className="text-sm text-muted-foreground">
               API: :3002 • Frontend: :3001
             </div>
             <Button variant="outline" size="sm" asChild>
@@ -125,11 +125,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       {/* Main Layout with Sidebar */}
       <div className="flex h-[calc(100vh-4rem)]">
         {/* Admin Sidebar */}
-        <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
+        <div className="w-64 bg-card border-r flex flex-col">
           {/* Sidebar Header */}
-          <div className="p-4 border-b border-gray-200">
-            <h2 className="font-semibold text-gray-900">Admin Navigation</h2>
-            <p className="text-sm text-gray-500">Manage platform and content</p>
+          <div className="p-4 border-b">
+            <h2 className="font-semibold text-foreground">Admin Navigation</h2>
+            <p className="text-sm text-muted-foreground">Manage platform and content</p>
           </div>
 
           {/* Sidebar Navigation */}
@@ -142,9 +142,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   href={item.href}
                   className={`
                     flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors
-                    ${isActive 
-                      ? 'bg-blue-100 text-blue-700' 
-                      : 'text-gray-700 hover:bg-gray-100'
+                    ${isActive
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-foreground hover:bg-muted'
                     }
                   `}
                 >
@@ -156,8 +156,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           </nav>
 
           {/* Sidebar Footer */}
-          <div className="p-4 border-t border-gray-200">
-            <div className="text-xs text-gray-500">
+          <div className="p-4 border-t">
+            <div className="text-xs text-muted-foreground">
               <div>Admin Key: {adminKey}</div>
               <div>OpenConductor v1.0.0</div>
             </div>

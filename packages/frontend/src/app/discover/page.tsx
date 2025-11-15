@@ -7,6 +7,9 @@ import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Search, Star, Download, ExternalLink, Filter } from 'lucide-react'
+import { AlertBox } from '@/components/ui/alert-box'
+import { CategoryBadge, MCPCategory } from '@/components/ui/category-badge'
+import { SiteHeader } from '@/components/navigation/site-header'
 import type { MCPServer, MCPServerSearchParams, MCPServerSearchResult } from '../../types'
 
 export default function DiscoverPage() {
@@ -60,18 +63,7 @@ export default function DiscoverPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold">OpenConductor</span>
-          </Link>
-          <nav className="flex space-x-6">
-            <Link href="/docs" className="text-sm hover:text-primary">Docs</Link>
-            <Link href="/install" className="text-sm hover:text-primary">Install CLI</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader variant="minimal" />
 
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
@@ -85,12 +77,10 @@ export default function DiscoverPage() {
           <p className="text-xl text-muted-foreground mb-4">
             Deploy agents alongside your components. Find MCP servers designed for Vercel, v0, Supabase, and BaseHub developers.
           </p>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <p className="text-sm text-blue-800">
-              🎯 <strong>Ecosystem Integration:</strong> Works with your modern AI stack out of the box.
-              Deploy with Vercel, build with v0, query Supabase, orchestrate with OpenConductor.
-            </p>
-          </div>
+          <AlertBox variant="info" icon={<span className="text-lg">🎯</span>} title="Ecosystem Integration">
+            Works with your modern AI stack out of the box.
+            Deploy with Vercel, build with v0, query Supabase, orchestrate with OpenConductor.
+          </AlertBox>
         </div>
 
         {/* Search and Filters */}
@@ -181,18 +171,6 @@ export default function DiscoverPage() {
 }
 
 function ServerCard({ server }: { server: MCPServer }) {
-  const categoryColors: Record<string, string> = {
-    memory: 'bg-blue-100 text-blue-800',
-    filesystem: 'bg-green-100 text-green-800',
-    database: 'bg-yellow-100 text-yellow-800',
-    api: 'bg-purple-100 text-purple-800',
-    search: 'bg-orange-100 text-orange-800',
-    communication: 'bg-pink-100 text-pink-800',
-    monitoring: 'bg-cyan-100 text-cyan-800',
-    development: 'bg-indigo-100 text-indigo-800',
-    custom: 'bg-gray-100 text-gray-800'
-  }
-
   return (
     <Card className="h-full">
       <CardHeader>
@@ -219,12 +197,7 @@ function ServerCard({ server }: { server: MCPServer }) {
         
         <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <Badge 
-              variant="outline" 
-              className={categoryColors[server.category]}
-            >
-              {server.category}
-            </Badge>
+            <CategoryBadge category={server.category as MCPCategory} />
           </div>
 
           <div className="flex items-center gap-4 text-sm text-muted-foreground">

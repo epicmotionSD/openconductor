@@ -106,16 +106,16 @@ export default function AdminDashboard() {
     <div>
       {/* Page Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Platform Administration</h1>
-        <p className="text-gray-600">
+        <h1 className="text-3xl font-bold mb-2 text-foreground">Platform Administration</h1>
+        <p className="text-muted-foreground">
           Monitor and manage the OpenConductor platform
         </p>
       </div>
 
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-            <span className="ml-3 text-gray-600">Loading admin dashboard...</span>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <span className="ml-3 text-muted-foreground">Loading admin dashboard...</span>
           </div>
         ) : (
           <div className="space-y-8">
@@ -126,12 +126,12 @@ export default function AdminDashboard() {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-gray-600">Total Servers</p>
-                      <p className="text-3xl font-bold text-blue-600">{stats.servers.total}</p>
+                      <p className="text-sm font-medium text-muted-foreground">Total Servers</p>
+                      <p className="text-3xl font-bold text-primary">{stats.servers.total}</p>
                     </div>
-                    <Server className="h-8 w-8 text-blue-600" />
+                    <Server className="h-8 w-8 text-primary" />
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">
+                  <p className="text-xs text-muted-foreground mt-2">
                     +12 this week
                   </p>
                 </CardContent>
@@ -141,12 +141,12 @@ export default function AdminDashboard() {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-gray-600">API Requests</p>
-                      <p className="text-3xl font-bold text-green-600">{stats.api.requestsToday.toLocaleString()}</p>
+                      <p className="text-sm font-medium text-muted-foreground">API Requests</p>
+                      <p className="text-3xl font-bold text-success">{stats.api.requestsToday.toLocaleString()}</p>
                     </div>
-                    <Activity className="h-8 w-8 text-green-600" />
+                    <Activity className="h-8 w-8 text-success" />
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">
+                  <p className="text-xs text-muted-foreground mt-2">
                     Today, {stats.api.avgResponseTime}ms avg
                   </p>
                 </CardContent>
@@ -156,12 +156,12 @@ export default function AdminDashboard() {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-gray-600">GitHub Sync</p>
-                      <p className="text-3xl font-bold text-purple-600">{stats.github.repos}</p>
+                      <p className="text-sm font-medium text-muted-foreground">GitHub Sync</p>
+                      <p className="text-3xl font-bold text-info">{stats.github.repos}</p>
                     </div>
-                    <GitBranch className="h-8 w-8 text-purple-600" />
+                    <GitBranch className="h-8 w-8 text-info" />
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">
+                  <p className="text-xs text-muted-foreground mt-2">
                     Last sync: {stats.github.lastSync}
                   </p>
                 </CardContent>
@@ -171,12 +171,12 @@ export default function AdminDashboard() {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-gray-600">Error Rate</p>
-                      <p className="text-3xl font-bold text-orange-600">{stats.api.errorRate}%</p>
+                      <p className="text-sm font-medium text-muted-foreground">Error Rate</p>
+                      <p className="text-3xl font-bold text-warning">{stats.api.errorRate}%</p>
                     </div>
-                    <Shield className="h-8 w-8 text-orange-600" />
+                    <Shield className="h-8 w-8 text-warning" />
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">
+                  <p className="text-xs text-muted-foreground mt-2">
                     Target: &lt;1%
                   </p>
                 </CardContent>
@@ -194,32 +194,32 @@ export default function AdminDashboard() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span>Database (Supabase)</span>
-                    <Badge variant="secondary" className="bg-green-100 text-green-700">
+                    <span className="text-foreground">Database (Supabase)</span>
+                    <Badge variant="secondary" className="bg-success/10 text-success border-success/20">
                       <CheckCircle className="h-3 w-3 mr-1" />
                       Healthy
                     </Badge>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
-                    <span>Redis Cache</span>
-                    <Badge variant="secondary" className="bg-green-100 text-green-700">
+                    <span className="text-foreground">Redis Cache</span>
+                    <Badge variant="secondary" className="bg-success/10 text-success border-success/20">
                       <CheckCircle className="h-3 w-3 mr-1" />
                       Healthy
                     </Badge>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
-                    <span>GitHub Integration</span>
-                    <Badge variant="secondary" className="bg-green-100 text-green-700">
+                    <span className="text-foreground">GitHub Integration</span>
+                    <Badge variant="secondary" className="bg-success/10 text-success border-success/20">
                       <CheckCircle className="h-3 w-3 mr-1" />
                       Active
                     </Badge>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
-                    <span>Background Workers</span>
-                    <Badge variant="secondary" className="bg-green-100 text-green-700">
+                    <span className="text-foreground">Background Workers</span>
+                    <Badge variant="secondary" className="bg-success/10 text-success border-success/20">
                       <CheckCircle className="h-3 w-3 mr-1" />
                       Running
                     </Badge>
@@ -236,27 +236,27 @@ export default function AdminDashboard() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span>Pending Jobs</span>
+                    <span className="text-foreground">Pending Jobs</span>
                     <Badge variant="outline">{stats.jobs.pending}</Badge>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
-                    <span>Currently Processing</span>
-                    <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                    <span className="text-foreground">Currently Processing</span>
+                    <Badge variant="secondary" className="bg-info/10 text-info border-info/20">
                       {stats.jobs.processing}
                     </Badge>
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <span>Completed Today</span>
-                    <Badge variant="secondary" className="bg-green-100 text-green-700">
+                    <span className="text-foreground">Completed Today</span>
+                    <Badge variant="secondary" className="bg-success/10 text-success border-success/20">
                       {stats.jobs.completed}
                     </Badge>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
-                    <span>Failed (24h)</span>
-                    <Badge variant="secondary" className="bg-red-100 text-red-700">
+                    <span className="text-foreground">Failed (24h)</span>
+                    <Badge variant="secondary" className="bg-destructive/10 text-destructive border-destructive/20">
                       {stats.jobs.failed}
                     </Badge>
                   </div>
@@ -274,24 +274,24 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                  <div className="text-center p-4 bg-blue-50 rounded-lg">
-                    <div className="text-2xl font-bold text-blue-600">{stats.servers.total}</div>
-                    <div className="text-sm text-gray-600">Total Servers</div>
+                  <div className="text-center p-4 bg-primary/10 rounded-lg border border-primary/20">
+                    <div className="text-2xl font-bold text-primary">{stats.servers.total}</div>
+                    <div className="text-sm text-muted-foreground">Total Servers</div>
                   </div>
-                  
-                  <div className="text-center p-4 bg-green-50 rounded-lg">
-                    <div className="text-2xl font-bold text-green-600">{stats.servers.verified}</div>
-                    <div className="text-sm text-gray-600">Verified</div>
+
+                  <div className="text-center p-4 bg-success/10 rounded-lg border border-success/20">
+                    <div className="text-2xl font-bold text-success">{stats.servers.verified}</div>
+                    <div className="text-sm text-muted-foreground">Verified</div>
                   </div>
-                  
-                  <div className="text-center p-4 bg-yellow-50 rounded-lg">
-                    <div className="text-2xl font-bold text-yellow-600">{stats.servers.pending}</div>
-                    <div className="text-sm text-gray-600">Pending Review</div>
+
+                  <div className="text-center p-4 bg-warning/10 rounded-lg border border-warning/20">
+                    <div className="text-2xl font-bold text-warning">{stats.servers.pending}</div>
+                    <div className="text-sm text-muted-foreground">Pending Review</div>
                   </div>
-                  
-                  <div className="text-center p-4 bg-purple-50 rounded-lg">
-                    <div className="text-2xl font-bold text-purple-600">{stats.servers.trending}</div>
-                    <div className="text-sm text-gray-600">Trending</div>
+
+                  <div className="text-center p-4 bg-info/10 rounded-lg border border-info/20">
+                    <div className="text-2xl font-bold text-info">{stats.servers.trending}</div>
+                    <div className="text-sm text-muted-foreground">Trending</div>
                   </div>
                 </div>
 
