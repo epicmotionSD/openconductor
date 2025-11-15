@@ -10,6 +10,7 @@ const collectorUrl = process.env.NEXT_PUBLIC_OTEL_COLLECTOR_URL || 'http://local
 
 const exporter = new OTLPTraceExporter({ url: collectorUrl });
 const provider = new WebTracerProvider();
+// @ts-ignore - Version mismatch between OpenTelemetry packages
 provider.addSpanProcessor(new BatchSpanProcessor(exporter));
 provider.register();
 
