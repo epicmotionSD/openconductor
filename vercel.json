@@ -1,6 +1,6 @@
 {
-  "buildCommand": "cd packages/shared && npm install --legacy-peer-deps && npm run build && cd ../frontend && npm install --legacy-peer-deps && npm run build",
-  "devCommand": "cd packages/frontend && npm run dev",
-  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install --legacy-peer-deps && cd packages/shared && npm install --legacy-peer-deps && cd ../frontend && npm install --legacy-peer-deps && cd ../..",
   "outputDirectory": "packages/frontend/.next"
 }
