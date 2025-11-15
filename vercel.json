@@ -1,14 +1,6 @@
 {
-  "version": 2,
-  "buildCommand": "cd packages/frontend && npm install --legacy-peer-deps && npm run build",
-  "outputDirectory": "packages/frontend/.next",
+  "buildCommand": "cd packages/shared && npm install --legacy-peer-deps && npm run build && cd ../frontend && npm install --legacy-peer-deps && npm run build",
+  "devCommand": "cd packages/frontend && npm run dev",
   "installCommand": "npm install --legacy-peer-deps",
-  "framework": null,
-  "devCommand": "npm run dev",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./",
-  "build": {
-    "env": {
-      "ENABLE_EXPERIMENTAL_COREPACK": "0"
-    }
-  }
+  "outputDirectory": "packages/frontend/.next"
 }
