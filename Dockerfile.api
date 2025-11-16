@@ -28,10 +28,11 @@ RUN npm run build
 
 # List dist contents for debugging
 RUN ls -la dist/ || echo "dist directory not found"
+RUN echo "Checking shared dist:" && ls -la ../shared/dist/ || echo "shared dist not found"
 
 # Expose port
 EXPOSE 3001
 
 # Start server
 WORKDIR /app/packages/api
-CMD ["node", "dist/server.js"]
+CMD ["node", "--trace-warnings", "dist/server.js"]

@@ -13,11 +13,7 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "declaration": false,
-    "sourceMap": false,
-    "baseUrl": ".",
-    "paths": {
-      "@openconductor/shared": ["../shared/dist"]
-    }
+    "sourceMap": false
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "src/db/create-admin-key.ts", "src/db/seed-127-servers.ts"]
