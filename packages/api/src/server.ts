@@ -17,6 +17,8 @@ import { config } from './config/production';
 import { githubSyncWorker } from './workers/GitHubSyncWorker';
 import { jobProcessor, jobScheduler } from './workers/JobProcessor';
 
+console.log('[DEBUG] Server starting - all imports loaded');
+
 // Load environment variables
 dotenv.config();
 

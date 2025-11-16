@@ -8,10 +8,10 @@ COPY packages/api/package*.json ./packages/api/
 
 # Install dependencies
 WORKDIR /app/packages/shared
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 WORKDIR /app/packages/api
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy source code
 WORKDIR /app
