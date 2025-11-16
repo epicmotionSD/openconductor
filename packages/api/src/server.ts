@@ -1,5 +1,6 @@
 // Initialize tracing as early as possible
-import './tracing';
+// TEMPORARILY DISABLED FOR DEBUGGING
+// import './tracing';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
