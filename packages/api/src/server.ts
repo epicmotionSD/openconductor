@@ -8,6 +8,7 @@ import { initializeDatabase } from './db/connection';
 import { serversRouter } from './routes/servers';
 import adminRouter from './routes/admin';
 import feedbackRouter from './routes/feedback';
+import ecosystemAnalyticsRouter from './routes/ecosystem-analytics';
 import { errorHandler, requestLogger, performanceMonitor, securityLogger } from './middleware/errorHandler';
 import { healthCheckHandler, livenessHandler, readinessHandler, metricsHandler } from './monitoring/healthChecks';
 import { anonymousLimiter, trackApiUsage } from './middleware/rateLimiter';
@@ -81,6 +82,7 @@ if (process.env.OPENCONDUCTOR_PHASE === 'phase2') {
 app.use('/v1/servers', serversRouter);
 app.use('/v1/admin', adminRouter);
 app.use('/v1/feedback', feedbackRouter);
+app.use('/v1/analytics', ecosystemAnalyticsRouter);
 
 // Legacy API routes for backward compatibility
 app.use('/api/servers', serversRouter);
