@@ -74,7 +74,20 @@ jobs:
 
     - name: Build packages
       run: |
-        npm run build --if-present
+        # Build shared package first
+        cd packages/shared
+        npm install --legacy-peer-deps
+        npm run build
+
+        # Build API package
+        cd ../api
+        npm install --legacy-peer-deps
+        npm run build
+
+        # Build CLI package
+        cd ../cli
+        npm install --legacy-peer-deps
+        npm run build
         
   publish-cli:
     needs: test
