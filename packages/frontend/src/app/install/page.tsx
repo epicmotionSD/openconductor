@@ -2,29 +2,18 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { SiteHeader } from '@/components/navigation/site-header'
 import { Terminal, Download, CheckCircle, ArrowRight, ExternalLink } from 'lucide-react'
 
 export default function InstallPage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <Terminal className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold">OpenConductor</span>
-          </Link>
-          <nav className="flex space-x-6">
-            <Link href="/discover" className="text-sm hover:text-primary">Discover</Link>
-            <Link href="/docs" className="text-sm hover:text-primary">Docs</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader variant="minimal" />
 
       <div className="container mx-auto px-4 py-12">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-6">Install OpenConductor CLI</h1>
+          <h1 className="text-4xl font-bold mb-6 text-foreground">Install OpenConductor CLI</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Get started with the OpenConductor CLI to discover, install, and manage MCP servers in seconds.
           </p>
@@ -182,7 +171,7 @@ export default function InstallPage() {
                     <p className="text-sm text-muted-foreground mb-2">
                       Restart Claude Desktop and enjoy!
                     </p>
-                    <div className="flex items-center gap-1 text-green-600 text-sm">
+                    <div className="flex items-center gap-1 text-success text-sm">
                       <CheckCircle className="h-4 w-4" />
                       Ready to use
                     </div>
