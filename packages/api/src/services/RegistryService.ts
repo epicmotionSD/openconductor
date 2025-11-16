@@ -240,6 +240,7 @@ export class RegistryService {
       const serverData = {
         slug,
         name: request.name || repoInfo.name,
+        tagline: `${request.name || repoInfo.name} - MCP Server`, // Add default tagline
         description: '', // Will be populated from README during GitHub sync
         repository_url: request.repositoryUrl,
         repository_owner: repoInfo.owner,
@@ -247,12 +248,17 @@ export class RegistryService {
         npm_package: request.npmPackage,
         category: request.category || 'custom',
         tags: request.tags || [],
+        install_command: null, // Will be populated during GitHub sync
         verified: false,
         featured: false,
         config_example: {}
       };
 
       const server = await mcpServerRepository.create(serverData);
+
+      if (!server) {
+        throw new Error('Failed to create server - database operation failed');
+      }
 
       // TODO: Trigger GitHub sync job for this server
       

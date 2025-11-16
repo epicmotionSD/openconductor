@@ -51,7 +51,7 @@ export const captureRawBody = (req: any, res: any, next: any) => {
 /**
  * POST /webhooks/github
  * Receive and process GitHub webhook events
- * Phase 2 Feature - Hidden in Phase 1 launch
+ * Phase 2 Enterprise Feature - NOW ENABLED FOR LAUNCH!
  */
 webhooksRouter.post('/github', requireFeature('githubWebhooks'), captureRawBody, asyncHandler(async (req, res) => {
   const eventType = req.get('X-GitHub-Event');
@@ -64,7 +64,7 @@ webhooksRouter.post('/github', requireFeature('githubWebhooks'), captureRawBody,
 
   // Verify webhook signature in production
   if (process.env.NODE_ENV === 'production') {
-    const isValid = githubService.verifyWebhookSignature(req.rawBody, signature);
+    const isValid = githubService.verifyWebhookSignature((req as any).rawBody, signature);
     if (!isValid) {
       logger.warn('Invalid webhook signature', { delivery, eventType });
       throw createError('Invalid webhook signature', 401);
@@ -73,12 +73,12 @@ webhooksRouter.post('/github', requireFeature('githubWebhooks'), captureRawBody,
 
   try {
     // Process the webhook event
-    await githubService.processWebhook(eventType, req.body);
+    await githubService.processWebhook(eventType, (req as any).body);
     
     logger.info('GitHub webhook processed successfully', {
       eventType,
       delivery,
-      repository: req.body.repository?.full_name
+      repository: (req as any).body.repository?.full_name
     });
 
     res.json(createAPIResponse({
@@ -106,7 +106,7 @@ webhooksRouter.post('/github', requireFeature('githubWebhooks'), captureRawBody,
 /**
  * GET /webhooks/github/status
  * Get webhook processing status and statistics
- * Phase 2 Feature - Hidden in Phase 1 launch
+ * Phase 2 Enterprise Feature - NOW ENABLED FOR LAUNCH!
  */
 webhooksRouter.get('/github/status', requireFeature('webhookStatus'), asyncHandler(async (req, res) => {
   const stats = await githubSyncWorker.getSyncStats();

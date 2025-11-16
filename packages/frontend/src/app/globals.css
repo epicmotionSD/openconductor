@@ -24,6 +24,34 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
     --radius: 0.5rem;
+
+    /* Semantic status colors */
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 210 40% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 222.2 84% 4.9%;
+    --info: 221.2 83.2% 53.3%;
+    --info-foreground: 210 40% 98%;
+
+    /* Category colors for MCP servers */
+    --category-memory: 221.2 83.2% 53.3%;
+    --category-memory-foreground: 210 40% 98%;
+    --category-filesystem: 142.1 76.2% 36.3%;
+    --category-filesystem-foreground: 210 40% 98%;
+    --category-database: 38 92% 50%;
+    --category-database-foreground: 222.2 84% 4.9%;
+    --category-api: 262.1 83.3% 57.8%;
+    --category-api-foreground: 210 40% 98%;
+    --category-search: 24.6 95% 53.1%;
+    --category-search-foreground: 210 40% 98%;
+    --category-communication: 340.6 82.2% 52.5%;
+    --category-communication-foreground: 210 40% 98%;
+    --category-monitoring: 188.1 83.2% 53.3%;
+    --category-monitoring-foreground: 210 40% 98%;
+    --category-development: 234 89% 63%;
+    --category-development-foreground: 210 40% 98%;
+    --category-custom: 215 16.3% 46.9%;
+    --category-custom-foreground: 210 40% 98%;
   }
 
   .dark {
@@ -46,6 +74,16 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 94.1%;
+
+    /* Semantic status colors - dark mode */
+    --success: 142.1 70.6% 45.3%;
+    --success-foreground: 210 40% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 222.2 84% 4.9%;
+    --info: 217.2 91.2% 59.8%;
+    --info-foreground: 210 40% 98%;
+
+    /* Category colors remain the same in dark mode for consistency */
   }
 }
 

@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import { ZodError } from 'zod';
-import { ErrorCodes, APIResponse } from '@openconductor/shared';
+import { ErrorCodes, APIResponse, ErrorCode } from '@openconductor/shared';
 import winston from 'winston';
 import path from 'path';
+import { db } from '../db/connection';
 
 // Configure comprehensive logging
 const logDir = path.join(process.cwd(), 'logs');
@@ -65,14 +66,14 @@ const logger = winston.createLogger({
  */
 export class AppError extends Error {
   public statusCode: number;
-  public errorCode: string;
+  public errorCode: ErrorCode;
   public isOperational: boolean;
   public context?: any;
 
   constructor(
     message: string,
     statusCode: number = 500,
-    errorCode: string = ErrorCodes.INTERNAL_ERROR,
+    errorCode: ErrorCode = ErrorCodes.INTERNAL_ERROR,
     isOperational: boolean = true,
     context?: any
   ) {
@@ -93,7 +94,7 @@ export class AppError extends Error {
 export function createError(
   message: string,
   statusCode: number = 500,
-  errorCode: string = ErrorCodes.INTERNAL_ERROR,
+  errorCode: ErrorCode = ErrorCodes.INTERNAL_ERROR,
   context?: any
 ): AppError {
   return new AppError(message, statusCode, errorCode, true, context);
@@ -109,7 +110,7 @@ export function errorHandler(
   next: NextFunction
 ): void {
   let statusCode = 500;
-  let errorCode = ErrorCodes.INTERNAL_ERROR;
+  let errorCode: ErrorCode = ErrorCodes.INTERNAL_ERROR;
   let message = 'Internal server error';
   let details: any = undefined;
 
@@ -417,13 +418,14 @@ export function setupGracefulShutdown(): void {
     logger.info(`Received ${signal}, shutting down gracefully`);
 
     // Close database connections
-    db.gracefulShutdown?.().then(() => {
-      logger.info('Database connections closed');
-      process.exit(0);
-    }).catch((error) => {
-      logger.error('Error during shutdown', error);
-      process.exit(1);
-    });
+      // Use any-cast to call internal graceful shutdown helper if present.
+      (db as any).gracefulShutdown?.().then(() => {
+        logger.info('Database connections closed');
+        process.exit(0);
+      }).catch((error) => {
+        logger.error('Error during shutdown', error);
+        process.exit(1);
+      });
 
     // Force exit after 10 seconds
     setTimeout(() => {

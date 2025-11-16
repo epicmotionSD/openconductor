@@ -6,8 +6,10 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { CategoryBadge, type MCPCategory } from '@/components/ui/category-badge'
+import { SiteHeader } from '@/components/navigation/site-header'
 import { ArrowLeft, Star, Download, ExternalLink, Copy, CheckCircle, Terminal, Book } from 'lucide-react'
-import type { MCPServer } from '../../types'
+import type { MCPServer } from '../../../types'
 
 export default function ServerDetailPage() {
   const params = useParams()
@@ -68,29 +70,9 @@ export default function ServerDetailPage() {
     )
   }
 
-  const categoryColors = {
-    memory: 'bg-blue-100 text-blue-800',
-    filesystem: 'bg-green-100 text-green-800',
-    database: 'bg-yellow-100 text-yellow-800',
-    api: 'bg-purple-100 text-purple-800',
-    custom: 'bg-gray-100 text-gray-800'
-  }
-
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold">OpenConductor</span>
-          </Link>
-          <nav className="flex space-x-6">
-            <Link href="/discover" className="text-sm hover:text-primary">Discover</Link>
-            <Link href="/docs" className="text-sm hover:text-primary">Docs</Link>
-            <Link href="/install" className="text-sm hover:text-primary">Install CLI</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader variant="minimal" />
 
       <div className="container mx-auto px-4 py-8">
         {/* Back Button */}
@@ -119,16 +101,14 @@ export default function ServerDetailPage() {
               </div>
 
               <div className="flex items-center gap-4 mb-6">
-                <Badge className={categoryColors[server.category]}>
-                  {server.category}
-                </Badge>
+                <CategoryBadge category={server.category as MCPCategory} />
                 <div className="flex items-center gap-1 text-sm text-muted-foreground">
                   <Star className="h-4 w-4" />
-                  {server.stats.githubStars} stars
+                  {server.repository.stars} stars
                 </div>
                 <div className="flex items-center gap-1 text-sm text-muted-foreground">
                   <Download className="h-4 w-4" />
-                  {server.stats.npmDownloads} downloads
+                  {server.packages.npm?.downloadsTotal || 0} downloads
                 </div>
               </div>
 
@@ -231,7 +211,7 @@ export default function ServerDetailPage() {
                   <pre className="text-sm overflow-x-auto">
                     <code>{JSON.stringify({
                       mcpServers: {
-                        [server.name.toLowerCase()]: server.configExample
+                        [server.name.toLowerCase()]: server.configuration.example
                       }
                     }, null, 2)}</code>
                   </pre>
@@ -241,7 +221,7 @@ export default function ServerDetailPage() {
                     className="absolute right-2 top-2 h-8 w-8 p-0"
                     onClick={() => copyToClipboard(JSON.stringify({
                       mcpServers: {
-                        [server.name.toLowerCase()]: server.configExample
+                        [server.name.toLowerCase()]: server.configuration.example
                       }
                     }, null, 2), 'config')}
                   >
@@ -265,17 +245,17 @@ export default function ServerDetailPage() {
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button className="w-full" asChild>
-                  <a href={server.repository} target="_blank" rel="noopener noreferrer">
+                  <a href={server.repository.url} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     View Repository
                   </a>
                 </Button>
-                
-                {server.npmPackage && (
+
+                {server.packages.npm && (
                   <Button variant="outline" className="w-full" asChild>
-                    <a 
-                      href={`https://www.npmjs.com/package/${server.npmPackage}`} 
-                      target="_blank" 
+                    <a
+                      href={`https://www.npmjs.com/package/${server.packages.npm.name}`}
+                      target="_blank"
                       rel="noopener noreferrer"
                     >
                       NPM Package
@@ -293,16 +273,16 @@ export default function ServerDetailPage() {
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-sm text-muted-foreground">GitHub Stars</span>
-                  <span className="font-medium">{server.stats.githubStars}</span>
+                  <span className="font-medium">{server.repository.stars}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-muted-foreground">NPM Downloads</span>
-                  <span className="font-medium">{server.stats.npmDownloads}</span>
+                  <span className="font-medium">{server.packages.npm?.downloadsTotal || 0}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-muted-foreground">Last Updated</span>
                   <span className="font-medium">
-                    {new Date(server.stats.lastUpdated).toLocaleDateString()}
+                    {new Date(server.repository.lastCommit).toLocaleDateString()}
                   </span>
                 </div>
                 <div className="flex justify-between">

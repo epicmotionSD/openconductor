@@ -1,0 +1,72 @@
+{
+  "name": "OpenConductor - MCP Server Registry",
+  "short_name": "OpenConductor",
+  "description": "Discover, install, and manage Model Context Protocol (MCP) servers for AI development",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["developer tools", "productivity", "utilities"],
+  "screenshots": [
+    {
+      "src": "/screenshot-discover.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Discover MCP Servers"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Discover Servers",
+      "short_name": "Discover",
+      "description": "Browse MCP server registry",
+      "url": "/discover",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "CLI Install Guide",
+      "short_name": "Install",
+      "description": "Install OpenConductor CLI",
+      "url": "/install",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Documentation",
+      "short_name": "Docs",
+      "description": "Read the documentation",
+      "url": "/docs",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

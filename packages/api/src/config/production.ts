@@ -46,7 +46,7 @@ export const PRODUCTION_CONFIG: ProductionConfig = {
     corsOrigins: [
       'https://openconductor.ai',
       'https://www.openconductor.ai',
-      ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000'] : [])
+      ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000', 'http://localhost:3001'] : [])
     ],
     rateLimitEnabled: true,
     analyticsEnabled: true
@@ -83,7 +83,7 @@ export function getConfig(): ProductionConfig {
   if (process.env.NODE_ENV === 'development') {
     baseConfig.database.ssl = false;
     // Parse CORS_ORIGIN environment variable (comma-separated list)
-    const corsOrigins = process.env.CORS_ORIGIN?.split(',').map(o => o.trim()) || ['http://localhost:3000'];
+    const corsOrigins = process.env.CORS_ORIGIN?.split(',').map(o => o.trim()) || ['http://localhost:3000', 'http://localhost:3001'];
     baseConfig.api.corsOrigins = [
       ...baseConfig.api.corsOrigins,
       ...corsOrigins

@@ -559,85 +559,93 @@ export async function seed127Servers(db: DatabaseManager): Promise<void> {
 
   try {
     let seededCount = 0;
+    const batchSize = 10; // Process 10 servers at a time
 
-    await db.transaction(async (client) => {
-      for (const server of allServers) {
-        try {
-          // Generate stats
-          const stats = generateStats(server.featured, server.verified);
+    // Process servers in smaller batches
+    for (let i = 0; i < allServers.length; i += batchSize) {
+      const batch = allServers.slice(i, i + batchSize);
+      
+      await db.transaction(async (client) => {
+        for (const server of batch) {
+          try {
+            // Generate stats
+            const stats = generateStats(server.featured, server.verified);
 
-          // Insert server
-          const serverResult = await client.query(`
-            INSERT INTO mcp_servers (
-              slug, name, tagline, description, repository_url, repository_owner,
-              repository_name, npm_package, category, tags, verified, featured
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
-            ON CONFLICT (slug) DO NOTHING
-            RETURNING id
-          `, [
-            server.slug,
-            server.name,
-            server.tagline,
-            server.description,
-            server.repository_url,
-            server.repository_owner,
-            server.repository_name,
-            server.npm_package,
-            server.category,
-            server.tags,
-            server.verified,
-            server.featured
-          ]);
+            // Insert server
+            const serverResult = await client.query(`
+              INSERT INTO mcp_servers (
+                slug, name, tagline, description, repository_url, repository_owner,
+                repository_name, npm_package, category, tags, verified, featured
+              ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+              ON CONFLICT (slug) DO NOTHING
+              RETURNING id
+            `, [
+              server.slug,
+              server.name,
+              server.tagline,
+              server.description,
+              server.repository_url,
+              server.repository_owner,
+              server.repository_name,
+              server.npm_package,
+              server.category,
+              server.tags,
+              server.verified,
+              server.featured
+            ]);
 
-          if (serverResult.rows.length === 0) {
-            logger.debug(`Server ${server.slug} already exists, skipping`);
-            continue;
+            if (serverResult.rows.length === 0) {
+              logger.debug(`Server ${server.slug} already exists, skipping`);
+              continue;
+            }
+
+            const serverId = serverResult.rows[0].id;
+
+            // Insert server stats
+            await client.query(`
+              INSERT INTO server_stats (
+                server_id, github_stars, github_forks, github_watchers,
+                npm_downloads_weekly, npm_downloads_total,
+                cli_installs, popularity_score, trending_score
+              ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+              ON CONFLICT (server_id) DO NOTHING
+            `, [
+              serverId,
+              stats.github_stars,
+              stats.github_forks,
+              stats.github_watchers,
+              stats.npm_downloads_weekly,
+              stats.npm_downloads_total,
+              stats.cli_installs,
+              calculatePopularityScore(stats),
+              Math.random() * 10 // Random trending score
+            ]);
+
+            // Insert a sample version
+            await client.query(`
+              INSERT INTO server_versions (
+                server_id, version, tag_name, is_latest, published_at
+              ) VALUES ($1, $2, $3, $4, $5)
+            `, [
+              serverId,
+              '1.0.0',
+              'v1.0.0',
+              true,
+              new Date()
+            ]);
+
+            seededCount++;
+          } catch (error: any) {
+            logger.warn(`Failed to seed ${server.slug}: ${error.message}`);
           }
-
-          const serverId = serverResult.rows[0].id;
-
-          // Insert server stats
-          await client.query(`
-            INSERT INTO server_stats (
-              server_id, github_stars, github_forks, github_watchers,
-              npm_downloads_weekly, npm_downloads_total,
-              cli_installs, popularity_score, trending_score
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-            ON CONFLICT (server_id) DO NOTHING
-          `, [
-            serverId,
-            stats.github_stars,
-            stats.github_forks,
-            stats.github_watchers,
-            stats.npm_downloads_weekly,
-            stats.npm_downloads_total,
-            stats.cli_installs,
-            calculatePopularityScore(stats),
-            Math.random() * 10 // Random trending score
-          ]);
-
-          // Insert a sample version
-          await client.query(`
-            INSERT INTO server_versions (
-              server_id, version, tag_name, is_latest, published_at
-            ) VALUES ($1, $2, $3, $4, $5)
-          `, [
-            serverId,
-            '1.0.0',
-            'v1.0.0',
-            true,
-            new Date()
-          ]);
-
-          seededCount++;
-          if (seededCount % 10 === 0) {
-            logger.info(`Seeded ${seededCount}/${allServers.length} servers...`);
-          }
-        } catch (error: any) {
-          logger.warn(`Failed to seed ${server.slug}: ${error.message}`);
         }
-      }
-    });
+      });
+      
+      logger.info(`Batch completed: ${Math.min(i + batchSize, allServers.length)}/${allServers.length} servers processed`);
+      
+      // Small delay between batches to prevent overwhelming the connection
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
 
     logger.info(`✓ Successfully seeded ${seededCount} servers with stats and versions`);
   } catch (error) {
@@ -652,8 +660,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     const db = DatabaseManager.getInstance();
 
     try {
-      logger.info('Running migrations...');
-      await db.migrate();
+      // Skip migrations as schema already exists
+      // logger.info('Running migrations...');
+      // await db.migrate();
 
       logger.info('Seeding 127+ MCP servers...');
       await seed127Servers(db);

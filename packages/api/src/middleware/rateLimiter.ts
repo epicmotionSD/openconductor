@@ -20,10 +20,10 @@ const logger = winston.createLogger({
 
 // Anonymous users: 100 requests per 15 minutes
 export const anonymousLimiter = rateLimit({
-  store: new RedisStore({
-    sendCommand: (...args: string[]) => db.getRedis().call(...args),
+  store: (new RedisStore({
+    sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
     prefix: 'rl:anon:',
-  }),
+  }) as any),
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // requests per window
   message: {
@@ -51,14 +51,14 @@ export const anonymousLimiter = rateLimit({
       endpoint: req.path
     });
   }
-});
+} as any);
 
 // Authenticated users: 1000 requests per 15 minutes  
 export const authenticatedLimiter = rateLimit({
-  store: new RedisStore({
-    sendCommand: (...args: string[]) => db.getRedis().call(...args),
+  store: (new RedisStore({
+    sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
     prefix: 'rl:auth:',
-  }),
+  }) as any),
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 1000, // requests per window
   message: {
@@ -85,14 +85,14 @@ export const authenticatedLimiter = rateLimit({
       endpoint: req.path
     });
   }
-});
+} as any);
 
 // CLI install endpoint: 10 requests per minute (prevent abuse)
 export const cliInstallLimiter = rateLimit({
-  store: new RedisStore({
-    sendCommand: (...args: string[]) => db.getRedis().call(...args),
+  store: (new RedisStore({
+    sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
     prefix: 'rl:cli:',
-  }),
+  }) as any),
   windowMs: 60 * 1000, // 1 minute
   max: 10, // requests per window
   message: {
@@ -118,14 +118,14 @@ export const cliInstallLimiter = rateLimit({
       platform: req.body?.platform
     });
   }
-});
+} as any);
 
 // Search endpoint: 60 requests per minute
 export const searchLimiter = rateLimit({
-  store: new RedisStore({
-    sendCommand: (...args: string[]) => db.getRedis().call(...args),
+  store: (new RedisStore({
+    sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
     prefix: 'rl:search:',
-  }),
+  }) as any),
   windowMs: 60 * 1000, // 1 minute
   max: 60, // requests per window
   message: {
@@ -143,14 +143,14 @@ export const searchLimiter = rateLimit({
   keyGenerator: (req) => {
     return req.apiKey?.id || req.user?.id || req.ip;
   }
-});
+} as any);
 
 // Webhook endpoint: 1000 requests per hour (GitHub sends many webhooks)
 export const webhookLimiter = rateLimit({
-  store: new RedisStore({
-    sendCommand: (...args: string[]) => db.getRedis().call(...args),
+  store: (new RedisStore({
+    sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
     prefix: 'rl:webhook:',
-  }),
+  }) as any),
   windowMs: 60 * 60 * 1000, // 1 hour
   max: 1000, // requests per window
   message: {
@@ -177,14 +177,14 @@ export const webhookLimiter = rateLimit({
     }
     return false;
   }
-});
+} as any);
 
 // Admin endpoints: 100 requests per hour
 export const adminLimiter = rateLimit({
-  store: new RedisStore({
-    sendCommand: (...args: string[]) => db.getRedis().call(...args),
+  store: (new RedisStore({
+    sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
     prefix: 'rl:admin:',
-  }),
+  }) as any),
   windowMs: 60 * 60 * 1000, // 1 hour
   max: 100, // requests per window
   message: {
@@ -202,7 +202,7 @@ export const adminLimiter = rateLimit({
   keyGenerator: (req) => {
     return req.user?.id || req.apiKey?.id || req.ip;
   }
-});
+} as any);
 
 /**
  * Dynamic rate limiter that adjusts based on server load
@@ -376,11 +376,11 @@ export const createCustomRateLimiter = (options: {
   skipIf?: (req: any) => boolean;
   message?: string;
 }) => {
-  return rateLimit({
-    store: new RedisStore({
-      sendCommand: (...args: string[]) => db.getRedis().call(...args),
+  const opts: any = {
+    store: (new RedisStore({
+      sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
       prefix: 'rl:custom:',
-    }),
+    }) as any),
     windowMs: options.windowMs,
     max: options.max,
     keyGenerator: options.keyGenerator || ((req) => req.ip),
@@ -398,17 +398,21 @@ export const createCustomRateLimiter = (options: {
       }
     },
     standardHeaders: true,
-    legacyHeaders: false,
-    onLimitReached: (req, res, options) => {
-      logger.warn('Custom rate limit reached', {
-        ip: req.ip,
-        endpoint: req.path,
-        limit: options.max,
-        windowMs: options.windowMs
-      });
-    }
-  });
+    legacyHeaders: false
+  };
+
+  opts.onLimitReached = (req: any, res: any, optsLocal: any) => {
+    logger.warn('Custom rate limit reached', {
+      ip: req.ip,
+      endpoint: req.path,
+      limit: optsLocal.max,
+      windowMs: optsLocal.windowMs
+    });
+  };
+
+  return rateLimit(opts) as any;
 };
+
 
 /**
  * Intelligent rate limiter that adapts to user behavior
@@ -478,6 +482,9 @@ export class AdaptiveRateLimiter {
           totalRequests: 0,
           errorCount: 0,
           totalResponseTime: 0,
+          errorRate: 0,
+          avgResponseTime: 0,
+          burstiness: 0,
           lastRequestTime: 0,
           requestTimes: [],
           endpoints: new Set()
@@ -630,7 +637,7 @@ export async function getRateLimitStatus(req: any, res: any) {
     const userId = req.apiKey?.id || req.user?.id || req.ip;
     const userType = req.apiKey ? 'authenticated' : 'anonymous';
     
-    const currentLimit = adaptiveRateLimiter.getCurrentLimit(userType, userType === 'authenticated' ? 1000 : 100);
+    const currentLimit = await adaptiveRateLimiter.getAdaptiveLimit(userId, userType === 'authenticated' ? 1000 : 100);
     
     // Get current usage from Redis
     const redis = db.getRedis();

@@ -8,7 +8,21 @@ import dotenv from 'dotenv';
 // Load environment variables FIRST before any config
 dotenv.config();
 
-// Logger setup
+// Logger setup - Use only Console transport in production/serverless environments
+const loggerTransports: winston.transport[] = [new winston.transports.Console()];
+
+// Add file transports only in local development (not in serverless environments like Vercel)
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  try {
+    loggerTransports.push(
+      new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+      new winston.transports.File({ filename: 'logs/combined.log' })
+    );
+  } catch (error) {
+    // Silently fail if logs directory doesn't exist in serverless environment
+  }
+}
+
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || 'info',
   format: winston.format.combine(
@@ -16,11 +30,7 @@ const logger = winston.createLogger({
     winston.format.errors({ stack: true }),
     winston.format.json()
   ),
-  transports: [
-    new winston.transports.Console(),
-    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'logs/combined.log' })
-  ]
+  transports: loggerTransports
 });
 
 // Database configuration - Use Supabase if POSTGRES_URL is provided
@@ -42,8 +52,30 @@ const dbConfig: PoolConfig = process.env.POSTGRES_URL ? {
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 };
 
-// Redis configuration
-const redisConfig = {
+// Redis configuration - Support both traditional Redis and Upstash REST API
+const redisConfig = process.env.UPSTASH_REDIS_REST_URL ? {
+  // Upstash Redis (production on Vercel)
+  host: new URL(process.env.UPSTASH_REDIS_REST_URL).hostname,
+  port: 443,
+  password: process.env.UPSTASH_REDIS_REST_TOKEN,
+  tls: {
+    rejectUnauthorized: false
+  },
+  maxRetriesPerRequest: 3,
+  enableReadyCheck: true,
+  lazyConnect: true
+} : process.env.REDIS_URL ? {
+  // Redis connection string (e.g., redis://localhost:6379)
+  // Parse URL for connection details
+  host: new URL(process.env.REDIS_URL).hostname,
+  port: parseInt(new URL(process.env.REDIS_URL).port || '6379'),
+  password: new URL(process.env.REDIS_URL).password || undefined,
+  db: parseInt(process.env.REDIS_DB || '0'),
+  maxRetriesPerRequest: 3,
+  enableReadyCheck: true,
+  lazyConnect: true
+} : {
+  // Default local Redis
   host: process.env.REDIS_HOST || 'localhost',
   port: parseInt(process.env.REDIS_PORT || '6379'),
   password: process.env.REDIS_PASSWORD,

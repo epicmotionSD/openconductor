@@ -322,7 +322,13 @@ export class StatsService {
     topTags: { tag: string; count: number }[];
   }> {
     const cacheKey = cache.generateKey('registry-stats');
-    const cached = await cache.get(cacheKey);
+    const cached = await cache.get<{
+      totalServers: number;
+      verifiedServers: number;
+      totalInstalls: number;
+      categoryCounts: Record<ServerCategory, number>;
+      topTags: { tag: string; count: number }[];
+    }>(cacheKey);
     
     if (cached) {
       return cached;
@@ -378,7 +384,6 @@ export class StatsService {
       return stats;
     } catch (error) {
       logger.error('Error getting registry stats', error);
-      // Return defaults on error
       return {
         totalServers: 0,
         verifiedServers: 0,

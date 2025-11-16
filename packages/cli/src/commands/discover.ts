@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import { api } from '../utils/api';
 import type { MCPServerCategory } from '@openconductor/shared';
+import { getAnalytics, matchQueryToSuggestions } from '../lib/ecosystem-analytics';
 
 interface DiscoverOptions {
   category?: MCPServerCategory;
@@ -27,6 +28,14 @@ export async function discoverCommand(query?: string, options: DiscoverOptions =
     const result = await api.searchServers(searchParams);
     spinner.stop();
 
+    // Track discovery event
+    const analytics = getAnalytics();
+    await analytics.trackDiscovery(query || '*', result.servers.length, {
+      category: options.category,
+      tags: options.tags,
+      verified: options.verified
+    });
+
     if (result.servers.length === 0) {
       console.log(chalk.yellow('No servers found matching your criteria.'));
       console.log(chalk.gray('Try broadening your search or removing filters.'));
@@ -44,6 +53,9 @@ export async function discoverCommand(query?: string, options: DiscoverOptions =
     for (const server of result.servers) {
       displayServer(server);
     }
+
+    // Show ecosystem suggestions
+    await showEcosystemSuggestions(query, analytics);
 
     // Show install hint
     console.log(chalk.gray('\n💡 To install a server: openconductor install <server-name>'));
@@ -82,4 +94,33 @@ function displayServer(server: any) {
   
   console.log(chalk.blue(`🔗 ${server.repository}`));
   console.log();
+}
+
+async function showEcosystemSuggestions(query: string | undefined, analytics: any) {
+  const suggestions = matchQueryToSuggestions(query);
+
+  if (suggestions.length > 0) {
+    console.log(chalk.blue('\n💡 You might also be interested in:'));
+
+    for (const suggestion of suggestions) {
+      console.log(chalk.bold(`\n   ${suggestion.product}`));
+      console.log(chalk.gray(`   ${suggestion.reason}`));
+      console.log(chalk.cyan(`   ${suggestion.cta}`));
+      console.log(chalk.gray(`   ${suggestion.url}`));
+    }
+
+    // Track ecosystem discovery (only track the first suggestion)
+    if (suggestions[0]) {
+      const destination = suggestions[0].product.toLowerCase().replace(/\s+/g, '');
+      if (destination === 'flexabrain' || destination === 'flexasports' || destination.includes('x3o')) {
+        await analytics.trackEcosystemReferral(
+          destination.includes('x3o') ? 'x3o' : destination as any,
+          {
+            matched_keywords: suggestions[0].keywords.filter(k => query?.toLowerCase().includes(k)),
+            query
+          }
+        );
+      }
+    }
+  }
 }

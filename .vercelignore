@@ -1,0 +1,5 @@
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.pnpm-store
+node_modules/.pnpm
+*.backup

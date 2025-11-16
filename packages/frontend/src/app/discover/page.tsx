@@ -7,7 +7,10 @@ import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Search, Star, Download, ExternalLink, Filter } from 'lucide-react'
-import type { MCPServer, MCPServerSearchParams, MCPServerSearchResult } from '../types'
+import { AlertBox } from '@/components/ui/alert-box'
+import { CategoryBadge, MCPCategory } from '@/components/ui/category-badge'
+import { SiteHeader } from '@/components/navigation/site-header'
+import type { MCPServer, MCPServerSearchParams, MCPServerSearchResult } from '../../types'
 
 export default function DiscoverPage() {
   const [servers, setServers] = useState<MCPServer[]>([])
@@ -29,7 +32,7 @@ export default function DiscoverPage() {
         query: searchQuery || undefined,
         category: selectedCategory as any || undefined,
         verified: showVerifiedOnly || undefined,
-        limit: 20
+        limit: 100
       }
 
       const queryString = new URLSearchParams()
@@ -38,8 +41,8 @@ export default function DiscoverPage() {
       if (params.verified) queryString.append('verified', 'true')
       if (params.limit) queryString.append('limit', params.limit.toString())
 
-      // Use new enterprise API endpoint
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002/v1'
+      // Use the configured API URL which already includes /v1
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1'
       const response = await fetch(`${apiUrl}/servers?${queryString.toString()}`)
       const result = await response.json()
       
@@ -60,26 +63,24 @@ export default function DiscoverPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold">OpenConductor</span>
-          </Link>
-          <nav className="flex space-x-6">
-            <Link href="/docs" className="text-sm hover:text-primary">Docs</Link>
-            <Link href="/install" className="text-sm hover:text-primary">Install CLI</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader variant="minimal" />
 
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">Discover MCP Servers</h1>
-          <p className="text-xl text-muted-foreground">
-            Find and install Model Context Protocol servers for your AI applications
+          <div className="flex items-center gap-3 mb-4">
+            <h1 className="text-4xl font-bold">Discover AI Agents for Your Stack</h1>
+            <Badge variant="outline" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-none text-sm px-3 py-1">
+              60+ Integrations
+            </Badge>
+          </div>
+          <p className="text-xl text-muted-foreground mb-4">
+            Deploy agents alongside your components. Find MCP servers designed for Vercel, v0, Supabase, and BaseHub developers.
           </p>
+          <AlertBox variant="info" icon={<span className="text-lg">🎯</span>} title="Ecosystem Integration">
+            Works with your modern AI stack out of the box.
+            Deploy with Vercel, build with v0, query Supabase, orchestrate with OpenConductor.
+          </AlertBox>
         </div>
 
         {/* Search and Filters */}
@@ -170,14 +171,6 @@ export default function DiscoverPage() {
 }
 
 function ServerCard({ server }: { server: MCPServer }) {
-  const categoryColors = {
-    memory: 'bg-blue-100 text-blue-800',
-    filesystem: 'bg-green-100 text-green-800',
-    database: 'bg-yellow-100 text-yellow-800',
-    api: 'bg-purple-100 text-purple-800',
-    custom: 'bg-gray-100 text-gray-800'
-  }
-
   return (
     <Card className="h-full">
       <CardHeader>
@@ -204,18 +197,13 @@ function ServerCard({ server }: { server: MCPServer }) {
         
         <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <Badge 
-              variant="outline" 
-              className={categoryColors[server.category]}
-            >
-              {server.category}
-            </Badge>
+            <CategoryBadge category={server.category as MCPCategory} />
           </div>
 
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
               <Star className="h-3 w-3" />
-              {server.repository?.stars || server.stats?.stars || 0}
+              {server.repository?.stars || 0}
             </div>
             <div className="flex items-center gap-1">
               <Download className="h-3 w-3" />
@@ -245,7 +233,7 @@ function ServerCard({ server }: { server: MCPServer }) {
               </Link>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <a href={server.repository} target="_blank" rel="noopener noreferrer">
+              <a href={server.repository.url} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-3 w-3" />
               </a>
             </Button>

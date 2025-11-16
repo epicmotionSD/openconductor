@@ -395,9 +395,10 @@ if (require.main === module) {
   
   async function run() {
     const db = DatabaseManager.getInstance();
-    
+
     try {
-      await db.migrate();
+      // Skip migrations as schema already exists
+      // await db.migrate();
       await seedDatabase(db);
       process.exit(0);
     } catch (error) {

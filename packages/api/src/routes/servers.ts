@@ -124,12 +124,12 @@ serversRouter.get('/:identifier', asyncHandler(async (req, res) => {
 /**
  * POST /api/servers
  * Submit a new MCP server for inclusion in the registry
- * Phase 2 Feature - Hidden in Phase 1
+ * Phase 2 Enterprise Feature - NOW ENABLED FOR LAUNCH!
  */
 serversRouter.post('/', requireFeature('serverSubmission'), asyncHandler(async (req, res) => {
   const validatedData = submitServerSchema.parse(req.body);
-  
-  const result = await registryService.submitServer(validatedData);
+
+  const result = await registryService.submitServer(validatedData as SubmitServerRequest);
   
   res.status(201).json(createAPIResponse(result));
 }));
@@ -137,7 +137,7 @@ serversRouter.post('/', requireFeature('serverSubmission'), asyncHandler(async (
 /**
  * PATCH /api/servers/:slug
  * Update server metadata
- * Phase 2 Feature - Hidden in Phase 1
+ * Phase 2 Enterprise Feature - NOW ENABLED FOR LAUNCH!
  */
 serversRouter.patch('/:slug', requireFeature('adminControls'), asyncHandler(async (req, res) => {
   const { slug } = req.params;
@@ -155,7 +155,7 @@ serversRouter.patch('/:slug', requireFeature('adminControls'), asyncHandler(asyn
 /**
  * PUT /api/servers/:slug/verify
  * Verify/unverify server (admin only)
- * Phase 2 Feature - Hidden in Phase 1
+ * Phase 2 Enterprise Feature - NOW ENABLED FOR LAUNCH!
  */
 serversRouter.put('/:slug/verify', requireFeature('adminControls'), asyncHandler(async (req, res) => {
   const { slug } = req.params;

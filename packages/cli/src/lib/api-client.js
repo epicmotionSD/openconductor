@@ -11,7 +11,7 @@ const pkg = JSON.parse(
 
 export class ApiClient {
   constructor(baseURL) {
-    this.baseURL = baseURL || process.env.OPENCONDUCTOR_API_URL || 'http://localhost:3001/v1';
+    this.baseURL = baseURL || process.env.OPENCONDUCTOR_API_URL || 'https://openconductor.ai/api/v1';
     
     this.client = axios.create({
       baseURL: this.baseURL,

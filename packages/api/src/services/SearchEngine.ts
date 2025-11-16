@@ -52,7 +52,7 @@ export class SearchEngine {
       const searchQuery = this.buildSearchQuery(q);
       
       let whereConditions = [`s.search_vector @@ to_tsquery('english', $1)`];
-      let queryParams = [searchQuery];
+      let queryParams: any[] = [searchQuery];
       let paramIndex = 2;
 
       // Apply filters
@@ -382,7 +382,11 @@ export class SearchEngine {
     searchVolume: { total: number; trend: number };
   }> {
     const cacheKey = cache.generateKey('search-analytics');
-    const cached = await cache.get(cacheKey);
+    const cached = await cache.get<{
+      topQueries: Array<{ query: string; count: number }>;
+      popularFilters: Array<{ filter: string; value: string; count: number }>;
+      searchVolume: { total: number; trend: number };
+    }>(cacheKey);
     
     if (cached) {
       return cached;
@@ -416,7 +420,11 @@ export class SearchEngine {
 
     } catch (error) {
       logger.error('Failed to get search analytics', error);
-      return { topQueries: [], popularFilters: [], searchVolume: { total: 0, trend: 0 } };
+      return {
+        topQueries: [],
+        popularFilters: [],
+        searchVolume: { total: 0, trend: 0 }
+      };
     }
   }
 
