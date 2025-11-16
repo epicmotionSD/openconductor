@@ -5,7 +5,8 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
+    "build": "tsc --skipLibCheck",
+    "vercel-build": "cd ../shared && npm install && npm run build && cd ../api && npm install && tsc --skipLibCheck",
     "start": "node dist/server.js",
     "db:migrate": "tsx src/db/deploy-to-supabase.ts",
     "db:seed": "tsx src/db/seed.ts",
