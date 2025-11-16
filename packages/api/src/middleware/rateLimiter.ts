@@ -14,16 +14,31 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()]
 });
 
+// Helper to create Redis store with fallback to memory store
+function createRateLimitStore(prefix: string): any {
+  try {
+    const redis = db.getRedis();
+    if (!redis || !redis.status || redis.status !== 'ready') {
+      logger.warn(`Redis not available, using in-memory rate limiting for ${prefix}`);
+      return undefined; // express-rate-limit will use default memory store
+    }
+    return new RedisStore({
+      sendCommand: (...args: any[]) => redis.call(...args),
+      prefix,
+    }) as any;
+  } catch (error) {
+    logger.warn(`Failed to create Redis store for ${prefix}, falling back to memory store:`, error);
+    return undefined; // Fallback to in-memory store
+  }
+}
+
 /**
  * Rate limiting configuration based on the technical specification
  */
 
 // Anonymous users: 100 requests per 15 minutes
 export const anonymousLimiter = rateLimit({
-  store: (new RedisStore({
-    sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
-    prefix: 'rl:anon:',
-  }) as any),
+  store: createRateLimitStore('rl:anon:'),
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // requests per window
   message: {
@@ -53,12 +68,9 @@ export const anonymousLimiter = rateLimit({
   }
 } as any);
 
-// Authenticated users: 1000 requests per 15 minutes  
+// Authenticated users: 1000 requests per 15 minutes
 export const authenticatedLimiter = rateLimit({
-  store: (new RedisStore({
-    sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
-    prefix: 'rl:auth:',
-  }) as any),
+  store: createRateLimitStore('rl:auth:'),
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 1000, // requests per window
   message: {
@@ -89,10 +101,7 @@ export const authenticatedLimiter = rateLimit({
 
 // CLI install endpoint: 10 requests per minute (prevent abuse)
 export const cliInstallLimiter = rateLimit({
-  store: (new RedisStore({
-    sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
-    prefix: 'rl:cli:',
-  }) as any),
+  store: createRateLimitStore('rl:cli:'),
   windowMs: 60 * 1000, // 1 minute
   max: 10, // requests per window
   message: {
@@ -122,10 +131,7 @@ export const cliInstallLimiter = rateLimit({
 
 // Search endpoint: 60 requests per minute
 export const searchLimiter = rateLimit({
-  store: (new RedisStore({
-    sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
-    prefix: 'rl:search:',
-  }) as any),
+  store: createRateLimitStore('rl:search:'),
   windowMs: 60 * 1000, // 1 minute
   max: 60, // requests per window
   message: {
@@ -147,10 +153,7 @@ export const searchLimiter = rateLimit({
 
 // Webhook endpoint: 1000 requests per hour (GitHub sends many webhooks)
 export const webhookLimiter = rateLimit({
-  store: (new RedisStore({
-    sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
-    prefix: 'rl:webhook:',
-  }) as any),
+  store: createRateLimitStore('rl:webhook:'),
   windowMs: 60 * 60 * 1000, // 1 hour
   max: 1000, // requests per window
   message: {
@@ -181,10 +184,7 @@ export const webhookLimiter = rateLimit({
 
 // Admin endpoints: 100 requests per hour
 export const adminLimiter = rateLimit({
-  store: (new RedisStore({
-    sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
-    prefix: 'rl:admin:',
-  }) as any),
+  store: createRateLimitStore('rl:admin:'),
   windowMs: 60 * 60 * 1000, // 1 hour
   max: 100, // requests per window
   message: {
@@ -377,10 +377,7 @@ export const createCustomRateLimiter = (options: {
   message?: string;
 }) => {
   const opts: any = {
-    store: (new RedisStore({
-      sendCommand: (...args: any[]) => (db.getRedis() as any).call(...args),
-      prefix: 'rl:custom:',
-    }) as any),
+    store: createRateLimitStore('rl:custom:'),
     windowMs: options.windowMs,
     max: options.max,
     keyGenerator: options.keyGenerator || ((req) => req.ip),

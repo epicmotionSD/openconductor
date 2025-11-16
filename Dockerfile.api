@@ -33,6 +33,6 @@ RUN echo "Checking shared dist:" && ls -la ../shared/dist/ || echo "shared dist 
 # Expose port
 EXPOSE 3001
 
-# Start server (using test-server for debugging)
+# Start server
 WORKDIR /app/packages/api
-CMD ["node", "--trace-warnings", "dist/test-server.js"]
+CMD ["node", "--trace-warnings", "dist/server.js"]
