@@ -4,6 +4,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./dist",
+    "rootDir": "./src",
     "strict": false,
     "noImplicitAny": false,
     "strictNullChecks": false,
@@ -12,12 +13,12 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "declaration": false,
-    "sourceMap": true,
+    "sourceMap": false,
     "baseUrl": ".",
     "paths": {
-      "@openconductor/shared": ["../shared/src"]
+      "@openconductor/shared": ["../shared/dist"]
     }
   },
-  "include": ["src/**/*"],
-  "exclude": ["dist", "node_modules", "src/db/create-admin-key.ts", "src/db/seed-127-servers.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "src/db/create-admin-key.ts", "src/db/seed-127-servers.ts"]
 }
