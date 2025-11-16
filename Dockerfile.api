@@ -26,8 +26,12 @@ RUN npm run build
 WORKDIR /app/packages/api
 RUN npm run build
 
+# List dist contents for debugging
+RUN ls -la dist/ || echo "dist directory not found"
+
 # Expose port
 EXPOSE 3001
 
 # Start server
+WORKDIR /app/packages/api
 CMD ["node", "dist/server.js"]
