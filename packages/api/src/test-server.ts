@@ -31,6 +31,30 @@ try {
   console.error('[TEST] ❌ FAILED to load production config:', err.message);
 }
 
+// Test importing each route handler one by one
+const routes = [
+  './db/connection',
+  './routes/servers',
+  './routes/admin',
+  './routes/feedback',
+  './routes/ecosystem-analytics',
+  './middleware/errorHandler',
+  './middleware/rateLimiter',
+  './workers/GitHubSyncWorker',
+  './workers/JobProcessor'
+];
+
+for (const route of routes) {
+  try {
+    console.log(`[TEST] Attempting to import ${route}...`);
+    require(route);
+    console.log(`[TEST] ✅ ${route} loaded successfully`);
+  } catch (err: any) {
+    console.error(`[TEST] ❌ FAILED to load ${route}:`, err.message);
+    console.error('[TEST] Stack:', err.stack);
+  }
+}
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
