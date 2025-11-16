@@ -23,7 +23,7 @@ function createRateLimitStore(prefix: string): any {
       return undefined; // express-rate-limit will use default memory store
     }
     return new RedisStore({
-      sendCommand: (...args: any[]) => redis.call(...args),
+      sendCommand: (...args: string[]) => (redis as any).call(...args) as Promise<any>,
       prefix,
     }) as any;
   } catch (error) {
