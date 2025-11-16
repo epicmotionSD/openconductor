@@ -10,6 +10,27 @@ console.log('[TEST] Dotenv loaded');
 dotenv.config();
 console.log('[TEST] Environment loaded');
 
+// Test if we can import from @openconductor/shared
+try {
+  console.log('[TEST] Attempting to import from @openconductor/shared...');
+  const shared = require('@openconductor/shared');
+  console.log('[TEST] ✅ @openconductor/shared loaded successfully');
+  console.log('[TEST] Available exports:', Object.keys(shared).slice(0, 10).join(', '));
+} catch (err: any) {
+  console.error('[TEST] ❌ FAILED to load @openconductor/shared:', err.message);
+  console.error('[TEST] Error stack:', err.stack);
+}
+
+// Test if we can import the config
+try {
+  console.log('[TEST] Attempting to import production config...');
+  const { config } = require('./config/production');
+  console.log('[TEST] ✅ Production config loaded');
+  console.log('[TEST] Config CORS origins:', config.api.corsOrigins);
+} catch (err: any) {
+  console.error('[TEST] ❌ FAILED to load production config:', err.message);
+}
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
