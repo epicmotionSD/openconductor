@@ -3,6 +3,7 @@ import ora from 'ora';
 import inquirer from 'inquirer';
 import { api } from '../utils/api';
 import { ClaudeDesktopConfigManager } from '../config/claude-desktop';
+import { getAnalytics } from '../lib/ecosystem-analytics';
 
 interface InstallOptions {
   config?: string;
@@ -82,9 +83,19 @@ export async function installCommand(serverIdentifier: string, options: InstallO
     
     // Install server
     await configManager.addServer(server.name, serverConfig);
-    
+
     spinner2.stop();
-    
+
+    // Track successful installation
+    const analytics = getAnalytics();
+    await analytics.trackInstall(server.slug, {
+      server_name: server.name,
+      category: server.category,
+      verified: server.verified,
+      forced: options.force || false,
+      had_existing: serverExists
+    });
+
     console.log(chalk.green('✅ Installation successful!'));
     console.log(chalk.gray(`📁 Config file: ${configManager.getConfigPath()}`));
     console.log(chalk.gray(`💾 Backup created: ${backupPath}`));

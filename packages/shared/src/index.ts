@@ -4,3 +4,6 @@ export type MCPTransport = 'stdio' | 'websocket' | 'http';
 
 // Re-export all types and constants from types.ts
 export * from './types';
+
+// Re-export ecosystem analytics types
+export * from './ecosystem-analytics';
