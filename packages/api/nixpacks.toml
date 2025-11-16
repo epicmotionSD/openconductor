@@ -1,0 +1,17 @@
+[phases.setup]
+nixPkgs = ["nodejs-22_x"]
+
+[phases.install]
+cmds = [
+  "cd ../shared && npm install",
+  "cd ../api && npm install"
+]
+
+[phases.build]
+cmds = [
+  "cd ../shared && npm run build",
+  "cd ../api && npm run build"
+]
+
+[start]
+cmd = "node dist/server.js"

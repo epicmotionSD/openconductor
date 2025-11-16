@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { DatabaseManager } from '../db/connection';
 import type {
   EcosystemEvent,
+  EcosystemProduct,
   BatchEventsRequest,
   BatchEventsResponse,
   VelocityResponse,
@@ -180,12 +181,14 @@ router.get('/velocity/realtime', async (req: Request, res: Response) => {
       growth_percentage: parseFloat(row.growth_percentage) || 0
     }));
 
-    const currentHour = metrics[0] || {
-      product: product as string,
+    const currentHour: InstallVelocityMetric = metrics[0] || {
+      product: product as EcosystemProduct,
       date: new Date().toISOString().split('T')[0],
       hour: new Date().getHours(),
       install_count: 0,
-      unique_users: 0
+      unique_users: 0,
+      hourly_growth: 0,
+      growth_percentage: 0
     };
 
     // Calculate overall growth rate

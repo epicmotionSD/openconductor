@@ -1,0 +1,33 @@
+FROM node:22-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY packages/shared/package*.json ./packages/shared/
+COPY packages/api/package*.json ./packages/api/
+
+# Install dependencies
+WORKDIR /app/packages/shared
+RUN npm install
+
+WORKDIR /app/packages/api
+RUN npm install
+
+# Copy source code
+WORKDIR /app
+COPY packages/shared ./packages/shared
+COPY packages/api ./packages/api
+
+# Build shared package
+WORKDIR /app/packages/shared
+RUN npm run build
+
+# Build API
+WORKDIR /app/packages/api
+RUN npm run build
+
+# Expose port
+EXPOSE 3001
+
+# Start server
+CMD ["node", "dist/server.js"]

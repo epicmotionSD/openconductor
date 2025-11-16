@@ -105,27 +105,29 @@ app.use('*', (req, res) => {
 // Error handling middleware
 app.use(errorHandler);
 
-// Start the server
-const server = app.listen(PORT, () => {
-  console.log(`🚀 OpenConductor API Server running on port ${PORT}`);
-  console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`📡 API Base: http://localhost:${PORT}/v1`);
-  console.log(`🔧 Admin: http://localhost:${PORT}/v1/admin`);
-});
-
-// Graceful shutdown
-process.on('SIGTERM', () => {
-  console.log('SIGTERM received, shutting down gracefully');
-  server.close(() => {
-    console.log('Process terminated');
+// Start the server only if not in serverless environment
+if (process.env.VERCEL !== '1') {
+  const server = app.listen(PORT, () => {
+    console.log(`🚀 OpenConductor API Server running on port ${PORT}`);
+    console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`📡 API Base: http://localhost:${PORT}/v1`);
+    console.log(`🔧 Admin: http://localhost:${PORT}/v1/admin`);
   });
-});
 
-process.on('SIGINT', () => {
-  console.log('SIGINT received, shutting down gracefully');
-  server.close(() => {
-    process.exit(0);
+  // Graceful shutdown
+  process.on('SIGTERM', () => {
+    console.log('SIGTERM received, shutting down gracefully');
+    server.close(() => {
+      console.log('Process terminated');
+    });
   });
-});
+
+  process.on('SIGINT', () => {
+    console.log('SIGINT received, shutting down gracefully');
+    server.close(() => {
+      process.exit(0);
+    });
+  });
+}
 
 export default app;
