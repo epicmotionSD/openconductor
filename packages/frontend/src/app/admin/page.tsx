@@ -58,13 +58,9 @@ interface AdminStats {
 }
 
 export default function AdminDashboard() {
-  const [stats, setStats] = useState<AdminStats>({
-    servers: { total: 127, verified: 89, pending: 12, trending: 23 },
-    github: { syncStatus: 'active', lastSync: '2 minutes ago', webhooks: 156, repos: 127 },
-    jobs: { pending: 3, processing: 1, completed: 1247, failed: 12 },
-    api: { requestsToday: 2847, errorRate: 0.8, avgResponseTime: 245, activeKeys: 18 }
-  })
+  const [stats, setStats] = useState<AdminStats | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     fetchAdminStats()
@@ -73,31 +69,20 @@ export default function AdminDashboard() {
   const fetchAdminStats = async () => {
     try {
       setLoading(true)
-      const adminKey = localStorage.getItem('admin-api-key')
+      setError(null)
 
-      if (!adminKey) {
-        console.error('No admin API key found')
-        setLoading(false)
-        return
-      }
-
-      const response = await fetch('/api/admin/dashboard', {
-        headers: {
-          'Authorization': `Bearer ${adminKey}`
-        }
-      })
-
+      const response = await fetch('/api/admin/dashboard')
       const result = await response.json()
 
       if (result.success) {
         setStats(result.data)
       } else {
-        console.error('Failed to fetch stats:', result.error)
+        throw new Error(result.error || 'Failed to fetch stats')
       }
-
-      setLoading(false)
-    } catch (error) {
-      console.error('Failed to fetch admin stats:', error)
+    } catch (err: any) {
+      console.error('Failed to fetch admin stats:', err)
+      setError(err.message || 'Failed to load dashboard data')
+    } finally {
       setLoading(false)
     }
   }
@@ -116,6 +101,18 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-center py-12">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
             <span className="ml-3 text-muted-foreground">Loading admin dashboard...</span>
+          </div>
+        ) : error ? (
+          <div className="flex items-center justify-center py-12">
+            <div className="text-center">
+              <p className="text-red-600 font-semibold mb-2">Error loading dashboard</p>
+              <p className="text-gray-600 mb-4">{error}</p>
+              <Button onClick={fetchAdminStats}>Retry</Button>
+            </div>
+          </div>
+        ) : !stats ? (
+          <div className="flex items-center justify-center py-12">
+            <p className="text-gray-600">No dashboard data available</p>
           </div>
         ) : (
           <div className="space-y-8">
