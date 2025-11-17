@@ -36,99 +36,18 @@ interface CampaignTemplate {
 }
 
 export default function MarketingManagementPage() {
-  const [campaigns, setCampaigns] = useState<Campaign[]>([
-    {
-      id: '1',
-      name: 'Saturday Launch - Product Hunt',
-      type: 'product-hunt',
-      status: 'draft',
-      title: 'OpenConductor – The npm for MCP servers',
-      content: 'The npm for MCP servers. Discover and install 60+ AI agent tools in seconds...',
-      scheduledDate: '2024-11-16T14:00:00Z',
-      createdAt: '2024-11-13T00:00:00Z'
-    },
-    {
-      id: '2', 
-      name: 'Launch Day Twitter Thread',
-      type: 'twitter',
-      status: 'scheduled',
-      title: '🚀 OpenConductor is LIVE!',
-      content: '🧵 1/8 Today we\'re launching OpenConductor - the npm for MCP servers...',
-      scheduledDate: '2024-11-16T14:00:00Z',
-      metrics: { views: 0, clicks: 0, conversions: 0 },
-      createdAt: '2024-11-13T00:00:00Z'
-    }
-  ])
+  const [campaigns, setCampaigns] = useState<Campaign[]>([])
+  const [templates, setTemplates] = useState<CampaignTemplate[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [stats, setStats] = useState({
+    totalCampaigns: 0,
+    draftCount: 0,
+    scheduledCount: 0,
+    publishedCount: 0
+  })
   
-  const [templates] = useState<CampaignTemplate[]>([
-    {
-      id: '1',
-      name: 'Product Hunt Launch',
-      type: 'product-hunt',
-      template: `**Title:** {{product_name}} – {{tagline}}
-
-**Description:**
-{{description}}
-
-**What makes us different:**
-• {{feature_1}}
-• {{feature_2}} 
-• {{feature_3}}
-
-**Quick Start:**
-\`\`\`bash
-{{install_command}}
-\`\`\`
-
-{{cta}}`,
-      variables: ['product_name', 'tagline', 'description', 'feature_1', 'feature_2', 'feature_3', 'install_command', 'cta']
-    },
-    {
-      id: '2',
-      name: 'Twitter Launch Thread',
-      type: 'twitter',
-      template: `🚀 {{product_name}} is LIVE!
-
-{{description}}
-
-Key features:
-→ {{feature_1}}
-→ {{feature_2}}
-→ {{feature_3}}
-
-{{cta}}
-
-#ProductHunt #LaunchWeek #{{hashtags}}`,
-      variables: ['product_name', 'description', 'feature_1', 'feature_2', 'feature_3', 'cta', 'hashtags']
-    },
-    {
-      id: '3',
-      name: 'Partnership Outreach',
-      type: 'partnership',
-      template: `Subject: {{subject_line}}
-
-Hi {{partner_name}},
-
-{{introduction}}
-
-**The Opportunity:**
-{{opportunity_description}}
-
-**What {{partner_company}} Users Get:**
-→ {{benefit_1}}
-→ {{benefit_2}}
-→ {{benefit_3}}
-
-**Integration Ideas:**
-{{integration_ideas}}
-
-{{closing}}
-
-Best,
-{{your_name}}`,
-      variables: ['subject_line', 'partner_name', 'introduction', 'opportunity_description', 'partner_company', 'benefit_1', 'benefit_2', 'benefit_3', 'integration_ideas', 'closing', 'your_name']
-    }
-  ])
+  
   
   const [showCampaignForm, setShowCampaignForm] = useState(false)
   const [selectedTemplate, setSelectedTemplate] = useState<CampaignTemplate | null>(null)
@@ -139,6 +58,38 @@ Best,
     content: '',
     scheduledDate: ''
   })
+
+  useEffect(() => {
+    fetchCampaigns()
+  }, [])
+
+  const fetchCampaigns = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+
+      const response = await fetch('/api/admin/campaigns')
+      const result = await response.json()
+
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to fetch campaigns')
+      }
+
+      setCampaigns(result.data.campaigns)
+      setTemplates(result.data.templates)
+      setStats({
+        totalCampaigns: result.data.stats.totalCampaigns,
+        draftCount: result.data.stats.draftCount,
+        scheduledCount: result.data.stats.scheduledCount,
+        publishedCount: result.data.stats.publishedCount
+      })
+    } catch (err: any) {
+      console.error('Failed to fetch campaigns:', err)
+      setError(err.message || 'Failed to load campaign data')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const getStatusColor = (status: Campaign['status']) => {
     switch (status) {
@@ -176,24 +127,66 @@ Best,
     setShowCampaignForm(true)
   }
 
-  const handleSaveCampaign = () => {
-    const campaign: Campaign = {
-      id: Date.now().toString(),
-      ...newCampaign,
-      status: 'draft',
-      createdAt: new Date().toISOString()
+  const handleSaveCampaign = async () => {
+    try {
+      const response = await fetch('/api/admin/campaigns', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: newCampaign.name,
+          type: newCampaign.type,
+          title: newCampaign.title,
+          content: newCampaign.content,
+          scheduledDate: newCampaign.scheduledDate || null,
+          templateId: selectedTemplate?.id || null
+        })
+      })
+
+      const result = await response.json()
+
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to create campaign')
+      }
+
+      await fetchCampaigns()
+
+      setShowCampaignForm(false)
+      setSelectedTemplate(null)
+      setNewCampaign({
+        name: '',
+        type: 'announcement',
+        title: '',
+        content: '',
+        scheduledDate: ''
+      })
+    } catch (err: any) {
+      console.error('Failed to save campaign:', err)
+      alert('Failed to save campaign: ' + err.message)
     }
-    
-    setCampaigns(prev => [campaign, ...prev])
-    setShowCampaignForm(false)
-    setSelectedTemplate(null)
-    setNewCampaign({
-      name: '',
-      type: 'announcement',
-      title: '',
-      content: '',
-      scheduledDate: ''
-    })
+  }
+
+  const handlePublishCampaign = async (campaignId: string) => {
+    try {
+      const response = await fetch('/api/admin/campaigns', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: campaignId,
+          status: 'published'
+        })
+      })
+
+      const result = await response.json()
+
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to publish campaign')
+      }
+
+      await fetchCampaigns()
+    } catch (err: any) {
+      console.error('Failed to publish campaign:', err)
+      alert('Failed to publish campaign: ' + err.message)
+    }
   }
 
   return (
@@ -215,31 +208,25 @@ Best,
       <div className="grid md:grid-cols-4 gap-6 mb-8">
         <Card>
           <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-blue-600">{campaigns.length}</div>
+            <div className="text-2xl font-bold text-blue-600">{stats.totalCampaigns}</div>
             <div className="text-sm text-gray-600">Total Campaigns</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-green-600">
-              {campaigns.filter(c => c.status === 'published').length}
-            </div>
+            <div className="text-2xl font-bold text-green-600">{stats.publishedCount}</div>
             <div className="text-sm text-gray-600">Published</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-orange-600">
-              {campaigns.filter(c => c.status === 'scheduled').length}
-            </div>
+            <div className="text-2xl font-bold text-orange-600">{stats.scheduledCount}</div>
             <div className="text-sm text-gray-600">Scheduled</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-purple-600">
-              {campaigns.filter(c => c.status === 'draft').length}
-            </div>
+            <div className="text-2xl font-bold text-purple-600">{stats.draftCount}</div>
             <div className="text-sm text-gray-600">Drafts</div>
           </CardContent>
         </Card>
@@ -410,7 +397,10 @@ Best,
                       <Edit className="h-3 w-3" />
                     </Button>
                     {campaign.status === 'draft' && (
-                      <Button size="sm" className="bg-green-600 hover:bg-green-700">
+                      <Button
+                        size="sm"
+                        className="bg-green-600 hover:bg-green-700"
+                        onClick={() => handlePublishCampaign(campaign.id)}
                         <Send className="h-3 w-3 mr-1" />
                         Publish
                       </Button>
@@ -466,6 +456,9 @@ Best,
           </div>
         </CardContent>
       </Card>
+    
+      </>
+      )}
     </div>
   )
 }

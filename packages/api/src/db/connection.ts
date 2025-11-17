@@ -53,6 +53,7 @@ const dbConfig: PoolConfig = process.env.POSTGRES_URL ? {
 };
 
 // Redis configuration - Support both traditional Redis and Upstash REST API
+// Only enable Redis if explicitly configured
 const redisConfig = process.env.UPSTASH_REDIS_REST_URL ? {
   // Upstash Redis (production on Vercel)
   host: new URL(process.env.UPSTASH_REDIS_REST_URL).hostname,
@@ -63,7 +64,14 @@ const redisConfig = process.env.UPSTASH_REDIS_REST_URL ? {
   },
   maxRetriesPerRequest: 3,
   enableReadyCheck: true,
-  lazyConnect: true
+  lazyConnect: true,
+  retryStrategy: (times: number) => {
+    if (times > 3) {
+      logger.warn('Redis connection failed after 3 retries, disabling cache');
+      return null; // Stop retrying
+    }
+    return Math.min(times * 100, 2000);
+  }
 } : process.env.REDIS_URL ? {
   // Redis connection string (e.g., redis://localhost:6379)
   // Parse URL for connection details
@@ -73,27 +81,26 @@ const redisConfig = process.env.UPSTASH_REDIS_REST_URL ? {
   db: parseInt(process.env.REDIS_DB || '0'),
   maxRetriesPerRequest: 3,
   enableReadyCheck: true,
-  lazyConnect: true
-} : {
-  // Default local Redis
-  host: process.env.REDIS_HOST || 'localhost',
-  port: parseInt(process.env.REDIS_PORT || '6379'),
-  password: process.env.REDIS_PASSWORD,
-  db: parseInt(process.env.REDIS_DB || '0'),
-  maxRetriesPerRequest: 3,
-  enableReadyCheck: true,
-  lazyConnect: true
-};
+  lazyConnect: true,
+  retryStrategy: (times: number) => {
+    if (times > 3) {
+      logger.warn('Redis connection failed after 3 retries, disabling cache');
+      return null; // Stop retrying
+    }
+    return Math.min(times * 100, 2000);
+  }
+} : null; // Don't create Redis client if no config provided
 
 export class DatabaseManager {
   private static instance: DatabaseManager;
   private pool: Pool;
-  private redis: Redis;
+  private redis: Redis | null;
 
   private constructor() {
     this.pool = new Pool(dbConfig);
-    this.redis = new Redis(redisConfig);
-    
+    // Only create Redis client if config is provided
+    this.redis = redisConfig ? new Redis(redisConfig) : null;
+
     this.setupEventHandlers();
   }
 
@@ -114,18 +121,20 @@ export class DatabaseManager {
       logger.error('Unexpected error on idle PostgreSQL client', err);
     });
 
-    // Redis event handlers
-    this.redis.on('connect', () => {
-      logger.info('Connected to Redis');
-    });
+    // Redis event handlers (only if Redis is configured)
+    if (this.redis) {
+      this.redis.on('connect', () => {
+        logger.info('Connected to Redis');
+      });
 
-    this.redis.on('error', (err) => {
-      logger.error('Redis connection error', err);
-    });
+      this.redis.on('error', (err) => {
+        logger.error('Redis connection error', err);
+      });
 
-    this.redis.on('ready', () => {
-      logger.info('Redis ready to accept commands');
-    });
+      this.redis.on('ready', () => {
+        logger.info('Redis ready to accept commands');
+      });
+    }
 
     // Graceful shutdown
     process.on('SIGINT', this.gracefulShutdown.bind(this));
@@ -136,7 +145,7 @@ export class DatabaseManager {
     return this.pool;
   }
 
-  public getRedis(): Redis {
+  public getRedis(): Redis | null {
     return this.redis;
   }
 
@@ -231,15 +240,18 @@ export class DatabaseManager {
       logger.error('PostgreSQL health check failed', error);
     }
 
-    try {
-      // Add timeout to Redis ping to avoid hanging
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Redis ping timeout')), 2000)
-      );
-      await Promise.race([this.redis.ping(), timeoutPromise]);
-      results.redis = true;
-    } catch (error) {
-      logger.error('Redis health check failed', error);
+    // Only check Redis if it's configured
+    if (this.redis) {
+      try {
+        // Add timeout to Redis ping to avoid hanging
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Redis ping timeout')), 2000)
+        );
+        await Promise.race([this.redis.ping(), timeoutPromise]);
+        results.redis = true;
+      } catch (error) {
+        logger.error('Redis health check failed', error);
+      }
     }
 
     return results;
@@ -247,7 +259,7 @@ export class DatabaseManager {
 
   private async gracefulShutdown(): Promise<void> {
     logger.info('Shutting down database connections gracefully');
-    
+
     try {
       await this.pool.end();
       logger.info('PostgreSQL pool closed');
@@ -255,11 +267,13 @@ export class DatabaseManager {
       logger.error('Error closing PostgreSQL pool', error);
     }
 
-    try {
-      this.redis.disconnect();
-      logger.info('Redis connection closed');
-    } catch (error) {
-      logger.error('Error closing Redis connection', error);
+    if (this.redis) {
+      try {
+        this.redis.disconnect();
+        logger.info('Redis connection closed');
+      } catch (error) {
+        logger.error('Error closing Redis connection', error);
+      }
     }
 
     process.exit(0);
@@ -300,13 +314,15 @@ export async function initializeDatabase(): Promise<void> {
 
 // Cache helper functions
 export class CacheManager {
-  private redis: Redis;
-  
+  private redis: Redis | null;
+
   constructor() {
     this.redis = db.getRedis();
   }
 
   async get<T>(key: string): Promise<T | null> {
+    if (!this.redis) return null;
+
     try {
       const result = await this.redis.get(key);
       return result ? JSON.parse(result) : null;
@@ -317,6 +333,8 @@ export class CacheManager {
   }
 
   async set(key: string, value: any, ttlSeconds?: number): Promise<void> {
+    if (!this.redis) return;
+
     try {
       const serialized = JSON.stringify(value);
       if (ttlSeconds) {
@@ -330,6 +348,8 @@ export class CacheManager {
   }
 
   async del(key: string): Promise<void> {
+    if (!this.redis) return;
+
     try {
       await this.redis.del(key);
     } catch (error) {
@@ -338,6 +358,8 @@ export class CacheManager {
   }
 
   async flush(): Promise<void> {
+    if (!this.redis) return;
+
     try {
       await this.redis.flushdb();
     } catch (error) {
