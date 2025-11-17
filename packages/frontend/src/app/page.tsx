@@ -80,33 +80,13 @@ export default function HomePage() {
                 <span className="font-medium">Install any MCP server in seconds</span>
               </div>
             </div>
-            <CardContent className="p-6 md:p-8 bg-slate-950 text-slate-50">
-              <div className="font-mono text-sm space-y-3">
-                <div className="flex items-start gap-3">
-                  <span className="text-emerald-400 mt-0.5">$</span>
-                  <span className="text-slate-100">npm install -g @openconductor/cli</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-emerald-400 mt-0.5">$</span>
-                  <span className="text-slate-100">openconductor discover "memory"</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-emerald-400 mt-0.5">$</span>
-                  <span className="text-slate-100">openconductor install openmemory</span>
-                </div>
-
-                <div className="pt-4 space-y-2 border-t border-slate-800 mt-4">
-                  <div className="text-emerald-400 flex items-center gap-2 text-xs">
-                    <span className="text-base">✓</span> Added to Claude Desktop config
-                  </div>
-                  <div className="text-emerald-400 flex items-center gap-2 text-xs">
-                    <span className="text-base">✓</span> Port allocated automatically
-                  </div>
-                  <div className="text-emerald-400 flex items-center gap-2 text-xs">
-                    <span className="text-base">✓</span> Ready to use in Claude!
-                  </div>
-                </div>
-              </div>
+            <CardContent className="p-0 bg-slate-950">
+              <img
+                src="/demo/openconductor-demo.gif"
+                alt="OpenConductor CLI demo showing installation and setup process"
+                className="w-full h-auto"
+                loading="lazy"
+              />
             </CardContent>
           </Card>
         </section>
