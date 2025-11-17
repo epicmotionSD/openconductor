@@ -1,6 +1,4 @@
 {
-  "buildCommand": "(cd ../.. && npm install --legacy-peer-deps) && (cd ../shared && npm run build) && npm run build",
-  "installCommand": "(cd ../.. && npm install --legacy-peer-deps) && (cd ../shared && npm install --legacy-peer-deps) && npm install --legacy-peer-deps",
   "crons": [
     {
       "path": "/api/cron/discovery",
