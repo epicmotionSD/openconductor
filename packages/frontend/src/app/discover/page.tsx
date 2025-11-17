@@ -18,12 +18,21 @@ export default function DiscoverPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('')
   const [showVerifiedOnly, setShowVerifiedOnly] = useState(false)
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const [sortBy, setSortBy] = useState<'popularity' | 'newest' | 'alphabetical' | 'installs'>('popularity')
+  const [showFilters, setShowFilters] = useState(false)
 
   const categories = ['memory', 'filesystem', 'database', 'api', 'custom']
 
+  // Popular tags for quick filtering
+  const popularTags = [
+    'ai', 'api', 'automation', 'database', 'development', 'analytics',
+    'cloud', 'search', 'integration', 'data', 'productivity', 'communication'
+  ]
+
   useEffect(() => {
     searchServers()
-  }, [searchQuery, selectedCategory, showVerifiedOnly])
+  }, [searchQuery, selectedCategory, showVerifiedOnly, selectedTags, sortBy])
 
   const searchServers = async () => {
     setLoading(true)
@@ -40,6 +49,8 @@ export default function DiscoverPage() {
       if (params.category) queryString.append('category', params.category)
       if (params.verified) queryString.append('verified', 'true')
       if (params.limit) queryString.append('limit', params.limit.toString())
+      if (selectedTags.length > 0) queryString.append('tags', selectedTags.join(','))
+      if (sortBy) queryString.append('sortBy', sortBy)
 
       // Use the configured API URL which already includes /v1
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1'
@@ -59,6 +70,22 @@ export default function DiscoverPage() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     searchServers()
+  }
+
+  const toggleTag = (tag: string) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter(t => t !== tag))
+    } else {
+      setSelectedTags([...selectedTags, tag])
+    }
+  }
+
+  const clearAllFilters = () => {
+    setSearchQuery('')
+    setSelectedCategory('')
+    setShowVerifiedOnly(false)
+    setSelectedTags([])
+    setSortBy('popularity')
   }
 
   return (
@@ -100,31 +127,76 @@ export default function DiscoverPage() {
           </form>
 
           {/* Filters */}
-          <div className="flex flex-wrap gap-4 items-center">
-            <div className="flex items-center gap-2">
-              <Filter className="h-4 w-4" />
-              <span className="text-sm font-medium">Filters:</span>
-            </div>
-            
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-3 py-1 border rounded-md text-sm"
-            >
-              <option value="">All Categories</option>
-              {categories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
-              ))}
-            </select>
+          <div className="space-y-4">
+            <div className="flex flex-wrap gap-4 items-center">
+              <div className="flex items-center gap-2">
+                <Filter className="h-4 w-4" />
+                <span className="text-sm font-medium">Filters:</span>
+              </div>
 
-            <label className="flex items-center gap-2 text-sm">
-              <input
-                type="checkbox"
-                checked={showVerifiedOnly}
-                onChange={(e) => setShowVerifiedOnly(e.target.checked)}
-              />
-              Verified only
-            </label>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="px-3 py-1 border rounded-md text-sm"
+              >
+                <option value="">All Categories</option>
+                {categories.map(cat => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
+                className="px-3 py-1 border rounded-md text-sm"
+              >
+                <option value="popularity">Sort: Popularity</option>
+                <option value="installs">Sort: Most Installs</option>
+                <option value="newest">Sort: Newest</option>
+                <option value="alphabetical">Sort: A-Z</option>
+              </select>
+
+              <label className="flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={showVerifiedOnly}
+                  onChange={(e) => setShowVerifiedOnly(e.target.checked)}
+                />
+                Verified only
+              </label>
+
+              {(selectedCategory || showVerifiedOnly || selectedTags.length > 0 || sortBy !== 'popularity') && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={clearAllFilters}
+                >
+                  Clear All
+                </Button>
+              )}
+            </div>
+
+            {/* Tag Selection */}
+            <div className="space-y-2">
+              <div className="text-sm font-medium">Filter by tags:</div>
+              <div className="flex flex-wrap gap-2">
+                {popularTags.map(tag => (
+                  <Badge
+                    key={tag}
+                    variant={selectedTags.includes(tag) ? "default" : "outline"}
+                    className="cursor-pointer hover:bg-primary/90 transition-colors"
+                    onClick={() => toggleTag(tag)}
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+              {selectedTags.length > 0 && (
+                <div className="text-sm text-muted-foreground">
+                  Selected: {selectedTags.join(', ')}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -154,11 +226,7 @@ export default function DiscoverPage() {
                 <p className="text-muted-foreground mb-4">
                   Try adjusting your search criteria
                 </p>
-                <Button onClick={() => {
-                  setSearchQuery('')
-                  setSelectedCategory('')
-                  setShowVerifiedOnly(false)
-                }}>
+                <Button onClick={clearAllFilters}>
                   Clear Filters
                 </Button>
               </div>

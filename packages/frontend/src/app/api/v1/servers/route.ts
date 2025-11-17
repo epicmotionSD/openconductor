@@ -11,14 +11,21 @@ export async function GET(request: NextRequest) {
     const query = searchParams.get('query');
     const category = searchParams.get('category');
     const verified = searchParams.get('verified');
+    const tagsParam = searchParams.get('tags');
+    const sortBy = searchParams.get('sortBy') as 'popularity' | 'newest' | 'alphabetical' | 'installs' | null;
     const limit = parseInt(searchParams.get('limit') || '100');
     const page = parseInt(searchParams.get('page') || '1');
+
+    // Parse tags from comma-separated string
+    const tags = tagsParam ? tagsParam.split(',').filter(t => t.trim()) : undefined;
 
     // Use optimized database service
     const result = await db.getServers({
       query: query || undefined,
       category: category || undefined,
       verified: verified === 'true' ? true : undefined,
+      tags: tags && tags.length > 0 ? tags : undefined,
+      sortBy: sortBy || 'popularity',
       limit,
       page,
       includeUnverified: false // Public endpoint only shows verified

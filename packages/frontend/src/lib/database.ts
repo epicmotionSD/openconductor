@@ -38,11 +38,13 @@ class DatabaseService {
     query?: string;
     category?: string;
     verified?: boolean;
+    tags?: string[];
+    sortBy?: 'popularity' | 'newest' | 'alphabetical' | 'installs';
     limit?: number;
     page?: number;
     includeUnverified?: boolean;
   }) {
-    const { query, category, verified, limit = 20, page = 1, includeUnverified = false } = options;
+    const { query, category, verified, tags, sortBy = 'popularity', limit = 20, page = 1, includeUnverified = false } = options;
     
     let sql = `
       WITH server_data AS (
@@ -94,7 +96,31 @@ class DatabaseService {
       sql += ` AND s.verified = true`;
     }
 
-    sql += ` ORDER BY st.github_stars DESC NULLS LAST, s.created_at DESC`;
+    // Tag filtering - match servers that contain all specified tags (using array overlap operator)
+    if (tags && tags.length > 0) {
+      sql += ` AND s.tags && $${paramCount}::text[]`;
+      params.push(tags);
+      paramCount++;
+    }
+
+    // Dynamic sorting
+    switch (sortBy) {
+      case 'popularity':
+        sql += ` ORDER BY st.github_stars DESC NULLS LAST, s.created_at DESC`;
+        break;
+      case 'installs':
+        sql += ` ORDER BY st.cli_installs DESC NULLS LAST, st.github_stars DESC NULLS LAST`;
+        break;
+      case 'newest':
+        sql += ` ORDER BY s.created_at DESC`;
+        break;
+      case 'alphabetical':
+        sql += ` ORDER BY s.name ASC`;
+        break;
+      default:
+        sql += ` ORDER BY st.github_stars DESC NULLS LAST, s.created_at DESC`;
+    }
+
     sql += ` LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
     params.push(limit, (page - 1) * limit);
 
