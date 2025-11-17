@@ -1,4 +1,5 @@
 {
+  "framework": null,
   "buildCommand": "npm install --legacy-peer-deps && cd packages/shared && npm run build && cd ../frontend && npm run build",
   "outputDirectory": "packages/frontend/.next",
   "installCommand": "npm install --legacy-peer-deps",
