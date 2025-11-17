@@ -1,336 +1,226 @@
 # OpenConductor
 
-> **🚀 The npm for MCP servers - 70+ developers already using it!**
-
-**OpenConductor is the missing registry and CLI for the Model Context Protocol.** Find, install, and manage 60+ AI agent tools with a professional developer experience. **70+ developers have already discovered and installed OpenConductor organically** - proving there's real demand for better MCP tooling.
-
-*Works with modern stacks including Vercel, Supabase, and more.*
-
-**📊 Early Success:** 70+ organic downloads with zero marketing - developers are finding and loving OpenConductor before we even launched!
-
-**⚡ Core Features:**
-- 🔍 **Smart Discovery** - Find any of 60+ MCP servers instantly
-- 📦 **One-Command Install** - Like npm, but for AI agent tools
-- 🤖 **Automated GitHub Sync** - Real-time server updates and discovery
-- 📊 **Professional Analytics** - Trending, stats, and insights (Pro feature)
-- 🚀 **Server Submissions** - Community-driven platform growth
-
-```bash
-# The npm for AI agents - install any MCP server in 3 commands:
-npm install -g @openconductor/cli
-openconductor discover "memory"    # → Find memory-related tools
-openconductor install openmemory   # → Install with automatic configuration
-```
-
-**🚀 Public Launch:** Saturday November 16th at 9:00 AM ET
-**🆓 Free for All:** Core platform available to every developer
-**💰 Pricing:** Free tier + Pro ($9/mo) + Enterprise ($49/mo)
-**📈 Early Adoption:** 70+ developers already using OpenConductor with zero marketing
+> The npm registry for Model Context Protocol servers
 
 [![npm version](https://img.shields.io/npm/v/@openconductor/cli.svg)](https://www.npmjs.com/package/@openconductor/cli)
 [![Downloads](https://img.shields.io/npm/dm/@openconductor/cli.svg)](https://www.npmjs.com/package/@openconductor/cli)
-[![GitHub stars](https://img.shields.io/github/stars/openconductor/openconductor.svg)](https://github.com/openconductor/openconductor)
-[![Discord](https://img.shields.io/discord/1234567890.svg)](https://discord.gg/openconductor)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+[Website](https://openconductor.ai) • [Documentation](#documentation) • [Discord](https://discord.gg/openconductor) • [Submit a Server](/submit)
 
 ---
 
-## 🚀 **What is OpenConductor?**
+## What is OpenConductor?
 
-**The Modern AI Stack Problem:** You deploy with Vercel, build components with v0, store data in Supabase, manage content with BaseHub—but your AI agents live in isolation. No unified orchestration layer connects your stack.
+OpenConductor is the missing registry and CLI for the Model Context Protocol. Find, install, and manage 60+ MCP servers with a professional developer experience.
 
-**The Orchestration Solution:** OpenConductor is the missing platform layer that completes your modern AI development workflow. Deploy agents as easily as components, with the same professional tooling you expect from your entire stack.
-
-**🎯 Why Choose OpenConductor:**
-- **Ecosystem Integration** - Works with Vercel, v0, Supabase, BaseHub out of the box
-- **Professional Orchestration** - Deploy agents alongside your components with one workflow
-- **The npm for AI agents** - 60+ servers, one command, zero configuration
-- **Platform-native** - Built for the modern AI stack, not legacy workflows
-
-### **Before OpenConductor:**
 ```bash
-# Find server manually on GitHub
-# Read installation docs
-# Copy/paste config to claude_desktop_config.json
-# Debug port conflicts
-# Restart Claude Desktop
-# Hope it works 🤞
-```
-
-### **After OpenConductor:**
-```bash
+npm install -g @openconductor/cli
+openconductor discover "memory"
 openconductor install openmemory
-# ✓ Found server
-# ✓ Installed package
-# ✓ Added to Claude config
-# ✓ Allocated port automatically
-# ✓ Ready to use!
+# ✓ Ready to use in Claude!
 ```
 
----
+## Features
 
-## ⚡ **Quick Start**
+- **🔍 Smart Discovery** - Search 60+ MCP servers by category, tags, and popularity
+- **⚡ One-Command Install** - Automatic configuration and port management
+- **🤖 Auto-Discovery** - Daily GitHub sync adds new servers automatically
+- **✅ Community Verified** - Automated validation with manual review
+- **🌐 Cross-Platform** - Works on macOS, Windows, and Linux
 
-### **Installation**
+## Quick Start
+
+### Install the CLI
+
 ```bash
 npm install -g @openconductor/cli
 ```
 
-### **Discovery**
+### Discover Servers
+
 ```bash
 # Browse all servers
 openconductor discover
 
-# Search for memory servers
-openconductor discover "memory"
+# Search for specific servers
+openconductor discover "database"
 
 # Filter by category
-openconductor discover --category database
-
-# Show only verified servers
-openconductor discover --verified
+openconductor discover --category memory
 ```
 
-### **Installation**
+### Install Servers
+
 ```bash
 # Install any server
 openconductor install openmemory
 
-# See what's installed  
+# List installed servers
 openconductor list
 
 # Remove a server
 openconductor remove openmemory
 ```
 
-### **That's it!** 🎉
+That's it! No config files to edit, no ports to manage, no manual restarts.
 
-No config files to edit. No ports to manage. No Claude Desktop restarts to remember.
+## Popular Servers
 
----
+| Server | Category | Description | GitHub Stars |
+|--------|----------|-------------|--------------|
+| [OpenMemory](https://github.com/zhaoolee/openmemory) | Memory | Hierarchical memory for AI agents | ⭐ 1.6K |
+| [GitHub MCP](https://github.com/modelcontextprotocol/servers) | API | Repository management | ⭐ 1.1K |
+| [PostgreSQL MCP](https://github.com/modelcontextprotocol/servers) | Database | Secure database queries | ⭐ 654 |
+| [Filesystem MCP](https://github.com/modelcontextprotocol/servers) | Files | Sandboxed file operations | ⭐ 892 |
 
-## 🔥 **Featured MCP Servers**
+[**Browse All Servers →**](https://openconductor.ai/discover)
 
-| **Server** | **Category** | **Description** | **Stars** |
-|------------|--------------|-----------------|-----------|
-| [**OpenMemory**](https://openconductor.ai/servers/openmemory) | 🧠 Memory | Hierarchical memory for AI agents | ⭐ 1.6K |
-| [**GitHub MCP**](https://openconductor.ai/servers/github-mcp) | 🔌 API | Repository management and automation | ⭐ 1.1K |
-| [**PostgreSQL MCP**](https://openconductor.ai/servers/postgresql-mcp) | 🗄️ Database | Secure database queries | ⭐ 654 |
-| [**Filesystem MCP**](https://openconductor.ai/servers/filesystem-mcp) | 📁 Files | Sandboxed file operations | ⭐ 892 |
-| [**Slack MCP**](https://openconductor.ai/servers/slack-mcp) | 💬 Communication | Workspace messaging | ⭐ 789 |
+## How It Works
 
-[**→ Browse 60+ Server Collection**](https://openconductor.ai/discover) *(Free for All Developers)*
+1. **Discover** - Browse the registry via CLI or web interface
+2. **Install** - One command installs and configures everything
+3. **Use** - Server is immediately available in Claude Desktop
+4. **Stay Updated** - Automatic discovery adds new servers daily
 
----
+## Architecture
 
-## 🎯 **Why OpenConductor?**
+OpenConductor is built as a monorepo with three main packages:
 
-### **🔍 Smart Discovery**
-- **Search 127+ servers** by name, category, or functionality
-- **Trending analysis** shows what's gaining popularity
-- **Verified servers** marked by community review
-- **Smart suggestions** help you find the right tools
-
-### **⚡ One-Command Installation**  
-- **Zero configuration** - works out of the box
-- **Cross-platform** - macOS, Windows, Linux support
-- **Port management** - automatic conflict resolution
-- **Backup safety** - auto-backup your existing config
-
-### **🛠️ Developer Experience**
-- **Interactive prompts** guide you through setup
-- **Beautiful output** with progress tracking
-- **Helpful errors** with troubleshooting tips  
-- **Update notifications** keep your tools current
-
-### **🌍 Community-Driven**
-- **Open source** - MIT licensed, contribute freely
-- **Auto-synced** - new servers appear automatically
-- **GitHub native** - integrates with your workflow
-- **No vendor lock-in** - works with any MCP client
-
----
-
-## 🎬 **See It In Action**
-
-### **30-Second Demo: Install & Discover**
-<!-- [Demo GIF will go here] -->
-*Watch the full installation and discovery workflow*
-
-### **Live Examples**
-
-**Memory Management:**
-```bash
-openconductor install openmemory
-# → Hierarchical memory for your AI agents
+```text
+packages/
+├── cli/         # Command-line interface
+├── frontend/    # Next.js web application
+└── api/         # Express.js backend API
 ```
 
-**Database Operations:**
-```bash  
-openconductor install postgresql-mcp
-# → Secure database queries and schema management
-```
+### Tech Stack
 
-**File System Access:**
-```bash
-openconductor install filesystem-mcp  
-# → Sandboxed file operations
-```
+- **Frontend**: Next.js 14, TypeScript, TailwindCSS
+- **Backend**: Express.js, PostgreSQL, TypeScript
+- **CLI**: Node.js, Commander.js
+- **Infrastructure**: Vercel (frontend), Railway (backend)
 
-**GitHub Integration:**
-```bash
-openconductor install github-mcp
-# → Repository management and automation
-```
+## Contributing
 
----
+We welcome contributions! Here's how you can help:
 
-## 🏗️ **How It Works**
+### Submit Your Server
 
-```mermaid
-graph LR
-    A[👤 Developer] --> B[🔍 openconductor discover]
-    B --> C[📋 Browse Registry] 
-    C --> D[⚡ openconductor install]
-    D --> E[✅ Ready to Use]
-    
-    F[📦 GitHub Repos] --> G[🤖 Auto-Sync]
-    G --> H[🗄️ Registry Database]
-    H --> C
-```
+1. Visit [openconductor.ai/submit](https://openconductor.ai/submit)
+2. Enter your GitHub repository URL
+3. Our system will validate and add it automatically
 
-1. **Developers discover** servers through CLI or web interface
-2. **One command installs** packages and configures Claude Desktop  
-3. **Background automation** keeps registry current with GitHub
-4. **Community verification** ensures quality and security
+Or add the `mcp-server` topic to your GitHub repo and we'll discover it.
 
----
+### Improve the Platform
 
-## 🚀 **Ecosystem Integration Examples**
-
-### **For Vercel + v0 Developers**
-```bash
-# Deploy your Next.js app
-vercel deploy
-
-# Install AI orchestration
-openconductor install github-mcp filesystem-mcp
-
-# Your agents now work with your deployment workflow
-# Components built with v0, agents managed with OpenConductor
-```
-
-### **For Supabase Teams**
-```bash
-# Set up your database
-supabase init
-supabase db push
-
-# Connect AI agents to your data layer
-openconductor install supabase-mcp postgresql-mcp
-
-# Your agents query the same database as your app
-# One data layer, unified AI integration
-```
-
-### **For BaseHub + Content Teams**
-```bash
-# Manage content in BaseHub
-# Deploy site with Vercel
-# Connect AI agents to your content
-
-openconductor install basehub-mcp github-mcp
-
-# Agents understand your content structure
-# Automated workflows with your existing stack
-```
-
-### **Complete Modern AI Stack**
-```bash
-# The full ecosystem integration
-openconductor install supabase-mcp github-mcp filesystem-mcp basehub-mcp
-
-# Deploy with Vercel ✓
-# Build with v0 ✓
-# Data with Supabase ✓
-# Content with BaseHub ✓
-# Orchestrate with OpenConductor ✓
-```
-
----
-
-## 🤝 **Contributing**
-
-We'd love your help making OpenConductor better!
-
-### **Add Your MCP Server**
-1. Add `mcp-server` topic to your GitHub repo
-2. Include installation instructions in README  
-3. We'll auto-discover and index it
-4. Community can find and install it instantly
-
-### **Improve the Platform**
-1. [Report bugs](https://github.com/openconductor/openconductor/issues)
-2. [Suggest features](https://github.com/openconductor/openconductor/discussions)  
-3. [Submit pull requests](https://github.com/openconductor/openconductor/pulls)
-4. [Join our Discord](https://discord.gg/openconductor)
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
----
+## Documentation
 
-## 📊 **Community Stats**
+- **[Getting Started](docs/getting-started.md)** - Installation and first steps
+- **[CLI Reference](docs/cli-reference.md)** - Complete command documentation
+- **[API Documentation](docs/api.md)** - REST API endpoints
+- **[Architecture](docs/architecture.md)** - System design and infrastructure
+- **[Contributing](CONTRIBUTING.md)** - How to contribute
 
-- **🎯 60+ Professional MCP Servers** (growing daily)
-- **⚡ 1-command installation** with automated configuration
-- **🔍 Smart discovery platform** with search and filtering
-- **✅ Community verification** and submission workflows
-- **🌐 Cross-platform support** (macOS, Windows, Linux)
+## Development
 
----
+### Prerequisites
 
-## 💬 **Community & Support**
+- Node.js 18+
+- PostgreSQL 14+
+- npm or pnpm
 
-- **🌐 Website**: [openconductor.ai](https://openconductor.ai)
-- **💬 Discord**: [Join our community](https://discord.gg/openconductor)
-- **🐛 Issues**: [Report bugs](https://github.com/openconductor/openconductor/issues)
-- **💡 Discussions**: [Share ideas](https://github.com/openconductor/openconductor/discussions)
-- **📧 Email**: [hello@openconductor.ai](mailto:hello@openconductor.ai)
+### Setup
 
----
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/openconductor.git
+cd openconductor
 
-## 📄 **License**
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your configuration
+
+# Run database migrations
+npm run migrate
+
+# Start development servers
+npm run dev
+```
+
+This starts:
+
+- Frontend at `http://localhost:3000`
+- API at `http://localhost:3001`
+
+### Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run integration tests
+npm run test:integration
+```
+
+## Deployment
+
+### Frontend (Vercel)
+
+The frontend automatically deploys to Vercel on push to `main`:
+
+```bash
+vercel --prod
+```
+
+### Backend (Railway)
+
+The backend deploys to Railway:
+
+```bash
+railway up
+```
+
+See [docs/deployment.md](docs/deployment.md) for detailed deployment instructions.
+
+## Community
+
+- **Website**: [openconductor.ai](https://openconductor.ai)
+- **Discord**: [Join our community](https://discord.gg/openconductor)
+- **GitHub Discussions**: [Share ideas](https://github.com/openconductor/openconductor/discussions)
+- **Issues**: [Report bugs](https://github.com/openconductor/openconductor/issues)
+- **Email**: [hello@openconductor.ai](mailto:hello@openconductor.ai)
+
+## License
 
 MIT License - see [LICENSE](LICENSE) for details.
 
----
-
-## 🙏 **Acknowledgments**
+## Acknowledgments
 
 Built for the [Model Context Protocol](https://modelcontextprotocol.io) community.
 
 Special thanks to:
 - **Anthropic** for creating MCP
-- **All MCP server maintainers** building the ecosystem  
-- **Early OpenConductor users** providing feedback and support
+- **All MCP server maintainers** for building the ecosystem
+- **Early OpenConductor users** for feedback and support
 
 ---
 
-<div align="center">
+**⭐ Star this repo to support the project!**
 
-**⭐ Star this repo to support the enterprise MCP platform!**
-
-**🚀 Ready for Beta Access?**
-
-[**Join Enterprise Beta →**](https://openconductor.ai) *(Limited to First 1000 Users)*
-
-</div>
-
----
-
-**📅 Beta Launch Schedule:**
-- **Saturday, Nov 16th at 9:00 AM ET** - Enterprise Beta Launch
-- **First 1000 Users** - Exclusive beta access with full enterprise features
-- **Community Feedback Period** - Shape the platform with direct input
-- **Post-Beta Expansion** - Public launch with enhanced features based on beta learnings
-
-*OpenConductor Enterprise Beta - Professional MCP infrastructure for the first 1000 developers*
+Made with ❤️ by the OpenConductor team
