@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Terminal, Menu } from 'lucide-react'
+import { PROJECT_CONFIG } from '@openconductor/shared'
 
 interface SiteHeaderProps {
   variant?: 'default' | 'minimal'
@@ -23,7 +24,7 @@ export function SiteHeader({ variant = 'default' }: SiteHeaderProps) {
               <Link href="/docs" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Docs
               </Link>
-              <a href="https://github.com/openconductor/openconductor" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              <a href={PROJECT_CONFIG.github.url} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 GitHub
               </a>
             </nav>

@@ -7,3 +7,6 @@ export * from './types';
 
 // Re-export ecosystem analytics types
 export * from './ecosystem-analytics';
+
+// Re-export project configuration
+export * from './config';
