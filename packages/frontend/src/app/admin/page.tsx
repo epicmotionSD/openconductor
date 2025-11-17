@@ -71,13 +71,25 @@ export default function AdminDashboard() {
       setLoading(true)
       setError(null)
 
-      const response = await fetch('/api/admin/dashboard')
+      // Get admin API key from localStorage
+      const adminKey = typeof window !== 'undefined' ? localStorage.getItem('admin-api-key') : null
+
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json'
+      }
+
+      // Add authorization header if admin key is present
+      if (adminKey) {
+        headers['Authorization'] = `Bearer ${adminKey}`
+      }
+
+      const response = await fetch('/api/admin/dashboard', { headers })
       const result = await response.json()
 
       if (result.success) {
         setStats(result.data)
       } else {
-        throw new Error(result.error || 'Failed to fetch stats')
+        throw new Error(result.error?.message || result.error || 'Failed to fetch stats')
       }
     } catch (err: any) {
       console.error('Failed to fetch admin stats:', err)
