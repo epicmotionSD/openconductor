@@ -18,6 +18,10 @@ function authenticateAdmin(request: NextRequest): boolean {
 }
 
 export async function GET(request: NextRequest) {
+  console.log('[ADMIN DASHBOARD] Route handler called');
+  console.log('[ADMIN DASHBOARD] DATABASE_URL set:', !!process.env.DATABASE_URL);
+  console.log('[ADMIN DASHBOARD] POSTGRES_URL set:', !!process.env.POSTGRES_URL);
+
   try {
     // Skip authentication for now - can be added later
     // if (!authenticateAdmin(request)) {
@@ -26,6 +30,8 @@ export async function GET(request: NextRequest) {
     //     error: { code: 'UNAUTHORIZED', message: 'Invalid or missing admin API key' }
     //   }, { status: 401 });
     // }
+
+    console.log('[ADMIN DASHBOARD] Starting database queries...');
 
     // Query all dashboard stats in parallel
     const [serverStats, githubStats, apiStats, recentActivity] = await Promise.all([
@@ -129,12 +135,15 @@ export async function GET(request: NextRequest) {
       }))
     };
 
+    console.log('[ADMIN DASHBOARD] Successfully built stats response');
+
     return NextResponse.json({
       success: true,
       data: stats,
       meta: {
         timestamp: new Date().toISOString(),
-        version: '1.0.0'
+        version: '1.0.0',
+        route: 'admin-dashboard' // Identifier to verify this route is being hit
       }
     });
 
