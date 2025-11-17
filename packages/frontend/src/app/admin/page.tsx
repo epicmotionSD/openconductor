@@ -124,7 +124,7 @@ export default function AdminDashboard() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">Total Servers</p>
-                      <p className="text-3xl font-bold text-primary">{stats.servers.total}</p>
+                      <p className="text-3xl font-bold text-primary">{stats.servers?.total || 0}</p>
                     </div>
                     <Server className="h-8 w-8 text-primary" />
                   </div>
@@ -154,12 +154,12 @@ export default function AdminDashboard() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">GitHub Sync</p>
-                      <p className="text-3xl font-bold text-info">{stats.github.repos}</p>
+                      <p className="text-3xl font-bold text-info">{stats.github?.repos || 0}</p>
                     </div>
                     <GitBranch className="h-8 w-8 text-info" />
                   </div>
                   <p className="text-xs text-muted-foreground mt-2">
-                    Last sync: {stats.github.lastSync}
+                    Last sync: {stats.github?.lastSync || 'Never'}
                   </p>
                 </CardContent>
               </Card>
@@ -234,27 +234,27 @@ export default function AdminDashboard() {
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="text-foreground">Pending Jobs</span>
-                    <Badge variant="outline">{stats.jobs.pending}</Badge>
+                    <Badge variant="outline">{stats.jobs?.pending || 0}</Badge>
                   </div>
 
                   <div className="flex items-center justify-between">
                     <span className="text-foreground">Currently Processing</span>
                     <Badge variant="secondary" className="bg-info/10 text-info border-info/20">
-                      {stats.jobs.processing}
+                      {stats.jobs?.processing || 0}
                     </Badge>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <span className="text-foreground">Completed Today</span>
                     <Badge variant="secondary" className="bg-success/10 text-success border-success/20">
-                      {stats.jobs.completed}
+                      {stats.jobs?.completed || 0}
                     </Badge>
                   </div>
 
                   <div className="flex items-center justify-between">
                     <span className="text-foreground">Failed (24h)</span>
                     <Badge variant="secondary" className="bg-destructive/10 text-destructive border-destructive/20">
-                      {stats.jobs.failed}
+                      {stats.jobs?.failed || 0}
                     </Badge>
                   </div>
                 </CardContent>
@@ -272,22 +272,22 @@ export default function AdminDashboard() {
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                   <div className="text-center p-4 bg-primary/10 rounded-lg border border-primary/20">
-                    <div className="text-2xl font-bold text-primary">{stats.servers.total}</div>
+                    <div className="text-2xl font-bold text-primary">{stats.servers?.total || 0}</div>
                     <div className="text-sm text-muted-foreground">Total Servers</div>
                   </div>
 
                   <div className="text-center p-4 bg-success/10 rounded-lg border border-success/20">
-                    <div className="text-2xl font-bold text-success">{stats.servers.verified}</div>
+                    <div className="text-2xl font-bold text-success">{stats.servers?.verified || 0}</div>
                     <div className="text-sm text-muted-foreground">Verified</div>
                   </div>
 
                   <div className="text-center p-4 bg-warning/10 rounded-lg border border-warning/20">
-                    <div className="text-2xl font-bold text-warning">{stats.servers.pending}</div>
+                    <div className="text-2xl font-bold text-warning">{stats.servers?.pending || 0}</div>
                     <div className="text-sm text-muted-foreground">Pending Review</div>
                   </div>
 
                   <div className="text-center p-4 bg-info/10 rounded-lg border border-info/20">
-                    <div className="text-2xl font-bold text-info">{stats.servers.trending}</div>
+                    <div className="text-2xl font-bold text-info">{stats.servers?.trending || 0}</div>
                     <div className="text-sm text-muted-foreground">Trending</div>
                   </div>
                 </div>
@@ -328,12 +328,12 @@ export default function AdminDashboard() {
               <CardContent className="space-y-4">
                 <div className="grid md:grid-cols-3 gap-4">
                   <div className="text-center p-4 border rounded-lg">
-                    <div className="text-xl font-bold text-blue-600">{stats.github.repos}</div>
+                    <div className="text-xl font-bold text-blue-600">{stats.github?.repos || 0}</div>
                     <div className="text-sm text-gray-600">Monitored Repos</div>
                   </div>
-                  
+
                   <div className="text-center p-4 border rounded-lg">
-                    <div className="text-xl font-bold text-green-600">{stats.github.webhooks}</div>
+                    <div className="text-xl font-bold text-green-600">{stats.github?.webhooks || 0}</div>
                     <div className="text-sm text-gray-600">Webhooks Today</div>
                   </div>
                   
@@ -369,7 +369,7 @@ export default function AdminDashboard() {
                 <Link href="/admin/servers/verify">
                   <CheckCircle className="h-6 w-6" />
                   <span>Verify Servers</span>
-                  <Badge variant="secondary">{stats.servers.pending}</Badge>
+                  <Badge variant="secondary">{stats.servers?.pending || 0}</Badge>
                 </Link>
               </Button>
               
