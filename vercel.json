@@ -1,6 +1,11 @@
 {
-  "buildCommand": "cd ../.. && npm run build",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install --legacy-peer-deps && (cd ../../packages/shared && npm install --legacy-peer-deps) && (cd ../../packages/frontend && npm install --legacy-peer-deps)",
-  "outputDirectory": ".next"
+  "buildCommand": "npm install --legacy-peer-deps && cd packages/shared && npm run build && cd ../frontend && npm run build",
+  "outputDirectory": "packages/frontend/.next",
+  "installCommand": "npm install --legacy-peer-deps",
+  "crons": [
+    {
+      "path": "/api/cron/discovery",
+      "schedule": "0 2 * * *"
+    }
+  ]
 }
