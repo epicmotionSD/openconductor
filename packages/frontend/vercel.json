@@ -1,4 +1,8 @@
 {
+  "framework": null,
+  "buildCommand": "cd ../.. && npm install --legacy-peer-deps && cd packages/shared && npm run build && cd ../frontend && npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "cd ../.. && npm install --legacy-peer-deps && cd packages/shared && npm install --legacy-peer-deps && cd ../frontend && npm install --legacy-peer-deps",
   "crons": [
     {
       "path": "/api/cron/discovery",
