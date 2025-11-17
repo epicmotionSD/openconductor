@@ -139,12 +139,12 @@ export default function AdminDashboard() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">API Requests</p>
-                      <p className="text-3xl font-bold text-success">{stats.api.requestsToday.toLocaleString()}</p>
+                      <p className="text-3xl font-bold text-success">{(stats.api?.requestsToday || 0).toLocaleString()}</p>
                     </div>
                     <Activity className="h-8 w-8 text-success" />
                   </div>
                   <p className="text-xs text-muted-foreground mt-2">
-                    Today, {stats.api.avgResponseTime}ms avg
+                    Today, {stats.api?.avgResponseTime || 0}ms avg
                   </p>
                 </CardContent>
               </Card>
@@ -169,7 +169,7 @@ export default function AdminDashboard() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">Error Rate</p>
-                      <p className="text-3xl font-bold text-warning">{stats.api.errorRate}%</p>
+                      <p className="text-3xl font-bold text-warning">{stats.api?.errorRate || 0}%</p>
                     </div>
                     <Shield className="h-8 w-8 text-warning" />
                   </div>
@@ -385,7 +385,7 @@ export default function AdminDashboard() {
                 <Link href="/admin/users">
                   <Users className="h-6 w-6" />
                   <span>User Management</span>
-                  <Badge variant="secondary">{stats.api.activeKeys}</Badge>
+                  <Badge variant="secondary">{stats.api?.activeKeys || 0}</Badge>
                 </Link>
               </Button>
               
