@@ -401,6 +401,7 @@ export default function MarketingManagementPage() {
                         size="sm"
                         className="bg-green-600 hover:bg-green-700"
                         onClick={() => handlePublishCampaign(campaign.id)}
+                      >
                         <Send className="h-3 w-3 mr-1" />
                         Publish
                       </Button>
@@ -456,9 +457,6 @@ export default function MarketingManagementPage() {
           </div>
         </CardContent>
       </Card>
-    
-      </>
-      )}
     </div>
   )
 }
