@@ -10,6 +10,7 @@ import { serversRouter } from './routes/servers';
 import adminRouter from './routes/admin';
 import feedbackRouter from './routes/feedback';
 import ecosystemAnalyticsRouter from './routes/ecosystem-analytics';
+import { discoveryRouter } from './routes/discovery';
 import { errorHandler, requestLogger, performanceMonitor, securityLogger } from './middleware/errorHandler';
 import { healthCheckHandler, livenessHandler, readinessHandler, metricsHandler } from './monitoring/healthChecks';
 import { anonymousLimiter, trackApiUsage } from './middleware/rateLimiter';
@@ -86,10 +87,12 @@ app.use('/v1/servers', serversRouter);
 app.use('/v1/admin', adminRouter);
 app.use('/v1/feedback', feedbackRouter);
 app.use('/v1/analytics', ecosystemAnalyticsRouter);
+app.use('/v1/discovery', discoveryRouter);
 
 // Legacy API routes for backward compatibility
 app.use('/api/servers', serversRouter);
 app.use('/api/feedback', feedbackRouter);
+app.use('/api/discovery', discoveryRouter);
 
 // Additional API endpoints
 app.get('/v1/search', (req, res) => res.redirect(307, `/v1/servers/search?${req.url.split('?')[1] || ''}`));

@@ -671,7 +671,7 @@ export class GitHubDiscoveryService {
    * Get discovery statistics
    */
   async getDiscoveryStats(): Promise<any> {
-    const stats = await db.query(`
+    const queueStats = await db.query(`
       SELECT
         COUNT(*) as total_queued,
         COUNT(*) FILTER (WHERE status = 'pending') as pending,
@@ -683,7 +683,109 @@ export class GitHubDiscoveryService {
       FROM discovery_queue
     `);
 
-    return stats.rows[0];
+    const recentActivity = await db.query(`
+      SELECT
+        DATE(processed_at) as date,
+        COUNT(*) as total,
+        COUNT(*) FILTER (WHERE status = 'completed') as completed,
+        COUNT(*) FILTER (WHERE status = 'failed') as failed
+      FROM discovery_queue
+      WHERE processed_at >= NOW() - INTERVAL '7 days'
+      GROUP BY DATE(processed_at)
+      ORDER BY date DESC
+    `);
+
+    const validationStats = await db.query(`
+      SELECT
+        validation_type,
+        COUNT(*) as total,
+        COUNT(*) FILTER (WHERE passed = true) as passed,
+        AVG(score) as avg_score
+      FROM server_validations
+      WHERE validated_at >= NOW() - INTERVAL '7 days'
+      GROUP BY validation_type
+    `);
+
+    return {
+      queueStats: queueStats.rows[0],
+      recentActivity: recentActivity.rows,
+      validationStats: validationStats.rows
+    };
+  }
+
+  /**
+   * Process discovery queue in batch
+   * Validates and adds multiple repositories from the queue
+   */
+  async processQueue(options: { limit?: number } = {}): Promise<{
+    processed: number;
+    added: number;
+    failed: number;
+    results: DiscoveryResult[];
+  }> {
+    const limit = options.limit || 10;
+    const results: DiscoveryResult[] = [];
+    let added = 0;
+    let failed = 0;
+
+    logger.info(`Processing discovery queue (limit: ${limit})`);
+
+    for (let i = 0; i < limit; i++) {
+      const result = await this.processNextDiscoveryItem();
+
+      if (!result) {
+        logger.info('No more items in queue');
+        break;
+      }
+
+      results.push(result);
+
+      if (result.added) {
+        added++;
+      } else {
+        failed++;
+      }
+    }
+
+    logger.info(`Queue processing complete: ${results.length} processed, ${added} added, ${failed} failed`);
+
+    return {
+      processed: results.length,
+      added,
+      failed,
+      results
+    };
+  }
+
+  /**
+   * Get items in discovery queue
+   */
+  async getQueueItems(options: { limit?: number; status?: string } = {}): Promise<any[]> {
+    const limit = options.limit || 20;
+    const status = options.status || 'pending';
+
+    const result = await db.query(
+      `SELECT
+        id,
+        repository_url,
+        source_type,
+        priority,
+        status,
+        retry_count,
+        max_retries,
+        last_error,
+        metadata,
+        created_at,
+        processed_at,
+        next_retry_at
+      FROM discovery_queue
+      WHERE status = $1
+      ORDER BY priority DESC, created_at ASC
+      LIMIT $2`,
+      [status, limit]
+    );
+
+    return result.rows;
   }
 }
 
