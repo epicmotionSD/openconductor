@@ -1,7 +1,9 @@
 {
+  "framework": "nextjs",
   "buildCommand": "npm install --legacy-peer-deps && cd packages/shared && npm run build && cd ../frontend && npm run build",
   "outputDirectory": "packages/frontend/.next",
   "installCommand": "npm install --legacy-peer-deps",
+  "devCommand": "cd packages/frontend && npm run dev",
   "crons": [
     {
       "path": "/api/cron/discovery",
