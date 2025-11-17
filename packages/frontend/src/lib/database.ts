@@ -168,3 +168,8 @@ class DatabaseService {
 // Export singleton instance
 export const db = DatabaseService.getInstance();
 export const dbPool = db.getPool();
+
+// Simple query function for direct SQL queries
+export async function query(text: string, params?: any[]) {
+  return dbPool.query(text, params);
+}
