@@ -154,8 +154,8 @@ openconductor enhance --auto Dashboard.tsx
 
 **Ready to enhance your v0 components?**
 
-→ [Install OpenConductor](https://openconductor.ai)  
-→ [Browse Component Agents](https://openconductor.ai/discover?tag=react)  
-→ [Join v0 + AI Community](https://discord.gg/openconductor)
+→ [Install OpenConductor](https://openconductor.ai)
+→ [Browse Component Agents](https://openconductor.ai/discover?tag=react)
+→ [Join v0 + AI Community](https://discord.gg/Ya5TPWeS)
 
 *Build with v0. Orchestrate with OpenConductor.*

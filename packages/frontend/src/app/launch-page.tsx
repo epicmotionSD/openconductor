@@ -24,7 +24,7 @@ export default function LaunchPage() {
             <Link href="/discover" className="text-sm hover:text-blue-600 transition-colors">
               Browse Servers
             </Link>
-            <a href="https://github.com/openconductor/openconductor" className="text-sm hover:text-blue-600 transition-colors">
+            <a href="https://github.com/epicmotionSD/openconductor" className="text-sm hover:text-blue-600 transition-colors">
               GitHub
             </a>
           </nav>
@@ -457,7 +457,7 @@ export default function LaunchPage() {
                 Install OpenConductor
               </Button>
               <Button size="lg" variant="outline" className="text-lg px-8 py-4" asChild>
-                <a href="https://github.com/openconductor/openconductor" target="_blank">
+                <a href="https://github.com/epicmotionSD/openconductor" target="_blank">
                   <Star className="mr-2 h-5 w-5" />
                   Star on GitHub
                 </a>
@@ -465,10 +465,10 @@ export default function LaunchPage() {
             </div>
 
             <div className="flex justify-center gap-8 text-sm text-gray-500">
-              <a href="https://discord.gg/openconductor" className="hover:text-blue-600 transition-colors">
+              <a href="https://discord.gg/Ya5TPWeS" className="hover:text-blue-600 transition-colors">
                 💬 Join Discord
               </a>
-              <a href="https://github.com/openconductor/openconductor" className="hover:text-blue-600 transition-colors">
+              <a href="https://github.com/epicmotionSD/openconductor" className="hover:text-blue-600 transition-colors">
                 📚 Documentation
               </a>
               <a href="mailto:hello@openconductor.ai" className="hover:text-blue-600 transition-colors">

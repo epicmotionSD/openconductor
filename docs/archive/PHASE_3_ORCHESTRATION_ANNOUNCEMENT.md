@@ -200,9 +200,9 @@ The railroad electrician's vision continues: From locomotive diagnostics to orch
 
 ---
 
-**Media Contact**: press@openconductor.ai  
-**Enterprise Demo**: https://openconductor.ai/demo  
-**Developer Community**: https://discord.gg/openconductor  
+**Media Contact**: press@openconductor.ai
+**Enterprise Demo**: https://openconductor.ai/demo
+**Developer Community**: https://discord.gg/Ya5TPWeS
 **Technical Roadmap**: https://openconductor.ai/roadmap
 
 *This announcement will be released following successful completion of Phase 2 launch metrics and community validation.*

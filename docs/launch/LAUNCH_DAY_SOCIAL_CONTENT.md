@@ -258,7 +258,7 @@ Posted this on Product Hunt today after discovering 70+ developers found us orga
 The MCP ecosystem is exploding but lacks professional tooling. OpenConductor bridges that gap.
 
 Product Hunt: [LINK]
-GitHub: https://github.com/openconductor/openconductor
+GitHub: https://github.com/epicmotionSD/openconductor
 
 Thoughts on MCP adoption and tooling needs?
 ```

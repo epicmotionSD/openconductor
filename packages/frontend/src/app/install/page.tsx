@@ -93,7 +93,7 @@ export default function InstallPage() {
                 Build from source for the latest development version.
               </p>
               <Button variant="outline" size="sm" asChild>
-                <a href="https://github.com/openconductor/openconductor" target="_blank">
+                <a href="https://github.com/epicmotionSD/openconductor" target="_blank">
                   <ExternalLink className="h-3 w-3 mr-1" />
                   GitHub
                 </a>

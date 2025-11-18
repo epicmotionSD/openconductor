@@ -172,8 +172,8 @@ openconductor optimize:auto --on-publish
 
 **Ready to enhance your content workflow?**
 
-→ [Install OpenConductor](https://openconductor.ai)  
-→ [Browse Content Agents](https://openconductor.ai/discover?category=content)  
-→ [Join BaseHub + AI Community](https://discord.gg/openconductor)
+→ [Install OpenConductor](https://openconductor.ai)
+→ [Browse Content Agents](https://openconductor.ai/discover?category=content)
+→ [Join BaseHub + AI Community](https://discord.gg/Ya5TPWeS)
 
 *Content in BaseHub. Intelligence in OpenConductor.*

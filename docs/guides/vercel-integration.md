@@ -110,7 +110,7 @@ A: Analytics MCP requires Vercel Pro plan for detailed metrics access
 ### Getting Help
 
 - **Documentation**: [openconductor.ai/docs/vercel](https://openconductor.ai/docs/vercel)
-- **Community**: [Discord #vercel-integration](https://discord.gg/openconductor)
+- **Community**: [Discord #vercel-integration](https://discord.gg/Ya5TPWeS)
 - **Support**: [hello@openconductor.ai](mailto:hello@openconductor.ai)
 
 ## What's Next
@@ -131,8 +131,8 @@ vercel deploy --with-agents
 
 **Ready to upgrade your Vercel workflow?**
 
-→ [Install OpenConductor CLI](https://openconductor.ai)  
-→ [Browse Agents for Vercel](https://openconductor.ai/discover?tag=vercel)  
-→ [Join the Community](https://discord.gg/openconductor)
+→ [Install OpenConductor CLI](https://openconductor.ai)
+→ [Browse Agents for Vercel](https://openconductor.ai/discover?tag=vercel)
+→ [Join the Community](https://discord.gg/Ya5TPWeS)
 
 *Deploy with Vercel. Orchestrate with OpenConductor.*

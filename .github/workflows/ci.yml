@@ -3,10 +3,13 @@ name: CI/CD Pipeline
 on:
   push:
     branches: [ main, master ]
+    tags:
+      - 'v*'  # Trigger on version tags like v1.0.3
   pull_request:
     branches: [ main ]
   release:
     types: [ published ]
+  workflow_dispatch:  # Allow manual triggering
 
 jobs:
   test:
@@ -92,31 +95,52 @@ jobs:
   publish-cli:
     needs: test
     runs-on: ubuntu-latest
-    if: github.event_name == 'release'
-    
+    # Trigger on releases, version tags, or manual workflow dispatch
+    if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
+
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 20
         cache: 'npm'
         registry-url: 'https://registry.npmjs.org'
-        
+
     - name: Install dependencies
       run: |
+        cd packages/cli
         npm install --legacy-peer-deps
 
     - name: Build CLI
       run: |
         cd packages/cli
         npm run build --if-present
-        
+
+    - name: Check if version is already published
+      id: check-version
+      run: |
+        cd packages/cli
+        PACKAGE_VERSION=$(node -p "require('./package.json').version")
+        if npm view @openconductor/cli@$PACKAGE_VERSION version 2>/dev/null; then
+          echo "Version $PACKAGE_VERSION already exists on npm"
+          echo "should_publish=false" >> $GITHUB_OUTPUT
+        else
+          echo "Version $PACKAGE_VERSION is new"
+          echo "should_publish=true" >> $GITHUB_OUTPUT
+        fi
+
     - name: Publish to npm
+      if: steps.check-version.outputs.should_publish == 'true'
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: |
         cd packages/cli
         npm publish
+
+    - name: Skip publishing (version exists)
+      if: steps.check-version.outputs.should_publish == 'false'
+      run: |
+        echo "Skipping publish - version already exists on npm"

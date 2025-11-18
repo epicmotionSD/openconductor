@@ -450,8 +450,8 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 - **Website:** [openconductor.ai](https://openconductor.ai)
 - **Documentation:** [docs.openconductor.ai](https://docs.openconductor.ai)
-- **Discord:** [OpenConductor Community](https://discord.gg/openconductor)
-- **Twitter:** [@openconductor](https://twitter.com/openconductor)
+- **Discord:** [OpenConductor Community](https://discord.gg/Ya5TPWeS)
+- **Twitter/X:** [@SDexecution](https://x.com/SDexecution)
 
 ## 🙏 Acknowledgments
 

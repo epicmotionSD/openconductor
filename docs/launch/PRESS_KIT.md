@@ -62,7 +62,7 @@ OpenConductor was built by a **self-taught railroad electrician** who needed to 
 
 ### **Open Source:**
 - **MIT Licensed** - completely free to use and modify
-- **GitHub:** https://github.com/openconductor/openconductor
+- **GitHub:** https://github.com/epicmotionSD/openconductor
 - **Community-driven** development and server curation
 
 ---
@@ -163,16 +163,16 @@ OpenConductor was built by a **self-taught railroad electrician** who needed to 
 - **Response Time:** Within 4 hours during business hours
 - **Available for:** Interviews, product demos, technical discussions
 
-### **Technical Contact:**  
+### **Technical Contact:**
 - **Email:** hello@openconductor.ai
 - **GitHub:** @openconductor
-- **Discord:** https://discord.gg/openconductor
+- **Discord:** https://discord.gg/Ya5TPWeS
 
 ### **Community:**
 - **Website:** https://openconductor.ai
 - **Documentation:** https://openconductor.ai/docs
-- **GitHub:** https://github.com/openconductor/openconductor
-- **Discord:** https://discord.gg/openconductor
+- **GitHub:** https://github.com/epicmotionSD/openconductor
+- **Discord:** https://discord.gg/Ya5TPWeS
 
 ---
 

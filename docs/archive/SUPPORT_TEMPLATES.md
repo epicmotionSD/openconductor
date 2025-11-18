@@ -120,7 +120,7 @@ Great question! Here's how OpenConductor works:
 - Redis caching for fast search
 - GitHub API integration for real-time updates
 
-Want to see the code? https://github.com/openconductor/openconductor 🔍
+Want to see the code? https://github.com/epicmotionSD/openconductor 🔍
 ```
 
 ### **Template 9: Adding Your Server**
@@ -153,8 +153,8 @@ Thank you so much for trying OpenConductor! 🙏
 
 Your feedback means everything to us. If you're finding it useful:
 
-⭐ **Star us on GitHub:** https://github.com/openconductor/openconductor
-💬 **Join Discord:** https://discord.gg/openconductor  
+⭐ **Star us on GitHub:** https://github.com/epicmotionSD/openconductor
+💬 **Join Discord:** https://discord.gg/Ya5TPWeS
 🐛 **Report bugs:** GitHub Issues
 💡 **Suggest features:** GitHub Discussions
 
@@ -190,7 +190,7 @@ We're experiencing high launch traffic! 📈
 
 Thanks for your patience - this is a good problem to have! 🚀
 
-Follow @OpenConductorAI for real-time updates.
+Follow @SDexecution for real-time updates.
 ```
 
 ### **Template 13: High Traffic**

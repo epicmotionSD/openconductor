@@ -6,7 +6,7 @@
 [![Downloads](https://img.shields.io/npm/dm/@openconductor/cli.svg)](https://www.npmjs.com/package/@openconductor/cli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[Website](https://openconductor.ai) • [Documentation](#documentation) • [Discord](https://discord.gg/openconductor) • [Submit a Server](/submit)
+[Website](https://openconductor.ai) • [Documentation](#documentation) • [Discord](https://discord.gg/Ya5TPWeS) • [Submit a Server](/submit)
 
 ---
 
@@ -201,9 +201,9 @@ See [docs/deployment.md](docs/deployment.md) for detailed deployment instruction
 ## Community
 
 - **Website**: [openconductor.ai](https://openconductor.ai)
-- **Discord**: [Join our community](https://discord.gg/openconductor)
-- **GitHub Discussions**: [Share ideas](https://github.com/openconductor/openconductor/discussions)
-- **Issues**: [Report bugs](https://github.com/openconductor/openconductor/issues)
+- **Discord**: [Join our community](https://discord.gg/Ya5TPWeS)
+- **GitHub Discussions**: [Share ideas](https://github.com/epicmotionSD/openconductor/discussions)
+- **Issues**: [Report bugs](https://github.com/epicmotionSD/openconductor/issues)
 - **Email**: [hello@openconductor.ai](mailto:hello@openconductor.ai)
 
 ## License

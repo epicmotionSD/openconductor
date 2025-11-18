@@ -214,7 +214,7 @@ export const logger = {
     this.progress('Check the server\'s GitHub repository for specific requirements');
     console.log();
     this.info('Still having issues?');
-    this.progress('Report at: ' + this.link('https://github.com/openconductor/openconductor/issues'));
+    this.progress('Report at: ' + this.link('https://github.com/epicmotionSD/openconductor/issues'));
     console.log();
   }
 };

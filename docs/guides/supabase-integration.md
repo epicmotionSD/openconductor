@@ -153,8 +153,8 @@ openconductor init --stack supabase --auto-detect-schema
 
 **Ready to connect your data layer?**
 
-→ [Install OpenConductor](https://openconductor.ai)  
-→ [Browse Database Agents](https://openconductor.ai/discover?category=database)  
-→ [Join Supabase + AI Community](https://discord.gg/openconductor)
+→ [Install OpenConductor](https://openconductor.ai)
+→ [Browse Database Agents](https://openconductor.ai/discover?category=database)
+→ [Join Supabase + AI Community](https://discord.gg/Ya5TPWeS)
 
 *Your data layer meets your AI agents.*

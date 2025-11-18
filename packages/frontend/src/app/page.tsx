@@ -207,15 +207,15 @@ export default function HomePage() {
             <div>
               <h3 className="font-semibold mb-3">Resources</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="https://github.com/openconductor" className="hover:text-foreground transition-colors">GitHub</a></li>
+                <li><a href="https://github.com/epicmotionSD/openconductor" className="hover:text-foreground transition-colors">GitHub</a></li>
                 <li><a href="https://modelcontextprotocol.io" className="hover:text-foreground transition-colors">MCP Docs</a></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-3">Community</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="https://discord.gg/mcp" className="hover:text-foreground transition-colors">Discord</a></li>
-                <li><a href="https://twitter.com/openconductor" className="hover:text-foreground transition-colors">Twitter</a></li>
+                <li><a href="https://discord.gg/Ya5TPWeS" className="hover:text-foreground transition-colors">Discord</a></li>
+                <li><a href="https://x.com/SDexecution" className="hover:text-foreground transition-colors">X/Twitter</a></li>
               </ul>
             </div>
           </div>

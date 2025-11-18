@@ -227,7 +227,7 @@ openconductor install github-mcp supabase-mcp
 ```
 
 Free for developers, premium for teams.
-⭐ Star us: github.com/openconductor/openconductor
+⭐ Star us: github.com/epicmotionSD/openconductor
 🌐 Try it: openconductor.ai
 
 Who's ready to upgrade their AI workflow? 🚀
@@ -331,7 +331,7 @@ Technical approach:
 We're open source (MIT) and built by developers for developers.
 
 Try it: npm install -g @openconductor/cli
-Code: github.com/openconductor/openconductor
+Code: github.com/epicmotionSD/openconductor
 
 What do you think? Are you using any of these stack combinations?
 ```

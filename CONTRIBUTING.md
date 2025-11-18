@@ -123,7 +123,7 @@ openconductor/
 
 ## 🤝 Community
 
-- **Discord**: [Join our community](https://discord.gg/openconductor)
+- **Discord**: [Join our community](https://discord.gg/Ya5TPWeS)
 - **Discussions**: Use GitHub Discussions for questions
 - **Issues**: GitHub Issues for bugs and feature requests
 
