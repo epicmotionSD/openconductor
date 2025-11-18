@@ -1,6 +1,6 @@
 {
   "name": "@openconductor/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The npm for MCP servers - discover and install AI agent tools in seconds. 70+ developers already using it organically! Works with Vercel, v0, Supabase, and BaseHub workflows.",
   "bin": {
     "openconductor": "./bin/openconductor.js"
