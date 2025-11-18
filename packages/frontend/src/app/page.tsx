@@ -37,9 +37,11 @@ export default function HomePage() {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
-                <Terminal className="mr-2 h-4 w-4" />
-                Get Started
+              <Button size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all" asChild>
+                <Link href="/install">
+                  <Terminal className="mr-2 h-4 w-4" />
+                  Get Started
+                </Link>
               </Button>
               <Button size="lg" variant="outline" className="text-base px-8 h-12" asChild>
                 <Link href="/discover">
@@ -172,9 +174,11 @@ export default function HomePage() {
                 Join developers using OpenConductor to supercharge their AI workflows
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="text-base px-8 h-12">
-                  <Terminal className="mr-2 h-4 w-4" />
-                  Install CLI
+                <Button size="lg" className="text-base px-8 h-12" asChild>
+                  <Link href="/install">
+                    <Terminal className="mr-2 h-4 w-4" />
+                    Install CLI
+                  </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="text-base px-8 h-12" asChild>
                   <Link href="/submit">
