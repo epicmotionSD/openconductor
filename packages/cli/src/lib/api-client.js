@@ -51,10 +51,28 @@ export class ApiClient {
 
   /**
    * Get detailed server info
+   * Fallback to search if direct endpoint fails (for compatibility)
    */
   async getServer(slug) {
-    const response = await this.client.get(`/servers/${slug}`);
-    return response.data;
+    try {
+      // Try the direct endpoint first
+      const response = await this.client.get(`/servers/${slug}`);
+      return response.data;
+    } catch (error) {
+      // Fallback to search endpoint if direct access fails
+      if (error.message && (error.message.includes('404') || error.message.includes('not found'))) {
+        const searchResult = await this.searchServers({ q: slug, limit: 1 });
+        if (searchResult.servers && searchResult.servers.length > 0) {
+          const server = searchResult.servers[0];
+          // Check if it's an exact slug match
+          if (server.slug === slug) {
+            return server;
+          }
+        }
+        throw new Error(`Server '${slug}' not found`);
+      }
+      throw error;
+    }
   }
 
   /**
