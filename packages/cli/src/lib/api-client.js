@@ -66,13 +66,48 @@ export class ApiClient {
           const server = searchResult.servers[0];
           // Check if it's an exact slug match
           if (server.slug === slug) {
-            return server;
+            // Normalize the structure to match expected format
+            return this._normalizeServerObject(server);
           }
         }
         throw new Error(`Server '${slug}' not found`);
       }
       throw error;
     }
+  }
+
+  /**
+   * Normalize server object from search endpoint to match detail endpoint format
+   * @private
+   */
+  _normalizeServerObject(server) {
+    // Extract npm package name from installation command if available
+    let npmPackageName = null;
+    if (server.installation && server.installation.npm) {
+      // Parse "npm install -g package-name" to extract package name
+      const match = server.installation.npm.match(/npm install (?:-g )?(@?[\w-/]+)/);
+      if (match) {
+        npmPackageName = match[1];
+      }
+    }
+
+    return {
+      ...server,
+      packages: {
+        npm: npmPackageName ? {
+          name: npmPackageName,
+          downloadsTotal: server.stats?.downloads || 0
+        } : undefined,
+        docker: undefined
+      },
+      configuration: {
+        example: {}
+      },
+      documentation: {
+        docsUrl: server.docs_url,
+        homepageUrl: server.homepage_url
+      }
+    };
   }
 
   /**
