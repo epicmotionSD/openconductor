@@ -227,6 +227,23 @@ export class GitHubService {
     }
   }
 
+  /**
+   * Check GitHub rate limit (lightweight helper used by health checks)
+   */
+  async checkRateLimit(): Promise<{ remaining: number; total: number; resetTime?: string }> {
+    try {
+      const resp = await this.octokit.rateLimit.get();
+      const core = (resp as any).data?.resources?.core;
+      if (core) {
+        return { remaining: core.remaining || 0, total: core.limit || 0, resetTime: core.reset ? new Date(core.reset * 1000).toISOString() : undefined };
+      }
+    } catch (error) {
+      logger.debug('Failed to fetch GitHub rate limit', error);
+    }
+
+    return { remaining: 0, total: 0 };
+  }
+
   // Private helper methods
 
   private async handleReleaseEvent(payload: any): Promise<void> {
@@ -465,7 +482,6 @@ export class GitHubService {
       // Memory-related
       'memory': 'memory',
       'persistence': 'memory',
-      'storage': 'memory',
       'semantic': 'memory',
       
       // Filesystem

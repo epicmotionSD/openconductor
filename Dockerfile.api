@@ -1,0 +1,38 @@
+FROM node:22-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY packages/shared/package*.json ./packages/shared/
+COPY packages/api/package*.json ./packages/api/
+
+# Install dependencies
+WORKDIR /app/packages/shared
+RUN npm install --legacy-peer-deps
+
+WORKDIR /app/packages/api
+RUN npm install --legacy-peer-deps
+
+# Copy source code
+WORKDIR /app
+COPY packages/shared ./packages/shared
+COPY packages/api ./packages/api
+
+# Build shared package
+WORKDIR /app/packages/shared
+RUN npm run build
+
+# Build API
+WORKDIR /app/packages/api
+RUN npm run build
+
+# List dist contents for debugging
+RUN ls -la dist/ || echo "dist directory not found"
+RUN echo "Checking shared dist:" && ls -la ../shared/dist/ || echo "shared dist not found"
+
+# Expose port
+EXPOSE 3001
+
+# Start server
+WORKDIR /app/packages/api
+CMD ["node", "--trace-warnings", "dist/server.js"]

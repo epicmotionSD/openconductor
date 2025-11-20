@@ -108,3 +108,37 @@ claude_desktop_config.json
 **/.npmrc
 
 .vercel
+
+# Temporary and backup files
+*.backup
+*.tmp
+*.temp
+*-backup.*
+
+# Launch and setup scripts (archived)
+launch-*.html
+launch-*.js
+setup-*.sh
+cleanup-*.sh
+fix-*.sh
+generate-*.sh
+
+# IDE and editor files
+.idea/
+*.swp
+*.swo
+*~
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Testing and coverage
+.nyc_output/
+coverage/
+*.lcov
+
+# Build artifacts
+*.tgz
+*.zip

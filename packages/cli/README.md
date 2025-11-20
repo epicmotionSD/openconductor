@@ -24,17 +24,19 @@ openconductor list
 
 ### Global Installation (Recommended)
 
+> **Note**: Package will be published to npm soon. For now, install from source.
+
 ```bash
 npm install -g @openconductor/cli
 ```
 
-### From Source
+### From Source (Current Method)
 
 ```bash
-git clone https://github.com/openconductor/openconductor.git
+git clone https://github.com/epicmotionSD/openconductor.git
 cd openconductor/packages/cli
-npm install
-npm link
+pnpm install
+pnpm link --global
 ```
 
 ### Verify Installation
@@ -310,10 +312,10 @@ openconductor list
 **❌ "Registry unreachable"**
 ```bash
 # Check internet connection
-ping api.openconductor.ai
+ping openconductor.ai
 
 # Use local API for development
-export OPENCONDUCTOR_API_URL=http://localhost:3001/v1
+export OPENCONDUCTOR_API_URL=http://localhost:3002/api/v1
 ```
 
 ### Debug Mode
@@ -341,14 +343,14 @@ cp ~/.config/claude/claude_desktop_config.json ~/backup-config.json
 
 ```bash
 # Clone repository
-git clone https://github.com/openconductor/openconductor.git
+git clone https://github.com/epicmotionSD/openconductor.git
 cd openconductor/packages/cli
 
 # Install dependencies
-npm install
+pnpm install
 
 # Link for global testing
-npm link
+pnpm link --global
 
 # Test locally
 openconductor discover
@@ -361,7 +363,7 @@ openconductor discover
 ./test-cli.sh
 
 # Test against local API
-export OPENCONDUCTOR_API_URL=http://localhost:3001/v1
+export OPENCONDUCTOR_API_URL=http://localhost:3002/api/v1
 openconductor discover --limit 5
 ```
 
@@ -403,7 +405,7 @@ openconductor analytics
 ## 🔗 Related Projects
 
 - **OpenConductor Registry**: [https://openconductor.ai](https://openconductor.ai)
-- **API Documentation**: [https://docs.openconductor.ai](https://docs.openconductor.ai)
+- **GitHub Repository**: [https://github.com/epicmotionSD/openconductor](https://github.com/epicmotionSD/openconductor)
 - **Model Context Protocol**: [https://modelcontextprotocol.io](https://modelcontextprotocol.io)
 
 ## 📄 License
@@ -412,9 +414,9 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 🆘 Support
 
-- **Issues**: [GitHub Issues](https://github.com/openconductor/openconductor/issues)
-- **Discord**: [OpenConductor Community](https://discord.gg/openconductor)
-- **Email**: [support@openconductor.ai](mailto:support@openconductor.ai)
+- **Issues**: [GitHub Issues](https://github.com/epicmotionSD/openconductor/issues)
+- **Website**: [https://openconductor.ai](https://openconductor.ai)
+- **Email**: hello@openconductor.ai
 
 ---
 

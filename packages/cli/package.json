@@ -1,7 +1,7 @@
 {
   "name": "@openconductor/cli",
-  "version": "1.0.0",
-  "description": "Professional CLI for discovering and installing MCP servers - the npm for AI agent tools",
+  "version": "1.0.4",
+  "description": "The npm for MCP servers - discover and install 120+ AI agent tools in seconds. Works with AWS, Stripe, Notion, Neon, and all major platforms. 70+ developers already using it!",
   "bin": {
     "openconductor": "./bin/openconductor.js"
   },
@@ -10,6 +10,7 @@
   "author": "OpenConductor <hello@openconductor.ai>",
   "license": "MIT",
   "homepage": "https://openconductor.ai",
+  "documentation": "https://openconductor.ai/docs",
   "repository": {
     "type": "git",
     "url": "https://github.com/epicmotionSD/openconductor.git",
@@ -42,7 +43,8 @@
     "listr2": "^8.0.0"
   },
   "devDependencies": {
-    "@openconductor/shared": "workspace:*",
+    "@openconductor/shared": "file:../shared",
+    "@types/inquirer": "^9.0.3",
     "vitest": "^1.0.4",
     "eslint": "^8.56.0"
   },
@@ -62,6 +64,13 @@
     "agents",
     "cli",
     "orchestration",
+    "vercel",
+    "v0",
+    "supabase",
+    "basehub",
+    "ecosystem",
+    "modern-stack",
+    "platform",
     "model-context-protocol",
     "claude",
     "anthropic",

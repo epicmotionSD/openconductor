@@ -7,7 +7,10 @@ import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Search, Star, Download, ExternalLink, Filter } from 'lucide-react'
-import type { MCPServer, MCPServerSearchParams, MCPServerSearchResult } from '../types'
+import { AlertBox } from '@/components/ui/alert-box'
+import { CategoryBadge, MCPCategory } from '@/components/ui/category-badge'
+import { SiteHeader } from '@/components/navigation/site-header'
+import type { MCPServer, MCPServerSearchParams, MCPServerSearchResult } from '../../types'
 
 export default function DiscoverPage() {
   const [servers, setServers] = useState<MCPServer[]>([])
@@ -15,12 +18,21 @@ export default function DiscoverPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('')
   const [showVerifiedOnly, setShowVerifiedOnly] = useState(false)
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const [sortBy, setSortBy] = useState<'popularity' | 'newest' | 'alphabetical' | 'installs'>('popularity')
+  const [showFilters, setShowFilters] = useState(false)
 
   const categories = ['memory', 'filesystem', 'database', 'api', 'custom']
 
+  // Popular tags for quick filtering
+  const popularTags = [
+    'ai', 'api', 'automation', 'database', 'development', 'analytics',
+    'cloud', 'search', 'integration', 'data', 'productivity', 'communication'
+  ]
+
   useEffect(() => {
     searchServers()
-  }, [searchQuery, selectedCategory, showVerifiedOnly])
+  }, [searchQuery, selectedCategory, showVerifiedOnly, selectedTags, sortBy])
 
   const searchServers = async () => {
     setLoading(true)
@@ -29,7 +41,7 @@ export default function DiscoverPage() {
         query: searchQuery || undefined,
         category: selectedCategory as any || undefined,
         verified: showVerifiedOnly || undefined,
-        limit: 20
+        limit: 100
       }
 
       const queryString = new URLSearchParams()
@@ -37,9 +49,11 @@ export default function DiscoverPage() {
       if (params.category) queryString.append('category', params.category)
       if (params.verified) queryString.append('verified', 'true')
       if (params.limit) queryString.append('limit', params.limit.toString())
+      if (selectedTags.length > 0) queryString.append('tags', selectedTags.join(','))
+      if (sortBy) queryString.append('sortBy', sortBy)
 
-      // Use new enterprise API endpoint
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002/v1'
+      // Use the configured API URL which already includes /v1
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1'
       const response = await fetch(`${apiUrl}/servers?${queryString.toString()}`)
       const result = await response.json()
       
@@ -58,28 +72,42 @@ export default function DiscoverPage() {
     searchServers()
   }
 
+  const toggleTag = (tag: string) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter(t => t !== tag))
+    } else {
+      setSelectedTags([...selectedTags, tag])
+    }
+  }
+
+  const clearAllFilters = () => {
+    setSearchQuery('')
+    setSelectedCategory('')
+    setShowVerifiedOnly(false)
+    setSelectedTags([])
+    setSortBy('popularity')
+  }
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold">OpenConductor</span>
-          </Link>
-          <nav className="flex space-x-6">
-            <Link href="/docs" className="text-sm hover:text-primary">Docs</Link>
-            <Link href="/install" className="text-sm hover:text-primary">Install CLI</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader variant="minimal" />
 
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">Discover MCP Servers</h1>
-          <p className="text-xl text-muted-foreground">
-            Find and install Model Context Protocol servers for your AI applications
+          <div className="flex items-center gap-3 mb-4">
+            <h1 className="text-4xl font-bold">Discover AI Agents for Your Stack</h1>
+            <Badge variant="outline" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-none text-sm px-3 py-1">
+              60+ Integrations
+            </Badge>
+          </div>
+          <p className="text-xl text-muted-foreground mb-4">
+            Deploy agents alongside your components. Find MCP servers designed for Vercel, v0, Supabase, and BaseHub developers.
           </p>
+          <AlertBox variant="info" icon={<span className="text-lg">🎯</span>} title="Ecosystem Integration">
+            Works with your modern AI stack out of the box.
+            Deploy with Vercel, build with v0, query Supabase, orchestrate with OpenConductor.
+          </AlertBox>
         </div>
 
         {/* Search and Filters */}
@@ -99,31 +127,76 @@ export default function DiscoverPage() {
           </form>
 
           {/* Filters */}
-          <div className="flex flex-wrap gap-4 items-center">
-            <div className="flex items-center gap-2">
-              <Filter className="h-4 w-4" />
-              <span className="text-sm font-medium">Filters:</span>
-            </div>
-            
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-3 py-1 border rounded-md text-sm"
-            >
-              <option value="">All Categories</option>
-              {categories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
-              ))}
-            </select>
+          <div className="space-y-4">
+            <div className="flex flex-wrap gap-4 items-center">
+              <div className="flex items-center gap-2">
+                <Filter className="h-4 w-4" />
+                <span className="text-sm font-medium">Filters:</span>
+              </div>
 
-            <label className="flex items-center gap-2 text-sm">
-              <input
-                type="checkbox"
-                checked={showVerifiedOnly}
-                onChange={(e) => setShowVerifiedOnly(e.target.checked)}
-              />
-              Verified only
-            </label>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="px-3 py-1 border rounded-md text-sm"
+              >
+                <option value="">All Categories</option>
+                {categories.map(cat => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
+                className="px-3 py-1 border rounded-md text-sm"
+              >
+                <option value="popularity">Sort: Popularity</option>
+                <option value="installs">Sort: Most Installs</option>
+                <option value="newest">Sort: Newest</option>
+                <option value="alphabetical">Sort: A-Z</option>
+              </select>
+
+              <label className="flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={showVerifiedOnly}
+                  onChange={(e) => setShowVerifiedOnly(e.target.checked)}
+                />
+                Verified only
+              </label>
+
+              {(selectedCategory || showVerifiedOnly || selectedTags.length > 0 || sortBy !== 'popularity') && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={clearAllFilters}
+                >
+                  Clear All
+                </Button>
+              )}
+            </div>
+
+            {/* Tag Selection */}
+            <div className="space-y-2">
+              <div className="text-sm font-medium">Filter by tags:</div>
+              <div className="flex flex-wrap gap-2">
+                {popularTags.map(tag => (
+                  <Badge
+                    key={tag}
+                    variant={selectedTags.includes(tag) ? "default" : "outline"}
+                    className="cursor-pointer hover:bg-primary/90 transition-colors"
+                    onClick={() => toggleTag(tag)}
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+              {selectedTags.length > 0 && (
+                <div className="text-sm text-muted-foreground">
+                  Selected: {selectedTags.join(', ')}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -153,11 +226,7 @@ export default function DiscoverPage() {
                 <p className="text-muted-foreground mb-4">
                   Try adjusting your search criteria
                 </p>
-                <Button onClick={() => {
-                  setSearchQuery('')
-                  setSelectedCategory('')
-                  setShowVerifiedOnly(false)
-                }}>
+                <Button onClick={clearAllFilters}>
                   Clear Filters
                 </Button>
               </div>
@@ -170,14 +239,6 @@ export default function DiscoverPage() {
 }
 
 function ServerCard({ server }: { server: MCPServer }) {
-  const categoryColors = {
-    memory: 'bg-blue-100 text-blue-800',
-    filesystem: 'bg-green-100 text-green-800',
-    database: 'bg-yellow-100 text-yellow-800',
-    api: 'bg-purple-100 text-purple-800',
-    custom: 'bg-gray-100 text-gray-800'
-  }
-
   return (
     <Card className="h-full">
       <CardHeader>
@@ -204,18 +265,13 @@ function ServerCard({ server }: { server: MCPServer }) {
         
         <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <Badge 
-              variant="outline" 
-              className={categoryColors[server.category]}
-            >
-              {server.category}
-            </Badge>
+            <CategoryBadge category={server.category as MCPCategory} />
           </div>
 
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
               <Star className="h-3 w-3" />
-              {server.repository?.stars || server.stats?.stars || 0}
+              {server.repository?.stars || 0}
             </div>
             <div className="flex items-center gap-1">
               <Download className="h-3 w-3" />
@@ -245,7 +301,7 @@ function ServerCard({ server }: { server: MCPServer }) {
               </Link>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <a href={server.repository} target="_blank" rel="noopener noreferrer">
+              <a href={server.repository.url} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-3 w-3" />
               </a>
             </Button>

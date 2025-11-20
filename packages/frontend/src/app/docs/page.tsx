@@ -2,29 +2,18 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { SiteHeader } from '@/components/navigation/site-header'
 import { Terminal, Book, ExternalLink, ArrowRight, Zap, Shield, Users } from 'lucide-react'
 
 export default function DocsPage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <Terminal className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold">OpenConductor</span>
-          </Link>
-          <nav className="flex space-x-6">
-            <Link href="/discover" className="text-sm hover:text-primary">Discover</Link>
-            <Link href="/install" className="text-sm hover:text-primary">Install CLI</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader variant="minimal" />
 
       <div className="container mx-auto px-4 py-12">
         {/* Hero */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-6">Documentation</h1>
+          <h1 className="text-4xl font-bold mb-6 text-foreground">Documentation</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Everything you need to know about using OpenConductor to manage MCP servers
           </p>

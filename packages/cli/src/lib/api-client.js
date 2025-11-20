@@ -11,11 +11,12 @@ const pkg = JSON.parse(
 
 export class ApiClient {
   constructor(baseURL) {
-    this.baseURL = baseURL || process.env.OPENCONDUCTOR_API_URL || 'http://localhost:3001/v1';
-    
+    this.baseURL = baseURL || process.env.OPENCONDUCTOR_API_URL || 'https://www.openconductor.ai/api/v1';
+
     this.client = axios.create({
       baseURL: this.baseURL,
-      timeout: 10000,
+      timeout: 30000,
+      maxRedirects: 5,
       headers: {
         'User-Agent': `openconductor-cli/${pkg.version}`,
         'Content-Type': 'application/json'

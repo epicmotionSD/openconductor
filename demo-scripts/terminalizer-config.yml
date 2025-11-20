@@ -1,0 +1,64 @@
+# Terminalizer Configuration for OpenConductor Demos
+# Install: npm install -g terminalizer
+# Usage: terminalizer record demo --config terminalizer-config.yml
+
+# Terminal window settings
+cols: 100
+rows: 30
+
+# Recording settings
+frameDelay: auto
+maxIdleTime: 2000
+
+# Quality
+quality: 100
+repeat: 0
+terminal: %TERMINAL%
+skipFrames: 1
+
+# Theme - High contrast for readability
+theme:
+  background: "transparent"
+  foreground: "#ececec"
+  cursor: "#c7c7c7"
+  black: "#000000"
+  red: "#f44747"
+  green: "#4ec9b0"
+  yellow: "#ffcc00"
+  blue: "#569cd6"
+  magenta: "#c678dd"
+  cyan: "#4ec9b0"
+  white: "#efefef"
+  brightBlack: "#666666"
+  brightRed: "#f44747"
+  brightGreen: "#6a9955"
+  brightYellow: "#ffcc00"
+  brightBlue: "#569cd6"
+  brightMagenta: "#c678dd"
+  brightCyan: "#4ec9b0"
+  brightWhite: "#ffffff"
+
+# Font settings
+fontFamily: "Cascadia Code, Consolas, Monaco, monospace"
+fontSize: 16
+lineHeight: 1.2
+
+# Window frame settings
+cursorStyle: block
+frameBox:
+  type: solid
+  title: OpenConductor Demo
+  style:
+    border: 0px black solid
+    boxShadow: none
+    margin: 0px
+
+# Watermark (optional - remove if not wanted)
+watermark:
+  imagePath: null
+  style:
+    position: absolute
+    right: 15px
+    bottom: 15px
+    width: 100px
+    opacity: 0.9

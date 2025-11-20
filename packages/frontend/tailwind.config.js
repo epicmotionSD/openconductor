@@ -50,6 +50,29 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        info: {
+          DEFAULT: "hsl(var(--info))",
+          foreground: "hsl(var(--info-foreground))",
+        },
+        category: {
+          memory: "hsl(var(--category-memory))",
+          filesystem: "hsl(var(--category-filesystem))",
+          database: "hsl(var(--category-database))",
+          api: "hsl(var(--category-api))",
+          search: "hsl(var(--category-search))",
+          communication: "hsl(var(--category-communication))",
+          monitoring: "hsl(var(--category-monitoring))",
+          development: "hsl(var(--category-development))",
+          custom: "hsl(var(--category-custom))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
