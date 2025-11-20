@@ -38,8 +38,13 @@ const dbConfig: PoolConfig = process.env.POSTGRES_URL ? {
   connectionString: process.env.POSTGRES_URL,
   ssl: { rejectUnauthorized: false },
   max: parseInt(process.env.DB_MAX_CONNECTIONS || '10'),
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 10000
+  min: 2, // Keep minimum connections alive
+  idleTimeoutMillis: 60000, // Keep connections alive longer (60s)
+  connectionTimeoutMillis: 30000, // Connection timeout (30s)
+  query_timeout: 60000, // Query timeout (60s)
+  statement_timeout: 60000, // Statement timeout (60s)
+  keepAlive: true, // Enable TCP keep-alive
+  keepAliveInitialDelayMillis: 10000 // Start keep-alive after 10s
 } : {
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '5432'),
@@ -48,7 +53,7 @@ const dbConfig: PoolConfig = process.env.POSTGRES_URL ? {
   password: process.env.DB_PASSWORD || 'password',
   max: parseInt(process.env.DB_MAX_CONNECTIONS || '20'),
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  connectionTimeoutMillis: 10000,
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 };
 
@@ -113,11 +118,11 @@ export class DatabaseManager {
 
   private setupEventHandlers(): void {
     // PostgreSQL event handlers
-    this.pool.on('connect', (client) => {
+    this.pool.on('connect', () => {
       logger.info('New PostgreSQL client connected');
     });
 
-    this.pool.on('error', (err, client) => {
+    this.pool.on('error', (err) => {
       logger.error('Unexpected error on idle PostgreSQL client', err);
     });
 
