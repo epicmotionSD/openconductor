@@ -93,6 +93,12 @@ export class ApiClient {
 
     return {
       ...server,
+      // Override installation object to have just the package name
+      installation: {
+        npm: npmPackageName || undefined,
+        docker: server.installation?.docker,
+        manual: server.installation?.manual
+      },
       packages: {
         npm: npmPackageName ? {
           name: npmPackageName,
