@@ -9,19 +9,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- 30 new MCP servers to the registry (now 120+ total servers)
-  - Cloud platforms: AWS, Azure, Google Cloud Run, Cloudflare
-  - Search engines: Tavily, Exa, Bright Data, Firecrawl
-  - Productivity: Notion, Stripe, Square, Mailgun
-  - Databases: Neon Postgres, Supabase, ClickHouse, Neo4j
-  - Dev tools: Atlassian, GitLab, CircleCI, GitHub Actions, Vercel, Render, Apollo GraphQL, Semgrep
-  - Specialized: Browserbase, ElevenLabs, Mapbox, Auth0, Apify, Riza
-- Automated seeding script for adding new servers (`add-new-servers-2025.ts`)
-- Comprehensive seed data file (`seed-new-servers-2025.ts`)
-- Better error handling for duplicate servers during seeding
+- **Major registry expansion**: 146 new MCP servers added (now **190+ total servers**)
+  - **Data Warehouses**: Snowflake, BigQuery, Databricks, ClickHouse
+  - **Vector Databases**: Pinecone, Weaviate, Qdrant, Chroma, LlamaIndex
+  - **AI/ML Platforms**: OpenAI, Anthropic, Hugging Face, LangChain, Replicate, Stability AI, Midjourney
+  - **Cloud Platforms**: AWS (S3, Lambda), Azure (Storage, Functions), Google Cloud, Vercel, Netlify, Railway, Render, Heroku
+  - **Development Tools**: Docker, Kubernetes, Terraform, Pulumi, GitLab, Jira, Confluence, Linear, Asana, Monday.com
+  - **Databases**: MySQL, MongoDB, Redis, Neo4j, TimescaleDB, MariaDB, Elasticsearch, Algolia, Meilisearch
+  - **Communication**: Discord, Telegram, WhatsApp, Twilio, Zoom, Calendly, Mattermost, Rocket.Chat, Intercom, Zendesk
+  - **Productivity**: Airtable, Google Sheets, Excel, Zapier, Make, n8n
+  - **Design & Media**: Figma, Canva, Adobe Creative Cloud, Cloudinary, imgix, Vimeo
+  - **Research**: arXiv, PubMed, Semantic Scholar, Wolfram Alpha
+  - **Social Media**: Reddit, Twitter, LinkedIn, Instagram, Mastodon, Facebook, TikTok
+  - **CMS**: WordPress, Medium, Ghost, Substack, Contentful, Sanity, Strapi, Prismic
+  - **Authentication**: Auth0, Okta, Clerk, Logto
+  - **Finance**: Plaid, QuickBooks, Xero, FreshBooks, Coinbase, Binance, Kraken, Alpaca
+  - **Maps & Location**: Mapbox, HERE Maps, OpenStreetMap, what3words
+  - **Travel**: Uber, Lyft, FlightAware, Booking.com, Airbnb, TripAdvisor, Yelp
+  - **Weather & Space**: Weather API, OpenWeatherMap, NASA APIs
+  - **And many more!**
+- Comprehensive seeding system (`seed-all-servers.ts`)
+  - Loads from 4 sources: TypeScript + 3 JSON files
+  - Individual transactions per server to prevent cascading failures
+  - Graceful handling of duplicate repository URLs
+  - Detailed progress logging and summary statistics
+- New seed data files:
+  - `seed-additional-servers.json` (49 servers)
+  - `seed-more-servers.json` (49 servers)
+  - `seed-specialized-servers.json` (48 servers)
 
 ### Changed
 
+- **Repository cleanup**: Archived temporary documentation and scripts to `/docs/archive/` and `/scripts/archive/`
+- Consolidated database seeding: `db:seed` now uses `seed-all-servers.ts` as the primary seeding script
+- Updated server counts throughout documentation (120+ → 190+)
 - CLI API client now uses `https://www.openconductor.ai` (with www) for better reliability
 - Increased API client timeout from 10s to 30s to handle slower responses
 - Added `maxRedirects: 5` to axios configuration for better redirect handling

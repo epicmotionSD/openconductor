@@ -57,6 +57,7 @@ program
   .argument('<server>', 'server name or slug')
   .option('--config <path>', 'custom config file path')
   .option('--port <port>', 'custom port number')
+  .option('--dry-run', 'simulate installation without making changes')
   .option('-y, --yes', 'skip confirmation prompts')
   .action(installCommand);
 
@@ -85,6 +86,7 @@ program
 program
   .command('init')
   .description('Initialize OpenConductor configuration')
+  .option('--config <path>', 'custom config file path')
   .option('-f, --force', 'overwrite existing config')
   .action(initCommand);
 

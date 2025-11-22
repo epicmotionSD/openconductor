@@ -9,8 +9,8 @@
     "vercel-build": "cd ../shared && npm install && npm run build && cd ../api && npm install && tsc --skipLibCheck",
     "start": "node dist/server.js",
     "db:migrate": "tsx src/db/deploy-to-supabase.ts",
-    "db:seed": "tsx src/db/seed.ts",
-    "db:seed:127": "tsx src/db/seed-127-servers.ts",
+    "db:seed": "tsx src/db/seed-all-servers.ts",
+    "db:seed:all": "tsx src/db/seed-all-servers.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "type-check": "tsc --noEmit"
