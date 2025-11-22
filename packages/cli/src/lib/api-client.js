@@ -46,6 +46,8 @@ export class ApiClient {
    */
   async searchServers(params) {
     const response = await this.client.get('/servers', { params });
+    // Interceptor extracts response.data -> {success, data, meta}
+    // We need response.data.data -> {servers, pagination, filters}
     return response.data;
   }
 
@@ -56,6 +58,7 @@ export class ApiClient {
   async getServer(slug) {
     try {
       // Try the direct endpoint first
+      // Interceptor extracts response.data -> {success, data, meta}
       const response = await this.client.get(`/servers/${slug}`);
       return response.data;
     } catch (error) {
@@ -120,6 +123,7 @@ export class ApiClient {
    * Get CLI-specific install config
    */
   async getInstallConfig(slug) {
+    // Interceptor extracts response.data -> {success, data, meta}
     const response = await this.client.get(`/servers/cli/config/${slug}`);
     return response.data;
   }
@@ -149,6 +153,7 @@ export class ApiClient {
    * Get trending servers
    */
   async getTrending(period = '7d') {
+    // Interceptor extracts response.data -> {success, data, meta}
     const response = await this.client.get('/servers/stats/trending', {
       params: { period }
     });
@@ -159,6 +164,7 @@ export class ApiClient {
    * Get popular servers by category
    */
   async getPopular(category, limit = 10) {
+    // Interceptor extracts response.data -> {success, data, meta}
     const response = await this.client.get('/servers/stats/popular', {
       params: { category, limit }
     });
@@ -169,6 +175,7 @@ export class ApiClient {
    * Get all categories
    */
   async getCategories() {
+    // Interceptor extracts response.data -> {success, data, meta}
     const response = await this.client.get('/servers/categories');
     return response.data;
   }
@@ -177,6 +184,7 @@ export class ApiClient {
    * Get search suggestions
    */
   async getAutocomplete(query, limit = 5) {
+    // Interceptor extracts response.data -> {success, data, meta}
     const response = await this.client.get('/servers/search/autocomplete', {
       params: { q: query, limit }
     });
@@ -187,6 +195,7 @@ export class ApiClient {
    * Search in specific category
    */
   async searchInCategory(category, query, limit = 10) {
+    // Interceptor extracts response.data -> {success, data, meta}
     const response = await this.client.get('/servers/search', {
       params: {
         q: query,
