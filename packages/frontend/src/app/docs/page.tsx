@@ -93,12 +93,28 @@ export default function DocsPage() {
                   </ul>
                 </div>
                 <div className="space-y-1">
-                  <h4 className="font-medium">CLI Commands</h4>
+                  <h4 className="font-medium">Core Commands</h4>
                   <ul className="text-sm space-y-1 ml-4">
                     <li><a href="#discover" className="text-muted-foreground hover:text-foreground">discover</a></li>
                     <li><a href="#install" className="text-muted-foreground hover:text-foreground">install</a></li>
                     <li><a href="#list" className="text-muted-foreground hover:text-foreground">list</a></li>
-                    <li><a href="#config" className="text-muted-foreground hover:text-foreground">config</a></li>
+                    <li><a href="#remove" className="text-muted-foreground hover:text-foreground">remove</a></li>
+                    <li><a href="#update" className="text-muted-foreground hover:text-foreground">update</a></li>
+                  </ul>
+                </div>
+                <div className="space-y-1">
+                  <h4 className="font-medium">Stack Commands</h4>
+                  <ul className="text-sm space-y-1 ml-4">
+                    <li><a href="#stack-list" className="text-muted-foreground hover:text-foreground">stack list</a></li>
+                    <li><a href="#stack-install" className="text-muted-foreground hover:text-foreground">stack install</a></li>
+                    <li><a href="#stack-show" className="text-muted-foreground hover:text-foreground">stack show</a></li>
+                  </ul>
+                </div>
+                <div className="space-y-1">
+                  <h4 className="font-medium">Developer Tools</h4>
+                  <ul className="text-sm space-y-1 ml-4">
+                    <li><a href="#badge" className="text-muted-foreground hover:text-foreground">badge</a></li>
+                    <li><a href="#achievements" className="text-muted-foreground hover:text-foreground">achievements</a></li>
                   </ul>
                 </div>
               </CardContent>
@@ -239,19 +255,131 @@ export default function DocsPage() {
                   </div>
                 </div>
 
-                <div>
-                  <h4 className="font-medium mb-2">openconductor config</h4>
+                <div id="remove">
+                  <h4 className="font-medium mb-2">openconductor remove</h4>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Manage OpenConductor and Claude Desktop configuration.
+                    Remove installed MCP servers from your configuration.
                   </p>
                   <div className="bg-muted rounded p-3 font-mono text-sm">
-                    # Show current configuration<br/>
-                    openconductor config --show<br/><br/>
-                    # Edit configuration file<br/>
-                    openconductor config --edit<br/><br/>
-                    # Validate configuration<br/>
-                    openconductor config --validate
+                    # Remove a server<br/>
+                    openconductor remove openmemory<br/><br/>
+                    # Skip confirmation<br/>
+                    openconductor remove github-mcp -y<br/><br/>
+                    # Alias: uninstall<br/>
+                    openconductor uninstall slack
                   </div>
+                </div>
+
+                <div id="update">
+                  <h4 className="font-medium mb-2">openconductor update</h4>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Update installed MCP servers to their latest versions.
+                  </p>
+                  <div className="bg-muted rounded p-3 font-mono text-sm">
+                    # Update specific server<br/>
+                    openconductor update github-mcp<br/><br/>
+                    # Update all servers<br/>
+                    openconductor update
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Stack Commands */}
+            <Card id="stack-list">
+              <CardHeader>
+                <CardTitle>Stack Commands</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <p className="text-muted-foreground">
+                  Stacks are pre-configured collections of MCP servers designed for specific workflows.
+                  Each stack includes a system prompt to give Claude a specialized persona.
+                </p>
+
+                <div>
+                  <h4 className="font-medium mb-2">openconductor stack list</h4>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    View all available stacks and their descriptions.
+                  </p>
+                  <div className="bg-muted rounded p-3 font-mono text-sm">
+                    openconductor stack list
+                  </div>
+                </div>
+
+                <div id="stack-install">
+                  <h4 className="font-medium mb-2">openconductor stack install</h4>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Install all servers in a stack and copy the system prompt to your clipboard.
+                  </p>
+                  <div className="bg-muted rounded p-3 font-mono text-sm">
+                    # Install Coder stack (5 servers)<br/>
+                    openconductor stack install coder<br/><br/>
+                    # Install Writer stack (4 servers)<br/>
+                    openconductor stack install writer<br/><br/>
+                    # Install Essential stack (3 servers)<br/>
+                    openconductor stack install essential<br/><br/>
+                    # Force reinstall<br/>
+                    openconductor stack install coder --force
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    💡 After installation, paste the system prompt into Claude Desktop &gt; Custom Instructions
+                  </p>
+                </div>
+
+                <div id="stack-show">
+                  <h4 className="font-medium mb-2">openconductor stack show</h4>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    View details about a specific stack including all servers and the system prompt.
+                  </p>
+                  <div className="bg-muted rounded p-3 font-mono text-sm">
+                    openconductor stack show coder
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Developer Tools */}
+            <Card id="badge">
+              <CardHeader>
+                <CardTitle>Developer Tools</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <h4 className="font-medium mb-2">openconductor badge</h4>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Generate installation badges for your MCP server README files.
+                  </p>
+                  <div className="bg-muted rounded p-3 font-mono text-sm">
+                    # Generate simple badge<br/>
+                    openconductor badge your-server --simple<br/><br/>
+                    # Generate command snippet<br/>
+                    openconductor badge your-server --command<br/><br/>
+                    # Generate full installation section<br/>
+                    openconductor badge your-server --full<br/><br/>
+                    # List all templates<br/>
+                    openconductor badge-templates
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    💡 Badges are automatically copied to clipboard for easy pasting into README.md
+                  </p>
+                </div>
+
+                <div id="achievements">
+                  <h4 className="font-medium mb-2">openconductor achievements</h4>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    View your unlocked achievements and track your progress.
+                  </p>
+                  <div className="bg-muted rounded p-3 font-mono text-sm">
+                    # Show unlocked achievements<br/>
+                    openconductor achievements<br/><br/>
+                    # Show all achievements (including locked)<br/>
+                    openconductor achievements --all<br/><br/>
+                    # Alias: badges<br/>
+                    openconductor badges
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    🎯 15 unlockable achievements across 5 categories: Installation, Stacks, Categories, Special, and Engagement
+                  </p>
                 </div>
               </CardContent>
             </Card>
