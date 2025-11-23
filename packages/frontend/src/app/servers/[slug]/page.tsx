@@ -6,6 +6,9 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { GradientText } from '@/components/ui/gradient-text'
+import { GlassCard } from '@/components/ui/glass-card'
+import { GradientButton } from '@/components/ui/gradient-button'
 import { CategoryBadge, type MCPCategory } from '@/components/ui/category-badge'
 import { SiteHeader } from '@/components/navigation/site-header'
 import { ArrowLeft, Star, Download, ExternalLink, Copy, CheckCircle, Terminal, Book } from 'lucide-react'
@@ -50,7 +53,7 @@ export default function ServerDetailPage() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground">Loading server details...</p>
+          <p className="mt-4 text-foreground-secondary">Loading server details...</p>
         </div>
       </div>
     )
@@ -60,11 +63,13 @@ export default function ServerDetailPage() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2">Server Not Found</h1>
-          <p className="text-muted-foreground mb-4">The requested MCP server could not be found.</p>
-          <Button asChild>
+          <h1 className="text-2xl font-bold mb-2 text-foreground">
+            <GradientText>Server Not Found</GradientText>
+          </h1>
+          <p className="text-foreground-secondary mb-4">The requested MCP server could not be found.</p>
+          <GradientButton asChild>
             <Link href="/discover">Browse All Servers</Link>
-          </Button>
+          </GradientButton>
         </div>
       </div>
     )
@@ -76,7 +81,7 @@ export default function ServerDetailPage() {
 
       <div className="container mx-auto px-4 py-8">
         {/* Back Button */}
-        <Button variant="ghost" asChild className="mb-6">
+        <Button variant="ghost" asChild className="mb-6 hover:text-primary">
           <Link href="/discover">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Discovery
@@ -90,11 +95,13 @@ export default function ServerDetailPage() {
             <div>
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h1 className="text-4xl font-bold mb-2">{server.name}</h1>
-                  <p className="text-xl text-muted-foreground">{server.description}</p>
+                  <h1 className="text-4xl font-bold mb-2">
+                    <GradientText>{server.name}</GradientText>
+                  </h1>
+                  <p className="text-xl text-foreground-secondary">{server.description}</p>
                 </div>
                 {server.verified && (
-                  <Badge variant="secondary" className="ml-4">
+                  <Badge className="ml-4 bg-success text-white border-none">
                     ✓ Verified
                   </Badge>
                 )}
@@ -102,12 +109,12 @@ export default function ServerDetailPage() {
 
               <div className="flex items-center gap-4 mb-6">
                 <CategoryBadge category={server.category as MCPCategory} />
-                <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                  <Star className="h-4 w-4" />
+                <div className="flex items-center gap-1 text-sm text-foreground-secondary">
+                  <Star className="h-4 w-4 text-warning" />
                   {server.repository.stars} stars
                 </div>
-                <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                  <Download className="h-4 w-4" />
+                <div className="flex items-center gap-1 text-sm text-foreground-secondary">
+                  <Download className="h-4 w-4 text-primary" />
                   {server.packages.npm?.downloadsTotal || 0} downloads
                 </div>
               </div>
@@ -115,7 +122,7 @@ export default function ServerDetailPage() {
               {server.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-6">
                   {server.tags.map((tag) => (
-                    <Badge key={tag} variant="outline">
+                    <Badge key={tag} variant="outline" className="border-primary/20 text-foreground-secondary">
                       {tag}
                     </Badge>
                   ))}
@@ -124,26 +131,26 @@ export default function ServerDetailPage() {
             </div>
 
             {/* Installation Instructions */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Terminal className="h-5 w-5" />
+            <GlassCard elevated>
+              <div className="mb-4">
+                <h3 className="text-xl font-semibold flex items-center gap-2 text-foreground">
+                  <Terminal className="h-5 w-5 text-primary" />
                   Quick Install
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
+                </h3>
+              </div>
+              <div className="space-y-4">
                 <div>
-                  <h4 className="font-medium mb-2">Using OpenConductor CLI</h4>
-                  <div className="bg-muted rounded-md p-4 font-mono text-sm relative">
-                    <code>openconductor install {server.slug}</code>
+                  <h4 className="font-medium mb-2 text-foreground">Using OpenConductor CLI</h4>
+                  <div className="bg-background-elevated border border-primary/20 rounded-md p-4 font-mono text-sm relative">
+                    <code className="text-foreground">openconductor install {server.slug}</code>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="absolute right-2 top-2 h-8 w-8 p-0"
+                      className="absolute right-2 top-2 h-8 w-8 p-0 hover:text-primary"
                       onClick={() => copyToClipboard(`openconductor install ${server.slug}`, 'cli')}
                     >
                       {copied === 'cli' ? (
-                        <CheckCircle className="h-3 w-3" />
+                        <CheckCircle className="h-3 w-3 text-success" />
                       ) : (
                         <Copy className="h-3 w-3" />
                       )}
@@ -153,17 +160,17 @@ export default function ServerDetailPage() {
 
                 {server.installation?.npm && (
                   <div>
-                    <h4 className="font-medium mb-2">Manual Installation</h4>
-                    <div className="bg-muted rounded-md p-4 font-mono text-sm relative">
-                      <code>{server.installation.npm}</code>
+                    <h4 className="font-medium mb-2 text-foreground">Manual Installation</h4>
+                    <div className="bg-background-elevated border border-primary/20 rounded-md p-4 font-mono text-sm relative">
+                      <code className="text-foreground">{server.installation.npm}</code>
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="absolute right-2 top-2 h-8 w-8 p-0"
+                        className="absolute right-2 top-2 h-8 w-8 p-0 hover:text-primary"
                         onClick={() => copyToClipboard(server.installation?.npm || '', 'npm')}
                       >
                         {copied === 'npm' ? (
-                          <CheckCircle className="h-3 w-3" />
+                          <CheckCircle className="h-3 w-3 text-success" />
                         ) : (
                           <Copy className="h-3 w-3" />
                         )}
@@ -174,17 +181,17 @@ export default function ServerDetailPage() {
 
                 {server.installation?.docker && (
                   <div>
-                    <h4 className="font-medium mb-2">Docker</h4>
-                    <div className="bg-muted rounded-md p-4 font-mono text-sm relative">
-                      <code>{server.installation.docker}</code>
+                    <h4 className="font-medium mb-2 text-foreground">Docker</h4>
+                    <div className="bg-background-elevated border border-primary/20 rounded-md p-4 font-mono text-sm relative">
+                      <code className="text-foreground">{server.installation.docker}</code>
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="absolute right-2 top-2 h-8 w-8 p-0"
+                        className="absolute right-2 top-2 h-8 w-8 p-0 hover:text-primary"
                         onClick={() => copyToClipboard(server.installation?.docker || '', 'docker')}
                       >
                         {copied === 'docker' ? (
-                          <CheckCircle className="h-3 w-3" />
+                          <CheckCircle className="h-3 w-3 text-success" />
                         ) : (
                           <Copy className="h-3 w-3" />
                         )}
@@ -192,24 +199,24 @@ export default function ServerDetailPage() {
                     </div>
                   </div>
                 )}
-              </CardContent>
-            </Card>
+              </div>
+            </GlassCard>
 
             {/* Configuration Example */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Book className="h-5 w-5" />
+            <GlassCard elevated>
+              <div className="mb-4">
+                <h3 className="text-xl font-semibold flex items-center gap-2 text-foreground">
+                  <Book className="h-5 w-5 text-primary" />
                   Claude Desktop Configuration
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
+                </h3>
+              </div>
+              <div>
+                <p className="text-sm text-foreground-secondary mb-4">
                   Add this configuration to your Claude Desktop config file:
                 </p>
-                <div className="bg-muted rounded-md p-4 relative">
+                <div className="bg-background-elevated border border-primary/20 rounded-md p-4 relative">
                   <pre className="text-sm overflow-x-auto">
-                    <code>{JSON.stringify({
+                    <code className="text-foreground">{JSON.stringify({
                       mcpServers: {
                         [server.name.toLowerCase()]: server.configuration.example
                       }
@@ -218,7 +225,7 @@ export default function ServerDetailPage() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="absolute right-2 top-2 h-8 w-8 p-0"
+                    className="absolute right-2 top-2 h-8 w-8 p-0 hover:text-primary"
                     onClick={() => copyToClipboard(JSON.stringify({
                       mcpServers: {
                         [server.name.toLowerCase()]: server.configuration.example
@@ -226,33 +233,31 @@ export default function ServerDetailPage() {
                     }, null, 2), 'config')}
                   >
                     {copied === 'config' ? (
-                      <CheckCircle className="h-3 w-3" />
+                      <CheckCircle className="h-3 w-3 text-success" />
                     ) : (
                       <Copy className="h-3 w-3" />
                     )}
                   </Button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </GlassCard>
           </div>
 
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Button className="w-full" asChild>
+            <GlassCard>
+              <h3 className="text-xl font-semibold mb-4 text-foreground">Quick Actions</h3>
+              <div className="space-y-3">
+                <GradientButton className="w-full" asChild>
                   <a href={server.repository.url} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     View Repository
                   </a>
-                </Button>
+                </GradientButton>
 
                 {server.packages.npm && (
-                  <Button variant="outline" className="w-full" asChild>
+                  <Button variant="outline" className="w-full border-primary/20 hover:border-primary/40" asChild>
                     <a
                       href={`https://www.npmjs.com/package/${server.packages.npm.name}`}
                       target="_blank"
@@ -262,52 +267,48 @@ export default function ServerDetailPage() {
                     </a>
                   </Button>
                 )}
-              </CardContent>
-            </Card>
+              </div>
+            </GlassCard>
 
             {/* Stats */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Statistics</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
+            <GlassCard>
+              <h3 className="text-xl font-semibold mb-4 text-foreground">Statistics</h3>
+              <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">GitHub Stars</span>
-                  <span className="font-medium">{server.repository.stars}</span>
+                  <span className="text-sm text-foreground-secondary">GitHub Stars</span>
+                  <span className="font-medium text-foreground">{server.repository.stars}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">NPM Downloads</span>
-                  <span className="font-medium">{server.packages.npm?.downloadsTotal || 0}</span>
+                  <span className="text-sm text-foreground-secondary">NPM Downloads</span>
+                  <span className="font-medium text-foreground">{server.packages.npm?.downloadsTotal || 0}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Last Updated</span>
-                  <span className="font-medium">
+                  <span className="text-sm text-foreground-secondary">Last Updated</span>
+                  <span className="font-medium text-foreground">
                     {new Date(server.repository.lastCommit).toLocaleDateString()}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Category</span>
-                  <Badge variant="outline">{server.category}</Badge>
+                  <span className="text-sm text-foreground-secondary">Category</span>
+                  <Badge variant="outline" className="border-primary/20">{server.category}</Badge>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </GlassCard>
 
             {/* Related Servers */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Related Servers</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
+            <GlassCard>
+              <h3 className="text-xl font-semibold mb-4 text-foreground">Related Servers</h3>
+              <div>
+                <p className="text-sm text-foreground-secondary mb-3">
                   Discover more {server.category} servers
                 </p>
-                <Button variant="outline" size="sm" className="w-full mt-3" asChild>
+                <Button variant="outline" size="sm" className="w-full border-primary/20 hover:border-primary/40" asChild>
                   <Link href={`/discover?category=${server.category}`}>
                     Browse {server.category} servers
                   </Link>
                 </Button>
-              </CardContent>
-            </Card>
+              </div>
+            </GlassCard>
           </div>
         </div>
       </div>
