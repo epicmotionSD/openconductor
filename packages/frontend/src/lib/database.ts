@@ -6,9 +6,12 @@ class DatabaseService {
   private pool: Pool;
 
   private constructor() {
+    const connectionString = process.env.POSTGRES_URL;
+    const isLocalhost = connectionString?.includes('localhost') || connectionString?.includes('127.0.0.1');
+
     this.pool = new Pool({
-      connectionString: process.env.POSTGRES_URL,
-      ssl: { rejectUnauthorized: false },
+      connectionString,
+      ssl: isLocalhost ? false : { rejectUnauthorized: false },
       // Optimized connection pool settings for Vercel Edge Functions
       max: 3, // Maximum connections (Vercel Edge has connection limits)
       min: 1, // Minimum connections to maintain

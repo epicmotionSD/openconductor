@@ -72,7 +72,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#2563eb',
+  themeColor: '#8B5CF6', // OpenConductor brand purple
 }
 
 export default function RootLayout({
@@ -81,14 +81,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="OpenConductor" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} min-h-screen bg-background antialiased`}>
         {children}
       </body>
     </html>

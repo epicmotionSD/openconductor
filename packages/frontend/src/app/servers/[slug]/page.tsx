@@ -24,8 +24,8 @@ export default function ServerDetailPage() {
 
   const fetchServer = async () => {
     try {
-      // Use new enterprise API endpoint
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002/v1'
+      // Use frontend API endpoint
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1'
       const response = await fetch(`${apiUrl}/servers/${slug}`)
       const result = await response.json()
       
