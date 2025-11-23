@@ -27,23 +27,22 @@ export default function HomePage() {
             <div className="flex justify-center mb-8 animate-fade-in">
               <Badge className="text-sm px-4 py-2 rounded-full border-primary/30 bg-primary/10 backdrop-blur-sm">
                 <Zap className="h-3 w-3 mr-2 inline text-primary" />
-                <span className="text-foreground-secondary">220+ Servers • 3 Stacks • Growing Daily</span>
+                <span className="text-foreground-secondary">190+ Servers • Free & Open Source • MIT Licensed</span>
               </Badge>
             </div>
 
             {/* Heading */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-[1.1] tracking-tight">
-              Set up Claude for
+              The <GradientText>npm</GradientText> for
               <br />
-              <GradientText>Coding/Writing/Data</GradientText>
-              <br />
-              <span className="text-2xl md:text-3xl lg:text-4xl text-foreground-secondary">in 10 seconds</span>
+              AI Agent Tools
             </h1>
 
             {/* Description */}
             <p className="text-lg md:text-xl text-foreground-secondary mb-10 max-w-2xl mx-auto leading-relaxed">
-              Pre-configured <strong className="text-foreground">Stacks</strong> with system prompts.
-              One command installs all tools + gives Claude a specialized persona.
+              Install MCP servers <strong className="text-foreground">without the JSON hell</strong>.
+              <br />
+              One command. 190+ tools. Works with Claude, Cursor, Cline, and more.
             </p>
 
             {/* CTAs */}
@@ -51,12 +50,12 @@ export default function HomePage() {
               <GradientButton size="lg" glow className="text-base px-8 h-12" asChild>
                 <Link href="/install">
                   <Terminal className="mr-2 h-4 w-4" />
-                  Install a Stack (10s)
+                  Get Started
                 </Link>
               </GradientButton>
               <Button size="lg" variant="outline" className="text-base px-8 h-12 border-primary/20 hover:border-primary/40" asChild>
                 <Link href="/discover">
-                  Browse 220+ Servers <ArrowRight className="ml-2 h-4 w-4" />
+                  Browse 190+ Servers <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
@@ -68,11 +67,11 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-foreground-secondary">
               <div className="flex items-center gap-2">
                 <Package className="h-4 w-4 text-primary" />
-                <span>220+ Servers</span>
+                <span>190+ Servers</span>
               </div>
               <div className="flex items-center gap-2">
-                <Zap className="h-4 w-4 text-primary" />
-                <span>3 Stacks</span>
+                <Terminal className="h-4 w-4 text-primary" />
+                <span>One Command</span>
               </div>
               <div className="flex items-center gap-2">
                 <Shield className="h-4 w-4 text-success" />
@@ -154,15 +153,15 @@ export default function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold mb-2">
-                <GradientText>220+</GradientText>
+                <GradientText>190+</GradientText>
               </div>
               <div className="text-foreground-secondary text-sm">MCP Servers</div>
             </div>
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold mb-2">
-                <GradientText>3</GradientText>
+                <GradientText>1</GradientText>
               </div>
-              <div className="text-foreground-secondary text-sm">Curated Stacks</div>
+              <div className="text-foreground-secondary text-sm">Command</div>
             </div>
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold mb-2">
@@ -172,9 +171,9 @@ export default function HomePage() {
             </div>
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold mb-2">
-                <GradientText>MIT</GradientText>
+                <GradientText>Free</GradientText>
               </div>
-              <div className="text-foreground-secondary text-sm">Open Source</div>
+              <div className="text-foreground-secondary text-sm">Forever</div>
             </div>
           </div>
         </section>
