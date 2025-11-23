@@ -49,9 +49,10 @@
     "repository_url": "https://github.com/modelcontextprotocol/servers",
     "repository_owner": "modelcontextprotocol",
     "repository_name": "servers",
-    "npm_package": "@modelcontextprotocol/server-git",
+    "npm_package": null,
+    "pypi_package": "mcp-server-git",
     "category": "development",
-    "tags": ["git", "version-control", "repositories"],
+    "tags": ["git", "version-control", "repositories", "python"],
     "verified": true,
     "featured": false
   },

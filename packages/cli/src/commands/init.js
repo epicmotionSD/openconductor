@@ -9,8 +9,8 @@ export async function initCommand(options) {
   try {
     console.log();
     logger.header('🚀 Initialize OpenConductor Configuration');
-    
-    const configManager = new ConfigManager();
+
+    const configManager = new ConfigManager(options.config);
     const configInfo = configManager.getConfigInfo();
 
     // Check if config already exists

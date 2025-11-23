@@ -1,7 +1,7 @@
 {
   "name": "@openconductor/cli",
-  "version": "1.0.4",
-  "description": "The npm for MCP servers - discover and install 120+ AI agent tools in seconds. Works with AWS, Stripe, Notion, Neon, and all major platforms. 70+ developers already using it!",
+  "version": "1.1.1",
+  "description": "The npm for MCP servers - discover and install 190+ AI agent tools in seconds. Works with AWS, Snowflake, BigQuery, Stripe, Notion, and all major platforms. One command to unlock the full MCP ecosystem!",
   "bin": {
     "openconductor": "./bin/openconductor.js"
   },

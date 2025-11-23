@@ -46,21 +46,84 @@ export class ApiClient {
    */
   async searchServers(params) {
     const response = await this.client.get('/servers', { params });
+    // Interceptor extracts response.data -> {success, data, meta}
+    // We need response.data.data -> {servers, pagination, filters}
     return response.data;
   }
 
   /**
    * Get detailed server info
+   * Fallback to search if direct endpoint fails (for compatibility)
    */
   async getServer(slug) {
-    const response = await this.client.get(`/servers/${slug}`);
-    return response.data;
+    try {
+      // Try the direct endpoint first
+      // Interceptor extracts response.data -> {success, data, meta}
+      const response = await this.client.get(`/servers/${slug}`);
+      return response.data;
+    } catch (error) {
+      // Fallback to search endpoint if direct access fails
+      if (error.message && (error.message.includes('404') || error.message.includes('not found'))) {
+        const searchResult = await this.searchServers({ q: slug, limit: 1 });
+        if (searchResult.servers && searchResult.servers.length > 0) {
+          const server = searchResult.servers[0];
+          // Check if it's an exact slug match
+          if (server.slug === slug) {
+            // Normalize the structure to match expected format
+            return this._normalizeServerObject(server);
+          }
+        }
+        throw new Error(`Server '${slug}' not found`);
+      }
+      throw error;
+    }
+  }
+
+  /**
+   * Normalize server object from search endpoint to match detail endpoint format
+   * @private
+   */
+  _normalizeServerObject(server) {
+    // Extract npm package name from installation command if available
+    let npmPackageName = null;
+    if (server.installation && server.installation.npm) {
+      // Parse "npm install -g package-name" to extract package name
+      const match = server.installation.npm.match(/npm install (?:-g )?(@?[\w-/]+)/);
+      if (match) {
+        npmPackageName = match[1];
+      }
+    }
+
+    return {
+      ...server,
+      // Override installation object to have just the package name
+      installation: {
+        npm: npmPackageName || undefined,
+        docker: server.installation?.docker,
+        manual: server.installation?.manual
+      },
+      packages: {
+        npm: npmPackageName ? {
+          name: npmPackageName,
+          downloadsTotal: server.stats?.downloads || 0
+        } : undefined,
+        docker: undefined
+      },
+      configuration: {
+        example: {}
+      },
+      documentation: {
+        docsUrl: server.docs_url,
+        homepageUrl: server.homepage_url
+      }
+    };
   }
 
   /**
    * Get CLI-specific install config
    */
   async getInstallConfig(slug) {
+    // Interceptor extracts response.data -> {success, data, meta}
     const response = await this.client.get(`/servers/cli/config/${slug}`);
     return response.data;
   }
@@ -90,6 +153,7 @@ export class ApiClient {
    * Get trending servers
    */
   async getTrending(period = '7d') {
+    // Interceptor extracts response.data -> {success, data, meta}
     const response = await this.client.get('/servers/stats/trending', {
       params: { period }
     });
@@ -100,6 +164,7 @@ export class ApiClient {
    * Get popular servers by category
    */
   async getPopular(category, limit = 10) {
+    // Interceptor extracts response.data -> {success, data, meta}
     const response = await this.client.get('/servers/stats/popular', {
       params: { category, limit }
     });
@@ -110,6 +175,7 @@ export class ApiClient {
    * Get all categories
    */
   async getCategories() {
+    // Interceptor extracts response.data -> {success, data, meta}
     const response = await this.client.get('/servers/categories');
     return response.data;
   }
@@ -118,6 +184,7 @@ export class ApiClient {
    * Get search suggestions
    */
   async getAutocomplete(query, limit = 5) {
+    // Interceptor extracts response.data -> {success, data, meta}
     const response = await this.client.get('/servers/search/autocomplete', {
       params: { q: query, limit }
     });
@@ -128,6 +195,7 @@ export class ApiClient {
    * Search in specific category
    */
   async searchInCategory(category, query, limit = 10) {
+    // Interceptor extracts response.data -> {success, data, meta}
     const response = await this.client.get('/servers/search', {
       params: {
         q: query,

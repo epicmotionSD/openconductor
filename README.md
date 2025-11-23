@@ -12,7 +12,7 @@
 
 ## What is OpenConductor?
 
-OpenConductor is the missing registry and CLI for the Model Context Protocol. Find, install, and manage 120+ MCP servers with a professional developer experience.
+OpenConductor is the missing registry and CLI for the Model Context Protocol. Find, install, and manage 190+ MCP servers with a professional developer experience.
 
 ```bash
 npm install -g @openconductor/cli
@@ -23,7 +23,7 @@ openconductor install openmemory
 
 ## Features
 
-- **🔍 Smart Discovery** - Search 120+ MCP servers by category, tags, and popularity
+- **🔍 Smart Discovery** - Search 190+ MCP servers by category, tags, and popularity
 - **⚡ One-Command Install** - Automatic configuration and port management
 - **🤖 Auto-Discovery** - Daily GitHub sync adds new servers automatically
 - **✅ Community Verified** - Automated validation with manual review

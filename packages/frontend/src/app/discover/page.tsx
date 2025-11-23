@@ -41,7 +41,7 @@ export default function DiscoverPage() {
         query: searchQuery || undefined,
         category: selectedCategory as any || undefined,
         verified: showVerifiedOnly || undefined,
-        limit: 100
+        limit: 500
       }
 
       const queryString = new URLSearchParams()
@@ -52,16 +52,25 @@ export default function DiscoverPage() {
       if (selectedTags.length > 0) queryString.append('tags', selectedTags.join(','))
       if (sortBy) queryString.append('sortBy', sortBy)
 
-      // Use the configured API URL which already includes /v1
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1'
+      // Try local API first, fallback to empty for now (database connection needed)
+      const apiUrl = '/api/v1'
       const response = await fetch(`${apiUrl}/servers?${queryString.toString()}`)
+
+      if (!response.ok) {
+        console.warn('Local API not available, showing empty state')
+        setServers([])
+        return
+      }
+
       const result = await response.json()
-      
+
       if (result.success) {
         setServers(result.data.servers)
       }
     } catch (error) {
       console.error('Error fetching servers:', error)
+      // Show empty state when API fails
+      setServers([])
     } finally {
       setLoading(false)
     }
@@ -96,18 +105,14 @@ export default function DiscoverPage() {
         {/* Page Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <h1 className="text-4xl font-bold">Discover AI Agents for Your Stack</h1>
-            <Badge variant="outline" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-none text-sm px-3 py-1">
-              60+ Integrations
+            <h1 className="text-4xl font-bold">Discover MCP Servers</h1>
+            <Badge variant="outline" className="bg-gradient-to-r from-primary/80 to-primary text-white border-none text-sm px-3 py-1">
+              {servers.length || '190+'} Servers
             </Badge>
           </div>
-          <p className="text-xl text-muted-foreground mb-4">
-            Deploy agents alongside your components. Find MCP servers designed for Vercel, v0, Supabase, and BaseHub developers.
+          <p className="text-lg text-muted-foreground max-w-3xl">
+            Browse and search through our registry of Model Context Protocol servers. Find tools for file management, databases, APIs, and more to supercharge Claude's capabilities.
           </p>
-          <AlertBox variant="info" icon={<span className="text-lg">🎯</span>} title="Ecosystem Integration">
-            Works with your modern AI stack out of the box.
-            Deploy with Vercel, build with v0, query Supabase, orchestrate with OpenConductor.
-          </AlertBox>
         </div>
 
         {/* Search and Filters */}
@@ -240,45 +245,49 @@ export default function DiscoverPage() {
 
 function ServerCard({ server }: { server: MCPServer }) {
   return (
-    <Card className="h-full">
-      <CardHeader>
-        <div className="flex items-start justify-between">
-          <CardTitle className="text-lg">
-            <Link 
+    <Card className="h-full flex flex-col hover:shadow-lg transition-shadow">
+      <CardHeader className="pb-3">
+        <div className="flex items-start justify-between gap-2">
+          <CardTitle className="text-lg leading-tight">
+            <Link
               href={`/servers/${server.slug}`}
-              className="hover:text-primary"
+              className="hover:text-primary transition-colors"
             >
               {server.name}
             </Link>
           </CardTitle>
           {server.verified && (
-            <Badge variant="secondary" className="text-xs">
+            <Badge variant="secondary" className="text-xs flex-shrink-0">
               ✓ Verified
             </Badge>
           )}
         </div>
       </CardHeader>
-      <CardContent>
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+      <CardContent className="flex-1 flex flex-col">
+        {/* Description - clearly visible */}
+        <p className="text-sm text-foreground/80 mb-4 line-clamp-2 min-h-[2.5rem]">
           {server.description}
         </p>
-        
-        <div className="space-y-3">
+
+        <div className="space-y-3 mt-auto">
+          {/* Category */}
           <div className="flex items-center gap-2">
             <CategoryBadge category={server.category as MCPCategory} />
           </div>
 
+          {/* Stats */}
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
               <Star className="h-3 w-3" />
-              {server.repository?.stars || 0}
+              <span>{server.repository?.stars || 0}</span>
             </div>
             <div className="flex items-center gap-1">
               <Download className="h-3 w-3" />
-              {server.stats?.installs || 0}
+              <span>{server.stats?.installs || 0}</span>
             </div>
           </div>
 
+          {/* Tags */}
           {server.tags.length > 0 && (
             <div className="flex flex-wrap gap-1">
               {server.tags.slice(0, 3).map((tag) => (
@@ -294,6 +303,7 @@ function ServerCard({ server }: { server: MCPServer }) {
             </div>
           )}
 
+          {/* Actions */}
           <div className="flex gap-2 pt-2">
             <Button asChild size="sm" className="flex-1">
               <Link href={`/servers/${server.slug}`}>

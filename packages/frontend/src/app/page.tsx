@@ -3,6 +3,9 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { SiteHeader } from '@/components/navigation/site-header'
+import { TryNowHero } from '@/components/homepage/try-now-hero'
+import { StackPreview } from '@/components/homepage/stack-preview'
+import { LiveActivityFeed } from '@/components/homepage/live-activity-feed'
 import { ArrowRight, Terminal, Zap, Shield, Package, Github, Search, Download } from 'lucide-react'
 
 export default function HomePage() {
@@ -24,15 +27,16 @@ export default function HomePage() {
 
             {/* Heading */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-[1.1] tracking-tight">
-              Discover & Install
+              Set up Claude for
               <br />
-              <span className="text-primary">MCP Servers</span> in Seconds
+              <span className="text-primary">Coding/Writing/Data</span>
+              <br />
+              <span className="text-2xl md:text-3xl lg:text-4xl text-muted-foreground">in 10 seconds</span>
             </h1>
 
             {/* Description */}
             <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-              The missing registry and CLI for the Model Context Protocol.
-              Find, install, and manage AI agent tools with a professional developer experience.
+              Pre-configured AI workflows (Stacks) with system prompts. One command installs all tools + gives Claude a specialized persona.
             </p>
 
             {/* CTAs */}
@@ -50,11 +54,18 @@ export default function HomePage() {
               </Button>
             </div>
 
+            {/* Try Now Hero - Instant Value */}
+            <TryNowHero />
+
             {/* Trust Indicators */}
             <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <Package className="h-4 w-4" />
-                <span>60+ Servers</span>
+                <span>220+ Servers</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Zap className="h-4 w-4" />
+                <span>3 Stacks</span>
               </div>
               <div className="flex items-center gap-2">
                 <Shield className="h-4 w-4" />
@@ -66,31 +77,6 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Terminal Demo Section */}
-        <section className="container mx-auto px-4 pb-16 md:pb-24">
-          <Card className="max-w-4xl mx-auto shadow-2xl border-border/50 overflow-hidden">
-            <div className="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 p-4 border-b flex items-center gap-3">
-              <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <div className="w-3 h-3 rounded-full bg-green-500/80" />
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Terminal className="h-4 w-4" />
-                <span className="font-medium">Install any MCP server in seconds</span>
-              </div>
-            </div>
-            <CardContent className="p-0 bg-slate-950">
-              <img
-                src="/demo/openconductor-demo.gif"
-                alt="OpenConductor CLI demo showing installation and setup process"
-                className="w-full h-auto"
-                loading="lazy"
-              />
-            </CardContent>
-          </Card>
         </section>
 
         {/* Features Section */}
@@ -106,11 +92,11 @@ export default function HomePage() {
             <Card className="border-border/50 hover:border-primary/50 transition-colors">
               <CardContent className="p-6">
                 <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <Search className="h-6 w-6 text-primary" />
+                  <Zap className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Discover Easily</h3>
+                <h3 className="text-xl font-semibold mb-2">Instant Value</h3>
                 <p className="text-muted-foreground">
-                  Search through 60+ MCP servers with advanced filtering by category, tags, and popularity.
+                  Install curated stacks with system prompts. Claude becomes a specialized assistant in 10 seconds.
                 </p>
               </CardContent>
             </Card>
@@ -118,11 +104,11 @@ export default function HomePage() {
             <Card className="border-border/50 hover:border-primary/50 transition-colors">
               <CardContent className="p-6">
                 <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <Download className="h-6 w-6 text-primary" />
+                  <Package className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Install Instantly</h3>
+                <h3 className="text-xl font-semibold mb-2">190+ Servers</h3>
                 <p className="text-muted-foreground">
-                  One command to install and configure. Automatic Claude Desktop integration with zero manual setup.
+                  Access the largest registry of MCP servers. Search, discover, and install any tool you need.
                 </p>
               </CardContent>
             </Card>
@@ -134,33 +120,48 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Verified Quality</h3>
                 <p className="text-muted-foreground">
-                  All servers are validated with automated testing. Community-driven with manual verification.
+                  All servers validated with automated testing. Stacks curated by experts for best practices.
                 </p>
               </CardContent>
             </Card>
           </div>
         </section>
 
+        {/* Live Activity Section - Social Proof */}
+        <section className="container mx-auto px-4 pb-16 md:pb-24">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Join Developers Worldwide</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              See what's happening right now on OpenConductor
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <LiveActivityFeed />
+          </div>
+        </section>
+
+        {/* Stacks Section - Interactive Preview */}
+        <StackPreview />
+
         {/* Stats Section */}
-        <section className="bg-muted/30 border-y">
-          <div className="container mx-auto px-4 py-16">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">60+</div>
-                <div className="text-muted-foreground text-sm">MCP Servers</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">&lt;3s</div>
-                <div className="text-muted-foreground text-sm">Average Install</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">100%</div>
-                <div className="text-muted-foreground text-sm">Cross-Platform</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">MIT</div>
-                <div className="text-muted-foreground text-sm">Open Source</div>
-              </div>
+        <section className="container mx-auto px-4 py-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">190+</div>
+              <div className="text-muted-foreground text-sm">MCP Servers</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">3</div>
+              <div className="text-muted-foreground text-sm">Curated Stacks</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">10s</div>
+              <div className="text-muted-foreground text-sm">Setup Time</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">MIT</div>
+              <div className="text-muted-foreground text-sm">Open Source</div>
             </div>
           </div>
         </section>
