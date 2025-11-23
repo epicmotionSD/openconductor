@@ -39,15 +39,25 @@ function generateActivity(): ActivityItem {
 }
 
 export function LiveActivityFeed() {
-  const [activities, setActivities] = useState<ActivityItem[]>([
-    generateActivity(),
-    generateActivity(),
-    generateActivity(),
-    generateActivity(),
-  ])
-  const [totalToday, setTotalToday] = useState(Math.floor(Math.random() * 50) + 30)
+  const [activities, setActivities] = useState<ActivityItem[]>([])
+  const [totalToday, setTotalToday] = useState(0)
+  const [mounted, setMounted] = useState(false)
+
+  // Initialize with random data only on client
+  useEffect(() => {
+    setActivities([
+      generateActivity(),
+      generateActivity(),
+      generateActivity(),
+      generateActivity(),
+    ])
+    setTotalToday(Math.floor(Math.random() * 50) + 30)
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
+    if (!mounted) return
+
     // Update activities every 8-15 seconds
     const interval = setInterval(() => {
       const newActivity = generateActivity()
@@ -56,7 +66,7 @@ export function LiveActivityFeed() {
     }, Math.floor(Math.random() * 7000) + 8000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [mounted])
 
   return (
     <Card className="border-border/50 bg-gradient-to-br from-primary/5 to-background">
@@ -66,25 +76,40 @@ export function LiveActivityFeed() {
           <h3 className="text-lg font-semibold">Live Activity</h3>
         </div>
 
-        <div className="space-y-3 mb-4">
-          {activities.map((activity, index) => (
-            <div
-              key={activity.id}
-              className={`flex items-center gap-3 text-sm transition-all duration-500 ${
-                index === 0 ? 'animate-fade-in' : ''
-              }`}
-            >
-              <span className="text-lg flex-shrink-0">{activity.icon}</span>
-              <div className="flex-1 min-w-0">
-                <span className="font-medium truncate block">{activity.item}</span>
-                <span className="text-muted-foreground text-xs">{activity.action}</span>
+        {!mounted ? (
+          <div className="space-y-3 mb-4">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="flex items-center gap-3 text-sm animate-pulse">
+                <div className="h-6 w-6 bg-muted rounded flex-shrink-0" />
+                <div className="flex-1 space-y-2">
+                  <div className="h-4 bg-muted rounded w-3/4" />
+                  <div className="h-3 bg-muted rounded w-1/2" />
+                </div>
+                <div className="h-3 bg-muted rounded w-16" />
               </div>
-              <span className="text-xs text-muted-foreground whitespace-nowrap">
-                {activity.timeAgo}
-              </span>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-3 mb-4">
+            {activities.map((activity, index) => (
+              <div
+                key={activity.id}
+                className={`flex items-center gap-3 text-sm transition-all duration-500 ${
+                  index === 0 ? 'animate-fade-in' : ''
+                }`}
+              >
+                <span className="text-lg flex-shrink-0">{activity.icon}</span>
+                <div className="flex-1 min-w-0">
+                  <span className="font-medium truncate block">{activity.item}</span>
+                  <span className="text-muted-foreground text-xs">{activity.action}</span>
+                </div>
+                <span className="text-xs text-muted-foreground whitespace-nowrap">
+                  {activity.timeAgo}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="pt-4 border-t border-border/50">
           <div className="flex items-center justify-between">
@@ -93,7 +118,7 @@ export function LiveActivityFeed() {
               <span>Today</span>
             </div>
             <Badge variant="outline" className="font-semibold">
-              {totalToday} installs
+              {totalToday > 0 ? `${totalToday} installs` : 'Loading...'}
             </Badge>
           </div>
         </div>

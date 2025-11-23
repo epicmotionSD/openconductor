@@ -4,54 +4,53 @@ import { useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { InstallTimer } from './install-timer'
-import { Terminal, ArrowRight, Copy, Check, Zap } from 'lucide-react'
+import { Terminal, ArrowRight, Copy, Check, Zap, XCircle, CheckCircle } from 'lucide-react'
 
-interface Stack {
+interface Server {
   id: string
   name: string
   emoji: string
+  slug: string
   description: string
-  servers: string[]
-  serverCount: number
+  category: string
 }
 
-const stacks: Stack[] = [
+const popularServers: Server[] = [
   {
-    id: 'coder',
-    name: 'Coder Stack',
-    emoji: '🧑‍💻',
-    description: 'Build, debug, and deploy like a senior engineer',
-    servers: ['GitHub', 'PostgreSQL', 'Filesystem', 'Memory', 'Brave Search'],
-    serverCount: 5,
+    id: 'github',
+    name: 'GitHub',
+    emoji: '🐙',
+    slug: 'github',
+    description: 'Search repos, issues, PRs, and code',
+    category: 'Development',
   },
   {
-    id: 'writer',
-    name: 'Writer Stack',
-    emoji: '✍️',
-    description: 'Research, write, and publish with confidence',
-    servers: ['Brave Search', 'Filesystem', 'Memory', 'Google Drive'],
-    serverCount: 4,
+    id: 'filesystem',
+    name: 'Filesystem',
+    emoji: '📁',
+    slug: 'filesystem',
+    description: 'Read, write, and search local files',
+    category: 'Essential',
   },
   {
-    id: 'essential',
-    name: 'Essential Stack',
-    emoji: '⚡',
-    description: 'Everything you need to get started',
-    servers: ['Filesystem', 'Brave Search', 'Memory'],
-    serverCount: 3,
+    id: 'postgres',
+    name: 'PostgreSQL',
+    emoji: '🐘',
+    slug: 'postgres',
+    description: 'Query and manage databases',
+    category: 'Database',
   },
 ]
 
 export function TryNowHero() {
-  const [selectedStack, setSelectedStack] = useState<Stack>(stacks[0])
+  const [selectedServer, setSelectedServer] = useState<Server>(popularServers[0])
   const [copied, setCopied] = useState(false)
   const [timerActive, setTimerActive] = useState(false)
 
-  const command = `npx @openconductor/cli stack install ${selectedStack.id}`
+  const command = `openconductor install ${selectedServer.slug}`
 
-  const handleStackChange = (stack: Stack) => {
-    setSelectedStack(stack)
-    // Reset timer when changing stacks
+  const handleServerChange = (server: Server) => {
+    setSelectedServer(server)
     setTimerActive(false)
     setCopied(false)
   }
@@ -75,51 +74,67 @@ export function TryNowHero() {
             <Terminal className="h-5 w-5 text-primary" />
           </div>
           <div className="flex-1">
-            <h3 className="text-lg font-semibold mb-2">Try it right now</h3>
+            <h3 className="text-lg font-semibold mb-2">See the difference</h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Choose a stack and copy the command. No signup required.
+              No more JSON config files. Just one command.
             </p>
 
-            {/* Stack Selector */}
+            {/* Server Selector */}
             <div className="grid grid-cols-3 gap-2 mb-4">
-              {stacks.map((stack) => (
+              {popularServers.map((server) => (
                 <button
-                  key={stack.id}
-                  onClick={() => handleStackChange(stack)}
+                  key={server.id}
+                  onClick={() => handleServerChange(server)}
                   className={`p-3 rounded-lg border-2 transition-all text-left ${
-                    selectedStack.id === stack.id
+                    selectedServer.id === server.id
                       ? 'border-primary bg-primary/10'
                       : 'border-border hover:border-primary/50'
                   }`}
                 >
-                  <div className="text-2xl mb-1">{stack.emoji}</div>
-                  <div className="text-xs font-semibold">{stack.name}</div>
+                  <div className="text-2xl mb-1">{server.emoji}</div>
+                  <div className="text-xs font-semibold">{server.name}</div>
+                  <div className="text-xs text-muted-foreground mt-1">{server.category}</div>
                 </button>
               ))}
             </div>
 
-            {/* Selected Stack Preview */}
-            <div className="mb-4 p-3 bg-muted/30 rounded-lg border border-border/50">
-              <div className="flex items-center gap-2 mb-2">
-                <Zap className="h-4 w-4 text-primary" />
-                <span className="text-sm font-semibold">You'll get:</span>
+            {/* Before/After Comparison */}
+            <div className="grid md:grid-cols-2 gap-3 mb-4">
+              {/* The Old Way - JSON Hell */}
+              <div className="p-3 bg-red-500/5 rounded-lg border border-red-500/20">
+                <div className="flex items-center gap-2 mb-2">
+                  <XCircle className="h-4 w-4 text-red-500" />
+                  <span className="text-xs font-semibold text-red-500">The Old Way</span>
+                </div>
+                <code className="block text-xs bg-slate-950 text-slate-100 px-3 py-2 rounded border border-slate-800 font-mono overflow-x-auto">
+                  <div className="text-muted-foreground">// Edit claude_desktop_config.json</div>
+                  <div className="text-red-400">{"{"}</div>
+                  <div className="text-red-400 ml-2">"mcpServers": {"{"}</div>
+                  <div className="text-red-400 ml-4">"{selectedServer.slug}": {"{"}</div>
+                  <div className="text-red-400 ml-6">"command": "..."</div>
+                  <div className="text-red-400 ml-4">{"}"}</div>
+                  <div className="text-red-400 ml-2">{"}"}</div>
+                  <div className="text-red-400">{"}"}</div>
+                </code>
+                <p className="text-xs text-muted-foreground mt-2">Complex, error-prone, manual editing</p>
               </div>
-              <p className="text-xs text-muted-foreground mb-2">{selectedStack.description}</p>
-              <div className="flex flex-wrap gap-1">
-                {selectedStack.servers.map((server, idx) => (
-                  <span
-                    key={idx}
-                    className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-md"
-                  >
-                    {server}
-                  </span>
-                ))}
+
+              {/* The New Way - OpenConductor */}
+              <div className="p-3 bg-green-500/5 rounded-lg border border-green-500/20">
+                <div className="flex items-center gap-2 mb-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span className="text-xs font-semibold text-green-500">With OpenConductor</span>
+                </div>
+                <code className="block text-xs bg-slate-950 text-slate-100 px-3 py-2 rounded border border-slate-800 font-mono overflow-x-auto">
+                  {command}
+                </code>
+                <p className="text-xs text-muted-foreground mt-2">One command. Done in 10 seconds.</p>
               </div>
             </div>
 
-            {/* Command */}
+            {/* Main CTA */}
             <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
-              <code className="flex-1 text-xs md:text-sm bg-slate-950 text-slate-100 px-4 py-3 rounded-lg border border-slate-800 font-mono overflow-x-auto">
+              <code className="flex-1 text-sm bg-slate-950 text-slate-100 px-4 py-3 rounded-lg border border-slate-800 font-mono overflow-x-auto">
                 {command}
               </code>
               <Button
@@ -140,13 +155,14 @@ export function TryNowHero() {
                 )}
               </Button>
             </div>
+
             <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
               <ArrowRight className="h-4 w-4 text-primary" />
-              <span>Sets up {selectedStack.serverCount} servers + system prompt in 10 seconds</span>
+              <span>{selectedServer.description}</span>
             </div>
 
             {/* Install Timer */}
-            <InstallTimer key={selectedStack.id} isActive={timerActive} />
+            <InstallTimer key={selectedServer.id} isActive={timerActive} />
           </div>
         </div>
       </CardContent>

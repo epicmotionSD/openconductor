@@ -68,7 +68,7 @@ export default function DiscoverPage() {
       const result = await response.json()
 
       if (result.success) {
-        setServers(result.data.servers)
+        setServers(result.data || [])
       }
     } catch (error) {
       console.error('Error fetching servers:', error)
@@ -112,7 +112,7 @@ export default function DiscoverPage() {
               Discover <GradientText>MCP Servers</GradientText>
             </h1>
             <Badge className="bg-gradient-primary text-white border-none text-sm px-3 py-1 shadow-glow-purple">
-              {servers.length || '220+'} Servers
+              {servers?.length || '190+'} Servers
             </Badge>
           </div>
           <p className="text-lg text-foreground-secondary max-w-3xl">
