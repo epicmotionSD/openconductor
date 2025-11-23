@@ -15,6 +15,10 @@ import { listCommand } from '../src/commands/list.js';
 import { removeCommand } from '../src/commands/remove.js';
 import { updateCommand } from '../src/commands/update.js';
 import { initCommand } from '../src/commands/init.js';
+import { analyticsCommand } from '../src/lib/analytics.js';
+import { stackListCommand, stackInstallCommand, stackShareCommand, stackShowCommand } from '../src/commands/stack.js';
+import { badgeCommand, listBadgeTemplates } from '../src/commands/badge.js';
+import { achievementsCommand, shareAchievements } from '../src/commands/achievements.js';
 
 // Get package.json for version
 const __filename = fileURLToPath(import.meta.url);
@@ -38,7 +42,7 @@ if (notifier.update) {
 // Configure CLI
 program
   .name('openconductor')
-  .description('Control plane for AI agent infrastructure')
+  .description('The npm for AI agent tools - install MCP servers without the JSON hell')
   .version(pkg.version);
 
 // Commands
@@ -90,16 +94,90 @@ program
   .option('-f, --force', 'overwrite existing config')
   .action(initCommand);
 
+// Stack commands - curated server collections with system prompts
+const stackCmd = program
+  .command('stack')
+  .description('Manage MCP server stacks (curated collections)');
+
+stackCmd
+  .command('list')
+  .description('List all available stacks')
+  .action(stackListCommand);
+
+stackCmd
+  .command('install <stack>')
+  .description('Install all servers in a stack + system prompt')
+  .option('-f, --force', 'reinstall already installed servers')
+  .action(stackInstallCommand);
+
+stackCmd
+  .command('show <stack>')
+  .description('Show details about a stack')
+  .action(stackShowCommand);
+
+stackCmd
+  .command('share <stack>')
+  .description('Generate shareable link for a stack')
+  .action(stackShareCommand);
+
+// Badge command - for developers to generate installation badges
+program
+  .command('badge <server>')
+  .description('Generate installation badge for your MCP server')
+  .option('--simple', 'Generate simple badge only')
+  .option('--command', 'Generate command snippet only')
+  .option('--full', 'Generate full installation section (recommended)')
+  .action(badgeCommand);
+
+program
+  .command('badge-templates')
+  .description('List all available badge templates')
+  .action(listBadgeTemplates);
+
+// Achievements command - gamification for users
+program
+  .command('achievements')
+  .alias('badges')
+  .description('View your achievements and progress')
+  .option('--all', 'Show locked achievements')
+  .action(achievementsCommand);
+
+program
+  .command('share-achievements')
+  .description('Share your achievements (coming soon)')
+  .action(shareAchievements);
+
 // Hidden command for analytics opt-out
 program
   .command('analytics')
   .description('Manage analytics preferences')
-  .option('--disable', 'disable analytics')
-  .option('--enable', 'enable analytics')
-  .action((options) => {
-    // Handle analytics preferences
-    console.log('Analytics preferences updated');
+  .option('--disable', 'Disable anonymous analytics')
+  .option('--enable', 'Enable anonymous analytics')
+  .option('--status', 'Show analytics status')
+  .option('--show', 'Show what data is collected')
+  .action(async (options) => {
+    await analyticsCommand(options);
   });
+
+// Show better help when no command provided
+if (process.argv.length === 2) {
+  console.log(`
+${chalk.bold.cyan('OpenConductor')} ${chalk.dim(`v${pkg.version}`)} - The npm for AI agent tools
+
+${chalk.bold('Quick Start:')}
+  ${chalk.cyan('openconductor stack list')}         ${chalk.dim('# See available stacks')}
+  ${chalk.cyan('openconductor stack install coder')}  ${chalk.dim('# Install Coder stack')}
+  ${chalk.cyan('openconductor discover database')}   ${chalk.dim('# Search for servers')}
+  ${chalk.cyan('openconductor install github-mcp')}  ${chalk.dim('# Install a server')}
+
+${chalk.bold('Get Help:')}
+  ${chalk.cyan('openconductor --help')}              ${chalk.dim('# Show all commands')}
+  ${chalk.cyan('openconductor <command> --help')}    ${chalk.dim('# Command-specific help')}
+
+${chalk.bold('Learn More:')} ${chalk.blue.underline('https://openconductor.ai')}
+  `);
+  process.exit(0);
+}
 
 // Global error handler
 process.on('uncaughtException', (error) => {

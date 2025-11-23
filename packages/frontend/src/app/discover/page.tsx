@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { GradientText } from '@/components/ui/gradient-text'
+import { GlassCard } from '@/components/ui/glass-card'
+import { GradientButton } from '@/components/ui/gradient-button'
 import { Search, Star, Download, ExternalLink, Filter } from 'lucide-react'
 import { AlertBox } from '@/components/ui/alert-box'
 import { CategoryBadge, MCPCategory } from '@/components/ui/category-badge'
@@ -105,44 +108,46 @@ export default function DiscoverPage() {
         {/* Page Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <h1 className="text-4xl font-bold">Discover MCP Servers</h1>
-            <Badge variant="outline" className="bg-gradient-to-r from-primary/80 to-primary text-white border-none text-sm px-3 py-1">
-              {servers.length || '190+'} Servers
+            <h1 className="text-4xl font-bold">
+              Discover <GradientText>MCP Servers</GradientText>
+            </h1>
+            <Badge className="bg-gradient-primary text-white border-none text-sm px-3 py-1 shadow-glow-purple">
+              {servers.length || '220+'} Servers
             </Badge>
           </div>
-          <p className="text-lg text-muted-foreground max-w-3xl">
+          <p className="text-lg text-foreground-secondary max-w-3xl">
             Browse and search through our registry of Model Context Protocol servers. Find tools for file management, databases, APIs, and more to supercharge Claude's capabilities.
           </p>
         </div>
 
         {/* Search and Filters */}
-        <div className="mb-8 space-y-4">
+        <GlassCard className="mb-8 space-y-4">
           <form onSubmit={handleSearch} className="flex gap-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-3 h-4 w-4 text-foreground-muted" />
               <Input
                 type="text"
                 placeholder="Search servers by name, description, or tags..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
+                className="pl-10 bg-background-surface border-primary/20"
               />
             </div>
-            <Button type="submit">Search</Button>
+            <GradientButton type="submit">Search</GradientButton>
           </form>
 
           {/* Filters */}
           <div className="space-y-4">
             <div className="flex flex-wrap gap-4 items-center">
               <div className="flex items-center gap-2">
-                <Filter className="h-4 w-4" />
-                <span className="text-sm font-medium">Filters:</span>
+                <Filter className="h-4 w-4 text-primary" />
+                <span className="text-sm font-medium text-foreground">Filters:</span>
               </div>
 
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-3 py-1 border rounded-md text-sm"
+                className="px-3 py-1 border border-primary/20 bg-background-surface rounded-md text-sm text-foreground"
               >
                 <option value="">All Categories</option>
                 {categories.map(cat => (
@@ -153,7 +158,7 @@ export default function DiscoverPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="px-3 py-1 border rounded-md text-sm"
+                className="px-3 py-1 border border-primary/20 bg-background-surface rounded-md text-sm text-foreground"
               >
                 <option value="popularity">Sort: Popularity</option>
                 <option value="installs">Sort: Most Installs</option>
@@ -161,11 +166,12 @@ export default function DiscoverPage() {
                 <option value="alphabetical">Sort: A-Z</option>
               </select>
 
-              <label className="flex items-center gap-2 text-sm">
+              <label className="flex items-center gap-2 text-sm text-foreground">
                 <input
                   type="checkbox"
                   checked={showVerifiedOnly}
                   onChange={(e) => setShowVerifiedOnly(e.target.checked)}
+                  className="accent-primary"
                 />
                 Verified only
               </label>
@@ -175,6 +181,7 @@ export default function DiscoverPage() {
                   variant="outline"
                   size="sm"
                   onClick={clearAllFilters}
+                  className="border-primary/20 hover:border-primary/40"
                 >
                   Clear All
                 </Button>
@@ -183,13 +190,15 @@ export default function DiscoverPage() {
 
             {/* Tag Selection */}
             <div className="space-y-2">
-              <div className="text-sm font-medium">Filter by tags:</div>
+              <div className="text-sm font-medium text-foreground">Filter by tags:</div>
               <div className="flex flex-wrap gap-2">
                 {popularTags.map(tag => (
                   <Badge
                     key={tag}
                     variant={selectedTags.includes(tag) ? "default" : "outline"}
-                    className="cursor-pointer hover:bg-primary/90 transition-colors"
+                    className={selectedTags.includes(tag)
+                      ? "cursor-pointer bg-gradient-primary text-white hover:opacity-90 transition-smooth border-none"
+                      : "cursor-pointer hover:bg-primary/10 transition-smooth border-primary/20"}
                     onClick={() => toggleTag(tag)}
                   >
                     {tag}
@@ -197,25 +206,25 @@ export default function DiscoverPage() {
                 ))}
               </div>
               {selectedTags.length > 0 && (
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm text-foreground-secondary">
                   Selected: {selectedTags.join(', ')}
                 </div>
               )}
             </div>
           </div>
-        </div>
+        </GlassCard>
 
         {/* Results */}
         {loading ? (
           <div className="text-center py-8">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-muted-foreground">Searching servers...</p>
+            <p className="mt-4 text-foreground-secondary">Searching servers...</p>
           </div>
         ) : (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-semibold">
-                {servers.length} server{servers.length !== 1 ? 's' : ''} found
+              <h2 className="text-2xl font-semibold text-foreground">
+                <GradientText>{servers.length}</GradientText> server{servers.length !== 1 ? 's' : ''} found
               </h2>
             </div>
 
@@ -227,13 +236,13 @@ export default function DiscoverPage() {
 
             {servers.length === 0 && (
               <div className="text-center py-12">
-                <h3 className="text-lg font-medium mb-2">No servers found</h3>
-                <p className="text-muted-foreground mb-4">
+                <h3 className="text-lg font-medium mb-2 text-foreground">No servers found</h3>
+                <p className="text-foreground-secondary mb-4">
                   Try adjusting your search criteria
                 </p>
-                <Button onClick={clearAllFilters}>
+                <GradientButton onClick={clearAllFilters}>
                   Clear Filters
-                </Button>
+                </GradientButton>
               </div>
             )}
           </div>
@@ -245,27 +254,27 @@ export default function DiscoverPage() {
 
 function ServerCard({ server }: { server: MCPServer }) {
   return (
-    <Card className="h-full flex flex-col hover:shadow-lg transition-shadow">
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between gap-2">
-          <CardTitle className="text-lg leading-tight">
+    <GlassCard className="h-full flex flex-col hover:border-primary/50 transition-smooth">
+      <div className="pb-3">
+        <div className="flex items-start justify-between gap-2 mb-4">
+          <h3 className="text-lg leading-tight font-semibold">
             <Link
               href={`/servers/${server.slug}`}
               className="hover:text-primary transition-colors"
             >
               {server.name}
             </Link>
-          </CardTitle>
+          </h3>
           {server.verified && (
-            <Badge variant="secondary" className="text-xs flex-shrink-0">
+            <Badge className="text-xs flex-shrink-0 bg-success text-white border-none">
               ✓ Verified
             </Badge>
           )}
         </div>
-      </CardHeader>
-      <CardContent className="flex-1 flex flex-col">
+      </div>
+      <div className="flex-1 flex flex-col">
         {/* Description - clearly visible */}
-        <p className="text-sm text-foreground/80 mb-4 line-clamp-2 min-h-[2.5rem]">
+        <p className="text-sm text-foreground-secondary mb-4 line-clamp-2 min-h-[2.5rem]">
           {server.description}
         </p>
 
@@ -276,13 +285,13 @@ function ServerCard({ server }: { server: MCPServer }) {
           </div>
 
           {/* Stats */}
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-4 text-sm text-foreground-secondary">
             <div className="flex items-center gap-1">
-              <Star className="h-3 w-3" />
+              <Star className="h-3 w-3 text-warning" />
               <span>{server.repository?.stars || 0}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Download className="h-3 w-3" />
+              <Download className="h-3 w-3 text-primary" />
               <span>{server.stats?.installs || 0}</span>
             </div>
           </div>
@@ -291,12 +300,12 @@ function ServerCard({ server }: { server: MCPServer }) {
           {server.tags.length > 0 && (
             <div className="flex flex-wrap gap-1">
               {server.tags.slice(0, 3).map((tag) => (
-                <Badge key={tag} variant="outline" className="text-xs">
+                <Badge key={tag} variant="outline" className="text-xs border-primary/20 text-foreground-secondary">
                   {tag}
                 </Badge>
               ))}
               {server.tags.length > 3 && (
-                <Badge variant="outline" className="text-xs">
+                <Badge variant="outline" className="text-xs border-primary/20 text-foreground-secondary">
                   +{server.tags.length - 3}
                 </Badge>
               )}
@@ -305,19 +314,19 @@ function ServerCard({ server }: { server: MCPServer }) {
 
           {/* Actions */}
           <div className="flex gap-2 pt-2">
-            <Button asChild size="sm" className="flex-1">
+            <GradientButton asChild size="sm" className="flex-1">
               <Link href={`/servers/${server.slug}`}>
                 View Details
               </Link>
-            </Button>
-            <Button variant="outline" size="sm" asChild>
+            </GradientButton>
+            <Button variant="outline" size="sm" asChild className="border-primary/20 hover:border-primary/40">
               <a href={server.repository.url} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-3 w-3" />
               </a>
             </Button>
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </GlassCard>
   )
 }

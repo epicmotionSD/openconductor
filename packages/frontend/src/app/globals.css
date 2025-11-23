@@ -55,35 +55,70 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
+    /* OpenConductor Brand Colors - Dark Mode */
 
-    /* Semantic status colors - dark mode */
-    --success: 142.1 70.6% 45.3%;
-    --success-foreground: 210 40% 98%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 222.2 84% 4.9%;
-    --info: 217.2 91.2% 59.8%;
-    --info-foreground: 210 40% 98%;
+    /* Backgrounds - Deep dark purple-blue */
+    --background: 240 17% 10%;        /* #0F0F1A */
+    --background-surface: 240 17% 18%; /* #1A1A2E */
+    --background-elevated: 240 17% 25%; /* #252541 */
+    --background-hover: 240 17% 31%;   /* #2F2F54 */
 
-    /* Category colors remain the same in dark mode for consistency */
+    /* Text Hierarchy */
+    --foreground: 0 0% 100%;          /* #FFFFFF */
+    --foreground-secondary: 220 9% 73%; /* #B8BCC8 */
+    --foreground-muted: 220 9% 46%;   /* #6B7280 */
+    --foreground-disabled: 220 9% 29%; /* #4B5563 */
+
+    /* Brand Primary - Purple Gradient */
+    --primary: 251 91% 67%;           /* #8B5CF6 */
+    --primary-light: 251 91% 74%;     /* #A78BFA */
+    --primary-dark: 251 91% 60%;      /* #6B38FB */
+    --primary-foreground: 0 0% 100%;  /* #FFFFFF */
+
+    /* Brand Secondary - Blue */
+    --secondary: 213 94% 56%;         /* #3B82F6 */
+    --secondary-light: 213 94% 68%;   /* #60A5FA */
+    --secondary-dark: 213 94% 48%;    /* #2563EB */
+    --secondary-foreground: 0 0% 100%; /* #FFFFFF */
+
+    /* Status Colors */
+    --success: 160 84% 51%;           /* #10B981 */
+    --success-light: 160 84% 60%;     /* #34D399 */
+    --success-dark: 160 100% 20%;     /* #064E3B */
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;         /* #EF4444 */
+    --destructive-light: 0 84% 78%;   /* #FCA5A5 */
+    --destructive-dark: 0 84% 30%;    /* #7F1D1D */
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 36 100% 67%;           /* #FFA657 */
+    --warning-light: 36 100% 89%;     /* #FED7AA */
+    --warning-dark: 36 100% 28%;      /* #92400E */
+    --warning-foreground: 0 0% 0%;
+
+    --info: 213 94% 56%;              /* #3B82F6 */
+    --info-foreground: 0 0% 100%;
+
+    /* Special Colors */
+    --cta: 0 72% 73%;                 /* #FF6B6B */
+    --badge: 261 61% 86%;             /* #D2A8FF */
+    --accent: 213 94% 56%;            /* #3B82F6 */
+    --accent-foreground: 0 0% 100%;
+
+    /* UI Elements */
+    --card: 240 17% 18%;              /* #1A1A2E */
+    --card-foreground: 0 0% 100%;
+    --popover: 240 17% 18%;
+    --popover-foreground: 0 0% 100%;
+    --muted: 240 17% 25%;             /* #252541 */
+    --muted-foreground: 220 9% 73%;   /* #B8BCC8 */
+    --border: 251 91% 67% / 0.2;      /* rgba(139, 92, 246, 0.2) */
+    --input: 251 91% 67% / 0.2;
+    --ring: 251 91% 67%;              /* #8B5CF6 */
+    --radius: 0.75rem;
+
+    /* Category colors remain vibrant in dark mode */
   }
 }
 
@@ -91,7 +126,104 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+}
+
+@layer utilities {
+  /* Gradient Text Utility */
+  .gradient-text {
+    background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+  }
+
+  .gradient-text-animated {
+    @apply gradient-text animate-gradient-shift;
+  }
+
+  /* Glow Effects */
+  .glow-purple {
+    box-shadow:
+      0 0 20px rgba(139, 92, 246, 0.5),
+      0 0 40px rgba(139, 92, 246, 0.3),
+      0 0 60px rgba(139, 92, 246, 0.1);
+  }
+
+  .glow-blue {
+    box-shadow:
+      0 0 20px rgba(59, 130, 246, 0.5),
+      0 0 40px rgba(59, 130, 246, 0.3);
+  }
+
+  .glow-success {
+    box-shadow:
+      0 0 20px rgba(16, 185, 129, 0.5),
+      0 0 40px rgba(16, 185, 129, 0.3);
+  }
+
+  /* Glass Morphism */
+  .glass {
+    background: rgba(26, 26, 46, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+
+  .glass-elevated {
+    background: rgba(37, 37, 65, 0.5);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+  }
+
+  /* Gradient Borders */
+  .border-gradient {
+    border: 2px solid transparent;
+    background-image:
+      linear-gradient(#1A1A2E, #1A1A2E),
+      linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  /* Smooth Transitions */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1A1A2E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8B5CF6;
+}
+
+/* Selection Styling */
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: #FFFFFF;
+}
+
+::-moz-selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: #FFFFFF;
 }

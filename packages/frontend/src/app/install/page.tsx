@@ -2,6 +2,9 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { GradientText } from '@/components/ui/gradient-text'
+import { GlassCard } from '@/components/ui/glass-card'
+import { GradientButton } from '@/components/ui/gradient-button'
 import { SiteHeader } from '@/components/navigation/site-header'
 import { Terminal, Download, CheckCircle, ArrowRight, ExternalLink } from 'lucide-react'
 
@@ -13,93 +16,89 @@ export default function InstallPage() {
       <div className="container mx-auto px-4 py-12">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-6 text-foreground">Install OpenConductor CLI</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold mb-6">
+            Install <GradientText>OpenConductor CLI</GradientText>
+          </h1>
+          <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
             Get started with the OpenConductor CLI to discover, install, and manage MCP servers in seconds.
           </p>
         </div>
 
         {/* Quick Install */}
-        <Card className="mb-12 max-w-3xl mx-auto">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Terminal className="h-5 w-5" />
+        <GlassCard elevated className="mb-12 max-w-3xl mx-auto">
+          <div className="mb-4">
+            <h3 className="text-xl font-semibold flex items-center gap-2 text-foreground">
+              <Terminal className="h-5 w-5 text-primary" />
               Quick Install
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="bg-muted rounded-lg p-6 font-mono text-sm mb-4">
+            </h3>
+          </div>
+          <div>
+            <div className="bg-background-elevated border border-primary/20 rounded-lg p-6 font-mono text-sm mb-4">
               <div className="flex items-center justify-between">
-                <code>npm install -g @openconductor/cli</code>
-                <Button variant="outline" size="sm">
+                <code className="text-foreground">npm install -g @openconductor/cli</code>
+                <Button variant="outline" size="sm" className="border-primary/20 hover:border-primary/40">
                   Copy
                 </Button>
               </div>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-foreground-secondary">
               Requires Node.js 18+ and npm. Works on macOS, Windows, and Linux.
             </p>
-          </CardContent>
-        </Card>
+          </div>
+        </GlassCard>
 
         {/* Installation Methods */}
         <div className="grid gap-6 md:grid-cols-3 mb-12">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Download className="h-5 w-5" />
-                NPM
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-muted rounded p-3 font-mono text-sm">
+          <GlassCard>
+            <h3 className="text-lg font-semibold flex items-center gap-2 mb-4 text-foreground">
+              <Download className="h-5 w-5 text-primary" />
+              NPM
+            </h3>
+            <div className="space-y-4">
+              <div className="bg-background-elevated border border-primary/20 rounded p-3 font-mono text-sm text-foreground">
                 npm install -g @openconductor/cli
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-foreground-secondary">
                 Install globally via npm for easy access from anywhere.
               </p>
-            </CardContent>
-          </Card>
+            </div>
+          </GlassCard>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Download className="h-5 w-5" />
-                Yarn
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-muted rounded p-3 font-mono text-sm">
+          <GlassCard>
+            <h3 className="text-lg font-semibold flex items-center gap-2 mb-4 text-foreground">
+              <Download className="h-5 w-5 text-primary" />
+              Yarn
+            </h3>
+            <div className="space-y-4">
+              <div className="bg-background-elevated border border-primary/20 rounded p-3 font-mono text-sm text-foreground">
                 yarn global add @openconductor/cli
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-foreground-secondary">
                 Alternative installation using Yarn package manager.
               </p>
-            </CardContent>
-          </Card>
+            </div>
+          </GlassCard>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Download className="h-5 w-5" />
-                Source
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-muted rounded p-3 font-mono text-sm">
+          <GlassCard>
+            <h3 className="text-lg font-semibold flex items-center gap-2 mb-4 text-foreground">
+              <Download className="h-5 w-5 text-primary" />
+              Source
+            </h3>
+            <div className="space-y-4">
+              <div className="bg-background-elevated border border-primary/20 rounded p-3 font-mono text-sm text-foreground">
                 git clone && npm install
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-foreground-secondary">
                 Build from source for the latest development version.
               </p>
-              <Button variant="outline" size="sm" asChild>
+              <Button variant="outline" size="sm" className="w-full border-primary/20 hover:border-primary/40" asChild>
                 <a href="https://github.com/epicmotionSD/openconductor" target="_blank">
                   <ExternalLink className="h-3 w-3 mr-1" />
                   GitHub
                 </a>
               </Button>
-            </CardContent>
-          </Card>
+            </div>
+          </GlassCard>
         </div>
 
         {/* Quick Start Guide */}
@@ -223,17 +222,19 @@ export default function InstallPage() {
 
         {/* Next Steps */}
         <div className="text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-          <p className="text-xl text-muted-foreground mb-6">
+          <h2 className="text-3xl font-bold mb-4">
+            Ready to <GradientText>Get Started</GradientText>?
+          </h2>
+          <p className="text-xl text-foreground-secondary mb-6">
             Discover amazing MCP servers for your AI applications
           </p>
           <div className="flex gap-4 justify-center">
-            <Button size="lg" asChild>
+            <GradientButton size="lg" glow asChild>
               <Link href="/discover">
                 Browse Servers <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
+            </GradientButton>
+            <Button size="lg" variant="outline" className="border-primary/20 hover:border-primary/40" asChild>
               <Link href="/docs">
                 View Documentation
               </Link>
