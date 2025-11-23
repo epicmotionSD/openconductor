@@ -1,69 +1,108 @@
 # OpenConductor
 
-> The npm registry for Model Context Protocol servers
+**The npm for AI agent tools.** Install 190+ MCP servers without editing JSON configs.
 
 [![npm version](https://img.shields.io/npm/v/@openconductor/cli.svg)](https://www.npmjs.com/package/@openconductor/cli)
 [![Downloads](https://img.shields.io/npm/dm/@openconductor/cli.svg)](https://www.npmjs.com/package/@openconductor/cli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[Website](https://openconductor.ai) • [Documentation](#documentation) • [Discord](https://discord.gg/Ya5TPWeS) • [Submit a Server](/submit)
+[Website](https://openconductor.ai) • [Install](https://openconductor.ai/install) • [Discover](https://openconductor.ai/discover) • [Discord](https://discord.gg/Ya5TPWeS)
 
 ---
 
-## What is OpenConductor?
+## The Problem → The Solution
 
-OpenConductor is the missing registry and CLI for the Model Context Protocol. Find, install, and manage 190+ MCP servers with a professional developer experience.
-
+**Before OpenConductor** (30+ minutes of JSON editing):
 ```bash
-npm install -g @openconductor/cli
-openconductor discover "memory"
-openconductor install openmemory
-# ✓ Ready to use in Claude!
+# Find the right package
+npm search mcp-server-github
+
+# Install it manually
+npm install -g @modelcontextprotocol/server-github
+
+# Edit Claude's config file
+vi ~/Library/Application\ Support/Claude/claude_desktop_config.json
+
+# Add complex JSON configuration
+# Deal with port conflicts, paths, environment variables...
+# Restart Claude Desktop
+# Debug why it's not working...
 ```
 
-## Features
+**After OpenConductor** (30 seconds):
+```bash
+npm install -g @openconductor/cli
+openconductor install github-mcp
+# ✓ Done. Works immediately in Claude Desktop.
+```
 
-- **🔍 Smart Discovery** - Search 190+ MCP servers by category, tags, and popularity
-- **⚡ One-Command Install** - Automatic configuration and port management
-- **🤖 Auto-Discovery** - Daily GitHub sync adds new servers automatically
-- **✅ Community Verified** - Automated validation with manual review
+---
+
+## Why OpenConductor?
+
+**The Problem:** Setting up MCP servers requires manually editing JSON config files, finding npm packages, managing ports, and debugging cryptic errors. It's 2010-era JavaScript dependency hell.
+
+**The Solution:** OpenConductor is the npm for AI agent tools. One command installs, configures, and manages everything.
+
+**The Result:** Go from idea to working AI agent in seconds, not hours.
+
+### Key Features
+
+- **🚀 One-Command Install** - No JSON editing, no config files, no debugging
+- **📦 190+ Servers** - Largest registry of MCP servers (databases, APIs, memory, search, files)
+- **⚡ Stacks** - Pre-configured workflows (Coder, Writer, Essential) with system prompts
+- **🎯 Achievements** - Gamification system with 15 unlockable achievements
+- **🏷️ Badges** - Installation badges for MCP server developers
+- **✅ Verified** - All servers tested and validated
 - **🌐 Cross-Platform** - Works on macOS, Windows, and Linux
 
 ## Quick Start
 
-### Install the CLI
+### 1. Install the CLI
 
 ```bash
 npm install -g @openconductor/cli
 ```
 
-### Discover Servers
+### 2. Install a Stack (Recommended for First-Timers)
+
+Stacks are pre-configured workflows that install multiple servers + give Claude a specialized persona.
 
 ```bash
-# Browse all servers
-openconductor discover
+# See available stacks
+openconductor stack list
 
-# Search for specific servers
-openconductor discover "database"
-
-# Filter by category
-openconductor discover --category memory
+# Install Coder Stack (5 servers + system prompt)
+openconductor stack install coder
+# System prompt auto-copied to clipboard!
+# Paste into Claude Desktop → Start coding
 ```
 
-### Install Servers
+**Available Stacks:**
+- 🧑‍💻 **Coder** - Build, debug, deploy (GitHub, Filesystem, PostgreSQL, Memory, Search)
+- ✍️ **Writer** - Research, write, publish (Memory, Search, Filesystem, Brave)
+- ⚡ **Essential** - Everything to get started (Filesystem, Memory, Search)
+
+### 3. Or Install Individual Servers
 
 ```bash
+# Browse 190+ servers
+openconductor discover
+
+# Search by keyword
+openconductor discover "database"
+
 # Install any server
-openconductor install openmemory
+openconductor install postgresql-mcp
 
 # List installed servers
 openconductor list
 
 # Remove a server
-openconductor remove openmemory
+openconductor remove postgresql-mcp
 ```
 
-That's it! No config files to edit, no ports to manage, no manual restarts.
+**That's it.** No JSON editing. No port debugging. No dependency hunting.
 
 ## Popular Servers
 

@@ -1,7 +1,7 @@
 {
   "name": "@openconductor/cli",
-  "version": "1.1.1",
-  "description": "The npm for MCP servers - discover and install 190+ AI agent tools in seconds. Works with AWS, Snowflake, BigQuery, Stripe, Notion, and all major platforms. One command to unlock the full MCP ecosystem!",
+  "version": "1.3.2",
+  "description": "The npm for AI agent tools - install MCP servers without the JSON hell. Discover and install 190+ AI agent tools with one command. Includes stacks, badges, and achievements. Free and open source.",
   "bin": {
     "openconductor": "./bin/openconductor.js"
   },
@@ -26,27 +26,29 @@
     "lint": "echo 'Linting coming soon'"
   },
   "dependencies": {
-    "commander": "^11.1.0",
-    "inquirer": "^9.2.12",
-    "chalk": "^5.3.0",
-    "ora": "^7.0.1",
     "axios": "^1.6.2",
-    "conf": "^12.0.0",
-    "update-notifier": "^7.0.0",
     "boxen": "^7.1.1",
+    "chalk": "^5.3.0",
     "cli-table3": "^0.6.3",
-    "semver": "^7.5.4",
+    "clipboardy": "^5.0.1",
+    "commander": "^11.1.0",
+    "comment-json": "^4.4.1",
+    "conf": "^12.0.0",
     "execa": "^8.0.1",
-    "node-fetch": "^3.3.2",
     "fast-glob": "^3.3.2",
     "fs-extra": "^11.2.0",
-    "listr2": "^8.0.0"
+    "inquirer": "^9.2.12",
+    "listr2": "^8.0.0",
+    "node-fetch": "^3.3.2",
+    "ora": "^7.0.1",
+    "semver": "^7.5.4",
+    "update-notifier": "^7.0.0"
   },
   "devDependencies": {
     "@openconductor/shared": "file:../shared",
     "@types/inquirer": "^9.0.3",
-    "vitest": "^1.0.4",
-    "eslint": "^8.56.0"
+    "eslint": "^8.56.0",
+    "vitest": "^1.0.4"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -60,23 +62,24 @@
   ],
   "keywords": [
     "mcp",
-    "ai",
-    "agents",
-    "cli",
-    "orchestration",
-    "vercel",
-    "v0",
-    "supabase",
-    "basehub",
-    "ecosystem",
-    "modern-stack",
-    "platform",
     "model-context-protocol",
     "claude",
+    "ai-agents",
+    "package-manager",
+    "cli",
+    "developer-tools",
+    "ai",
     "anthropic",
-    "discovery",
+    "ai-tools",
+    "mcp-server",
+    "mcp-registry",
+    "claude-desktop",
+    "automation",
     "installation",
-    "automation"
+    "discovery",
+    "stacks",
+    "configuration",
+    "json-config"
   ],
   "publishConfig": {
     "access": "public"
