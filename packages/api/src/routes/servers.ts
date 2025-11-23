@@ -21,7 +21,7 @@ export const serversRouter = express.Router();
 // Validation schemas
 const listServersSchema = z.object({
   page: z.string().optional().transform(str => str ? parseInt(str) : 1),
-  limit: z.string().optional().transform(str => str ? Math.min(parseInt(str), 100) : 20),
+  limit: z.string().optional().transform(str => str ? Math.min(parseInt(str), 500) : 20),
   category: z.enum(['memory', 'filesystem', 'database', 'api', 'search', 'communication', 'monitoring', 'development', 'custom']).optional(),
   tags: z.string().optional().transform(str => str ? str.split(',') : undefined),
   verified: z.string().optional().transform(str => str === 'true' ? true : str === 'false' ? false : undefined),
@@ -90,17 +90,31 @@ function createAPIResponse<T>(data: T, meta?: any): APIResponse<T> {
   };
 }
 
+// Mount sub-routers for different API sections (MUST be before /:identifier route)
+import { searchRouter } from './search';
+import { statsRouter } from './stats';
+import { cliRouter } from './cli';
+import { categoriesRouter } from './categories';
+import { webhooksRouter } from './webhooks';
+
 /**
  * GET /api/servers
  * List all MCP servers with filtering and pagination
  */
 serversRouter.get('/', asyncHandler(async (req, res) => {
   const params = listServersSchema.parse(req.query) as ListServersRequest;
-  
+
   const result = await registryService.listServers(params);
-  
+
   res.json(createAPIResponse(result));
 }));
+
+// Mount specific route handlers before the catch-all /:identifier route
+serversRouter.use('/search', searchRouter);
+serversRouter.use('/stats', statsRouter);
+serversRouter.use('/cli', cliRouter);
+serversRouter.use('/categories', categoriesRouter);
+serversRouter.use('/webhooks', webhooksRouter);
 
 /**
  * GET /api/servers/:identifier
@@ -108,16 +122,16 @@ serversRouter.get('/', asyncHandler(async (req, res) => {
  */
 serversRouter.get('/:identifier', asyncHandler(async (req, res) => {
   const { identifier } = req.params;
-  
+
   const server = await registryService.getServer(identifier);
-  
+
   if (!server) {
     throw createError('Server not found', 404, ErrorCodes.NOT_FOUND);
   }
 
   // Track page view
   await statsService.trackPageView(server.id, req.get('User-Agent'), req.ip);
-  
+
   res.json(createAPIResponse(server));
 }));
 
@@ -210,16 +224,3 @@ serversRouter.delete('/:slug', requireFeature('adminControls'), asyncHandler(asy
     message: 'Server deleted successfully'
   }));
 }));
-
-// Mount sub-routers for different API sections
-import { searchRouter } from './search';
-import { statsRouter } from './stats';
-import { cliRouter } from './cli';
-import { categoriesRouter } from './categories';
-import { webhooksRouter } from './webhooks';
-
-serversRouter.use('/search', searchRouter);
-serversRouter.use('/stats', statsRouter);  
-serversRouter.use('/cli', cliRouter);
-serversRouter.use('/categories', categoriesRouter);
-serversRouter.use('/webhooks', webhooksRouter);
