@@ -68,7 +68,11 @@ export default function DiscoverPage() {
       const result = await response.json()
 
       if (result.success) {
-        setServers(result.data || [])
+        // Handle both response formats:
+        // New format: { success: true, data: { servers: [...], pagination: {...} } }
+        // Old format: { success: true, data: [...] }
+        const servers = result.data?.servers || result.data || []
+        setServers(Array.isArray(servers) ? servers : [])
       }
     } catch (error) {
       console.error('Error fetching servers:', error)
@@ -288,7 +292,7 @@ function ServerCard({ server }: { server: MCPServer }) {
           <div className="flex items-center gap-4 text-sm text-foreground-secondary">
             <div className="flex items-center gap-1">
               <Star className="h-3 w-3 text-warning" />
-              <span>{server.repository?.stars || 0}</span>
+              <span>{(server.stats as any)?.stars || server.repository?.stars || 0}</span>
             </div>
             <div className="flex items-center gap-1">
               <Download className="h-3 w-3 text-primary" />
@@ -297,7 +301,7 @@ function ServerCard({ server }: { server: MCPServer }) {
           </div>
 
           {/* Tags */}
-          {server.tags.length > 0 && (
+          {server.tags && server.tags.length > 0 && (
             <div className="flex flex-wrap gap-1">
               {server.tags.slice(0, 3).map((tag) => (
                 <Badge key={tag} variant="outline" className="text-xs border-primary/20 text-foreground-secondary">
@@ -319,11 +323,13 @@ function ServerCard({ server }: { server: MCPServer }) {
                 View Details
               </Link>
             </GradientButton>
-            <Button variant="outline" size="sm" asChild className="border-primary/20 hover:border-primary/40">
-              <a href={server.repository.url} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="h-3 w-3" />
-              </a>
-            </Button>
+            {server.repository?.url && (
+              <Button variant="outline" size="sm" asChild className="border-primary/20 hover:border-primary/40">
+                <a href={server.repository.url} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </Button>
+            )}
           </div>
         </div>
       </div>
