@@ -1,0 +1,59 @@
+# Coder Stack: Your AI Senior Engineer
+Duration: 1:45
+
+=".repeat(60) + '
+
+## Scene 1: intro
+Timestamp: 0:00-0:15 (15s)
+
+The Coder Stack transforms Claude into a senior software engineer with access to your entire development environment. Let me show you how powerful this is.
+
+Visual: undefined
+
+============================================================
+
+## Scene 2: install
+Timestamp: 0:15-0:30 (15s)
+
+Installation takes one command: openconductor stack install coder. Five servers configure automatically, and a specialized system prompt is copied to your clipboard.
+
+Visual: undefined
+
+============================================================
+
+## Scene 3: demo-files
+Timestamp: 0:30-0:50 (20s)
+
+Watch Claude read your project files, understand your architecture, and suggest improvements. It sees your entire codebase.
+
+Visual: undefined
+
+============================================================
+
+## Scene 4: demo-database
+Timestamp: 0:50-1:10 (20s)
+
+It can query your database, write migrations, and explain your schema. Real database access, real-time insights.
+
+Visual: undefined
+
+============================================================
+
+## Scene 5: demo-github
+Timestamp: 1:10-1:30 (20s)
+
+Create pull requests, review code, manage issues. Claude becomes your development partner.
+
+Visual: undefined
+
+============================================================
+
+## Scene 6: cta
+Timestamp: 1:30-1:45 (15s)
+
+Get the Coder Stack now at openconductor.ai. Your AI senior engineer is one command away.
+
+Visual: undefined
+
+============================================================
+

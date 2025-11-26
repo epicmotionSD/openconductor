@@ -64,7 +64,7 @@ These are published packages that users install separately:
 npm start
 
 # Or manually
-./launch-openconductor.sh
+./scripts/launch-openconductor.sh
 ```
 
 ### Using the CLI (Separate Install)

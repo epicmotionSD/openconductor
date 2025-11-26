@@ -142,3 +142,9 @@ coverage/
 # Build artifacts
 *.tgz
 *.zip
+
+# Development and testing directories
+.venv-video/
+mcp-registry-discovery/
+seed-data/
+trinity-ai/

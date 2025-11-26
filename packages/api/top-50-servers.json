@@ -1,0 +1,782 @@
+{
+  "exportDate": "2025-11-22T04:01:26.311Z",
+  "count": 50,
+  "servers": [
+    {
+      "id": "a0154c25-b9bc-4c77-a696-edea9bdb90e7",
+      "slug": "anthropic",
+      "name": "Anthropic",
+      "description": "Anthropic Claude API integration for advanced AI capabilities.",
+      "repository_url": "https://github.com/anthropics/mcp-anthropic",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "anthropic",
+        "claude",
+        "ai",
+        "llm"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "cffa293e-45ae-4976-a9ba-6dfb4002d476",
+      "slug": "mcp-memory",
+      "name": "MCP Memory",
+      "description": "Knowledge graph-based persistent memory system for AI agents. Stores and retrieves information across sessions.",
+      "repository_url": "https://github.com/modelcontextprotocol/servers",
+      "npm_package": "@modelcontextprotocol/server-memory",
+      "category": "memory",
+      "tags": [
+        "memory",
+        "knowledge-graph",
+        "persistence",
+        "official"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "917b9f18-d49d-4a91-88f5-460aa408b201",
+      "slug": "postgresql-mcp",
+      "name": "PostgreSQL MCP",
+      "description": "Database integration for PostgreSQL with secure query execution and schema management capabilities.",
+      "repository_url": "https://github.com/anthropic/postgresql-mcp",
+      "npm_package": "@anthropic/postgresql-mcp",
+      "category": "database",
+      "tags": [
+        "database",
+        "postgresql",
+        "SQL",
+        "schema"
+      ],
+      "github_stars": 654
+    },
+    {
+      "id": "e788180e-0414-44a8-a453-e2eaf83ce72b",
+      "slug": "github-mcp",
+      "name": "GitHub MCP",
+      "description": "GitHub integration for repository management, issue tracking, and pull request operations.",
+      "repository_url": "https://github.com/anthropic/github-mcp",
+      "npm_package": "@anthropic/github-mcp",
+      "category": "api",
+      "tags": [
+        "github",
+        "git",
+        "repositories",
+        "API"
+      ],
+      "github_stars": 1123
+    },
+    {
+      "id": "ee8ba3d6-da93-4ab8-8476-9c98ceb3d82f",
+      "slug": "slack-mcp",
+      "name": "Slack MCP",
+      "description": "Slack workspace integration for messaging, channel management, and team communication automation.",
+      "repository_url": "https://github.com/slack/slack-mcp",
+      "npm_package": "@slack/mcp-server",
+      "category": "communication",
+      "tags": [
+        "slack",
+        "messaging",
+        "team",
+        "communication"
+      ],
+      "github_stars": 789
+    },
+    {
+      "id": "5b9c31ca-ff47-4229-a192-2d29b06d4dac",
+      "slug": "discord",
+      "name": "Discord",
+      "description": "Discord integration for bot creation, messaging, and community management.",
+      "repository_url": "https://github.com/discord/mcp-discord",
+      "npm_package": null,
+      "category": "communication",
+      "tags": [
+        "discord",
+        "messaging",
+        "bots",
+        "community"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "f6622c12-6883-4434-a37c-210cd01c92c8",
+      "slug": "openmemory",
+      "name": "OpenMemory",
+      "description": "Hierarchical memory management system for AI agents with long-term persistent storage and semantic search capabilities.",
+      "repository_url": "https://github.com/openai/openmemory",
+      "npm_package": "openmemory",
+      "category": "memory",
+      "tags": [
+        "memory",
+        "storage",
+        "semantic-search",
+        "AI"
+      ],
+      "github_stars": 1640
+    },
+    {
+      "id": "a0305cb5-7fe1-41cc-9948-f42eb18f92a6",
+      "slug": "filesystem-mcp",
+      "name": "Filesystem MCP",
+      "description": "Secure file system operations for AI agents with sandboxed access to read, write, and manage files.",
+      "repository_url": "https://github.com/anthropic/filesystem-mcp",
+      "npm_package": "@anthropic/filesystem-mcp",
+      "category": "filesystem",
+      "tags": [
+        "filesystem",
+        "files",
+        "security",
+        "sandbox"
+      ],
+      "github_stars": 892
+    },
+    {
+      "id": "4239ede6-0c66-4d5d-b633-8e2b182d0c7b",
+      "slug": "dataproduct-mcp",
+      "name": "Data Product MCP",
+      "description": "Data mesh MCP server for discovering data products in Data Mesh Manager. Supports Snowflake, Databricks, and BigQuery.",
+      "repository_url": "https://github.com/entropy-data/dataproduct-mcp",
+      "npm_package": null,
+      "category": "database",
+      "tags": [
+        "data-mesh",
+        "governance",
+        "snowflake",
+        "databricks",
+        "bigquery",
+        "python"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "80b2c1e8-0571-4f73-92ec-043d08337d6d",
+      "slug": "bigquery",
+      "name": "BigQuery",
+      "description": "Google BigQuery integration for serverless data warehouse and analytics.",
+      "repository_url": "https://github.com/GoogleCloudPlatform/mcp-bigquery",
+      "npm_package": null,
+      "category": "database",
+      "tags": [
+        "bigquery",
+        "google",
+        "data-warehouse",
+        "analytics"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "829561f2-2faf-4a5d-be23-2cac9033eccb",
+      "slug": "brave-search-mcp",
+      "name": "Brave Search MCP",
+      "description": "Web search capabilities powered by Brave Search API with privacy-focused results and ad-free searching.",
+      "repository_url": "https://github.com/brave/search-mcp",
+      "npm_package": "@brave/search-mcp",
+      "category": "search",
+      "tags": [
+        "search",
+        "web",
+        "privacy",
+        "brave"
+      ],
+      "github_stars": 445
+    },
+    {
+      "id": "87057291-8c34-468d-999b-edccf3fd61cf",
+      "slug": "google-drive-mcp",
+      "name": "Google Drive MCP",
+      "description": "Google Drive integration for file management, sharing, and collaborative document operations.",
+      "repository_url": "https://github.com/google/drive-mcp",
+      "npm_package": "@google/drive-mcp",
+      "category": "filesystem",
+      "tags": [
+        "google-drive",
+        "cloud",
+        "documents",
+        "collaboration"
+      ],
+      "github_stars": 623
+    },
+    {
+      "id": "27be6b49-2901-41ac-bfd9-c0cead54363c",
+      "slug": "google-sheets",
+      "name": "Google Sheets",
+      "description": "Google Sheets API integration for spreadsheet automation and data management.",
+      "repository_url": "https://github.com/google/mcp-sheets",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "google",
+        "sheets",
+        "spreadsheet"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "27495d53-ffdd-4459-a19d-ad0d3ff6f4f2",
+      "slug": "aws-lambda",
+      "name": "AWS Lambda",
+      "description": "AWS Lambda integration for serverless function deployment and management.",
+      "repository_url": "https://github.com/aws/mcp-lambda",
+      "npm_package": null,
+      "category": "development",
+      "tags": [
+        "aws",
+        "lambda",
+        "serverless"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "bb236e58-b40e-42b3-ad85-00c2ca19a6b8",
+      "slug": "cloudflare-mcp",
+      "name": "Cloudflare MCP",
+      "description": "Manage Cloudflare resources including CDN, Workers, and edge computing. Full Cloudflare integration.",
+      "repository_url": "https://github.com/cloudflare/mcp-server-cloudflare",
+      "npm_package": "@cloudflare/mcp-server-cloudflare",
+      "category": "api",
+      "tags": [
+        "cloudflare",
+        "cdn",
+        "edge"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "50f5bd43-4e66-4be3-865a-bb9a315babc3",
+      "slug": "clickhouse-mcp",
+      "name": "ClickHouse",
+      "description": "ClickHouse time-series and analytical database. Fast OLAP queries.",
+      "repository_url": "https://github.com/ClickHouse/mcp-server",
+      "npm_package": "@clickhouse/mcp-server",
+      "category": "database",
+      "tags": [
+        "clickhouse",
+        "analytics",
+        "time-series"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "001c395f-16f9-4d90-9b2a-49c81b5a42ac",
+      "slug": "mem0-mcp",
+      "name": "Mem0 MCP",
+      "description": "Advanced memory layer for Large Language Models with persistent context and intelligent retrieval.",
+      "repository_url": "https://github.com/mem0ai/mem0-mcp",
+      "npm_package": "mem0-mcp",
+      "category": "memory",
+      "tags": [
+        "memory",
+        "LLM",
+        "context",
+        "retrieval"
+      ],
+      "github_stars": 890
+    },
+    {
+      "id": "03d8018d-935f-4dc4-97ef-c3bad3bdbfc7",
+      "slug": "zep-memory-mcp",
+      "name": "Zep Memory MCP",
+      "description": "Conversational memory for AI applications with session management and long-term memory persistence.",
+      "repository_url": "https://github.com/getzep/zep-mcp",
+      "npm_package": "@getzep/mcp-server",
+      "category": "memory",
+      "tags": [
+        "memory",
+        "conversation",
+        "session",
+        "persistence"
+      ],
+      "github_stars": 620
+    },
+    {
+      "id": "c72f81da-c90f-4925-a7dd-0c97bd9f0eaa",
+      "slug": "mongodb-mcp",
+      "name": "MongoDB MCP",
+      "description": "MongoDB database integration with document operations, aggregation pipelines, and schema validation.",
+      "repository_url": "https://github.com/mongodb/mcp-server",
+      "npm_package": "@mongodb/mcp-server",
+      "category": "database",
+      "tags": [
+        "mongodb",
+        "database",
+        "documents",
+        "aggregation"
+      ],
+      "github_stars": 432
+    },
+    {
+      "id": "5e806117-91de-4a9e-8daf-dad39318f85b",
+      "slug": "aws-mcp",
+      "name": "AWS MCP Server",
+      "description": "Comprehensive AWS services integration including CDK, documentation, and cost analysis. Manage AWS resources with AI.",
+      "repository_url": "https://github.com/awslabs/mcp",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "aws",
+        "cloud",
+        "infrastructure"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "4ab87c38-64df-4d8c-b753-5412c5abef0a",
+      "slug": "aws-s3",
+      "name": "AWS S3",
+      "description": "AWS S3 integration for object storage, file management, and cloud data operations.",
+      "repository_url": "https://github.com/aws/mcp-s3",
+      "npm_package": null,
+      "category": "filesystem",
+      "tags": [
+        "aws",
+        "s3",
+        "storage",
+        "cloud"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "d26635dd-488d-49df-8482-c6e6964f353e",
+      "slug": "adobe-creative",
+      "name": "Adobe Creative Cloud",
+      "description": "Adobe Creative Cloud API integration for creative workflows.",
+      "repository_url": "https://github.com/adobe/mcp-creative-cloud",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "adobe",
+        "creative",
+        "design"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "d2e9aec1-3da1-47a7-9248-58b7da574a92",
+      "slug": "agentmode",
+      "name": "AgentMode",
+      "description": "Connect to dozens of databases from a single MCP server.",
+      "repository_url": "https://github.com/agentmode/mcp-agentmode",
+      "npm_package": null,
+      "category": "database",
+      "tags": [
+        "database",
+        "connector",
+        "multi-db"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "a149a8ff-c93a-4095-aef0-9ef901306162",
+      "slug": "airbnb",
+      "name": "Airbnb",
+      "description": "Airbnb integration for property search and booking management.",
+      "repository_url": "https://github.com/airbnb/mcp-airbnb",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "airbnb",
+        "rentals",
+        "travel",
+        "accommodation"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "3853393e-bb7b-4b61-aa05-991f08e1abd8",
+      "slug": "airtable",
+      "name": "Airtable",
+      "description": "Airtable integration for spreadsheet-database operations and automation.",
+      "repository_url": "https://github.com/airtable/mcp-airtable",
+      "npm_package": null,
+      "category": "database",
+      "tags": [
+        "airtable",
+        "spreadsheet",
+        "database"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "006987de-1ce1-4716-9289-8199dd001355",
+      "slug": "algolia",
+      "name": "Algolia",
+      "description": "Algolia integration for fast, relevant search experiences across web and mobile.",
+      "repository_url": "https://github.com/algolia/mcp-algolia",
+      "npm_package": null,
+      "category": "search",
+      "tags": [
+        "algolia",
+        "search",
+        "api"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "fcee1880-0d76-4304-9d60-83dd4567553a",
+      "slug": "alpaca",
+      "name": "Alpaca",
+      "description": "Alpaca integration for stock trading and market data.",
+      "repository_url": "https://github.com/alpacahq/mcp-alpaca",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "alpaca",
+        "trading",
+        "stocks",
+        "finance"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "0d6fbab8-d845-4459-a6ea-5d3468ed0198",
+      "slug": "alpha-vantage",
+      "name": "Alpha Vantage",
+      "description": "Alpha Vantage integration for stock, forex, and cryptocurrency data.",
+      "repository_url": "https://github.com/alphavantage/mcp-alphavantage",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "finance",
+        "stocks",
+        "forex",
+        "market-data"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "1c4bfa1c-ed1f-4f6a-a698-54d2495a2533",
+      "slug": "apify-mcp",
+      "name": "Apify",
+      "description": "Use 6,000+ pre-built cloud tools to extract data from any website. Comprehensive web automation.",
+      "repository_url": "https://github.com/apify/apify-mcp-server",
+      "npm_package": "@apify/mcp-server",
+      "category": "api",
+      "tags": [
+        "apify",
+        "scraping",
+        "automation"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "393d429e-033d-4c85-8c53-1356d3100797",
+      "slug": "apollo-graphql-mcp",
+      "name": "Apollo GraphQL",
+      "description": "Connect GraphQL APIs to AI agents. Query and mutate GraphQL endpoints.",
+      "repository_url": "https://github.com/apollographql/apollo-mcp-server",
+      "npm_package": "@apollo/mcp-server",
+      "category": "api",
+      "tags": [
+        "graphql",
+        "apollo",
+        "api"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "b81074e5-c23f-4b24-8206-5bbbadc8d9df",
+      "slug": "asana",
+      "name": "Asana",
+      "description": "Asana integration for task and project management workflows.",
+      "repository_url": "https://github.com/asana/mcp-asana",
+      "npm_package": null,
+      "category": "development",
+      "tags": [
+        "asana",
+        "project-management",
+        "tasks"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "412d0fa8-278d-4c15-b272-cb8d03aa904c",
+      "slug": "atlassian-mcp",
+      "name": "Atlassian",
+      "description": "Interact with Jira and Confluence. Manage issues, projects, and documentation.",
+      "repository_url": "https://github.com/atlassian/mcp-server",
+      "npm_package": "@atlassian/mcp-server",
+      "category": "development",
+      "tags": [
+        "jira",
+        "confluence",
+        "atlassian"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "c5f7470c-96a0-4c4b-954a-c7d9532c6d61",
+      "slug": "auth0",
+      "name": "Auth0",
+      "description": "Auth0 integration for authentication, authorization, and user management.",
+      "repository_url": "https://github.com/auth0/mcp-auth0",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "auth0",
+        "authentication",
+        "security"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "5c09128f-baad-4974-b48d-c478a619c8b6",
+      "slug": "auth0-mcp",
+      "name": "Auth0",
+      "description": "Manage Auth0 tenant operations. Handle authentication and authorization.",
+      "repository_url": "https://github.com/auth0/auth0-mcp-server",
+      "npm_package": "@auth0/mcp-server",
+      "category": "api",
+      "tags": [
+        "auth",
+        "authentication",
+        "auth0"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "65211f3e-91b8-41b1-abe3-8a92c8a9929e",
+      "slug": "azure-functions",
+      "name": "Azure Functions",
+      "description": "Azure Functions integration for event-driven serverless computing.",
+      "repository_url": "https://github.com/Azure/mcp-azure-functions",
+      "npm_package": null,
+      "category": "development",
+      "tags": [
+        "azure",
+        "serverless",
+        "functions"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "31dd0aca-6ae7-48b3-9858-6737a925bf90",
+      "slug": "azure-mcp",
+      "name": "Azure MCP Server",
+      "description": "Access Azure Storage, Cosmos DB, and Azure CLI. Complete Azure services integration for AI agents.",
+      "repository_url": "https://github.com/microsoft/mcp",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "azure",
+        "microsoft",
+        "cloud"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "fbf8f093-7924-4b5f-8a7d-1f815ef7ec08",
+      "slug": "azure-storage",
+      "name": "Azure Storage",
+      "description": "Azure Storage integration for blob storage, files, and cloud data management.",
+      "repository_url": "https://github.com/Azure/mcp-azure-storage",
+      "npm_package": null,
+      "category": "filesystem",
+      "tags": [
+        "azure",
+        "storage",
+        "cloud",
+        "microsoft"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "aa6f9f07-7952-4d78-a6ea-785894bcc04f",
+      "slug": "bigquery-mcp",
+      "name": "BigQuery",
+      "description": "Google BigQuery MCP server for natural language queries. Secure, read-only access to datasets with schema inspection.",
+      "repository_url": "https://github.com/ergut/mcp-bigquery-server",
+      "npm_package": "@ergut/mcp-bigquery-server",
+      "category": "database",
+      "tags": [
+        "bigquery",
+        "google-cloud",
+        "data-warehouse",
+        "analytics"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "83b580e7-0cc6-456d-af33-1b01bf0674f8",
+      "slug": "bigquery-python-mcp",
+      "name": "BigQuery (Python)",
+      "description": "Python-based BigQuery MCP server with schema inspection and query execution. Alternative implementation for BigQuery access.",
+      "repository_url": "https://github.com/LucasHild/mcp-server-bigquery",
+      "npm_package": null,
+      "category": "database",
+      "tags": [
+        "bigquery",
+        "google-cloud",
+        "data-warehouse",
+        "python"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "1054b781-f9dc-423e-acf1-4064cbc98556",
+      "slug": "binance",
+      "name": "Binance",
+      "description": "Binance API integration for cryptocurrency trading and market data.",
+      "repository_url": "https://github.com/binance/mcp-binance",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "binance",
+        "crypto",
+        "trading"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "76fbd84c-5cef-42f8-b4a4-59427e940724",
+      "slug": "booking-com",
+      "name": "Booking.com",
+      "description": "Booking.com integration for hotel search, booking, and travel services.",
+      "repository_url": "https://github.com/bookingcom/mcp-booking",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "booking",
+        "hotels",
+        "travel"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "f7732284-1383-4861-94d5-ee03339535bb",
+      "slug": "bright-data-mcp",
+      "name": "Bright Data",
+      "description": "Web data discovery and extraction at scale. Comprehensive web scraping capabilities.",
+      "repository_url": "https://github.com/luminati-io/mcp-server",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "scraping",
+        "data-extraction",
+        "web-data"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "73e3720b-ca9f-4a61-a7d5-e2979daf3371",
+      "slug": "browserbase-mcp",
+      "name": "Browserbase",
+      "description": "Cloud browser automation service. Run browsers in the cloud for AI agents.",
+      "repository_url": "https://github.com/browserbase/mcp-server",
+      "npm_package": "@browserbase/mcp-server",
+      "category": "development",
+      "tags": [
+        "browser",
+        "automation",
+        "cloud"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "dc21fd3d-c558-4dd9-8e48-6fac9f9b8f0f",
+      "slug": "calendly",
+      "name": "Calendly",
+      "description": "Calendly integration for automated scheduling and calendar management.",
+      "repository_url": "https://github.com/calendly/mcp-calendly",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "calendly",
+        "scheduling",
+        "calendar"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "361b2d33-391e-4ab9-8291-37b3cb2f7a6f",
+      "slug": "canva",
+      "name": "Canva",
+      "description": "Canva integration for graphic design and content creation.",
+      "repository_url": "https://github.com/canva/mcp-canva",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "canva",
+        "design",
+        "graphics"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "7b0c6717-b914-4448-83a8-f9fd1383f56b",
+      "slug": "chroma",
+      "name": "Chroma",
+      "description": "Chroma vector database for AI applications with embeddings.",
+      "repository_url": "https://github.com/chroma-core/mcp-chroma",
+      "npm_package": null,
+      "category": "database",
+      "tags": [
+        "vector",
+        "embeddings",
+        "ai",
+        "database"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "1d483dfd-5d27-4317-8c8b-d8df76f4bd99",
+      "slug": "circleci",
+      "name": "CircleCI",
+      "description": "CircleCI integration for continuous integration and delivery workflows.",
+      "repository_url": "https://github.com/circleci/mcp-circleci",
+      "npm_package": null,
+      "category": "development",
+      "tags": [
+        "circleci",
+        "cicd",
+        "deployment"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "85d24063-af3e-418e-aefe-c3ae01b8a39a",
+      "slug": "circleci-mcp",
+      "name": "CircleCI",
+      "description": "CI/CD build failure analysis and management. Debug failed builds with AI.",
+      "repository_url": "https://github.com/circleci/mcp-server",
+      "npm_package": "@circleci/mcp-server",
+      "category": "development",
+      "tags": [
+        "cicd",
+        "circleci",
+        "builds"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "fc10eac1-e988-4d9b-a3d7-12d0edc36cc6",
+      "slug": "clerk",
+      "name": "Clerk",
+      "description": "Clerk integration for user authentication and management for developers.",
+      "repository_url": "https://github.com/clerkinc/mcp-clerk",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "clerk",
+        "authentication",
+        "users"
+      ],
+      "github_stars": 0
+    },
+    {
+      "id": "7a75032b-982e-4774-b2f5-b62c65cb1e16",
+      "slug": "cloudinary",
+      "name": "Cloudinary",
+      "description": "Cloudinary integration for image and video management and transformation.",
+      "repository_url": "https://github.com/cloudinary/mcp-cloudinary",
+      "npm_package": null,
+      "category": "api",
+      "tags": [
+        "cloudinary",
+        "media",
+        "images",
+        "video"
+      ],
+      "github_stars": 0
+    }
+  ]
+}

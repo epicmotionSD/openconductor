@@ -1,7 +1,12 @@
 import { readFile, writeFile, mkdir } from 'fs/promises';
+import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
-import { homedir } from 'os';
+import { fileURLToPath } from 'url';
+import { homedir, hostname } from 'os';
 import { existsSync } from 'fs';
+import { createHash } from 'crypto';
+import inquirer from 'inquirer';
+import chalk from 'chalk';
 import { ApiClient } from './api-client.js';
 import { logger } from '../utils/logger.js';
 
@@ -109,7 +114,7 @@ export class Analytics {
   async setEnabled(enabled) {
     try {
       await mkdir(this.configDir, { recursive: true });
-      
+
       const config = {
         enabled,
         userId: this.generateUserId(),
@@ -119,7 +124,7 @@ export class Analytics {
 
       await writeFile(this.configPath, JSON.stringify(config, null, 2), 'utf-8');
       this.enabled = enabled;
-      
+
       return true;
     } catch (error) {
       logger.debug('Failed to save analytics preference:', error.message);
@@ -215,7 +220,7 @@ export class Analytics {
   async getStatus() {
     const enabled = await this.isEnabled();
     const configExists = existsSync(this.configPath);
-    
+
     return {
       enabled,
       configPath: this.configPath,
@@ -225,17 +230,41 @@ export class Analytics {
   }
 
   /**
+   * Get analytics status without prompting (for status command)
+   */
+  async getStatusWithoutPrompt() {
+    const configExists = existsSync(this.configPath);
+    let enabled = false;
+    let userId = null;
+
+    if (configExists) {
+      try {
+        const content = await readFile(this.configPath, 'utf-8');
+        const config = JSON.parse(content);
+        enabled = config.enabled === true;
+        userId = config.userId;
+      } catch (error) {
+        enabled = false;
+      }
+    }
+
+    return {
+      enabled,
+      configPath: this.configPath,
+      configExists,
+      userId
+    };
+  }
+
+  /**
    * Generate anonymous user ID (machine-based, consistent)
    */
   generateUserId() {
     // Create a consistent but anonymous ID based on machine characteristics
-    const { hostname } = require('os');
-    const crypto = require('crypto');
-    
     // Use hostname + platform + home directory as seed (not PII)
     const seed = hostname() + process.platform + homedir();
-    const hash = crypto.createHash('sha256').update(seed).digest('hex');
-    
+    const hash = createHash('sha256').update(seed).digest('hex');
+
     // Take first 16 characters for a shorter ID
     return hash.substring(0, 16);
   }
@@ -261,8 +290,6 @@ export class Analytics {
    */
   getCLIVersion() {
     try {
-      const { readFileSync } = require('fs');
-      const { fileURLToPath } = require('url');
       const __filename = fileURLToPath(import.meta.url);
       const __dirname = dirname(__filename);
       const pkg = JSON.parse(
@@ -350,19 +377,77 @@ export async function trackError(command, error) {
  */
 export async function analyticsCommand(options) {
   if (options.enable) {
-    await analytics.setEnabled(true);
-    logger.success('✓ Analytics enabled');
-    logger.info('Thank you for helping improve OpenConductor!');
+    const success = await analytics.setEnabled(true);
+    if (success) {
+      logger.success('✓ Analytics enabled');
+      logger.info('Thank you for helping improve OpenConductor!');
+    } else {
+      logger.error('Failed to enable analytics. Please check file permissions.');
+    }
+    console.log();
     return;
   }
-  
+
   if (options.disable) {
-    await analytics.setEnabled(false);
-    logger.success('✓ Analytics disabled');
-    logger.info('You can re-enable anytime with: ' + logger.code('openconductor analytics --enable'));
+    const success = await analytics.setEnabled(false);
+    if (success) {
+      logger.success('✓ Analytics disabled');
+      logger.info('You can re-enable anytime with: ' + logger.code('openconductor analytics --enable'));
+    } else {
+      logger.error('Failed to disable analytics. Please check file permissions.');
+    }
+    console.log();
     return;
   }
-  
-  // Show analytics information
+
+  if (options.status) {
+    // Directly check status without prompting
+    const config = await analytics.getStatusWithoutPrompt();
+    console.log();
+    logger.header('📊 Analytics Status');
+    console.log(`  Enabled: ${config.enabled ? chalk.green('Yes') : chalk.red('No')}`);
+    console.log(`  Config: ${logger.path(config.configPath)}`);
+    if (config.enabled && config.userId) {
+      console.log(`  Anonymous ID: ${chalk.dim(config.userId)}`);
+    }
+    console.log();
+    logger.info('Commands:');
+    logger.progress(logger.code('openconductor analytics --enable') + '  - Enable tracking');
+    logger.progress(logger.code('openconductor analytics --disable') + ' - Disable tracking');
+    logger.progress(logger.code('openconductor analytics --show') + '    - Show what data is collected');
+    console.log();
+    return;
+  }
+
+  if (options.show) {
+    console.log();
+    logger.header('📊 What Data We Collect');
+    console.log();
+    console.log(chalk.bold('✓ We DO collect (anonymous):'));
+    console.log('  • Commands used (discover, install, etc.)');
+    console.log('  • Installation success/failure rates');
+    console.log('  • Popular MCP servers');
+    console.log('  • Error frequency (no stack traces)');
+    console.log('  • Platform (macOS/Linux/Windows)');
+    console.log('  • CLI version');
+    console.log();
+    console.log(chalk.bold('✗ We DO NOT collect:'));
+    console.log('  • Personal information');
+    console.log('  • File paths or contents');
+    console.log('  • Environment variables');
+    console.log('  • Server configurations');
+    console.log('  • API keys or credentials');
+    console.log('  • IP addresses');
+    console.log();
+    logger.info('Privacy:');
+    console.log('  • All data is anonymous');
+    console.log('  • Data is used only to improve OpenConductor');
+    console.log('  • Never shared with third parties');
+    console.log('  • Can be disabled at any time');
+    console.log();
+    return;
+  }
+
+  // Show analytics information (default)
   await analytics.showHelp();
 }

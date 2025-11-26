@@ -1,0 +1,55 @@
+{
+  "title": "OpenConductor v1.2.0: Set Up Claude in 10 Seconds",
+  "duration": "2:30",
+  "scenes": [
+    {
+      "id": "scene-01-hook",
+      "timestamp": "0:00-0:10",
+      "duration": 10,
+      "narrationLength": 143,
+      "visualCue": "Split screen: JSON hell vs. clean terminal"
+    },
+    {
+      "id": "scene-02-problem",
+      "timestamp": "0:10-0:30",
+      "duration": 20,
+      "narrationLength": 187,
+      "visualCue": "Screen recording: manual JSON editing, errors, frustration"
+    },
+    {
+      "id": "scene-03-solution",
+      "timestamp": "0:30-0:50",
+      "duration": 20,
+      "narrationLength": 176,
+      "visualCue": "Terminal with openconductor stack list - clean table"
+    },
+    {
+      "id": "scene-04-demo-install",
+      "timestamp": "0:50-1:10",
+      "duration": 20,
+      "narrationLength": 193,
+      "visualCue": "Real-time: openconductor stack install coder"
+    },
+    {
+      "id": "scene-05-demo-usage",
+      "timestamp": "1:10-1:50",
+      "duration": 40,
+      "narrationLength": 232,
+      "visualCue": "Claude Desktop: paste prompt, immediate intelligent responses"
+    },
+    {
+      "id": "scene-06-more-stacks",
+      "timestamp": "1:50-2:10",
+      "duration": 20,
+      "narrationLength": 220,
+      "visualCue": "Quick cuts of Writer and Essential stacks"
+    },
+    {
+      "id": "scene-07-cta",
+      "timestamp": "2:10-2:30",
+      "duration": 20,
+      "narrationLength": 176,
+      "visualCue": "OpenConductor logo, website URL, CLI command"
+    }
+  ]
+}

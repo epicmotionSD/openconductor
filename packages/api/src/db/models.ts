@@ -201,49 +201,80 @@ export class MCPServerRepository extends BaseRepository<MCPServer> {
       }
 
       if (q) {
-        whereConditions.push(`s.search_vector @@ plainto_tsquery('english', $${paramIndex++})`);
-        queryParams.push(q);
+        // Use ILIKE for robust search that works without search_vector column
+        // Search across name, tagline, description, slug, and tags
+        whereConditions.push(`(
+          s.name ILIKE $${paramIndex} OR
+          s.tagline ILIKE $${paramIndex} OR
+          s.description ILIKE $${paramIndex} OR
+          s.slug ILIKE $${paramIndex} OR
+          EXISTS (SELECT 1 FROM unnest(s.tags) AS tag WHERE tag ILIKE $${paramIndex})
+        )`);
+        queryParams.push(`%${q}%`);
+        paramIndex++;
       }
 
-      const whereClause = whereConditions.length > 0 
+      const whereClause = whereConditions.length > 0
         ? 'WHERE ' + whereConditions.join(' AND ')
         : '';
 
+      // Save WHERE clause params for COUNT query
+      const whereParams = [...queryParams];
+
       // Build ORDER BY clause
       let orderClause = '';
-      switch (sort) {
-        case 'popular':
-          orderClause = `st.popularity_score ${order.toUpperCase()}`;
-          break;
-        case 'trending':
-          orderClause = `st.trending_score ${order.toUpperCase()}`;
-          break;
-        case 'recent':
-          orderClause = `s.created_at ${order.toUpperCase()}`;
-          break;
-        case 'stars':
-          orderClause = `st.github_stars ${order.toUpperCase()}`;
-          break;
-        case 'installs':
-          orderClause = `st.cli_installs ${order.toUpperCase()}`;
-          break;
-        default:
-          orderClause = `st.popularity_score DESC`;
+
+      // When searching, prioritize relevance
+      if (q) {
+        // Add the raw search term as a parameter for exact matching
+        queryParams.push(q);
+        const searchParamIndex = paramIndex++;
+
+        // Order by: exact matches first, then partial matches, then by popularity
+        orderClause = `
+          CASE
+            WHEN LOWER(s.name) = LOWER($${searchParamIndex}) THEN 1
+            WHEN LOWER(s.slug) = LOWER($${searchParamIndex}) THEN 2
+            WHEN LOWER(s.name) LIKE LOWER($${searchParamIndex}) || '%' THEN 3
+            ELSE 4
+          END ASC,
+          st.popularity_score DESC
+        `;
+      } else {
+        switch (sort) {
+          case 'popular':
+            orderClause = `st.popularity_score ${order.toUpperCase()}`;
+            break;
+          case 'trending':
+            orderClause = `st.trending_score ${order.toUpperCase()}`;
+            break;
+          case 'recent':
+            orderClause = `s.created_at ${order.toUpperCase()}`;
+            break;
+          case 'stars':
+            orderClause = `st.github_stars ${order.toUpperCase()}`;
+            break;
+          case 'installs':
+            orderClause = `st.cli_installs ${order.toUpperCase()}`;
+            break;
+          default:
+            orderClause = `st.popularity_score DESC`;
+        }
       }
 
-      // Count total
+      // Count total (use WHERE params only, not ORDER BY params)
       const countResult = await this.query(`
         SELECT COUNT(*)
         FROM mcp_servers s
         LEFT JOIN server_stats st ON s.id = st.server_id
         ${whereClause}
-      `, queryParams);
+      `, whereParams);
 
       const total = parseInt(countResult.rows[0].count);
 
       // Get paginated results
       const result = await this.query(`
-        SELECT 
+        SELECT
           s.id, s.slug, s.name, s.tagline, s.category, s.tags,
           s.repository_url, s.repository_owner, s.repository_name,
           s.npm_package, s.docker_image, s.verified, s.featured,

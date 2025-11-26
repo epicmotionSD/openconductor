@@ -199,6 +199,105 @@ openconductor analytics --disable
 - `--enable` - Enable anonymous usage tracking
 - `--disable` - Disable anonymous usage tracking
 
+### `openconductor stack list`
+
+List all available curated stacks (collections of servers with system prompts).
+
+```bash
+# Show all available stacks
+openconductor stack list
+```
+
+**Output:**
+
+```text
+📦 Available Stacks
+
+⚡ Essential Stack
+  Everything you need to get started
+  5 servers | 103 installs
+  Install: openconductor stack install essential
+
+🧑‍💻 Coder Stack
+  Build, debug, and deploy like a senior engineer
+  6 servers | 42 installs
+  Install: openconductor stack install coder
+
+💡 Stacks include pre-configured system prompts for Claude Desktop
+```
+
+### `openconductor stack install <slug>`
+
+Install a complete stack (all servers + system prompt).
+
+```bash
+# Install the Coder Stack
+openconductor stack install coder
+
+# Force reinstall servers
+openconductor stack install essential --force
+```
+
+**What happens:**
+
+1. Installs all servers in the stack
+2. Adds them to Claude Desktop config
+3. Copies optimized system prompt to clipboard
+4. Shows instructions for adding prompt to Claude
+
+**Options:**
+
+- `-f, --force` - Force reinstall servers that are already installed
+
+### `openconductor stack show <slug>`
+
+View details about a specific stack before installing.
+
+```bash
+# Show details for Coder Stack
+openconductor stack show coder
+```
+
+**Output:**
+
+```text
+🧑‍💻 Coder Stack
+
+Build, debug, and deploy like a senior engineer
+
+📦 Included Servers:
+  1. github-mcp ⭐ 1,234
+  2. postgresql-mcp ⭐ 856
+  3. filesystem-mcp ⭐ 2,103
+  ... (and 3 more)
+
+📊 Stats:
+  Servers: 6
+  Installs: 42
+
+🚀 Install this stack:
+  openconductor stack install coder
+```
+
+### `openconductor stack share <slug>`
+
+Generate a shareable URL for a stack.
+
+```bash
+# Create share link for Coder Stack
+openconductor stack share coder
+```
+
+**Output:**
+
+```text
+🔗 Share this stack:
+  https://openconductor.ai/s/coder
+
+📦 Installation command:
+  $ openconductor stack install coder
+```
+
 ## 🎯 Examples
 
 ### Discover and Install Workflow

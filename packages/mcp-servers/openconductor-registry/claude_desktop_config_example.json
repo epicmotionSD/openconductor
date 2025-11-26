@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "openconductor-registry": {
+      "command": "node",
+      "args": [
+        "/home/roizen/projects/openconductor/packages/mcp-servers/openconductor-registry/dist/index.js"
+      ],
+      "env": {
+        "OPENCONDUCTOR_API_URL": "https://api.openconductor.ai"
+      }
+    }
+  }
+}

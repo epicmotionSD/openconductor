@@ -1,0 +1,50 @@
+# Writer Stack: Research & Publishing Assistant
+Duration: 1:45
+
+=".repeat(60) + '
+
+## Scene 1: intro
+Timestamp: 0:00-0:15 (15s)
+
+The Writer Stack transforms Claude into a research and publishing assistant. Perfect for content creators, researchers, and writers.
+
+Visual: undefined
+
+============================================================
+
+## Scene 2: install
+Timestamp: 0:15-0:30 (15s)
+
+One command installs everything: openconductor stack install writer. Four specialized servers and a research-focused system prompt.
+
+Visual: undefined
+
+============================================================
+
+## Scene 3: demo-research
+Timestamp: 0:30-0:55 (25s)
+
+Claude searches the web, gathers sources, and synthesizes information. It remembers everything you discuss and builds on previous research.
+
+Visual: undefined
+
+============================================================
+
+## Scene 4: demo-writing
+Timestamp: 0:55-1:20 (25s)
+
+It drafts articles, saves to files, and manages your publishing workflow. From research to publication, all in one conversation.
+
+Visual: undefined
+
+============================================================
+
+## Scene 5: cta
+Timestamp: 1:20-1:45 (25s)
+
+Transform your research and writing workflow. Get the Writer Stack at openconductor.ai.
+
+Visual: undefined
+
+============================================================
+

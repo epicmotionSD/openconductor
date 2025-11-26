@@ -1,0 +1,48 @@
+$ openconductor stack show coder
+============================================
+
+╔════════════════════════════════════════════════════════════════╗
+║                      🧑‍💻 Coder Stack                            ║
+║           Transform Claude into a Senior Engineer              ║
+╚════════════════════════════════════════════════════════════════╝
+
+DESCRIPTION:
+  The Coder Stack gives Claude complete access to your development
+  environment. Read files, query databases, manage repositories,
+  search the web, and maintain context across sessions.
+
+INCLUDED SERVERS (5):
+
+  📦 github-mcp
+     GitHub repository management, PR reviews, issue tracking
+
+  📁 filesystem-mcp
+     Secure read/write access to your project files
+
+  🗄️  postgresql-mcp
+     Query databases, write migrations, analyze schemas
+
+  🧠 openmemory
+     Long-term memory for conversation context
+
+  🔍 brave-search-mcp
+     Privacy-focused web search for documentation
+
+SYSTEM PROMPT:
+  A specialized prompt that configures Claude as a senior software
+  engineer with expertise in your tech stack. Automatically copied
+  to your clipboard on install.
+
+INSTALLATION:
+  openconductor stack install coder
+
+USE CASES:
+  • Code review and architecture analysis
+  • Database query optimization
+  • Full-stack development assistance
+  • Documentation and research
+  • Context-aware pair programming
+
+⭐ Most popular stack for developers
+
+============================================

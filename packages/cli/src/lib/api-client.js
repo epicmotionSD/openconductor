@@ -11,7 +11,7 @@ const pkg = JSON.parse(
 
 export class ApiClient {
   constructor(baseURL) {
-    this.baseURL = baseURL || process.env.OPENCONDUCTOR_API_URL || 'https://www.openconductor.ai/api/v1';
+    this.baseURL = baseURL || process.env.OPENCONDUCTOR_API_URL || 'https://api.openconductor.ai/v1';
 
     this.client = axios.create({
       baseURL: this.baseURL,
@@ -62,20 +62,18 @@ export class ApiClient {
       const response = await this.client.get(`/servers/${slug}`);
       return response.data;
     } catch (error) {
-      // Fallback to search endpoint if direct access fails
-      if (error.message && (error.message.includes('404') || error.message.includes('not found'))) {
-        const searchResult = await this.searchServers({ q: slug, limit: 1 });
-        if (searchResult.servers && searchResult.servers.length > 0) {
-          const server = searchResult.servers[0];
-          // Check if it's an exact slug match
-          if (server.slug === slug) {
-            // Normalize the structure to match expected format
-            return this._normalizeServerObject(server);
-          }
+      // Fallback to search endpoint if direct access fails (404, 500, or any error)
+      // Search for servers where the slug contains our search term
+      const searchResult = await this.searchServers({ q: slug.replace(/-/g, ' '), limit: 20 });
+      if (searchResult.servers && searchResult.servers.length > 0) {
+        // Find exact slug match
+        const server = searchResult.servers.find(s => s.slug === slug);
+        if (server) {
+          // Normalize the structure to match expected format
+          return this._normalizeServerObject(server);
         }
-        throw new Error(`Server '${slug}' not found`);
       }
-      throw error;
+      throw new Error(`Server '${slug}' not found`);
     }
   }
 

@@ -43,17 +43,26 @@ export class RegistryService {
    */
   async getServer(identifier: string): Promise<MCPServer | null> {
     try {
-      // Try ID first, then slug
-      let server = await mcpServerRepository.findById(identifier);
+      let server: MCPServer | null = null;
+
+      // Check if identifier looks like a UUID (8-4-4-4-12 hex digits)
+      const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+      if (uuidRegex.test(identifier)) {
+        // Try ID first if it looks like a UUID
+        server = await mcpServerRepository.findById(identifier);
+      }
+
+      // If not found by ID or not a UUID, try by slug
       if (!server) {
         server = await mcpServerRepository.findBySlug(identifier);
       }
-      
+
       if (server) {
         // Populate additional data
         await this.populateServerDetails(server);
       }
-      
+
       return server;
     } catch (error) {
       logger.error('Error getting server', { identifier, error });

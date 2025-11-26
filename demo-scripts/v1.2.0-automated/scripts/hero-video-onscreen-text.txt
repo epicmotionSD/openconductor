@@ -1,0 +1,38 @@
+# OpenConductor v1.2.0: Set Up Claude in 10 Seconds - On-Screen Text
+
+## Scene 1 (0:00-0:10)
+  • 30 minutes → 10 seconds
+  • Configuration hell → One command
+
+## Scene 2 (0:10-0:30)
+  • Manual JSON editing
+  • Syntax errors
+  • Multiple restarts
+  • 30+ minutes wasted
+
+## Scene 3 (0:30-0:50)
+  • 🧑‍💻 Coder Stack - 5 servers
+  • ✍️ Writer Stack - 4 servers
+  • ⚡ Essential Stack - 3 servers
+
+## Scene 4 (0:50-1:10)
+  • $ openconductor stack install coder
+  • ✓ Installing 5 servers...
+  • ✓ System prompt copied!
+
+## Scene 5 (1:10-1:50)
+  • ✓ Reading project files
+  • ✓ Analyzing architecture
+  • ✓ Querying database
+  • ✓ Remembering context
+
+## Scene 6 (1:50-2:10)
+  • Writer Stack: Research + Publishing
+  • Essential Stack: Perfect First Install
+  • More stacks coming soon
+
+## Scene 7 (2:10-2:30)
+  • openconductor.ai/stacks
+  • npm install -g @openconductor/cli
+  • Stop configuring. Start creating.
+

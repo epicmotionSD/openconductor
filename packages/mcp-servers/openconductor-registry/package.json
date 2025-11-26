@@ -1,0 +1,42 @@
+{
+  "name": "@openconductor/mcp-registry",
+  "version": "1.1.0",
+  "description": "MCP server for discovering and searching OpenConductor's registry of 190+ MCP servers and pre-configured stacks",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "openconductor-registry": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "openconductor",
+    "registry",
+    "claude",
+    "ai"
+  ],
+  "author": "OpenConductor",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "zod": "^3.22.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/epicmotionSD/openconductor.git",
+    "directory": "packages/mcp-servers/openconductor-registry"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -159,28 +159,31 @@ test_error_handling() {
 # Test SDK functionality
 test_sdk() {
     echo -e "${BLUE}Testing SDK functionality...${NC}"
-    
-    cat > /tmp/test-sdk.js << 'EOF'
-import { OpenConductorSDK } from './src/lib/sdk.js';
+
+    # Get absolute path to current directory
+    local CLI_DIR="$(pwd)"
+
+    cat > /tmp/test-sdk.js <<EOF
+import { OpenConductorSDK } from '${CLI_DIR}/src/lib/sdk.js';
 
 async function testSDK() {
   const sdk = new OpenConductorSDK({
     apiUrl: process.env.OPENCONDUCTOR_API_URL
   });
-  
+
   try {
     // Test health check
     const health = await sdk.checkAPIHealth();
     console.log('API Health:', health.healthy ? '✓' : '✗');
-    
+
     // Test search
     const searchResults = await sdk.searchServers('memory', { limit: 2 });
     console.log('Search Results:', searchResults.servers.length, 'servers found');
-    
+
     // Test categories
     const categories = await sdk.getCategories();
     console.log('Categories:', categories.categories.length, 'categories found');
-    
+
     console.log('✓ SDK test completed successfully');
   } catch (error) {
     console.error('✗ SDK test failed:', error.message);
@@ -194,13 +197,13 @@ EOF
     echo -e "${YELLOW}Testing: SDK functionality${NC}"
     echo "Command: node /tmp/test-sdk.js"
     echo "----------------------------------------"
-    
-    if cd "$(pwd)" && node /tmp/test-sdk.js; then
+
+    if node /tmp/test-sdk.js; then
         echo -e "${GREEN}✓ PASSED: SDK functionality working${NC}"
     else
         echo -e "${RED}✗ FAILED: SDK test failed${NC}"
     fi
-    
+
     rm -f /tmp/test-sdk.js
     echo ""
 }

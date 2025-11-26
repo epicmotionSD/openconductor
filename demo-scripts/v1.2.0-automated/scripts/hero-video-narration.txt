@@ -1,0 +1,75 @@
+# OpenConductor v1.2.0: Set Up Claude in 10 Seconds
+Duration: 2:30
+
+=".repeat(60) + '
+
+## Scene 1: scene-01-hook
+Timestamp: 0:00-0:10 (10s)
+
+What if you could transform Claude into a specialized AI assistant in 10 seconds instead of 30 minutes? OpenConductor v1.2.0 makes it possible.
+
+Visual: Split screen: JSON hell vs. clean terminal
+Music: Upbeat, energetic intro
+
+============================================================
+
+## Scene 2: scene-02-problem
+Timestamp: 0:10-0:30 (20s)
+
+Setting up MCP servers used to mean hunting through GitHub, manually editing JSON configs, wrestling with syntax errors, and losing 30 minutes of your day. And that's if everything works.
+
+Visual: Screen recording: manual JSON editing, errors, frustration
+Music: Tense, frustrating
+
+============================================================
+
+## Scene 3: scene-03-solution
+Timestamp: 0:30-0:50 (20s)
+
+Version 1.2.0 introduces Stacks - pre-configured AI workflows that bundle the right servers with specialized system prompts. No configuration, no guesswork, just instant value.
+
+Visual: Terminal with openconductor stack list - clean table
+Music: Hopeful, building
+
+============================================================
+
+## Scene 4: scene-04-demo-install
+Timestamp: 0:50-1:10 (20s)
+
+Watch this. One command installs five development servers: GitHub, filesystem, PostgreSQL, memory, and Brave Search. Plus, a specialized system prompt is automatically copied to your clipboard.
+
+Visual: Real-time: openconductor stack install coder
+Music: Smooth, confident
+
+============================================================
+
+## Scene 5: scene-05-demo-usage
+Timestamp: 1:10-1:50 (40s)
+
+Paste the prompt into Claude, and you instantly have a senior software engineer. It can read files, analyze codebases, query databases, search the web, and remember context across sessions. All without touching a single config file.
+
+Visual: Claude Desktop: paste prompt, immediate intelligent responses
+Music: Triumphant
+
+============================================================
+
+## Scene 6: scene-06-more-stacks
+Timestamp: 1:50-2:10 (20s)
+
+The Writer Stack transforms Claude into a research and publishing assistant. The Essential Stack gives you the perfect first install. Each stack is crafted for a specific workflow, tested in production, and ready to use.
+
+Visual: Quick cuts of Writer and Essential stacks
+Music: Building excitement
+
+============================================================
+
+## Scene 7: scene-07-cta
+Timestamp: 2:10-2:30 (20s)
+
+Ready to transform your Claude setup? Visit openconductor.ai to explore stacks, or install the CLI now with npm install -g @openconductor/cli. Stop configuring. Start creating.
+
+Visual: OpenConductor logo, website URL, CLI command
+Music: Strong, memorable outro
+
+============================================================
+

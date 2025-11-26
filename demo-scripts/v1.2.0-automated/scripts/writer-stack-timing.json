@@ -1,0 +1,36 @@
+{
+  "title": "Writer Stack: Research & Publishing Assistant",
+  "duration": "1:45",
+  "scenes": [
+    {
+      "id": "intro",
+      "timestamp": "0:00-0:15",
+      "duration": 15,
+      "narrationLength": 132
+    },
+    {
+      "id": "install",
+      "timestamp": "0:15-0:30",
+      "duration": 15,
+      "narrationLength": 131
+    },
+    {
+      "id": "demo-research",
+      "timestamp": "0:30-0:55",
+      "duration": 25,
+      "narrationLength": 139
+    },
+    {
+      "id": "demo-writing",
+      "timestamp": "0:55-1:20",
+      "duration": 25,
+      "narrationLength": 128
+    },
+    {
+      "id": "cta",
+      "timestamp": "1:20-1:45",
+      "duration": 25,
+      "narrationLength": 87
+    }
+  ]
+}

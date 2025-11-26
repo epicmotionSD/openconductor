@@ -2,6 +2,7 @@ import { readFile, writeFile, mkdir, access } from 'fs/promises';
 import { dirname, join } from 'path';
 import { homedir } from 'os';
 import { existsSync } from 'fs';
+import { parse, stringify } from 'comment-json';
 
 /**
  * Manages MCP configuration files
@@ -39,7 +40,7 @@ export class ConfigManager {
     try {
       await access(this.configPath);
       const content = await readFile(this.configPath, 'utf-8');
-      return JSON.parse(content);
+      return parse(content);
     } catch (error) {
       if (error.code === 'ENOENT') {
         // Config doesn't exist, return default
@@ -57,11 +58,11 @@ export class ConfigManager {
   async writeConfig(config) {
     // Ensure directory exists
     await mkdir(dirname(this.configPath), { recursive: true });
-    
-    // Write with pretty formatting
+
+    // Write with pretty formatting (preserves comments)
     await writeFile(
       this.configPath,
-      JSON.stringify(config, null, 2),
+      stringify(config, null, 2),
       'utf-8'
     );
   }

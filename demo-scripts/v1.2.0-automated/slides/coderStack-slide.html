@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coder Stack</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #1a1a2e;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .slide {
+      max-width: 1200px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #00d9ff;
+      text-shadow: 0 0 20px #00d9ff40;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .subtitle {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+      animation: fadeIn 1s ease-out 0.3s both;
+    }
+
+    .bullets {
+      list-style: none;
+      font-size: 2rem;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .bullets li {
+      margin-bottom: 20px;
+      padding-left: 50px;
+      position: relative;
+      animation: fadeInLeft 0.6s ease-out both;
+    }
+
+    .bullets li:nth-child(1) { animation-delay: 0.5s; }
+    .bullets li:nth-child(2) { animation-delay: 0.7s; }
+    .bullets li:nth-child(3) { animation-delay: 0.9s; }
+    .bullets li:nth-child(4) { animation-delay: 1.1s; }
+    .bullets li:nth-child(5) { animation-delay: 1.3s; }
+
+    .bullets li:before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #00d9ff;
+      font-size: 2.5rem;
+      line-height: 1;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Print styles for PDF export */
+    @media print {
+      body {
+        width: 1920px;
+        height: 1080px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <h1 class="title">Coder Stack</h1>
+    <p class="subtitle">Your AI Senior Engineer</p>
+    
+      <ul class="bullets">
+        <li>GitHub integration</li>
+        <li>Filesystem access</li>
+        <li>PostgreSQL queries</li>
+        <li>Long-term memory</li>
+        <li>Web search</li>
+      </ul>
+    
+  </div>
+</body>
+</html>

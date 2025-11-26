@@ -1,0 +1,30 @@
+$ openconductor stack install coder
+============================================
+
+🧑‍💻 Installing Coder Stack...
+
+┌─────────────────────────────────────────────────────────────┐
+│  Installing 5 servers for your development workflow...     │
+└─────────────────────────────────────────────────────────────┘
+
+  ✓ github-mcp           Repository management & code review
+  ✓ filesystem-mcp       Secure file operations
+  ✓ postgresql-mcp       Database integration
+  ✓ openmemory           Long-term context & memory
+  ✓ brave-search-mcp     Web search capabilities
+
+┌─────────────────────────────────────────────────────────────┐
+│  📋 System Prompt Copied to Clipboard!                      │
+└─────────────────────────────────────────────────────────────┘
+
+✨ Next steps:
+  1. Open Claude Desktop
+  2. Paste the system prompt (Cmd+V / Ctrl+V)
+  3. Start coding with your AI senior engineer!
+
+Your Coder Stack is ready! 🎉
+
+Configuration saved to:
+  ~/.config/claude/claude_desktop_config.json
+
+============================================

@@ -1,0 +1,48 @@
+{
+  "name": "@openconductor/sportintel",
+  "version": "1.0.0",
+  "description": "MCP server for sports data, fantasy insights, and betting analysis - powered by AI",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "sportintel": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepare": "npm run build",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "sports",
+    "fantasy-sports",
+    "betting",
+    "nba",
+    "nfl",
+    "mlb",
+    "claude",
+    "ai"
+  ],
+  "author": "OpenConductor",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "zod": "^3.22.0",
+    "node-fetch": "^3.3.2",
+    "date-fns": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/epicmotionSD/openconductor.git",
+    "directory": "packages/mcp-servers/sportintel"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
