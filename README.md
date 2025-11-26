@@ -1,11 +1,9 @@
 <p align="center">
-  <img src="https://openconductor.ai/logo.png" alt="OpenConductor" width="120" />
-</p>
-
-<h1 align="center">OpenConductor</h1>
-
-<p align="center">
-  <strong>The npm for AI Agent Tools</strong>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://openconductor.ai/banner-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://openconductor.ai/banner.svg">
+    <img src="https://openconductor.ai/banner.svg" alt="OpenConductor - The npm for AI Agent Tools" width="600" />
+  </picture>
 </p>
 
 <p align="center">
