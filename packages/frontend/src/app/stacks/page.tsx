@@ -16,7 +16,8 @@ import {
   Sparkles,
   Code,
   FileText,
-  Layers
+  Layers,
+  Download
 } from 'lucide-react'
 
 // Fetch stacks from API
