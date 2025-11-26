@@ -1,40 +1,79 @@
-# Claude Desktop Setup Guide - BOTH MCP SERVERS
+# Claude Desktop Complete Orchestration Setup
 
-**Status**: ✅ Both servers installed and configured!
-**Setup Date**: November 20, 2025
+**Complete AI Agent Orchestration** — OpenConductor CLI + Registry MCP + Stacks + Custom Servers
 
----
-
-## ✅ What's Installed
-
-Both MCP servers are now installed globally and configured for Claude Desktop:
-
-1. **OpenConductor Registry MCP** v1.0.0
-2. **SportIntel MCP** v1.0.0
+**Status**: ✅ Full orchestration ready!
+**Updated**: November 26, 2025
 
 ---
 
-## 📍 Installation Locations
+## 🎯 What is Complete Orchestration?
 
-**Global npm directory**: `/home/roizen/.nvm/versions/node/v20.19.5/lib/node_modules/`
+Complete orchestration means Claude can:
+1. **Discover** MCP servers via the Registry MCP
+2. **Install** servers automatically via OpenConductor CLI
+3. **Use** all installed servers in workflows
+4. **Switch** between specialized modes using Stacks
+5. **Combine** multiple tools seamlessly
 
-**Registry MCP**:
-```
-/home/roizen/.nvm/versions/node/v20.19.5/lib/node_modules/@openconductor/mcp-registry/dist/index.js
-```
+**Before**: Manual JSON editing, one server at a time
+**After**: Claude orchestrates your entire AI agent toolchain
 
-**SportIntel MCP**:
+---
+
+## 📦 Architecture Overview
+
 ```
-/home/roizen/.nvm/versions/node/v20.19.5/lib/node_modules/@openconductor/sportintel/dist/index.js
+┌─────────────────────────────────────────────────────────┐
+│ Claude Desktop (Your AI Agent)                          │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ OpenConductor Registry MCP                       │  │
+│  │ • Discover 220+ servers                          │  │
+│  │ • Search by category/keyword                     │  │
+│  │ • Get install commands                           │  │
+│  │ • Browse stacks                                  │  │
+│  └──────────────────────────────────────────────────┘  │
+│                                                         │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ OpenConductor CLI (via shell MCP)                │  │
+│  │ • Install servers: openconductor install github  │  │
+│  │ • Install stacks: openconductor stack install... │  │
+│  │ • Manage config automatically                    │  │
+│  └──────────────────────────────────────────────────┘  │
+│                                                         │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ Your Installed MCP Servers                       │  │
+│  │ • GitHub, Postgres, Filesystem, etc.             │  │
+│  │ • Memory, Brave Search, Google Drive             │  │
+│  │ • 220+ servers available                         │  │
+│  └──────────────────────────────────────────────────┘  │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## ⚙️ Claude Desktop Configuration
+## 🚀 Quick Setup (5 Minutes)
 
-**Config file location**: `~/.config/Claude/claude_desktop_config.json`
+### Step 1: Install OpenConductor CLI
 
-**Current configuration**:
+```bash
+npm install -g @openconductor/cli
+```
+
+### Step 2: Install Registry MCP Server
+
+```bash
+npm install -g @openconductor/mcp-registry
+```
+
+### Step 3: Configure Claude Desktop
+
+**Edit**: `~/.config/Claude/claude_desktop_config.json` (Linux/macOS)
+**Or**: `%APPDATA%\Claude\claude_desktop_config.json` (Windows)
+
 ```json
 {
   "mcpServers": {
@@ -43,395 +82,405 @@ Both MCP servers are now installed globally and configured for Claude Desktop:
       "args": [
         "/home/roizen/.nvm/versions/node/v20.19.5/lib/node_modules/@openconductor/mcp-registry/dist/index.js"
       ]
-    },
-    "sportintel": {
-      "command": "node",
-      "args": [
-        "/home/roizen/.nvm/versions/node/v20.19.5/lib/node_modules/@openconductor/sportintel/dist/index.js"
-      ]
     }
   }
 }
 ```
 
-### Adding Python-based MCP Servers
+**Note**: Adjust the path to match your Node.js installation:
+```bash
+# Find your path
+which node
+npm root -g
+```
 
-Some MCP servers (like `mcp-server-git`) are Python packages. To add them:
+### Step 4: Restart Claude Desktop
 
-1. **Install uv** (Python package runner):
-   ```bash
-   curl -LsSf https://astral.sh/uv/install.sh | sh
-   source $HOME/.local/bin/env
-   ```
-
-2. **Add to Claude config** (example with git server):
-   ```json
-   {
-     "mcpServers": {
-       "git": {
-         "command": "uvx",
-         "args": [
-           "mcp-server-git",
-           "--repository",
-           "/home/roizen/projects/openconductor"
-         ]
-       }
-     }
-   }
-   ```
-
-3. **Test the server**:
-   ```bash
-   uvx mcp-server-git --help
-   ```
-
-**Note**: The first run may take longer as `uvx` downloads and caches the package.
+**Important**: Completely quit and reopen Claude Desktop
 
 ---
 
-## 🧪 Testing Steps
+## 🎨 Complete Orchestration Workflows
 
-### Step 1: Restart Claude Desktop
+### Workflow 1: Discover → Install → Use
 
-**Important**: You MUST restart Claude Desktop for the MCP servers to load.
+**You**: "I need to work with GitHub repositories. What MCP servers are available?"
 
-1. Completely quit Claude Desktop (not just close the window)
-2. Reopen Claude Desktop
-3. Wait for it to fully load
+**Claude** (uses Registry MCP):
+- Searches for GitHub servers
+- Shows `@modelcontextprotocol/server-github`
+- Provides install command
 
-### Step 2: Verify Servers are Loaded
+**You**: "Install it for me"
 
-Claude Desktop should show MCP server indicators when they're loaded. Look for:
-- Server connection status in the UI
-- Available tools/functions
-
-### Step 3: Test Registry MCP
-
-Try these queries in Claude:
-
-**Test 1 - Discover Servers**:
-```
-Show me MCP servers for working with databases
+**Claude** (uses shell/terminal access):
+```bash
+openconductor install github
 ```
 
-**Expected**: List of database-related MCP servers with descriptions and install commands
+**Result**: GitHub server auto-configured in Claude Desktop
 
-**Test 2 - Trending**:
-```
-What are the most popular MCP servers right now?
-```
+**You**: "List all my GitHub repositories"
 
-**Expected**: List of trending servers sorted by GitHub stars and installs
+**Claude** (uses GitHub MCP):
+- Connects to GitHub API
+- Lists your repositories
 
-**Test 3 - Search**:
-```
-Search for servers related to GitHub
-```
+### Workflow 2: Stack Installation → Specialized Mode
 
-**Expected**: Search results for GitHub-related servers
+**You**: "I want to become a senior software engineer assistant"
 
-**Test 4 - Details**:
-```
-Get details about the openmemory server
-```
+**Claude** (uses Registry MCP to find stacks):
+- Shows Coder Stack
+- Explains what's included
 
-**Expected**: Detailed information including installation instructions
+**You**: "Install the Coder Stack"
 
-**Test 5 - Categories**:
-```
-Show me the breakdown of MCP servers by category
+**Claude** (uses CLI):
+```bash
+openconductor stack install coder
 ```
 
-**Expected**: Statistics showing server counts per category
+**Result**: Installs:
+- GitHub MCP
+- PostgreSQL MCP
+- Filesystem MCP
+- Memory MCP
+- Brave Search MCP
+- **+ System Prompt**: "Act as senior software engineer..."
 
-### Step 4: Test SportIntel MCP
+**You**: "Debug this TypeScript error in my codebase"
 
-Try these queries in Claude:
+**Claude** (now in Coder mode):
+- Uses Filesystem to read code
+- Uses GitHub to check issues
+- Uses Memory to remember context
+- Uses Brave Search for docs
+- Provides expert debugging
 
-**Test 1 - Live NBA Scores**:
-```
-What are today's NBA scores?
-```
+### Workflow 3: Multi-Server Orchestration
 
-**Expected**: Current/recent NBA game scores with teams, records, and status
+**You**: "Research competitors for my SaaS product and save findings to a document"
 
-**Test 2 - NFL Scores**:
-```
-Show me NFL scores
-```
+**Claude** orchestrates:
+1. **Brave Search MCP**: Searches for competitors
+2. **Web Fetch MCP**: Scrapes competitor websites
+3. **Memory MCP**: Stores findings
+4. **Filesystem MCP**: Creates `competitor-analysis.md`
+5. **GitHub MCP**: Commits document to repo
 
-**Expected**: NFL game scores (if games are happening)
-
-**Test 3 - Standings**:
-```
-Show me NBA standings
-```
-
-**Expected**: Full NBA standings organized by division
-
-**Test 4 - Team Search**:
-```
-Find the Los Angeles Lakers
-```
-
-**Expected**: Lakers team information and current record
-
-**Test 5 - AI Analysis**:
-```
-Which NBA teams are currently playoff contenders based on the standings?
-```
-
-**Expected**: Claude analyzes the standings data and provides insights
+All in one conversation!
 
 ---
 
-## ✅ Verification Checklist
+## 🎯 Recommended Stacks for Claude
 
-After testing, verify:
+### For Software Development
+```bash
+openconductor stack install coder
+```
+**Includes**: github, postgres, filesystem, memory, brave-search
+**System Prompt**: Senior software engineer mode
 
-- [ ] Claude Desktop restarted successfully
-- [ ] Both MCP servers show as connected
-- [ ] Registry MCP can discover servers
-- [ ] Registry MCP can search servers
-- [ ] Registry MCP can show server details
-- [ ] SportIntel can fetch live scores
-- [ ] SportIntel can show standings
-- [ ] SportIntel can search teams
-- [ ] Both servers respond within 1-2 seconds
-- [ ] No error messages in Claude
+### For Content Creation
+```bash
+openconductor stack install writer
+```
+**Includes**: brave-search, filesystem, memory, google-drive
+**System Prompt**: Professional writer and researcher
+
+### For General Use
+```bash
+openconductor stack install essential
+```
+**Includes**: filesystem, brave-search, memory
+**System Prompt**: Helpful AI assistant
+
+---
+
+## 🔧 Manual Server Installation
+
+If you want to add individual servers:
+
+### Using OpenConductor CLI (Recommended)
+
+```bash
+# Search for servers
+openconductor search postgres
+
+# Install a server
+openconductor install postgres
+
+# Install multiple servers
+openconductor install github slack notion
+
+# List installed servers
+openconductor status
+
+# Remove a server
+openconductor remove postgres
+```
+
+### Manual JSON Configuration
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "your_token_here"
+      }
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "POSTGRES_URL": "postgresql://user:pass@localhost:5432/db"
+      }
+    }
+  }
+}
+```
+
+---
+
+## 🧪 Testing Complete Orchestration
+
+### Test 1: Discovery + Installation Flow
+
+**Query**:
+```
+Show me MCP servers for working with Google Sheets
+```
+
+**Expected**:
+- Registry MCP lists relevant servers
+- Shows install commands
+- Claude can execute installation if authorized
+
+### Test 2: Stack Workflow
+
+**Query**:
+```
+Install the Coder Stack and help me refactor my TypeScript project
+```
+
+**Expected**:
+- Shows Coder Stack details
+- Installs all servers
+- Applies system prompt
+- Uses multiple tools (filesystem, memory, search)
+
+### Test 3: Multi-Server Orchestration
+
+**Query**:
+```
+Research the top 5 MCP servers by popularity, save the findings to a markdown file, and commit it to my GitHub repo
+```
+
+**Expected Claude workflow**:
+1. Uses Registry MCP to get trending servers
+2. Uses Filesystem MCP to create file
+3. Uses GitHub MCP to commit and push
+
+---
+
+## 📊 Current Configuration
+
+**Installed CLI**: @openconductor/cli@latest
+**Installed MCP Servers**:
+- `openconductor-registry` - Discover and search 220+ servers
+- `sportintel` (optional) - Sports data and analytics
+
+**Available via CLI**: 220+ servers
+**Available Stacks**: coder, writer, essential
+
+**Config Location**: `~/.config/Claude/claude_desktop_config.json`
+**CLI Config**: `~/.openconductor/config.json`
+
+---
+
+## 🎬 Demo Script for Complete Orchestration
+
+```
+[Open Claude Desktop]
+
+"Hi Claude, I need to set up a complete development environment."
+
+"What MCP servers do you recommend for software development?"
+[Claude uses Registry MCP, shows Coder Stack]
+
+"Install the Coder Stack for me"
+[Claude uses CLI to install]
+
+"Now help me analyze my GitHub repository structure"
+[Claude uses GitHub MCP]
+
+"Create a project roadmap document based on the issues"
+[Claude uses GitHub + Filesystem + Memory]
+
+"Commit the roadmap to the repo"
+[Claude uses GitHub MCP]
+
+"Perfect! Now search for best practices in TypeScript architecture"
+[Claude uses Brave Search MCP]
+
+[Demo shows complete orchestration of 5+ tools]
+```
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Claude Desktop doesn't start
+### Registry MCP not working
 
-**Cause**: Configuration file syntax error
-
-**Fix**:
+**Check**:
 ```bash
-# Verify JSON is valid
-cat ~/.config/Claude/claude_desktop_config.json | python3 -m json.tool
-```
+# Verify installation
+npm list -g @openconductor/mcp-registry
 
-If you see errors, the JSON is malformed. Check for:
-- Missing commas
-- Unclosed quotes
-- Incorrect brackets
+# Test directly
+node /path/to/mcp-registry/dist/index.js
 
-### MCP servers not showing up
-
-**Cause**: Incorrect paths or permissions
-
-**Fix**:
-```bash
-# Verify files exist
-ls -la /home/roizen/.nvm/versions/node/v20.19.5/lib/node_modules/@openconductor/mcp-registry/dist/index.js
-ls -la /home/roizen/.nvm/versions/node/v20.19.5/lib/node_modules/@openconductor/sportintel/dist/index.js
-
-# Make sure they're executable
-chmod +x /home/roizen/.nvm/versions/node/v20.19.5/lib/node_modules/@openconductor/*/dist/index.js
-```
-
-### "Server connection failed" errors
-
-**Cause**: Node.js path issues
-
-**Fix**:
-```bash
-# Verify node is in PATH
-which node
-
-# If different from config, update the "command" field to full path:
-# "command": "/home/roizen/.nvm/versions/node/v20.19.5/bin/node"
-```
-
-### Registry MCP returns errors
-
-**Cause**: API connectivity issues
-
-**Fix**:
-```bash
-# Test API directly
+# Check API
 curl https://api.openconductor.ai/v1/servers
-
-# Should return JSON with servers
 ```
 
-### SportIntel returns errors
+### CLI commands fail
 
-**Cause**: ESPN API connectivity
-
-**Fix**:
+**Check**:
 ```bash
-# Test ESPN API
-curl "http://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"
+# Verify CLI installation
+openconductor --version
 
-# Should return JSON with game data
+# Check permissions
+ls -la ~/.openconductor/
+
+# Verify Claude Desktop config
+cat ~/.config/Claude/claude_desktop_config.json
+```
+
+### Servers not loading
+
+**Check**:
+```bash
+# Restart Claude Desktop (required!)
+pkill Claude
+# Reopen Claude Desktop
+
+# Check logs
+tail -f ~/.config/claude/logs/mcp*.log
 ```
 
 ---
 
-## 📊 Expected Performance
-
-### Registry MCP
-- **Response Time**: <500ms (with caching)
-- **Cache Duration**: 5 minutes for most queries
-- **API Calls**: ~1 per unique query
-- **Data Source**: api.openconductor.ai
-
-### SportIntel MCP
-- **Response Time**: <1000ms (first request), <200ms (cached)
-- **Cache Duration**:
-  - Live scores: 2 minutes
-  - Standings: 1 hour
-  - Team data: 24 hours
-- **API Calls**: ~1 per unique query per cache period
-- **Data Source**: ESPN public APIs
-
----
-
-## 🔄 Updating the Servers
-
-When new versions are released:
+## 🔄 Updating Everything
 
 ```bash
-# Update both servers
-npm update -g @openconductor/mcp-registry @openconductor/sportintel
+# Update CLI
+npm update -g @openconductor/cli
+
+# Update Registry MCP
+npm update -g @openconductor/mcp-registry
+
+# Update all installed servers
+openconductor update
 
 # Restart Claude Desktop
-# (Configuration doesn't need to change)
 ```
 
 ---
 
-## 🎯 Demo Queries to Try
+## 🎯 Advanced Orchestration Patterns
 
-### Cool Registry MCP Queries
+### Pattern 1: Research → Document → Share
 
-1. **"Show me all memory-related MCP servers"**
-   - Discovers memory management tools
+1. **Research** (Brave Search + Registry MCP)
+2. **Analyze** (Claude reasoning)
+3. **Document** (Filesystem MCP)
+4. **Store** (Memory MCP for future reference)
+5. **Share** (GitHub MCP or Google Drive MCP)
 
-2. **"What's the most popular MCP server?"**
-   - Shows top server by stars
+### Pattern 2: Code → Test → Deploy
 
-3. **"Find servers that work with PostgreSQL"**
-   - Targeted search example
+1. **Search docs** (Brave Search MCP)
+2. **Write code** (Filesystem MCP)
+3. **Query database** (Postgres MCP)
+4. **Commit changes** (GitHub MCP)
+5. **Remember context** (Memory MCP)
 
-4. **"How many MCP servers are in the filesystem category?"**
-   - Category statistics
+### Pattern 3: Data → Insight → Report
 
-### Cool SportIntel Queries
-
-1. **"How did the Warriors do last night?"**
-   - Recent game lookup
-
-2. **"Compare the Lakers and Celtics standings"**
-   - Multi-team analysis
-
-3. **"Which NBA team has the best record in the West?"**
-   - AI analyzes standings
-
-4. **"Show me all California NBA teams"**
-   - Geography-based search
+1. **Fetch data** (API MCPs)
+2. **Store findings** (Memory MCP)
+3. **Analyze** (Claude reasoning + multiple data sources)
+4. **Generate report** (Filesystem MCP)
+5. **Share** (Google Drive or GitHub MCP)
 
 ---
 
-## 📸 Screenshot Checklist
+## 📈 Performance Expectations
 
-For demo videos and marketing, capture screenshots of:
-
-### Registry MCP
-- [ ] Search results showing multiple servers
-- [ ] Trending servers list
-- [ ] Detailed server info with install commands
-- [ ] Category statistics
-
-### SportIntel MCP
-- [ ] Live game scores with multiple games
-- [ ] Full standings table
-- [ ] Team search results
-- [ ] AI analysis of playoff race
+| Component | Response Time | Cache Duration |
+|-----------|--------------|----------------|
+| Registry MCP | <500ms | 5 minutes |
+| CLI Install | 5-10 seconds | N/A |
+| GitHub MCP | <1000ms | Per request |
+| Filesystem MCP | <100ms | N/A |
+| Memory MCP | <200ms | Persistent |
 
 ---
 
-## 🎬 Recording Tips
+## 🎓 Learning Resources
 
-When creating demo videos:
-
-1. **Clear the chat**: Start fresh for clean screenshots
-2. **Type slowly**: Make queries readable in video
-3. **Wait for response**: Let full output display
-4. **Highlight features**: Zoom in on important details
-5. **Show variety**: Different queries, different sports
+**OpenConductor Docs**: https://openconductor.ai
+**MCP Protocol**: https://modelcontextprotocol.io
+**GitHub Repository**: https://github.com/epicmotionSD/openconductor
+**Community Discord**: https://discord.gg/Ya5TPWeS
 
 ---
 
-## 💡 Test Script for Live Demo
+## 🌟 Best Practices
 
-Use this script for a live demonstration:
-
-```
-[Open Claude Desktop]
-
-"Hi Claude, I've configured two MCP servers. Let's test them."
-
-[Test Registry MCP]
-"Show me MCP servers for working with databases"
-[Wait for response]
-
-"What are the trending MCP servers?"
-[Wait for response]
-
-[Test SportIntel]
-"What are today's NBA scores?"
-[Wait for response]
-
-"Show me NBA standings"
-[Wait for response]
-
-[Test AI Integration]
-"Based on these standings, which teams look like playoff contenders?"
-[Wait for Claude to analyze]
-
-[Close]
-"Both servers are working perfectly!"
-```
+1. **Start with a Stack** - Get 5-7 servers configured instantly
+2. **Use Registry MCP** - Let Claude discover tools as needed
+3. **Enable Memory MCP** - Claude remembers context across sessions
+4. **Combine Tools** - The power is in orchestration, not individual servers
+5. **Update Regularly** - New servers added weekly
 
 ---
 
-## ✅ Success Criteria
+## 🎉 Complete Orchestration Checklist
 
-Both servers are working if:
-
-1. ✅ No error messages appear
-2. ✅ Data is returned within 2 seconds
-3. ✅ Formatted output is clear and readable
-4. ✅ Links and install commands are included
-5. ✅ Claude can analyze the data (AI integration works)
-
----
-
-## 📞 Support
-
-If you encounter issues:
-
-1. **Check logs**: Claude Desktop logs are in `~/.config/claude/logs/`
-2. **Test APIs**: Verify api.openconductor.ai and ESPN APIs are accessible
-3. **GitHub Issues**: https://github.com/epicmotionSD/openconductor/issues
-4. **Discord**: [community server]
-5. **Email**: hello@openconductor.ai
+- [ ] OpenConductor CLI installed globally
+- [ ] Registry MCP configured in Claude Desktop
+- [ ] At least one Stack installed (Coder, Writer, or Essential)
+- [ ] Claude Desktop restarted after configuration
+- [ ] Tested discovery workflow (search for servers)
+- [ ] Tested installation workflow (install a server)
+- [ ] Tested multi-server workflow (combine 3+ tools)
+- [ ] Memory MCP enabled (for persistent context)
+- [ ] Filesystem MCP enabled (for file operations)
 
 ---
 
-## 🎉 You're All Set!
+## 🚀 You're Ready!
 
-Both MCP servers are installed and configured. Just restart Claude Desktop and start testing!
+With complete orchestration, Claude can:
+- ✅ Discover any of 220+ MCP servers
+- ✅ Install servers automatically
+- ✅ Use multiple tools in complex workflows
+- ✅ Switch between specialized modes (Stacks)
+- ✅ Remember context across conversations
+- ✅ Orchestrate your entire AI agent toolchain
 
-**Next Steps**:
-1. Restart Claude Desktop
-2. Test all queries above
-3. Capture screenshots/recordings
-4. Share your results!
+**Welcome to the future of AI agent orchestration!** 🎊
 
-Good luck with the demos! 🚀
+---
+
+**Questions?**
+- GitHub Issues: https://github.com/epicmotionSD/openconductor/issues
+- Discord Community: https://discord.gg/Ya5TPWeS
+- Email: hello@openconductor.ai
