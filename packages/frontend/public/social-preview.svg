@@ -1,0 +1,85 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1280" height="640" fill="#0f172a"/>
+
+  <!-- Gradient overlay -->
+  <defs>
+    <radialGradient id="gradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="640" fill="url(#gradient)"/>
+
+  <!-- Icon Circle -->
+  <circle cx="200" cy="200" r="80" fill="#3b82f6"/>
+
+  <!-- Terminal Icon -->
+  <g transform="translate(160, 160)">
+    <path d="M30 30L60 52.5L30 75" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <line x1="67.5" y1="75" x2="90" y2="75" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <!-- Main Title -->
+  <text x="320" y="180" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" fill="#f1f5f9">
+    OpenConductor
+  </text>
+
+  <!-- Tagline -->
+  <text x="320" y="240" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="400" fill="#94a3b8">
+    The npm for AI Agent Tools
+  </text>
+
+  <!-- Divider Line -->
+  <line x1="200" y1="300" x2="1080" y2="300" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Terminal Window -->
+  <rect x="200" y="340" width="880" height="260" rx="12" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+
+  <!-- Terminal Header -->
+  <rect x="200" y="340" width="880" height="40" rx="12" fill="#0f172a"/>
+  <circle cx="220" cy="360" r="6" fill="#ef4444"/>
+  <circle cx="240" cy="360" r="6" fill="#f59e0b"/>
+  <circle cx="260" cy="360" r="6" fill="#10b981"/>
+  <text x="280" y="368" font-family="Monaco, Consolas, monospace" font-size="14" fill="#64748b">
+    openconductor
+  </text>
+
+  <!-- Terminal Content -->
+  <g font-family="Monaco, Consolas, monospace" font-size="18">
+    <!-- Command 1 -->
+    <text x="220" y="410" fill="#10b981">$</text>
+    <text x="240" y="410" fill="#60a5fa">openconductor install github</text>
+
+    <!-- Output 1 -->
+    <text x="220" y="440" fill="#94a3b8">⚙️  Installing github...</text>
+    <text x="220" y="465" fill="#10b981">✓</text>
+    <text x="240" y="465" fill="#e2e8f0">Package installed</text>
+    <text x="220" y="490" fill="#10b981">✓</text>
+    <text x="240" y="490" fill="#e2e8f0">Added to claude_desktop_config.json</text>
+    <text x="220" y="515" fill="#10b981" font-weight="bold">🎉 Installation complete!</text>
+
+    <!-- Command 2 -->
+    <text x="220" y="555" fill="#10b981">$</text>
+    <text x="240" y="555" fill="#60a5fa">openconductor stack install coder</text>
+    <text x="560" y="555" fill="#64748b">← Try a complete stack</text>
+  </g>
+
+  <!-- Stats Footer -->
+  <g font-family="system-ui, -apple-system, sans-serif" font-size="20" fill="#64748b">
+    <text x="200" y="625">
+      <tspan fill="#3b82f6" font-weight="600">220+ Servers</tspan>
+      <tspan dx="40">•</tspan>
+      <tspan dx="40" fill="#10b981" font-weight="600">One Command</tspan>
+      <tspan dx="40">•</tspan>
+      <tspan dx="40" fill="#f59e0b" font-weight="600">Zero Config</tspan>
+      <tspan dx="40">•</tspan>
+      <tspan dx="40">MIT Licensed</tspan>
+    </text>
+  </g>
+
+  <!-- URL -->
+  <text x="1020" y="625" font-family="system-ui, -apple-system, sans-serif" font-size="20" fill="#64748b" text-anchor="end">
+    openconductor.ai
+  </text>
+</svg>
