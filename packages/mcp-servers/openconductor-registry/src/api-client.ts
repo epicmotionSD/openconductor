@@ -3,8 +3,6 @@
  * Connects to the OpenConductor API to fetch server data
  */
 
-import fetch from 'node-fetch';
-
 const API_BASE_URL = process.env.OPENCONDUCTOR_API_URL || 'https://api.openconductor.ai';
 
 export interface MCPServer {
