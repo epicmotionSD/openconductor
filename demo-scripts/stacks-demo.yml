@@ -1,0 +1,289 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: bash -l
+
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: /home/roizen/projects/openconductor/demo-scripts
+
+  # Export additional ENV variables
+  env:
+    recording: true
+
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 100
+
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 28
+
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+
+  # Quality
+  # 1 - 100
+  quality: 100
+
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: floating
+    title: OpenConductor Stacks - Install Complete Workflows in 10 Seconds
+    style:
+      border: 0px black solid
+      boxShadow: 0 20px 40px rgba(0,0,0,0.3)
+      margin: 20px
+
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Cascadia Code, Monaco, Consolas, monospace"
+
+  # The size of the font
+  fontSize: 14
+
+  # The height of lines
+  lineHeight: 1.3
+
+  # The spacing between letters
+  letterSpacing: 0
+
+  # Theme - OpenConductor brand colors
+  theme:
+    background: "#0f172a"
+    foreground: "#e2e8f0"
+    cursor: "#3b82f6"
+    black: "#1e293b"
+    red: "#ef4444"
+    green: "#10b981"
+    yellow: "#f59e0b"
+    blue: "#3b82f6"
+    magenta: "#8b5cf6"
+    cyan: "#06b6d4"
+    white: "#f1f5f9"
+    brightBlack: "#475569"
+    brightRed: "#f87171"
+    brightGreen: "#34d399"
+    brightYellow: "#fbbf24"
+    brightBlue: "#60a5fa"
+    brightMagenta: "#a78bfa"
+    brightCyan: "#22d3ee"
+    brightWhite: "#ffffff"
+
+# Records - Demo showing stack installation
+records:
+  # Clear screen and show prompt
+  - delay: 500
+    content: "\e[H\e[2J\e[3J"
+  - delay: 300
+    content: "$ "
+
+  # Type: openconductor stack list
+  - delay: 200
+    content: "o"
+  - delay: 100
+    content: "p"
+  - delay: 100
+    content: "e"
+  - delay: 100
+    content: "n"
+  - delay: 100
+    content: "c"
+  - delay: 100
+    content: "o"
+  - delay: 100
+    content: "n"
+  - delay: 100
+    content: "d"
+  - delay: 100
+    content: "u"
+  - delay: 100
+    content: "c"
+  - delay: 100
+    content: "t"
+  - delay: 100
+    content: "o"
+  - delay: 100
+    content: "r"
+  - delay: 200
+    content: " "
+  - delay: 150
+    content: "s"
+  - delay: 100
+    content: "t"
+  - delay: 100
+    content: "a"
+  - delay: 100
+    content: "c"
+  - delay: 100
+    content: "k"
+  - delay: 200
+    content: " "
+  - delay: 150
+    content: "l"
+  - delay: 100
+    content: "i"
+  - delay: 100
+    content: "s"
+  - delay: 100
+    content: "t"
+  - delay: 800
+    content: "\r\n"
+
+  # Show available stacks
+  - delay: 400
+    content: "\r\n\e[1m\e[36m🎯 Available Stacks\e[0m\r\n\r\n"
+  - delay: 300
+    content: "\e[1m🧑‍💻 coder\e[0m - Build, debug, and deploy like a senior engineer\r\n"
+  - delay: 200
+    content: "   \e[2mIncludes: github, postgres, filesystem, memory, brave-search\e[0m\r\n\r\n"
+  - delay: 300
+    content: "\e[1m✍️  writer\e[0m - Research, write, and publish with confidence\r\n"
+  - delay: 200
+    content: "   \e[2mIncludes: brave-search, filesystem, memory, google-drive\e[0m\r\n\r\n"
+  - delay: 300
+    content: "\e[1m⚡ essential\e[0m - Everything you need to get started\r\n"
+  - delay: 200
+    content: "   \e[2mIncludes: filesystem, brave-search, memory\e[0m\r\n\r\n"
+  - delay: 1500
+    content: "$ "
+
+  # Type: openconductor stack install coder
+  - delay: 300
+    content: "o"
+  - delay: 100
+    content: "p"
+  - delay: 100
+    content: "e"
+  - delay: 100
+    content: "n"
+  - delay: 100
+    content: "c"
+  - delay: 100
+    content: "o"
+  - delay: 100
+    content: "n"
+  - delay: 100
+    content: "d"
+  - delay: 100
+    content: "u"
+  - delay: 100
+    content: "c"
+  - delay: 100
+    content: "t"
+  - delay: 100
+    content: "o"
+  - delay: 100
+    content: "r"
+  - delay: 200
+    content: " "
+  - delay: 150
+    content: "s"
+  - delay: 100
+    content: "t"
+  - delay: 100
+    content: "a"
+  - delay: 100
+    content: "c"
+  - delay: 100
+    content: "k"
+  - delay: 200
+    content: " "
+  - delay: 150
+    content: "i"
+  - delay: 100
+    content: "n"
+  - delay: 100
+    content: "s"
+  - delay: 100
+    content: "t"
+  - delay: 100
+    content: "a"
+  - delay: 100
+    content: "l"
+  - delay: 100
+    content: "l"
+  - delay: 200
+    content: " "
+  - delay: 150
+    content: "c"
+  - delay: 100
+    content: "o"
+  - delay: 100
+    content: "d"
+  - delay: 100
+    content: "e"
+  - delay: 100
+    content: "r"
+  - delay: 800
+    content: "\r\n"
+
+  # Show installation progress
+  - delay: 400
+    content: "\r\n\e[36m⚙️  Installing Coder Stack...\e[0m\r\n\r\n"
+  - delay: 500
+    content: "\e[32m✓\e[0m Installing github\r\n"
+  - delay: 400
+    content: "\e[32m✓\e[0m Installing postgres\r\n"
+  - delay: 400
+    content: "\e[32m✓\e[0m Installing filesystem\r\n"
+  - delay: 400
+    content: "\e[32m✓\e[0m Installing memory\r\n"
+  - delay: 400
+    content: "\e[32m✓\e[0m Installing brave-search\r\n"
+  - delay: 500
+    content: "\r\n\e[36m📝 Configuring system prompt...\e[0m\r\n"
+  - delay: 400
+    content: "\e[32m✓\e[0m Added senior engineer system prompt\r\n"
+  - delay: 500
+    content: "\r\n\e[1m\e[32m🎉 Coder Stack installed successfully!\e[0m\r\n\r\n"
+  - delay: 300
+    content: "\e[2m✨ Open Claude Desktop to start coding\e[0m\r\n"
+  - delay: 300
+    content: "\e[2m⏱️  Total time: 8.2 seconds\e[0m\r\n\r\n"
+
+  - delay: 2000
+    content: "$ "
+
+  # Pause at the end
+  - delay: 3000
+    content: ""
