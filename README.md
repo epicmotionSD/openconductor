@@ -20,8 +20,8 @@
 <p align="center">
   <a href="https://openconductor.ai">Website</a> •
   <a href="#quick-start">Quick Start</a> •
-  <a href="https://openconductor.ai/servers">Browse 220+ Servers</a> •
-  <a href="#stacks">Stacks</a> •
+  <a href="https://openconductor.ai/discover">Browse 220+ Servers</a> •
+  <a href="https://openconductor.ai/stacks">Stacks</a> •
   <a href="https://discord.gg/openconductor">Discord</a>
 </p>
 
@@ -161,7 +161,7 @@ The largest registry of MCP servers, all verified and tested.
 | **AI & LLMs**        | openai, replicate, huggingface                 |
 | **Data & Analytics** | bigquery, snowflake, dbt                       |
 
-[Browse all servers →](https://openconductor.ai/servers)
+[Browse all servers →](https://openconductor.ai/discover)
 
 ---
 
