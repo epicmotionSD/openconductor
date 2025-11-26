@@ -1,11 +1,9 @@
 <p align="center">
-  <img src="https://openconductor.ai/logo.png" alt="OpenConductor" width="120" />
-</p>
-
-<h1 align="center">OpenConductor</h1>
-
-<p align="center">
-  <strong>The npm for AI Agent Tools</strong>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://openconductor.ai/banner-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://openconductor.ai/banner.svg">
+    <img src="https://openconductor.ai/banner.svg" alt="OpenConductor - The npm for AI Agent Tools" width="600" />
+  </picture>
 </p>
 
 <p align="center">
@@ -16,14 +14,15 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/@openconductor/cli"><img src="https://img.shields.io/npm/v/@openconductor/cli.svg" alt="npm version"></a>
   <a href="https://www.npmjs.com/package/@openconductor/cli"><img src="https://img.shields.io/npm/dw/@openconductor/cli.svg" alt="npm downloads"></a>
+  <a href="https://github.com/epicmotionSD/openconductor/stargazers"><img src="https://img.shields.io/github/stars/epicmotionSD/openconductor.svg" alt="GitHub stars"></a>
   <a href="https://github.com/epicmotionSD/openconductor/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
 </p>
 
 <p align="center">
   <a href="https://openconductor.ai">Website</a> •
   <a href="#quick-start">Quick Start</a> •
-  <a href="https://openconductor.ai/servers">Browse 220+ Servers</a> •
-  <a href="#stacks">Stacks</a> •
+  <a href="https://openconductor.ai/discover">Browse 220+ Servers</a> •
+  <a href="https://openconductor.ai/stacks">Stacks</a> •
   <a href="https://discord.gg/openconductor">Discord</a>
 </p>
 
@@ -163,7 +162,7 @@ The largest registry of MCP servers, all verified and tested.
 | **AI & LLMs**        | openai, replicate, huggingface                 |
 | **Data & Analytics** | bigquery, snowflake, dbt                       |
 
-[Browse all servers →](https://openconductor.ai/servers)
+[Browse all servers →](https://openconductor.ai/discover)
 
 ---
 

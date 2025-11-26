@@ -1,0 +1,87 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    .terminal {
+      font-family: 'Monaco', 'Consolas', monospace;
+      font-size: 14px;
+    }
+    .terminal-bg {
+      fill: #0f172a;
+    }
+    .terminal-text {
+      fill: #e2e8f0;
+    }
+    .terminal-prompt {
+      fill: #10b981;
+    }
+    .terminal-command {
+      fill: #60a5fa;
+    }
+    .terminal-success {
+      fill: #10b981;
+    }
+    .terminal-accent {
+      fill: #3b82f6;
+    }
+    .cursor {
+      fill: #3b82f6;
+      animation: blink 1s step-end infinite;
+    }
+  </style>
+
+  <!-- Terminal Background -->
+  <rect class="terminal-bg" width="800" height="400" rx="8"/>
+
+  <!-- Terminal Header -->
+  <rect fill="#1e293b" width="800" height="30" rx="8"/>
+  <text x="15" y="20" class="terminal-text" font-size="12">OpenConductor Stacks - Install Complete Workflows in 10 Seconds</text>
+
+  <!-- Terminal Content -->
+  <g class="terminal">
+    <!-- Command 1: openconductor stack list -->
+    <text x="20" y="60" class="terminal-prompt">$</text>
+    <text x="35" y="60" class="terminal-command">openconductor stack list</text>
+
+    <!-- Output: Available Stacks -->
+    <text x="20" y="90" class="terminal-accent" font-weight="bold">🎯 Available Stacks</text>
+
+    <text x="20" y="120" class="terminal-text" font-weight="bold">🧑‍💻 coder</text>
+    <text x="120" y="120" class="terminal-text">- Build, debug, and deploy like a senior engineer</text>
+    <text x="35" y="140" class="terminal-text" opacity="0.6" font-size="12">Includes: github, postgres, filesystem, memory, brave-search</text>
+
+    <text x="20" y="170" class="terminal-text" font-weight="bold">✍️  writer</text>
+    <text x="120" y="170" class="terminal-text">- Research, write, and publish with confidence</text>
+    <text x="35" y="190" class="terminal-text" opacity="0.6" font-size="12">Includes: brave-search, filesystem, memory, google-drive</text>
+
+    <text x="20" y="220" class="terminal-text" font-weight="bold">⚡ essential</text>
+    <text x="120" y="220" class="terminal-text">- Everything you need to get started</text>
+    <text x="35" y="240" class="terminal-text" opacity="0.6" font-size="12">Includes: filesystem, brave-search, memory</text>
+
+    <!-- Command 2: openconductor stack install coder -->
+    <text x="20" y="270" class="terminal-prompt">$</text>
+    <text x="35" y="270" class="terminal-command">openconductor stack install coder</text>
+
+    <!-- Installation Progress -->
+    <text x="20" y="300" class="terminal-accent">⚙️  Installing Coder Stack...</text>
+
+    <text x="20" y="325" class="terminal-success">✓</text>
+    <text x="35" y="325" class="terminal-text">Installing github, postgres, filesystem, memory, brave-search</text>
+
+    <text x="20" y="345" class="terminal-success">✓</text>
+    <text x="35" y="345" class="terminal-text">Configuring system prompt</text>
+
+    <!-- Success Message -->
+    <text x="20" y="370" class="terminal-success" font-weight="bold">🎉 Coder Stack installed successfully!</text>
+    <text x="35" y="390" class="terminal-text" opacity="0.7" font-size="12">⏱️  Total time: 8.2 seconds</text>
+  </g>
+
+  <!-- Animated cursor (optional) -->
+  <rect class="cursor" x="485" y="375" width="8" height="16"/>
+</svg>

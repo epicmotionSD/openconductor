@@ -50,6 +50,15 @@ const nextConfig = {
   experimental: {
     webpackBuildWorker: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/servers',
+        destination: '/discover',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {

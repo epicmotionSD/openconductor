@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Convert Social Preview to PNG</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+    h1 {
+      color: #3b82f6;
+    }
+    button {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 10px 5px;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+    #preview {
+      margin-top: 30px;
+      border: 2px solid #334155;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .info {
+      background: #1e293b;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 20px 0;
+      border-left: 4px solid #3b82f6;
+    }
+    .success {
+      background: #10b981;
+      color: white;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 20px 0;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 Social Preview Converter</h1>
+
+  <div class="info">
+    <strong>Instructions:</strong><br>
+    1. Click "Convert & Download PNG" below<br>
+    2. Save the file as <code>social-preview.png</code><br>
+    3. Upload to GitHub Settings → Social preview<br>
+    4. Verify dimensions: 1280x640 pixels
+  </div>
+
+  <button onclick="convertAndDownload()">Convert & Download PNG</button>
+  <button onclick="viewPreview()">View Preview</button>
+
+  <div id="success" class="success">
+    ✅ PNG downloaded! Check your Downloads folder for social-preview.png
+  </div>
+
+  <div id="preview"></div>
+
+  <script>
+    async function convertAndDownload() {
+      try {
+        // Fetch the SVG
+        const response = await fetch('social-preview.svg');
+        const svgText = await response.text();
+
+        // Create an image from the SVG
+        const img = new Image();
+        const blob = new Blob([svgText], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+
+        img.onload = () => {
+          // Create canvas with exact dimensions
+          const canvas = document.createElement('canvas');
+          canvas.width = 1280;
+          canvas.height = 640;
+          const ctx = canvas.getContext('2d');
+
+          // Draw the image
+          ctx.drawImage(img, 0, 0, 1280, 640);
+
+          // Convert to PNG and download
+          canvas.toBlob((pngBlob) => {
+            const pngUrl = URL.createObjectURL(pngBlob);
+            const a = document.createElement('a');
+            a.href = pngUrl;
+            a.download = 'social-preview.png';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(pngUrl);
+
+            // Show success message
+            document.getElementById('success').style.display = 'block';
+            setTimeout(() => {
+              document.getElementById('success').style.display = 'none';
+            }, 5000);
+          }, 'image/png', 1.0);
+
+          URL.revokeObjectURL(url);
+        };
+
+        img.src = url;
+      } catch (error) {
+        alert('Error converting SVG: ' + error.message);
+      }
+    }
+
+    async function viewPreview() {
+      try {
+        const response = await fetch('social-preview.svg');
+        const svgText = await response.text();
+
+        const preview = document.getElementById('preview');
+        preview.innerHTML = svgText;
+
+        // Scale to fit
+        const svg = preview.querySelector('svg');
+        if (svg) {
+          svg.style.width = '100%';
+          svg.style.height = 'auto';
+        }
+      } catch (error) {
+        alert('Error loading preview: ' + error.message);
+      }
+    }
+
+    // Auto-load preview on page load
+    window.addEventListener('load', viewPreview);
+  </script>
+
+  <hr style="margin: 40px 0; border-color: #334155;">
+
+  <div class="info">
+    <strong>Alternative Method:</strong><br>
+    If the download doesn't work, use an online converter:<br>
+    • <a href="https://svgtopng.com/" target="_blank" style="color: #3b82f6;">svgtopng.com</a><br>
+    • <a href="https://cloudconvert.com/svg-to-png" target="_blank" style="color: #3b82f6;">cloudconvert.com</a><br>
+    <br>
+    Upload <code>social-preview.svg</code> and set dimensions to 1280x640.
+  </div>
+</body>
+</html>

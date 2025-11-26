@@ -1,0 +1,20 @@
+<svg width="800" height="200" viewBox="0 0 800 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon Circle Background -->
+  <circle cx="100" cy="100" r="60" fill="#2563eb"/>
+
+  <!-- Terminal Icon -->
+  <g transform="translate(70, 70)">
+    <path d="M20 20L40 35L20 50" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <line x1="45" y1="50" x2="60" y2="50" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- OpenConductor Text -->
+  <text x="180" y="115" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="700" fill="#1e293b">
+    OpenConductor
+  </text>
+
+  <!-- Tagline -->
+  <text x="180" y="145" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="400" fill="#64748b">
+    The npm for AI Agent Tools
+  </text>
+</svg>
