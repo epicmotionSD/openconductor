@@ -3,8 +3,6 @@
  * Shared configuration for tracking across all Sonnier Ventures products
  */
 
-import { z } from 'zod';
-
 // Ecosystem products enumeration
 export enum EcosystemProduct {
   OPENCONDUCTOR = 'openconductor',
