@@ -211,6 +211,15 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ---
 
+## Resources
+
+- ⭐ [Awesome MCP](https://github.com/epicmotionSD/awesome-mcp) - Curated list of 220+ MCP servers, tools, and resources
+- 📖 [MCP Specification](https://spec.modelcontextprotocol.io/) - Official Model Context Protocol docs
+- 📚 [OpenConductor Guides](https://openconductor.ai/docs) - Tutorials and integration guides
+- 🎓 [MCP Quickstart](https://modelcontextprotocol.io/quickstart) - Get started in 5 minutes
+
+---
+
 ## License
 
 MIT © [OpenConductor](https://openconductor.ai)

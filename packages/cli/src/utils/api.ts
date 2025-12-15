@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import type { MCPServer, MCPServerSearchParams, MCPServerSearchResult } from '@openconductor/shared';
 
 export class OpenConductorAPI {
