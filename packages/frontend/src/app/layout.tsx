@@ -1,6 +1,7 @@
 // import '../lib/tracing-web'  // Disabled due to XMLHttpRequest SSR errors
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -90,6 +91,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} min-h-screen bg-background antialiased`}>
         {children}
+        <SpeedInsights />
       </body>
     </html>
   )
