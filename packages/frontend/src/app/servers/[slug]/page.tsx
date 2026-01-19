@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -10,13 +10,16 @@ import { GradientText } from '@/components/ui/gradient-text'
 import { GlassCard } from '@/components/ui/glass-card'
 import { GradientButton } from '@/components/ui/gradient-button'
 import { CategoryBadge, type MCPCategory } from '@/components/ui/category-badge'
+import { UpgradeCard } from '@/components/ui/upgrade-card'
 import { SiteHeader } from '@/components/navigation/site-header'
-import { ArrowLeft, Star, Download, ExternalLink, Copy, CheckCircle, Terminal, Book } from 'lucide-react'
+import { ArrowLeft, Star, Download, ExternalLink, Copy, CheckCircle, Terminal, Book, XCircle, Sparkles, Zap } from 'lucide-react'
 import type { MCPServer } from '../../../types'
 
 export default function ServerDetailPage() {
   const params = useParams()
+  const searchParams = useSearchParams()
   const slug = params.slug as string
+  const checkoutStatus = searchParams.get('checkout')
   const [server, setServer] = useState<MCPServer | null>(null)
   const [loading, setLoading] = useState(true)
   const [copied, setCopied] = useState('')
@@ -88,6 +91,26 @@ export default function ServerDetailPage() {
           </Link>
         </Button>
 
+        {/* Checkout Status Banner */}
+        {checkoutStatus === 'success' && (
+          <div className="mb-6 p-4 bg-green-500/10 border border-green-500/30 rounded-lg flex items-center gap-3">
+            <CheckCircle className="h-5 w-5 text-green-400" />
+            <div>
+              <p className="font-semibold text-green-400">Upgrade successful!</p>
+              <p className="text-sm text-foreground-secondary">Your server listing has been upgraded. Changes will appear shortly.</p>
+            </div>
+          </div>
+        )}
+        {checkoutStatus === 'cancelled' && (
+          <div className="mb-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg flex items-center gap-3">
+            <XCircle className="h-5 w-5 text-amber-400" />
+            <div>
+              <p className="font-semibold text-amber-400">Checkout cancelled</p>
+              <p className="text-sm text-foreground-secondary">No charges were made. You can upgrade anytime from this page.</p>
+            </div>
+          </div>
+        )}
+
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
@@ -100,11 +123,25 @@ export default function ServerDetailPage() {
                   </h1>
                   <p className="text-xl text-foreground-secondary">{server.description}</p>
                 </div>
-                {server.verified && (
-                  <Badge className="ml-4 bg-success text-white border-none">
-                    ✓ Verified
-                  </Badge>
-                )}
+                <div className="flex gap-2 ml-4">
+                  {server.tier === 'FEATURED_SERVER' && (
+                    <Badge className="bg-amber-500/20 text-amber-400 border-amber-500/30">
+                      <Sparkles className="h-3 w-3 mr-1" />
+                      Featured
+                    </Badge>
+                  )}
+                  {server.tier === 'PRO_SERVER' && (
+                    <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
+                      <Zap className="h-3 w-3 mr-1" />
+                      Pro
+                    </Badge>
+                  )}
+                  {server.verified && (
+                    <Badge className="bg-success text-white border-none">
+                      ✓ Verified
+                    </Badge>
+                  )}
+                </div>
               </div>
 
               <div className="flex items-center gap-4 mb-6">
@@ -245,6 +282,13 @@ export default function ServerDetailPage() {
 
           {/* Sidebar */}
           <div className="space-y-6">
+            {/* Upgrade CTA - Maintainer Monetization */}
+            <UpgradeCard 
+              serverId={server.id} 
+              serverSlug={server.slug}
+              currentTier={server.tier}
+            />
+
             {/* Quick Actions */}
             <GlassCard>
               <h3 className="text-xl font-semibold mb-4 text-foreground">Quick Actions</h3>

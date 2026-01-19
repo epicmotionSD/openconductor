@@ -12,6 +12,14 @@ import feedbackRouter from './routes/feedback';
 import ecosystemAnalyticsRouter from './routes/ecosystem-analytics';
 import { discoveryRouter } from './routes/discovery';
 import stacksRouter from './routes/stacks.js';
+import billingRouter from './routes/billing';
+// Board of Directors - Revenue Sniper routes
+import { createAgentRoutes } from './routes/agents';
+import { createIntelligenceRoutes } from './routes/intelligence';
+import { createTemplateRoutes } from './routes/templates';
+import { createKelatiRoutes } from './routes/kelati';
+import { createCommandCenterRoutes } from './routes/command-center';
+import { db } from './db/connection';
 import { errorHandler, requestLogger, performanceMonitor, securityLogger } from './middleware/errorHandler';
 import { healthCheckHandler, livenessHandler, readinessHandler, metricsHandler } from './monitoring/healthChecks';
 import { anonymousLimiter, trackApiUsage } from './middleware/rateLimiter';
@@ -48,6 +56,8 @@ app.use(cors({
 }));
 
 // Body parsing middleware
+// Note: Stripe webhooks need raw body, so we use a custom parser
+app.use('/v1/billing/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -90,11 +100,38 @@ app.use('/v1/admin', adminRouter);
 app.use('/v1/feedback', feedbackRouter);
 app.use('/v1/analytics', ecosystemAnalyticsRouter);
 app.use('/v1/discovery', discoveryRouter);
+app.use('/v1/billing', billingRouter);
+
+// Board of Directors - Revenue Sniper API routes
+const pool = db.getPool();
+app.use('/v1/agents', createAgentRoutes(pool));
+app.use('/v1/intelligence', createIntelligenceRoutes(pool));
+app.use('/v1/templates', createTemplateRoutes(pool));
+app.use('/v1/kelati', createKelatiRoutes(pool));
+app.use('/v1/command-center', createCommandCenterRoutes(pool));
 
 // Legacy API routes for backward compatibility
 app.use('/api/servers', serversRouter);
 app.use('/api/feedback', feedbackRouter);
 app.use('/api/discovery', discoveryRouter);
+
+// Root welcome route
+app.get('/', (req, res) => {
+  res.json({
+    name: 'OpenConductor API',
+    version: '1.0.0',
+    status: 'online',
+    endpoints: {
+      servers: '/v1/servers',
+      search: '/v1/servers/search?q=query',
+      agents: '/v1/agents',
+      commandCenter: '/v1/command-center',
+      templates: '/v1/templates',
+      stacks: '/v1/stacks'
+    },
+    docs: 'https://openconductor.ai/docs'
+  });
+});
 
 // Additional API endpoints
 app.get('/v1/search', (req, res) => res.redirect(307, `/v1/servers/search?${req.url.split('?')[1] || ''}`));
