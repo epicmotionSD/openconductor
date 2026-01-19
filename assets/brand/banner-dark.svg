@@ -1,0 +1,16 @@
+<svg width="1200" height="360" viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="OpenConductor banner">
+  <defs>
+    <linearGradient id="ocg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="360" fill="#0B1020"/>
+  <rect x="88" y="92" width="176" height="176" rx="36" fill="#0F172A" stroke="#1F2937"/>
+  <circle cx="176" cy="180" r="40" fill="none" stroke="url(#ocg)" stroke-width="6"/>
+  <path d="M116 180h32M204 180h32M176 120v32M176 208v32" stroke="url(#ocg)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M140 140l18 18M194 194l18 18M212 140l-18 18M158 194l-18 18" stroke="#93C5FD" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+
+  <text x="300" y="172" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="64" font-weight="700" fill="#E2E8F0">OpenConductor</text>
+  <text x="300" y="220" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="24" fill="#94A3B8">Install MCP servers without the JSON hell</text>
+</svg>
