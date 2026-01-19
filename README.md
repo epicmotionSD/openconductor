@@ -1,14 +1,14 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://openconductor.ai/banner-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://openconductor.ai/banner.svg">
-    <img src="https://openconductor.ai/banner.svg" alt="OpenConductor - The npm for AI Agent Tools" width="600" />
+    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/banner-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/brand/banner-light.svg">
+    <img src="assets/brand/banner-light.svg" alt="OpenConductor - The npm for AI Agent Tools" width="600" />
   </picture>
 </p>
 
 <p align="center">
   Install MCP servers without the JSON hell.<br/>
-  One command. 220+ tools. Works with Claude, Cursor, Cline, and more.
+  One command. 180+ tools. Works with Claude, Cursor, Cline, and more.
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@
 <p align="center">
   <a href="https://openconductor.ai">Website</a> •
   <a href="#quick-start">Quick Start</a> •
-  <a href="https://openconductor.ai/discover">Browse 220+ Servers</a> •
+  <a href="https://openconductor.ai/discover">Browse 180+ Servers</a> •
   <a href="https://openconductor.ai/stacks">Stacks</a> •
   <a href="https://discord.gg/openconductor">Discord</a>
 </p>
@@ -49,7 +49,7 @@ Complex. Error-prone. Manual editing.
 **After** — One command:
 
 ```bash
-openconductor install github
+openconductor install github-mcp
 ```
 
 Done in 10 seconds.
@@ -63,7 +63,7 @@ Done in 10 seconds.
 npm install -g @openconductor/cli
 
 # Install your first MCP server
-openconductor install github
+openconductor install github-mcp
 
 # Or install a complete stack
 openconductor stack install coder
@@ -107,19 +107,20 @@ openconductor stack install essential
 
 ```bash
 # Discovery
-openconductor search <query>        # Search 220+ servers
-openconductor list                  # Browse all servers
+openconductor discover [query]      # Search 180+ servers
 
 # Installation
 openconductor install <server>      # Install a single server
-openconductor install github slack  # Install multiple servers
 openconductor stack install <name>  # Install a complete stack
 
 # Management
-openconductor status                # Show installed servers
+openconductor list                  # Show installed servers
 openconductor remove <server>       # Remove a server
 openconductor update                # Update all servers
-openconductor doctor                # Fix configuration issues
+openconductor init                  # Initialize config
+openconductor badge <server>        # Generate install badge
+openconductor achievements          # View achievements
+openconductor analytics             # Analytics preferences
 ```
 
 ---
@@ -149,7 +150,7 @@ openconductor doctor                # Fix configuration issues
 
 ---
 
-## 220+ Servers
+## 180+ Servers
 
 The largest registry of MCP servers, all verified and tested.
 
@@ -157,7 +158,7 @@ The largest registry of MCP servers, all verified and tested.
 | -------------------- | ---------------------------------------------- |
 | **Developer Tools**  | github, gitlab, postgres, redis, docker        |
 | **Productivity**     | notion, slack, linear, todoist, google-drive   |
-| **Memory & RAG**     | mem0, openmemory, knowledge-graph, qdrant      |
+| **Memory & RAG**     | mcp-memory, mem0, knowledge-graph, qdrant      |
 | **Web & Browser**    | puppeteer, playwright, firecrawl, brave-search |
 | **AI & LLMs**        | openai, replicate, huggingface                 |
 | **Data & Analytics** | bigquery, snowflake, dbt                       |
@@ -168,11 +169,7 @@ The largest registry of MCP servers, all verified and tested.
 
 ## Add Your Server
 
-```bash
-openconductor publish
-```
-
-Or submit a PR to add your server to the registry.
+Submit a PR to add your server to the registry.
 
 ---
 
