@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc --skipLibCheck && echo 'TypeScript build completed' && ls -la dist/",
+    "build": "tsc --skipLibCheck && echo TypeScript build completed",
     "build:vercel": "node scripts/prebuild-shared.js && npx tsc --skipLibCheck",
     "start": "node dist/server.js",
     "db:migrate": "tsx src/db/deploy-to-supabase.ts",
