@@ -16,5 +16,5 @@
     "sourceMap": false
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "src/db/create-admin-key.ts", "src/db/seed-127-servers.ts"]
+  "exclude": ["node_modules", "src/db/create-admin-key.ts", "src/db/seed-127-servers.ts", "src/db/archive/**"]
 }

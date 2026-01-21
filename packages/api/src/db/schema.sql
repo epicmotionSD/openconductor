@@ -380,3 +380,31 @@ FROM mcp_servers s
 JOIN server_stats st ON s.id = st.server_id
 WHERE s.verified = true AND st.trending_score > 0
 ORDER BY st.trending_score DESC;
+
+-- ============================================
+-- RAG / VECTOR SEARCH
+-- ============================================
+
+-- Enable pgvector for semantic search
+CREATE EXTENSION IF NOT EXISTS vector;
+
+-- Embeddings for MCP servers (RAG)
+CREATE TABLE server_embeddings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  server_id UUID REFERENCES mcp_servers(id) ON DELETE CASCADE,
+  source_type VARCHAR(50) NOT NULL, -- 'readme', 'docs', 'metadata', etc.
+  content TEXT NOT NULL,
+  embedding vector(1536) NOT NULL,
+  metadata JSONB DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_server_embeddings_server_id ON server_embeddings(server_id);
+CREATE INDEX idx_server_embeddings_source ON server_embeddings(source_type);
+CREATE INDEX idx_server_embeddings_embedding ON server_embeddings
+  USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+
+CREATE TRIGGER update_server_embeddings_updated_at
+  BEFORE UPDATE ON server_embeddings
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

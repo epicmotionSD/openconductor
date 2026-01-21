@@ -9,7 +9,7 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()]
 });
 
-interface AuthenticatedRequest extends Request {
+export interface AdminAuthRequest extends Request {
   adminKey?: {
     id: string;
     name: string;
@@ -17,7 +17,8 @@ interface AuthenticatedRequest extends Request {
   };
 }
 
-export async function adminAuth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+export async function adminAuth(req: Request, res: Response, next: NextFunction) {
+  const authReq = req as AdminAuthRequest;
   try {
     const authHeader = req.headers.authorization;
     
@@ -81,7 +82,7 @@ export async function adminAuth(req: AuthenticatedRequest, res: Response, next: 
     `, [keyData.id]);
 
     // Attach admin info to request
-    req.adminKey = {
+    authReq.adminKey = {
       id: keyData.id,
       name: keyData.name,
       permissions: permissions

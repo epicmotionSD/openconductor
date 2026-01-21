@@ -1,0 +1,11 @@
+{
+  "name": "@openconductor/vercel-api",
+  "private": true,
+  "version": "0.1.0",
+  "dependencies": {
+    "pg": "^8.17.1"
+  },
+  "devDependencies": {
+    "@vercel/node": "^5.5.5"
+  }
+}

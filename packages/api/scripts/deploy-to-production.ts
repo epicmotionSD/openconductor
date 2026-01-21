@@ -46,9 +46,11 @@ interface ServerData {
   };
 }
 
-// Production Supabase connection
-const PRODUCTION_DB_URL = process.env.PRODUCTION_POSTGRES_URL ||
-  'postgresql://postgres.fjmzvcipimpctqnhhfrr:29FHVZqmLEcx864X@aws-1-us-east-1.pooler.supabase.com:6543/postgres';
+// Production Supabase connection (requires environment variable)
+const PRODUCTION_DB_URL = process.env.PRODUCTION_POSTGRES_URL || process.env.DATABASE_URL;
+if (!PRODUCTION_DB_URL) {
+  throw new Error('PRODUCTION_POSTGRES_URL or DATABASE_URL environment variable is required');
+}
 
 // Parse command line args
 const isDryRun = process.argv.includes('--dry-run');

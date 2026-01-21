@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Local PostgreSQL with pgvector
+  postgres:
+    image: pgvector/pgvector:pg15
+    container_name: openconductor-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: openconductor
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Redis for caching (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: openconductor-redis
+    ports:
+      - "6381:6379"
+    volumes:
+      - redis_data:/data
+
+  # pgAdmin for database management (optional)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: openconductor-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@openconductor.ai
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+  redis_data:

@@ -14,7 +14,7 @@ npm install -g @openconductor/cli
 openconductor discover "memory"
 
 # Install a server
-openconductor install openmemory
+openconductor install mcp-memory
 
 # List installed servers
 openconductor list
@@ -23,8 +23,6 @@ openconductor list
 ## 📦 Installation
 
 ### Global Installation (Recommended)
-
-> **Note**: Package will be published to npm soon. For now, install from source.
 
 ```bash
 npm install -g @openconductor/cli
@@ -84,7 +82,7 @@ Install an MCP server to your Claude Desktop configuration.
 
 ```bash
 # Basic installation
-openconductor install openmemory
+openconductor install mcp-memory
 
 # Custom config file location
 openconductor install postgres --config ./my-config.json
@@ -99,7 +97,7 @@ openconductor install filesystem --yes
 openconductor install slack --dry-run
 
 # Force reinstall if already exists
-openconductor install openmemory --force
+openconductor install mcp-memory --force
 ```
 
 **Options:**
@@ -134,7 +132,7 @@ Remove an installed MCP server.
 
 ```bash
 # Remove a server
-openconductor remove openmemory
+openconductor remove mcp-memory
 
 # Skip confirmation
 openconductor remove postgres --yes
@@ -156,7 +154,7 @@ Update installed MCP servers to their latest versions.
 openconductor update
 
 # Update specific server
-openconductor update openmemory
+openconductor update mcp-memory
 
 # Use custom config file
 openconductor update --config ./my-config.json
@@ -306,14 +304,14 @@ openconductor stack share coder
 # 1. Discover memory-related servers
 openconductor discover memory
 
-# 2. Install OpenMemory
-openconductor install openmemory
+# 2. Install MCP Memory
+openconductor install mcp-memory
 
 # 3. Verify installation
 openconductor list
 
-# 4. Configure environment (if needed)
-export OPENMEMORY_API_KEY=your_key_here
+# 4. Configure environment (if needed for the server)
+export MCP_SERVER_API_KEY=your_key_here
 
 # 5. Restart Claude Desktop
 ```
@@ -322,7 +320,7 @@ export OPENMEMORY_API_KEY=your_key_here
 
 ```bash
 # Install multiple servers
-openconductor install openmemory
+openconductor install mcp-memory
 openconductor install filesystem-mcp
 openconductor install github-mcp
 
@@ -360,9 +358,9 @@ OpenConductor automatically detects your Claude Desktop configuration location:
 ```json
 {
   "mcpServers": {
-    "openmemory": {
+    "mcp-memory": {
       "command": "npx",
-      "args": ["-y", "openmemory"],
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
       "env": {
         "PORT": "8080"
       }
@@ -414,7 +412,7 @@ openconductor list
 ping openconductor.ai
 
 # Use local API for development
-export OPENCONDUCTOR_API_URL=http://localhost:3002/api/v1
+export OPENCONDUCTOR_API_URL=https://openconductor-api.vercel.app/v1
 ```
 
 ### Debug Mode
@@ -462,7 +460,7 @@ openconductor discover
 ./test-cli.sh
 
 # Test against local API
-export OPENCONDUCTOR_API_URL=http://localhost:3002/api/v1
+export OPENCONDUCTOR_API_URL=https://openconductor-api.vercel.app/v1
 openconductor discover --limit 5
 ```
 

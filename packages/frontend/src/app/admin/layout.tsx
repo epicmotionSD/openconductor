@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
-import { 
-  Terminal, BarChart3, Database, Megaphone, Calendar, Key, LogOut
+import {
+  Terminal, BarChart3, Database, Megaphone, Calendar, Key, LogOut, Brain
 } from 'lucide-react'
 
 interface AdminLayoutProps {
@@ -32,6 +32,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   const navigationItems = [
     { name: 'Dashboard', href: '/admin', icon: BarChart3 },
+    { name: 'Command Center', href: '/admin/command-center', icon: Brain, badge: 'NEW' },
     { name: 'Servers', href: '/admin/servers', icon: Database },
     { name: 'Marketing', href: '/admin/marketing', icon: Megaphone },
     { name: 'Roadmap', href: '/admin/roadmap', icon: Calendar },
@@ -135,21 +136,28 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           {/* Sidebar Navigation */}
           <nav className="flex-1 p-4 space-y-2">
             {navigationItems.map((item) => {
-              const isActive = pathname === item.href
+              const isActive = pathname === item.href || (item.href !== '/admin' && pathname?.startsWith(item.href))
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={`
-                    flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors
+                    flex items-center justify-between px-3 py-2 rounded-lg transition-colors
                     ${isActive
                       ? 'bg-primary/10 text-primary'
                       : 'text-foreground hover:bg-muted'
                     }
                   `}
                 >
-                  <item.icon className="h-5 w-5" />
-                  <span className="font-medium">{item.name}</span>
+                  <div className="flex items-center space-x-3">
+                    <item.icon className="h-5 w-5" />
+                    <span className="font-medium">{item.name}</span>
+                  </div>
+                  {item.badge && (
+                    <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                      {item.badge}
+                    </Badge>
+                  )}
                 </Link>
               )
             })}

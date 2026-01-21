@@ -148,3 +148,5 @@ coverage/
 mcp-registry-discovery/
 seed-data/
 trinity-ai/
+node_modules
+.env*.local

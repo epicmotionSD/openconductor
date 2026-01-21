@@ -11,7 +11,7 @@ const pkg = JSON.parse(
 
 export class ApiClient {
   constructor(baseURL) {
-    this.baseURL = baseURL || process.env.OPENCONDUCTOR_API_URL || 'https://api.openconductor.ai/v1';
+    this.baseURL = baseURL || process.env.OPENCONDUCTOR_API_URL || 'https://openconductor-api.vercel.app/v1';
 
     this.client = axios.create({
       baseURL: this.baseURL,

@@ -6,12 +6,19 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/home/roizen/projects/openconductor/packages/api",
-        "/home/roizen/projects/openconductor/packages/cli",
-        "/home/roizen/projects/openconductor/packages/frontend",
-        "/home/roizen/projects/openconductor/packages/shared"
+        "C:\\Users\\shawn\\apps\\openconductor"
       ],
       "env": {}
+    },
+
+    "openconductor-registry": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@openconductor/mcp-registry"
+      ],
+      "env": {},
+      "description": "OpenConductor registry MCP for discovery/search"
     },
 
     "openconductor-database-local": {
@@ -34,6 +41,10 @@
       ],
       "env": {},
       "description": "Production Supabase PostgreSQL database"
+    },
+
+    "supabase": {
+      "url": "https://mcp.supabase.com/mcp?project_ref=${SUPABASE_PROJECT_REF}"
     },
 
     "github": {

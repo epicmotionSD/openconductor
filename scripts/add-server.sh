@@ -9,8 +9,19 @@ echo "🚀 OpenConductor - Add Server to Registry"
 echo "=========================================="
 echo ""
 
-# Database connection string
-DB_URL="postgres://postgres.fjmzvcipimpctqnhhfrr:29FHVZqmLEcx864X@aws-1-us-east-1.pooler.supabase.com:6543/postgres"
+# Database connection string (from environment variable)
+DB_URL="${DATABASE_URL:-}"
+if [ -z "$DB_URL" ]; then
+    echo "❌ Error: DATABASE_URL environment variable is required"
+    exit 1
+fi
+
+# Parse connection string for psql
+DB_HOST=$(echo $DB_URL | sed -n 's/.*@\([^:]*\):.*/\1/p')
+DB_PORT=$(echo $DB_URL | sed -n 's/.*:\([0-9]*\)\/.*/\1/p')
+DB_USER=$(echo $DB_URL | sed -n 's/.*:\/\/\([^:]*\):.*/\1/p')
+DB_PASS=$(echo $DB_URL | sed -n 's/.*:\/\/[^:]*:\([^@]*\)@.*/\1/p')
+DB_NAME=$(echo $DB_URL | sed -n 's/.*\/\([^?]*\).*/\1/p')
 
 # Prompt for required fields
 read -p "Server slug (e.g., 'my-awesome-server'): " SLUG
@@ -66,7 +77,7 @@ SQL="INSERT INTO mcp_servers (
 ) RETURNING id;"
 
 # Execute insert
-SERVER_ID=$(PGPASSWORD="29FHVZqmLEcx864X" psql -h aws-1-us-east-1.pooler.supabase.com -p 6543 -U postgres.fjmzvcipimpctqnhhfrr -d postgres -t -c "$SQL" | tr -d ' ')
+SERVER_ID=$(PGPASSWORD="$DB_PASS" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -t -c "$SQL" | tr -d ' ')
 
 if [ -z "$SERVER_ID" ]; then
     echo "❌ Failed to add server"
@@ -77,7 +88,7 @@ echo "✅ Server added with ID: $SERVER_ID"
 
 # Add stats
 echo "📊 Adding initial stats..."
-PGPASSWORD="29FHVZqmLEcx864X" psql -h aws-1-us-east-1.pooler.supabase.com -p 6543 -U postgres.fjmzvcipimpctqnhhfrr -d postgres -c "
+PGPASSWORD="$DB_PASS" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -c "
 INSERT INTO server_stats (server_id, github_stars, cli_installs)
 VALUES ('$SERVER_ID', 0, 0);"
 

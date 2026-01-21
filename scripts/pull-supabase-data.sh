@@ -8,8 +8,13 @@ set -e
 echo "📥 Pulling data from Supabase..."
 echo ""
 
-SUPABASE_URL="https://fjmzvcipimpctqnhhfrr.supabase.co"
-SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqbXp2Y2lwaW1wY3RxbmhoZnJyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzNjYzMTAsImV4cCI6MjA3NDk0MjMxMH0.zFLo3tHYMR9-ctFbGFNwquAfs6TWK0p1RzXICDXvj_E"
+SUPABASE_URL="${SUPABASE_URL:-$NEXT_PUBLIC_SUPABASE_URL}"
+SUPABASE_KEY="${SUPABASE_ANON_KEY:-$NEXT_PUBLIC_SUPABASE_ANON_KEY}"
+
+if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_KEY" ]; then
+    echo "❌ Error: SUPABASE_URL and SUPABASE_ANON_KEY environment variables are required"
+    exit 1
+fi
 
 OUTPUT_DIR="seed-data"
 mkdir -p $OUTPUT_DIR

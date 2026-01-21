@@ -1,3 +1,6 @@
+// Force dynamic rendering - stacks API requires runtime fetch
+export const dynamic = 'force-dynamic'
+
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'

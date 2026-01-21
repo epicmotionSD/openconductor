@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { GradientText } from '@/components/ui/gradient-text'
 import { GlassCard } from '@/components/ui/glass-card'
 import { GradientButton } from '@/components/ui/gradient-button'
-import { Search, Star, Download, ExternalLink, Filter } from 'lucide-react'
+import { Search, Star, Download, ExternalLink, Filter, Sparkles, Zap } from 'lucide-react'
 import { AlertBox } from '@/components/ui/alert-box'
 import { CategoryBadge, MCPCategory } from '@/components/ui/category-badge'
 import { SiteHeader } from '@/components/navigation/site-header'
@@ -257,8 +257,11 @@ export default function DiscoverPage() {
 }
 
 function ServerCard({ server }: { server: MCPServer }) {
+  const isFeatured = server.tier === 'FEATURED_SERVER'
+  const isPro = server.tier === 'PRO_SERVER'
+  
   return (
-    <GlassCard className="h-full flex flex-col hover:border-primary/50 transition-smooth">
+    <GlassCard className={`h-full flex flex-col transition-smooth ${isFeatured ? 'border-amber-500/50 bg-amber-500/5' : 'hover:border-primary/50'}`}>
       <div className="pb-3">
         <div className="flex items-start justify-between gap-2 mb-4">
           <h3 className="text-lg leading-tight font-semibold">
@@ -269,11 +272,25 @@ function ServerCard({ server }: { server: MCPServer }) {
               {server.name}
             </Link>
           </h3>
-          {server.verified && (
-            <Badge className="text-xs flex-shrink-0 bg-success text-white border-none">
-              ✓ Verified
-            </Badge>
-          )}
+          <div className="flex gap-1 flex-shrink-0">
+            {isFeatured && (
+              <Badge className="text-xs bg-amber-500/20 text-amber-400 border-amber-500/30">
+                <Sparkles className="h-3 w-3 mr-1" />
+                Featured
+              </Badge>
+            )}
+            {isPro && !isFeatured && (
+              <Badge className="text-xs bg-blue-500/20 text-blue-400 border-blue-500/30">
+                <Zap className="h-3 w-3 mr-1" />
+                Pro
+              </Badge>
+            )}
+            {server.verified && (
+              <Badge className="text-xs bg-success text-white border-none">
+                ✓
+              </Badge>
+            )}
+          </div>
         </div>
       </div>
       <div className="flex-1 flex flex-col">

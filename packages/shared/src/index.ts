@@ -10,3 +10,6 @@ export * from './ecosystem-analytics';
 
 // Re-export project configuration
 export * from './config';
+
+// Re-export Board of Directors agent types
+export * from './agents';

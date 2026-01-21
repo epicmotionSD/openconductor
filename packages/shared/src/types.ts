@@ -100,6 +100,7 @@ export interface MCPServer {
   verified: boolean;
   featured: boolean;
   deprecated: boolean;
+  tier?: 'free' | 'PRO_SERVER' | 'FEATURED_SERVER';
   
   // Metadata
   createdAt: string;
@@ -135,6 +136,7 @@ export interface ServerSummary {
   
   verified: boolean;
   featured: boolean;
+  tier?: 'free' | 'PRO_SERVER' | 'FEATURED_SERVER';
 }
 
 // Version information

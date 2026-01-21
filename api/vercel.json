@@ -1,0 +1,33 @@
+{
+  "builds": [
+    {
+      "src": "v1/servers.ts",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "v1/servers/categories.ts",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "v1/servers/[slug].ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/v1/servers/?",
+      "methods": ["GET", "OPTIONS", "HEAD"],
+      "dest": "v1/servers.ts"
+    },
+    {
+      "src": "/v1/servers/categories/?",
+      "methods": ["GET", "OPTIONS", "HEAD"],
+      "dest": "v1/servers/categories.ts"
+    },
+    {
+      "src": "/v1/servers/[^/]+/?",
+      "methods": ["GET", "OPTIONS", "HEAD"],
+      "dest": "v1/servers/[slug].ts"
+    }
+  ]
+}

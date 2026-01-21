@@ -1,6 +1,6 @@
 {
   "name": "@openconductor/cli",
-  "version": "1.3.3",
+  "version": "1.3.5",
   "description": "The npm for AI agent tools - install MCP servers without the JSON hell. Discover and install 190+ AI agent tools with one command. Includes stacks, badges, and achievements. Free and open source.",
   "bin": {
     "openconductor": "./bin/openconductor.js"

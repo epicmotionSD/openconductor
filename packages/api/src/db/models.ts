@@ -230,8 +230,13 @@ export class MCPServerRepository extends BaseRepository<MCPServer> {
         queryParams.push(q);
         const searchParamIndex = paramIndex++;
 
-        // Order by: exact matches first, then partial matches, then by popularity
+        // Order by: featured first, then exact matches, then partial matches, then by popularity
         orderClause = `
+          CASE s.tier 
+            WHEN 'FEATURED_SERVER' THEN 1 
+            WHEN 'PRO_SERVER' THEN 2 
+            ELSE 3 
+          END ASC,
           CASE
             WHEN LOWER(s.name) = LOWER($${searchParamIndex}) THEN 1
             WHEN LOWER(s.slug) = LOWER($${searchParamIndex}) THEN 2
@@ -241,24 +246,26 @@ export class MCPServerRepository extends BaseRepository<MCPServer> {
           st.popularity_score DESC
         `;
       } else {
+        // Always show featured servers first, then sort by chosen criteria
+        const tierOrder = `CASE s.tier WHEN 'FEATURED_SERVER' THEN 1 WHEN 'PRO_SERVER' THEN 2 ELSE 3 END ASC`;
         switch (sort) {
           case 'popular':
-            orderClause = `st.popularity_score ${order.toUpperCase()}`;
+            orderClause = `${tierOrder}, st.popularity_score ${order.toUpperCase()}`;
             break;
           case 'trending':
-            orderClause = `st.trending_score ${order.toUpperCase()}`;
+            orderClause = `${tierOrder}, st.trending_score ${order.toUpperCase()}`;
             break;
           case 'recent':
-            orderClause = `s.created_at ${order.toUpperCase()}`;
+            orderClause = `${tierOrder}, s.created_at ${order.toUpperCase()}`;
             break;
           case 'stars':
-            orderClause = `st.github_stars ${order.toUpperCase()}`;
+            orderClause = `${tierOrder}, st.github_stars ${order.toUpperCase()}`;
             break;
           case 'installs':
-            orderClause = `st.cli_installs ${order.toUpperCase()}`;
+            orderClause = `${tierOrder}, st.cli_installs ${order.toUpperCase()}`;
             break;
           default:
-            orderClause = `st.popularity_score DESC`;
+            orderClause = `${tierOrder}, st.popularity_score DESC`;
         }
       }
 
@@ -623,6 +630,7 @@ export class MCPServerRepository extends BaseRepository<MCPServer> {
       verified: row.verified,
       featured: row.featured,
       deprecated: row.deprecated || false,
+      tier: row.tier || 'free',
       createdAt: row.created_at,
       updatedAt: row.updated_at,
       lastSyncedAt: row.last_synced_at
@@ -652,7 +660,8 @@ export class MCPServerRepository extends BaseRepository<MCPServer> {
         docker: row.docker_image ? `docker pull ${row.docker_image}` : undefined
       },
       verified: row.verified,
-      featured: row.featured
+      featured: row.featured,
+      tier: row.tier || 'free'
     };
   }
 }

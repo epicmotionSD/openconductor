@@ -97,8 +97,14 @@ export async function discoverCommand(query, options) {
       console.log();
     }
 
-    // Interactive menu
-    await showInteractiveMenu(api, results.servers);
+    // Interactive menu (skip in non-interactive/CI environments)
+    const isInteractive = options.interactive !== false &&
+      !process.env.OPENCONDUCTOR_NON_INTERACTIVE &&
+      !process.env.CI;
+
+    if (isInteractive) {
+      await showInteractiveMenu(api, results.servers);
+    }
 
   } catch (error) {
     spinner.stop();

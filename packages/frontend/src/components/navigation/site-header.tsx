@@ -24,6 +24,12 @@ export function SiteHeader({ variant = 'default' }: SiteHeaderProps) {
               <Link href="/discover" className="text-sm font-medium text-foreground-secondary hover:text-primary transition-colors">
                 Discover
               </Link>
+              <Link href="/stacks" className="text-sm font-medium text-foreground-secondary hover:text-primary transition-colors">
+                Stacks
+              </Link>
+              <Link href="/pricing" className="text-sm font-medium text-foreground-secondary hover:text-primary transition-colors">
+                Pricing
+              </Link>
               <Link href="/docs" className="text-sm font-medium text-foreground-secondary hover:text-primary transition-colors">
                 Docs
               </Link>

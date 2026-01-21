@@ -60,8 +60,20 @@ async function deployToSupabase() {
       
       // Ask if we should drop existing tables
       logger.info('🗑️  Dropping existing tables to ensure clean deployment...');
+
+      // Drop views first (they depend on tables)
+      const viewsToDrop = ['servers_with_stats', 'popular_servers', 'trending_servers'];
+      for (const view of viewsToDrop) {
+        try {
+          await client.query(`DROP VIEW IF EXISTS ${view} CASCADE`);
+          logger.info(`   Dropped view: ${view}`);
+        } catch (error) {
+          logger.warn(`   Could not drop view ${view}: ${error.message}`);
+        }
+      }
       
       const tablesToDrop = [
+        'server_embeddings', 'stacks', 'stack_servers', 'server_submissions', 'server_validations',
         'mcp_servers', 'server_stats', 'server_versions', 'server_dependencies',
         'user_interactions', 'server_reviews', 'github_webhook_logs', 'api_usage',
         'api_keys', 'background_jobs', 'server_analytics_snapshots'

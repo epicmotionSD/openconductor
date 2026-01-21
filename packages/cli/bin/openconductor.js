@@ -53,6 +53,7 @@ program
   .option('-c, --category <category>', 'filter by category')
   .option('-t, --tags <tags...>', 'filter by tags')
   .option('-l, --limit <number>', 'number of results', '10')
+  .option('--no-interactive', 'skip interactive menu')
   .action(discoverCommand);
 
 program

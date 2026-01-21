@@ -2,27 +2,46 @@ import { VercelRequest, VercelResponse } from '@vercel/node';
 import { Pool } from 'pg';
 
 // Create PostgreSQL connection pool
+const cleanConnectionString = (raw?: string) => {
+  if (!raw) return undefined;
+  try {
+    const url = new URL(raw);
+    url.search = '';
+    return url.toString();
+  } catch {
+    return raw;
+  }
+};
+
+const directConnectionString = process.env.POSTGRES_HOST
+  ? `postgres://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}:5432/${process.env.POSTGRES_DATABASE}?sslmode=require`
+  : undefined;
+
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL,
+  connectionString:
+    cleanConnectionString(process.env.POSTGRES_URL_NON_POOLING) ||
+    cleanConnectionString(process.env.POSTGRES_URL) ||
+    directConnectionString,
   ssl: { rejectUnauthorized: false }
 });
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, HEAD');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
-  if (req.method !== 'GET') {
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
     return res.status(405).json({ success: false, error: { code: 'METHOD_NOT_ALLOWED', message: 'Method not allowed' } });
   }
 
   try {
-    const { query, category, verified, limit = '20', page = '1' } = req.query;
+    const { query, q, category, verified, limit = '20', page = '1' } = req.query;
+    const searchQuery = query || q;
 
     let sql = `
       SELECT
@@ -41,17 +60,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         st.github_stars,
         st.cli_installs,
         s.created_at
-      FROM mcp_servers s
-      LEFT JOIN server_stats st ON s.id = st.server_id
+      FROM public.mcp_servers s
+      LEFT JOIN public.server_stats st ON s.id = st.server_id
       WHERE 1=1
     `;
 
     const params: any[] = [];
     let paramCount = 1;
 
-    if (query) {
+    if (searchQuery) {
       sql += ` AND (s.name ILIKE $${paramCount} OR s.description ILIKE $${paramCount})`;
-      params.push(`%${query}%`);
+      params.push(`%${searchQuery}%`);
       paramCount++;
     }
 
@@ -96,8 +115,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       featured: row.featured
     }));
 
-    const countResult = await pool.query('SELECT COUNT(*) FROM mcp_servers WHERE 1=1');
+    const countResult = await pool.query('SELECT COUNT(*) FROM public.mcp_servers WHERE 1=1');
     const total = parseInt(countResult.rows[0].count);
+
+    if (req.method === 'HEAD') {
+      return res.status(200).end();
+    }
 
     return res.status(200).json({
       success: true,

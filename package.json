@@ -17,11 +17,11 @@
     "test": "jest --passWithNoTests || true"
   },
   "devDependencies": {
-    "@esbuild/linux-x64": "^0.27.0",
+    "esbuild": "^0.27.0",
     "@types/inquirer": "^9.0.9",
     "@types/node": "^20.0.0",
     "concurrently": "^8.2.0",
-    "next": "^14.2.33",
+    "next": "^14.2.21",
     "tsx": "^4.20.6",
     "typescript": "^5.0.0"
   },
