@@ -397,12 +397,12 @@ export class MCPServerRepository extends BaseRepository<MCPServer> {
         score: parseFloat(row.rank)
       }));
 
-      // Get total count
+      // Get total count (queryParams doesn't include limit, that was only added to the main query)
       const countResult = await this.query(`
         SELECT COUNT(*)
         FROM mcp_servers s
         ${whereClause}
-      `, queryParams.slice(0, -1)); // Remove limit parameter
+      `, queryParams); // Use original queryParams (without limit)
 
       const response: SearchResponse = {
         results: searchResults,

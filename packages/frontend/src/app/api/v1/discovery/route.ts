@@ -20,7 +20,7 @@ const octokit = new Octokit({
 // MCP server search queries
 const SEARCH_QUERIES = [
   '@modelcontextprotocol/sdk language:typescript',
-  '@modelcontextprotocol/sdk language:javascript',
+  '@modelcontextprotocol/sdk language:javascript', 
   'mcp-server in:name,description',
   'topic:mcp-server',
   '"@modelcontextprotocol" in:file'
@@ -36,27 +36,18 @@ interface DiscoveryResult {
 }
 
 /**
- * GET /api/cron/discovery
- * Automated daily discovery job triggered by Vercel Cron
+ * POST /api/v1/discovery
+ * Run the automated GitHub discovery process
  */
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   const startTime = Date.now();
-
-  // Verify cron secret in production
+  
+  // Verify authorization in production
   if (process.env.NODE_ENV === 'production') {
     const authHeader = request.headers.get('authorization');
     const cronSecret = process.env.CRON_SECRET;
-
-    if (!cronSecret) {
-      console.error('[CRON] CRON_SECRET not configured');
-      return NextResponse.json({
-        success: false,
-        error: { code: 'CONFIG_ERROR', message: 'Cron secret not configured' }
-      }, { status: 500 });
-    }
-
-    if (authHeader !== `Bearer ${cronSecret}`) {
-      console.warn('[CRON] Unauthorized request');
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
       return NextResponse.json({
         success: false,
         error: { code: 'UNAUTHORIZED', message: 'Invalid authorization' }
@@ -64,8 +55,8 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  console.log('[CRON] Starting GitHub discovery...');
-
+  console.log('[DISCOVERY] Starting GitHub discovery...');
+  
   const result: DiscoveryResult = {
     discovered: 0,
     queued: 0,
@@ -83,27 +74,25 @@ export async function GET(request: NextRequest) {
       try {
         const searchResult = await searchGitHub(query);
         searchResult.forEach(url => discoveredRepos.add(url));
-        console.log(`[CRON] Query "${query}": found ${searchResult.length} repos`);
       } catch (err: any) {
-        console.warn(`[CRON] Query failed: ${query}`, err.message);
+        console.warn(`[DISCOVERY] Query failed: ${query}`, err.message);
         result.errors.push(`Search failed: ${query}`);
       }
     }
 
     result.discovered = discoveredRepos.size;
-    console.log(`[CRON] Total unique repos: ${result.discovered}`);
+    console.log(`[DISCOVERY] Found ${result.discovered} unique repositories`);
 
     // Process each discovered repo
     for (const repoUrl of discoveredRepos) {
       try {
         const processed = await processRepository(repoUrl);
         result.processed++;
-
+        
         if (processed.added) {
           result.added++;
-          console.log(`[CRON] Added: ${repoUrl}`);
         } else if (processed.skipped) {
-          result.queued++;
+          result.queued++; // Already exists
         } else {
           result.failed++;
         }
@@ -114,7 +103,7 @@ export async function GET(request: NextRequest) {
     }
 
     const duration = Date.now() - startTime;
-    console.log(`[CRON] Completed in ${duration}ms:`, result);
+    console.log(`[DISCOVERY] Completed in ${duration}ms:`, result);
 
     return NextResponse.json({
       success: true,
@@ -130,8 +119,8 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error: any) {
-    console.error('[CRON] Fatal error:', error);
-
+    console.error('[DISCOVERY] Fatal error:', error);
+    
     return NextResponse.json({
       success: false,
       error: {
@@ -142,10 +131,40 @@ export async function GET(request: NextRequest) {
   }
 }
 
+/**
+ * GET /api/v1/discovery
+ * Get discovery status and stats
+ */
+export async function GET() {
+  try {
+    const statsResult = await pool.query(`
+      SELECT 
+        COUNT(*) as total_servers,
+        COUNT(*) FILTER (WHERE verified = true) as verified,
+        COUNT(*) FILTER (WHERE created_at > NOW() - INTERVAL '24 hours') as added_last_24h,
+        COUNT(*) FILTER (WHERE created_at > NOW() - INTERVAL '7 days') as added_last_week
+      FROM mcp_servers
+    `);
+
+    return NextResponse.json({
+      success: true,
+      data: {
+        stats: statsResult.rows[0],
+        lastRun: new Date().toISOString()
+      }
+    });
+  } catch (error: any) {
+    return NextResponse.json({
+      success: false,
+      error: { code: 'STATS_ERROR', message: error.message }
+    }, { status: 500 });
+  }
+}
+
 // Search GitHub for repositories
 async function searchGitHub(query: string, maxResults = 100): Promise<string[]> {
   const repos: string[] = [];
-
+  
   try {
     const response = await octokit.search.repos({
       q: query,
@@ -158,7 +177,7 @@ async function searchGitHub(query: string, maxResults = 100): Promise<string[]> 
       repos.push(repo.html_url);
     }
   } catch (error: any) {
-    console.warn(`[CRON] GitHub search error:`, error.message);
+    console.warn(`[DISCOVERY] GitHub search error for "${query}":`, error.message);
   }
 
   return repos;
@@ -186,7 +205,7 @@ async function processRepository(repoUrl: string): Promise<{ added: boolean; ski
 
   // Get repo metadata
   const repoData = await octokit.repos.get({ owner, repo });
-
+  
   if (repoData.data.fork) {
     return { added: false, skipped: false, reason: 'Is a fork' };
   }
@@ -230,7 +249,7 @@ async function processRepository(repoUrl: string): Promise<{ added: boolean; ski
 
   if (insertResult.rows.length > 0) {
     const serverId = insertResult.rows[0].id;
-
+    
     // Insert stats
     await pool.query(`
       INSERT INTO server_stats (server_id, github_stars, github_forks, cli_installs)
@@ -251,11 +270,11 @@ async function processRepository(repoUrl: string): Promise<{ added: boolean; ski
 async function validateMCPDependency(owner: string, repo: string): Promise<boolean> {
   try {
     const response = await octokit.repos.getContent({ owner, repo, path: 'package.json' });
-
+    
     if ('content' in response.data) {
       const content = Buffer.from(response.data.content, 'base64').toString('utf-8');
       const packageJson = JSON.parse(content);
-
+      
       return !!(
         packageJson.dependencies?.['@modelcontextprotocol/sdk'] ||
         packageJson.devDependencies?.['@modelcontextprotocol/sdk'] ||
@@ -263,7 +282,7 @@ async function validateMCPDependency(owner: string, repo: string): Promise<boole
       );
     }
   } catch {}
-
+  
   return false;
 }
 
@@ -277,13 +296,13 @@ function parseRepoUrl(url: string): { owner: string; repo: string } {
 // Detect category from description and topics
 function detectCategory(description: string, topics: string[]): string {
   const text = `${description} ${topics.join(' ')}`.toLowerCase();
-
+  
   if (text.includes('database') || text.includes('sql') || text.includes('postgres')) return 'database';
   if (text.includes('file') || text.includes('filesystem') || text.includes('storage')) return 'filesystem';
   if (text.includes('memory') || text.includes('cache') || text.includes('redis')) return 'memory';
   if (text.includes('api') || text.includes('http') || text.includes('rest')) return 'api';
   if (text.includes('search') || text.includes('semantic')) return 'search';
   if (text.includes('communication') || text.includes('slack') || text.includes('email')) return 'communication';
-
+  
   return 'custom';
 }

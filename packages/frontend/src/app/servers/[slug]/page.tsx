@@ -31,8 +31,9 @@ export default function ServerDetailPage() {
   const fetchServer = async () => {
     try {
       // Use frontend API endpoint
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1'
-      const response = await fetch(`${apiUrl}/servers/${slug}`)
+      const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002').replace(/\/+$/, '')
+      const apiBase = apiUrl.endsWith('/v1') ? apiUrl.slice(0, -3) : apiUrl
+      const response = await fetch(`${apiBase}/v1/servers/${slug}`)
       const result = await response.json()
       
       if (result.success) {
