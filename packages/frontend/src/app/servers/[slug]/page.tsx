@@ -162,7 +162,7 @@ export default function ServerDetailPage() {
                 <CategoryBadge category={server.category as MCPCategory} />
                 <div className="flex items-center gap-1 text-sm text-foreground-secondary">
                   <Star className="h-4 w-4 text-warning" />
-                  {server.repository?.stars ?? server.stats?.stars ?? 0} stars
+                  {server.repository?.stars ?? (server.stats as any)?.stars ?? 0} stars
                 </div>
                 <div className="flex items-center gap-1 text-sm text-foreground-secondary">
                   <Download className="h-4 w-4 text-primary" />
@@ -336,7 +336,7 @@ export default function ServerDetailPage() {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-sm text-foreground-secondary">GitHub Stars</span>
-                  <span className="font-medium text-foreground">{server.repository?.stars ?? server.stats?.stars ?? 0}</span>
+                  <span className="font-medium text-foreground">{server.repository?.stars ?? (server.stats as any)?.stars ?? 0}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-foreground-secondary">NPM Downloads</span>
@@ -345,8 +345,8 @@ export default function ServerDetailPage() {
                 <div className="flex justify-between">
                   <span className="text-sm text-foreground-secondary">Last Updated</span>
                   <span className="font-medium text-foreground">
-                    {server.repository?.lastCommit || server.stats?.lastCommit 
-                      ? new Date(server.repository?.lastCommit || server.stats?.lastCommit || '').toLocaleDateString()
+                    {server.repository?.lastCommit || (server.stats as any)?.lastCommit 
+                      ? new Date(server.repository?.lastCommit || (server.stats as any)?.lastCommit || '').toLocaleDateString()
                       : 'N/A'}
                   </span>
                 </div>
