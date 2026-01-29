@@ -35,7 +35,22 @@ export default function ServerDetailPage() {
       const result = await response.json()
       
       if (result.success) {
-        setServer(result.data)
+        // Handle both single server response and list response (fallback)
+        let serverData = result.data
+        
+        // If we got a list response, find the matching server by slug
+        if (result.data?.servers && Array.isArray(result.data.servers)) {
+          serverData = result.data.servers.find((s: any) => s.slug === slug)
+        }
+        
+        // Ensure repository object exists with defaults
+        if (serverData && !serverData.repository) {
+          serverData.repository = { stars: 0, url: '', owner: '', name: '' }
+        } else if (serverData?.repository && serverData.repository.stars === undefined) {
+          serverData.repository.stars = serverData.stats?.stars || 0
+        }
+        
+        setServer(serverData)
       }
     } catch (error) {
       console.error('Error fetching server:', error)
@@ -147,7 +162,7 @@ export default function ServerDetailPage() {
                 <CategoryBadge category={server.category as MCPCategory} />
                 <div className="flex items-center gap-1 text-sm text-foreground-secondary">
                   <Star className="h-4 w-4 text-warning" />
-                  {server.repository.stars} stars
+                  {server.repository?.stars ?? server.stats?.stars ?? 0} stars
                 </div>
                 <div className="flex items-center gap-1 text-sm text-foreground-secondary">
                   <Download className="h-4 w-4 text-primary" />
@@ -292,12 +307,14 @@ export default function ServerDetailPage() {
             <GlassCard>
               <h3 className="text-xl font-semibold mb-4 text-foreground">Quick Actions</h3>
               <div className="space-y-3">
-                <GradientButton className="w-full" asChild>
-                  <a href={server.repository.url} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    View Repository
-                  </a>
-                </GradientButton>
+                {server.repository?.url && (
+                  <GradientButton className="w-full" asChild>
+                    <a href={server.repository.url} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      View Repository
+                    </a>
+                  </GradientButton>
+                )}
 
                 {server.packages.npm && (
                   <Button variant="outline" className="w-full border-primary/20 hover:border-primary/40" asChild>
@@ -319,7 +336,7 @@ export default function ServerDetailPage() {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-sm text-foreground-secondary">GitHub Stars</span>
-                  <span className="font-medium text-foreground">{server.repository.stars}</span>
+                  <span className="font-medium text-foreground">{server.repository?.stars ?? server.stats?.stars ?? 0}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-foreground-secondary">NPM Downloads</span>
@@ -328,7 +345,9 @@ export default function ServerDetailPage() {
                 <div className="flex justify-between">
                   <span className="text-sm text-foreground-secondary">Last Updated</span>
                   <span className="font-medium text-foreground">
-                    {new Date(server.repository.lastCommit).toLocaleDateString()}
+                    {server.repository?.lastCommit || server.stats?.lastCommit 
+                      ? new Date(server.repository?.lastCommit || server.stats?.lastCommit || '').toLocaleDateString()
+                      : 'N/A'}
                   </span>
                 </div>
                 <div className="flex justify-between">
