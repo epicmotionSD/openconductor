@@ -269,7 +269,7 @@ export default function ServerDetailPage() {
                   <pre className="text-sm overflow-x-auto">
                     <code className="text-foreground">{JSON.stringify({
                       mcpServers: {
-                        [server.name.toLowerCase()]: server.configuration.example
+                        [server.name.toLowerCase()]: server.configuration?.example || { command: 'npx', args: [server.slug] }
                       }
                     }, null, 2)}</code>
                   </pre>
@@ -279,7 +279,7 @@ export default function ServerDetailPage() {
                     className="absolute right-2 top-2 h-8 w-8 p-0 hover:text-primary"
                     onClick={() => copyToClipboard(JSON.stringify({
                       mcpServers: {
-                        [server.name.toLowerCase()]: server.configuration.example
+                        [server.name.toLowerCase()]: server.configuration?.example || { command: 'npx', args: [server.slug] }
                       }
                     }, null, 2), 'config')}
                   >
