@@ -166,11 +166,11 @@ export default function ServerDetailPage() {
                 </div>
                 <div className="flex items-center gap-1 text-sm text-foreground-secondary">
                   <Download className="h-4 w-4 text-primary" />
-                  {server.packages.npm?.downloadsTotal || 0} downloads
+                  {server.packages?.npm?.downloadsTotal || 0} downloads
                 </div>
               </div>
 
-              {server.tags.length > 0 && (
+              {server.tags?.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-6">
                   {server.tags.map((tag) => (
                     <Badge key={tag} variant="outline" className="border-primary/20 text-foreground-secondary">
@@ -316,7 +316,7 @@ export default function ServerDetailPage() {
                   </GradientButton>
                 )}
 
-                {server.packages.npm && (
+                {server.packages?.npm && (
                   <Button variant="outline" className="w-full border-primary/20 hover:border-primary/40" asChild>
                     <a
                       href={`https://www.npmjs.com/package/${server.packages.npm.name}`}
@@ -340,7 +340,7 @@ export default function ServerDetailPage() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-foreground-secondary">NPM Downloads</span>
-                  <span className="font-medium text-foreground">{server.packages.npm?.downloadsTotal || 0}</span>
+                  <span className="font-medium text-foreground">{server.packages?.npm?.downloadsTotal || 0}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-foreground-secondary">Last Updated</span>
