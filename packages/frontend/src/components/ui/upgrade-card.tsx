@@ -54,8 +54,8 @@ export function UpgradeCard({ serverId, serverSlug, currentTier = 'free' }: Upgr
     setError(null)
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1'
-      const response = await fetch(`${apiUrl}/billing/checkout`, {
+      // Use frontend API proxy to avoid CORS issues
+      const response = await fetch(`/api/v1/billing/checkout`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
