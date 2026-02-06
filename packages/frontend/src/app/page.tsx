@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
@@ -12,7 +12,7 @@ import { GlassCard } from '@/components/ui/glass-card'
 import { 
   ArrowRight, Terminal, Zap, Shield, Package, Github, 
   Search, Download, AlertTriangle, CheckCircle, Clock,
-  FileCheck, Scale, Lock, Fingerprint, Building2
+  FileCheck, Scale, Lock, Fingerprint, Building2, ExternalLink
 } from 'lucide-react'
 
 export default function HomePage() {
@@ -31,7 +31,7 @@ export default function HomePage() {
             <div className="flex justify-center mb-8 animate-fade-in">
               <Badge className="text-sm px-4 py-2 rounded-full border-warning/50 bg-warning/10 backdrop-blur-sm">
                 <AlertTriangle className="h-3 w-3 mr-2 inline text-warning" />
-                <span className="text-foreground-secondary">2026: EU AI Act enforced • NIST AI RMF required • Unregistered agents = Uninsurable</span>
+                <span className="text-foreground-secondary">2026: EU AI Act enforced â€¢ NIST AI RMF required â€¢ Unregistered agents = Uninsurable</span>
               </Badge>
             </div>
 
@@ -158,7 +158,7 @@ export default function HomePage() {
                 ERC-8004 identity standard. Every agent gets a verifiable on-chain identity.
               </p>
               <div className="text-xs text-foreground-secondary">
-                <span className="text-success">✓</span> 220+ MCP servers indexed
+                <span className="text-success">âœ“</span> 220+ MCP servers indexed
               </div>
             </GlassCard>
 
@@ -175,7 +175,7 @@ export default function HomePage() {
                 AP2 policy enforcement. PEP sidecars that ensure agents stay within bounds.
               </p>
               <div className="text-xs text-foreground-secondary">
-                <span className="text-primary">◐</span> Policy engine in development
+                <span className="text-primary">â—</span> Policy engine in development
               </div>
             </GlassCard>
 
@@ -192,7 +192,7 @@ export default function HomePage() {
                 Risk scoring and ISO 42001 compliance. Makes agents insurable.
               </p>
               <div className="text-xs text-foreground-secondary">
-                <span className="text-muted-foreground">○</span> Insurance partnerships forming
+                <span className="text-muted-foreground">â—‹</span> Insurance partnerships forming
               </div>
             </GlassCard>
 
@@ -209,7 +209,7 @@ export default function HomePage() {
                 x3o.ai Command Center. Live implementation of the full Trust Stack.
               </p>
               <div className="text-xs text-foreground-secondary">
-                <span className="text-success">✓</span> Production deployment
+                <span className="text-success">âœ“</span> Production deployment
               </div>
             </GlassCard>
           </div>
@@ -219,7 +219,7 @@ export default function HomePage() {
         <section className="container mx-auto px-4 py-16 md:py-24">
           <div className="text-center mb-12">
             <Badge className="mb-4 px-3 py-1 text-xs bg-success/10 border-success/30">
-              LAYER 1 • LIVE NOW
+              LAYER 1 â€¢ LIVE NOW
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               MCP Server <GradientText>Registry</GradientText>
@@ -389,3 +389,5 @@ export default function HomePage() {
     </div>
   )
 }
+
+
