@@ -9,11 +9,27 @@ const sora = Sora({ subsets: ['latin'], variable: '--font-display', display: 'sw
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.openconductor.ai'),
   title: {
-    default: 'OpenConductor - The npm for AI agent tools',
+    default: 'OpenConductor - The Identity Layer for AI Agents',
     template: '%s | OpenConductor'
   },
-  description: 'Install MCP servers without the JSON hell. Discover and install 190+ AI agent tools with one command. Free, open source, and built for developers.',
-  keywords: ['mcp', 'model-context-protocol', 'claude', 'ai-agents', 'package-manager', 'cli', 'developer-tools', 'ai', 'anthropic', 'ai-tools', 'mcp-server', 'mcp-registry', 'claude-desktop', 'json-config', 'stacks'],
+  description: 'On-chain agent registration. Verifiable trust scores. EU AI Act compliance. The infrastructure that makes AI agents legal and insurable.',
+  keywords: [
+    'ai-agent-identity',
+    'erc-8004',
+    'agent-registry',
+    'eu-ai-act',
+    'ai-compliance',
+    'trust-stack',
+    'agent-attestation',
+    'verifiable-agents',
+    'ai-governance',
+    'agent-insurance',
+    'mcp',
+    'model-context-protocol',
+    'on-chain-agents',
+    'base',
+    'ethereum'
+  ],
   authors: [{ name: 'OpenConductor Team' }],
   creator: 'OpenConductor',
   publisher: 'OpenConductor',
@@ -26,24 +42,24 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://www.openconductor.ai',
-    title: 'OpenConductor - The npm for AI agent tools',
-    description: 'Install MCP servers without the JSON hell. 190+ servers, one command. Includes stacks, badges, and achievements.',
+    title: 'OpenConductor - The Identity Layer for AI Agents',
+    description: 'On-chain agent registration. Verifiable trust scores. EU AI Act compliance. The infrastructure that makes AI agents legal and insurable.',
     siteName: 'OpenConductor',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'OpenConductor - The npm for AI agent tools',
+        alt: 'OpenConductor Trust Stack - Identity Layer for AI Agents',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'OpenConductor - The npm for AI agent tools',
-    description: 'Install MCP servers without the JSON hell. 190+ servers, one command.',
+    title: 'OpenConductor - The Identity Layer for AI Agents',
+    description: 'On-chain agent identity. EU AI Act compliance. Make your AI agents legal and insurable.',
     images: ['/og-image.png'],
-    creator: '@SDexecution',
+    creator: '@OpenConductor',
   },
   robots: {
     index: true,
@@ -73,7 +89,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#8B5CF6', // OpenConductor brand purple
+  themeColor: '#8B5CF6',
 }
 
 export default function RootLayout({
