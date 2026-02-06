@@ -412,7 +412,7 @@ openconductor list
 ping openconductor.ai
 
 # Use local API for development
-export OPENCONDUCTOR_API_URL=https://openconductor-api.vercel.app/v1
+export OPENCONDUCTOR_API_URL=https://openconductor.ai/api/v1
 ```
 
 ### Debug Mode
@@ -460,7 +460,7 @@ openconductor discover
 ./test-cli.sh
 
 # Test against local API
-export OPENCONDUCTOR_API_URL=https://openconductor-api.vercel.app/v1
+export OPENCONDUCTOR_API_URL=https://openconductor.ai/api/v1
 openconductor discover --limit 5
 ```
 

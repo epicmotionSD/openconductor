@@ -1,9 +1,10 @@
 // import '../lib/tracing-web'  // Disabled due to XMLHttpRequest SSR errors
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Sora } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
+const sora = Sora({ subsets: ['latin'], variable: '--font-display', display: 'swap' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.openconductor.ai'),
@@ -88,7 +89,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="OpenConductor" />
       </head>
-      <body className={`${inter.className} min-h-screen bg-background antialiased`}>
+      <body className={`${inter.className} ${sora.variable} min-h-screen bg-background antialiased`}>
         {children}
       </body>
     </html>

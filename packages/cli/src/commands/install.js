@@ -39,7 +39,7 @@ export async function installCommand(serverSlug, options) {
   try {
     const api = new ApiClient();
     const platformConfig = resolvePlatformConfig(options);
-    const configManager = new ConfigManager(platformConfig.configPath);
+    const configManager = new ConfigManager(platformConfig.configPath, platformConfig);
     const installer = new Installer();
     const portManager = new PortManager();
 
@@ -198,8 +198,8 @@ export async function installCommand(serverSlug, options) {
           }
         }
       };
-      
-      console.log(JSON.stringify({ mcpServers: mcpConfig }, null, 2));
+
+      console.log(JSON.stringify({ [configManager.serversKey]: mcpConfig }, null, 2));
       console.log();
       
       logger.info('To actually install, run:');
@@ -358,7 +358,7 @@ export async function installCommand(serverSlug, options) {
           env: { PORT: context.port?.toString() }
         }
       };
-      console.log(JSON.stringify({ mcpServers: addedConfig }, null, 2));
+      console.log(JSON.stringify({ [configManager.serversKey]: addedConfig }, null, 2));
       console.log();
     }
 

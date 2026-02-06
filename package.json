@@ -1,6 +1,6 @@
 {
   "name": "openconductor",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "The orchestration platform for modern AI development. Deploy AI agents alongside your Vercel, v0, Supabase, and BaseHub workflow.",
   "private": true,
   "scripts": {

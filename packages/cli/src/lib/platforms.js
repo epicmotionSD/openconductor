@@ -4,6 +4,7 @@ import { join } from 'path';
 const PLATFORM_DEFINITIONS = {
   claude: {
     label: 'Claude Desktop',
+    serversKey: 'mcpServers',
     getDefaultConfigPath: () => {
       const platform = process.platform;
 
@@ -22,16 +23,18 @@ const PLATFORM_DEFINITIONS = {
   },
   cursor: {
     label: 'Cursor',
+    serversKey: 'mcpServers',
     getDefaultConfigPath: () => null,
     requiresConfig: true
   },
   vscode: {
     label: 'VS Code',
-    getDefaultConfigPath: () => null,
-    requiresConfig: true
+    serversKey: 'servers',
+    getDefaultConfigPath: () => join(process.cwd(), '.vscode', 'mcp.json')
   },
   windsurf: {
     label: 'Windsurf',
+    serversKey: 'mcpServers',
     getDefaultConfigPath: () => null,
     requiresConfig: true
   }
@@ -68,6 +71,7 @@ export function resolvePlatformConfig(options = {}) {
   return {
     id: platformId,
     label: platform.label,
-    configPath
+    configPath,
+    serversKey: platform.serversKey || 'mcpServers'
   };
 }

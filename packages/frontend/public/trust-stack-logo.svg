@@ -1,0 +1,17 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="OpenConductor Trust Stack">
+  <defs>
+    <linearGradient id="oc-shield" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#6366F1" />
+    </linearGradient>
+    <linearGradient id="oc-core" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="52" height="52" rx="14" fill="url(#oc-core)" stroke="url(#oc-shield)" stroke-width="2" />
+  <path d="M32 16L46 22V32C46 40.2 40.6 47.6 32 50C23.4 47.6 18 40.2 18 32V22L32 16Z" fill="url(#oc-shield)" />
+  <path d="M26 30H38M26 35H38" stroke="#E2E8F0" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="24" cy="29" r="2" fill="#E2E8F0" />
+  <circle cx="40" cy="36" r="2" fill="#E2E8F0" />
+</svg>

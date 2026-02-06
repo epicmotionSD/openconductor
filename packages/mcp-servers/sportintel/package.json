@@ -1,6 +1,6 @@
 {
   "name": "@openconductor/sportintel",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "MCP server for sports data, fantasy insights, and betting analysis - powered by AI",
   "type": "module",
   "main": "dist/index.js",

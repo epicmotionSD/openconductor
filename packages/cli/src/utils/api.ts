@@ -4,7 +4,7 @@ export class OpenConductorAPI {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = process.env.OPENCONDUCTOR_API_URL || 'https://openconductor-api.vercel.app';
+    this.baseUrl = process.env.OPENCONDUCTOR_API_URL || 'https://openconductor.ai/api';
   }
 
   async searchServers(params: MCPServerSearchParams = {}): Promise<MCPServerSearchResult> {

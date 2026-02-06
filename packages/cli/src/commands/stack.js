@@ -47,7 +47,7 @@ export async function stackListCommand() {
 export async function stackInstallCommand(stackSlug, options = {}) {
   const api = new ApiClient();
   const platformConfig = resolvePlatformConfig(options);
-  const config = new ConfigManager(platformConfig.configPath);
+  const config = new ConfigManager(platformConfig.configPath, platformConfig);
   const spinner = ora(`Loading ${stackSlug} stack...`).start();
 
   try {

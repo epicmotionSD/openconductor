@@ -1,18 +1,14 @@
 ﻿import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
 import { SiteHeader } from '@/components/navigation/site-header'
-import { TryNowHero } from '@/components/homepage/try-now-hero'
-import { StackPreview } from '@/components/homepage/stack-preview'
-import { LiveActivityFeed } from '@/components/homepage/live-activity-feed'
 import { GradientText } from '@/components/ui/gradient-text'
 import { GradientButton } from '@/components/ui/gradient-button'
 import { GlassCard } from '@/components/ui/glass-card'
-import { 
-  ArrowRight, Terminal, Zap, Shield, Package, Github, 
-  Search, Download, AlertTriangle, CheckCircle, Clock,
-  FileCheck, Scale, Lock, Fingerprint, Building2, ExternalLink
+import {
+  ArrowRight, Shield, AlertTriangle, CheckCircle,
+  FileCheck, Scale, Fingerprint, Building2, ExternalLink,
+  Users, Globe, Cpu, Lock, FileWarning, Gavel
 } from 'lucide-react'
 
 export default function HomePage() {
@@ -21,323 +17,319 @@ export default function HomePage() {
       <SiteHeader />
 
       <main className="flex-1">
-        {/* Hero Section - Trust Stack Positioning */}
+        {/* Hero Section */}
         <section className="relative container mx-auto px-4 pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
-          {/* Background gradient glow */}
           <div className="absolute inset-0 bg-gradient-primary opacity-5 blur-3xl" />
 
           <div className="relative text-center max-w-5xl mx-auto">
-            {/* 2026 Urgency Badge */}
+            {/* Regulatory Urgency */}
             <div className="flex justify-center mb-8 animate-fade-in">
               <Badge className="text-sm px-4 py-2 rounded-full border-warning/50 bg-warning/10 backdrop-blur-sm">
                 <AlertTriangle className="h-3 w-3 mr-2 inline text-warning" />
-                <span className="text-foreground-secondary">2026: EU AI Act enforced â€¢ NIST AI RMF required â€¢ Unregistered agents = Uninsurable</span>
+                <span className="text-foreground-secondary">EU AI Act enforcement begins August 2026</span>
               </Badge>
             </div>
 
-            {/* Heading */}
+            {/* Main Headline */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-[1.1] tracking-tight">
-              The <GradientText>Trust Infrastructure</GradientText>
+              Your AI Agents Need
               <br />
-              for AI Agents
+              <GradientText>An Identity</GradientText>
             </h1>
 
-            {/* Description */}
-            <p className="text-lg md:text-xl text-foreground-secondary mb-10 max-w-3xl mx-auto leading-relaxed">
-              <strong className="text-foreground">Identity. Governance. Liability.</strong>
+            {/* Value Prop */}
+            <p className="text-xl md:text-2xl text-foreground-secondary mb-10 max-w-3xl mx-auto leading-relaxed">
+              On-chain registration. Verifiable trust scores. Compliance-ready.
               <br />
-              The rails that AI agents must run on to be legal and insurable.
+              <span className="text-foreground">The infrastructure that makes AI agents legal and insurable.</span>
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <GradientButton size="lg" glow className="text-base px-8 h-12" asChild>
-                <Link href="/early-access">
-                  <Shield className="mr-2 h-4 w-4" />
-                  Join Early Access
+              <GradientButton size="lg" glow className="text-base px-8 h-14 text-lg" asChild>
+                <Link href="/register">
+                  <Fingerprint className="mr-2 h-5 w-5" />
+                  Register an Agent
                 </Link>
               </GradientButton>
-              <Button size="lg" variant="outline" className="text-base px-8 h-12 border-primary/20 hover:border-primary/40" asChild>
-                <Link href="/register">
-                  Register Your Agent <ArrowRight className="ml-2 h-4 w-4" />
+              <Button size="lg" variant="outline" className="text-base px-8 h-14 text-lg border-primary/20 hover:border-primary/40" asChild>
+                <Link href="/early-access">
+                  Enterprise Early Access <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-foreground-secondary">
-              <div className="flex items-center gap-2">
-                <Fingerprint className="h-4 w-4 text-primary" />
-                <span>ERC-8004 Identity</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Scale className="h-4 w-4 text-primary" />
-                <span>AP2 Policy Engine</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FileCheck className="h-4 w-4 text-success" />
-                <span>ISO 42001 Ready</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Building2 className="h-4 w-4 text-foreground" />
-                <span>Insurance Partners</span>
-              </div>
+            {/* Live Contract Proof */}
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-success/10 border border-success/30">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+              </span>
+              <span className="text-sm text-foreground-secondary">Live on Base</span>
+              <a
+                href="https://sepolia.basescan.org/address/0xf8d7044d657b602194fb5745c614beb35d5d898a"
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm text-primary hover:underline inline-flex items-center gap-1"
+              >
+                View Contract <ExternalLink className="h-3 w-3" />
+              </a>
             </div>
           </div>
         </section>
 
-        {/* Problem Section */}
-        <section className="container mx-auto px-4 pb-16 md:pb-24">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              The <GradientText>2026 Problem</GradientText>
-            </h2>
-            <p className="text-foreground-secondary text-lg max-w-2xl mx-auto">
-              AI agents are everywhere. But they have no identity, no guardrails, and no liability framework.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <GlassCard className="border-destructive/30 hover:border-destructive/50 transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-destructive/20 flex items-center justify-center mb-4">
-                <AlertTriangle className="h-6 w-6 text-destructive" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">No Identity</h3>
-              <p className="text-foreground-secondary">
-                Agents act anonymously. When something breaks, who's responsible? No audit trail, no accountability.
-              </p>
-            </GlassCard>
-
-            <GlassCard className="border-destructive/30 hover:border-destructive/50 transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-destructive/20 flex items-center justify-center mb-4">
-                <AlertTriangle className="h-6 w-6 text-destructive" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">No Guardrails</h3>
-              <p className="text-foreground-secondary">
-                Agents do whatever they want. No policy enforcement, no boundaries, no compliance with regulations.
-              </p>
-            </GlassCard>
-
-            <GlassCard className="border-destructive/30 hover:border-destructive/50 transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-destructive/20 flex items-center justify-center mb-4">
-                <AlertTriangle className="h-6 w-6 text-destructive" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">No Liability</h3>
-              <p className="text-foreground-secondary">
-                Agents can't be insured. When AI causes $10M in damages, insurers won't touch it.
-              </p>
-            </GlassCard>
-          </div>
-        </section>
-
-        {/* Trust Stack Section */}
-        <section className="container mx-auto px-4 pb-16 md:pb-24 bg-muted/20 py-16 rounded-3xl">
-          <div className="text-center mb-12">
-            <Badge className="mb-4 px-3 py-1 text-xs bg-primary/10 border-primary/30">
-              THE SOLUTION
-            </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              The <GradientText>Trust Stack</GradientText>
-            </h2>
-            <p className="text-foreground-secondary text-lg max-w-2xl mx-auto">
-              Four layers that transform rogue AI into compliant, insurable infrastructure
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {/* Layer 1: Registry */}
-            <GlassCard className="hover:border-success/50 transition-colors relative overflow-hidden">
-              <Badge className="absolute top-4 right-4 bg-success/20 text-success border-success/30 text-xs">
-                LIVE NOW
-              </Badge>
-              <div className="h-12 w-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 shadow-glow-purple">
-                <Fingerprint className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">Registry</h3>
-              <p className="text-foreground-secondary text-sm mb-4">
-                ERC-8004 identity standard. Every agent gets a verifiable on-chain identity.
-              </p>
-              <div className="text-xs text-foreground-secondary">
-                <span className="text-success">âœ“</span> 220+ MCP servers indexed
-              </div>
-            </GlassCard>
-
-            {/* Layer 2: Governor */}
-            <GlassCard className="hover:border-primary/50 transition-colors relative overflow-hidden">
-              <Badge className="absolute top-4 right-4 bg-primary/20 text-primary border-primary/30 text-xs">
-                Q2 2026
-              </Badge>
-              <div className="h-12 w-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 shadow-glow-blue">
-                <Scale className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">Governor</h3>
-              <p className="text-foreground-secondary text-sm mb-4">
-                AP2 policy enforcement. PEP sidecars that ensure agents stay within bounds.
-              </p>
-              <div className="text-xs text-foreground-secondary">
-                <span className="text-primary">â—</span> Policy engine in development
-              </div>
-            </GlassCard>
-
-            {/* Layer 3: Underwriter */}
-            <GlassCard className="hover:border-primary/50 transition-colors relative overflow-hidden">
-              <Badge className="absolute top-4 right-4 bg-muted text-foreground-secondary border-muted text-xs">
-                Q3 2026
-              </Badge>
-              <div className="h-12 w-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4">
-                <FileCheck className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">Underwriter</h3>
-              <p className="text-foreground-secondary text-sm mb-4">
-                Risk scoring and ISO 42001 compliance. Makes agents insurable.
-              </p>
-              <div className="text-xs text-foreground-secondary">
-                <span className="text-muted-foreground">â—‹</span> Insurance partnerships forming
-              </div>
-            </GlassCard>
-
-            {/* Layer 4: Proof */}
-            <GlassCard className="hover:border-success/50 transition-colors relative overflow-hidden">
-              <Badge className="absolute top-4 right-4 bg-success/20 text-success border-success/30 text-xs">
-                REFERENCE
-              </Badge>
-              <div className="h-12 w-12 rounded-lg bg-gradient-success flex items-center justify-center mb-4 shadow-glow-success">
-                <Building2 className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">Proof</h3>
-              <p className="text-foreground-secondary text-sm mb-4">
-                x3o.ai Command Center. Live implementation of the full Trust Stack.
-              </p>
-              <div className="text-xs text-foreground-secondary">
-                <span className="text-success">âœ“</span> Production deployment
-              </div>
-            </GlassCard>
-          </div>
-        </section>
-
-        {/* MCP Registry Section - Existing Functionality */}
+        {/* The Problem */}
         <section className="container mx-auto px-4 py-16 md:py-24">
-          <div className="text-center mb-12">
-            <Badge className="mb-4 px-3 py-1 text-xs bg-success/10 border-success/30">
-              LAYER 1 â€¢ LIVE NOW
-            </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              MCP Server <GradientText>Registry</GradientText>
-            </h2>
-            <p className="text-foreground-secondary text-lg max-w-2xl mx-auto">
-              Start with identity. 220+ servers indexed and ready to register.
-            </p>
-          </div>
-
-          {/* Try Now Hero - Instant Value */}
-          <TryNowHero />
-
-          {/* Features */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12">
-            <GlassCard className="hover:border-primary/50 transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 shadow-glow-purple">
-                <Zap className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">One Command</h3>
-              <p className="text-foreground-secondary">
-                Install curated stacks without JSON configuration. Works with Claude, Cursor, and more.
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 font-display">
+                AI Agents Are <GradientText>Everywhere</GradientText>
+              </h2>
+              <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
+                But they operate in a legal gray zone. No identity. No accountability. No insurance.
               </p>
-            </GlassCard>
-
-            <GlassCard className="hover:border-primary/50 transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 shadow-glow-blue">
-                <Package className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">220+ Servers</h3>
-              <p className="text-foreground-secondary">
-                The largest registry of MCP servers. Search, discover, and install any tool.
-              </p>
-            </GlassCard>
-
-            <GlassCard className="hover:border-primary/50 transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-gradient-success flex items-center justify-center mb-4 shadow-glow-success">
-                <Shield className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">Trust Verified</h3>
-              <p className="text-foreground-secondary">
-                Every server validated. Reputation scores and compliance tracking built in.
-              </p>
-            </GlassCard>
-          </div>
-        </section>
-
-        {/* Live Activity Section */}
-        <section className="container mx-auto px-4 pb-16 md:pb-24">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <GradientText>Live Network</GradientText> Activity
-            </h2>
-            <p className="text-foreground-secondary text-lg max-w-2xl mx-auto">
-              Real-time installations and registrations across the Trust Stack
-            </p>
-          </div>
-
-          <div className="max-w-2xl mx-auto">
-            <LiveActivityFeed />
-          </div>
-        </section>
-
-        {/* Stacks Preview */}
-        <StackPreview />
-
-        {/* Stats Section */}
-        <section className="container mx-auto px-4 py-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold mb-2">
-                <GradientText>220+</GradientText>
-              </div>
-              <div className="text-foreground-secondary text-sm">Servers Indexed</div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold mb-2">
-                <GradientText>1K+</GradientText>
-              </div>
-              <div className="text-foreground-secondary text-sm">Weekly Downloads</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold mb-2">
-                <GradientText>4</GradientText>
-              </div>
-              <div className="text-foreground-secondary text-sm">Trust Layers</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold mb-2">
-                <GradientText>2026</GradientText>
-              </div>
-              <div className="text-foreground-secondary text-sm">Full Stack Launch</div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <GlassCard className="border-destructive/30">
+                <FileWarning className="h-10 w-10 text-destructive mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Regulatory Risk</h3>
+                <p className="text-foreground-secondary">
+                  EU AI Act requires high-risk AI systems to be traceable. Violations: up to EUR 35M or 7% global revenue.
+                </p>
+              </GlassCard>
+
+              <GlassCard className="border-destructive/30">
+                <Gavel className="h-10 w-10 text-destructive mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Liability Exposure</h3>
+                <p className="text-foreground-secondary">
+                  When an agent causes damage, who pays? Without identity, there is no chain of custody.
+                </p>
+              </GlassCard>
+
+              <GlassCard className="border-destructive/30">
+                <Lock className="h-10 w-10 text-destructive mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Uninsurable</h3>
+                <p className="text-foreground-secondary">
+                  Insurers will not cover anonymous AI. No identity means no policy and unlimited exposure.
+                </p>
+              </GlassCard>
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* The Solution: Trust Stack */}
+        <section className="bg-muted/30 py-16 md:py-24" id="trust-stack">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-16">
+                <Badge className="mb-4 px-3 py-1 text-xs bg-primary/10 border-primary/30">
+                  THE SOLUTION
+                </Badge>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  The <GradientText>Trust Stack</GradientText>
+                </h2>
+                <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
+                  Four layers that transform rogue AI into compliant, insurable infrastructure
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Layer 1 */}
+                <GlassCard className="relative overflow-hidden border-success/50" id="registry">
+                  <Badge className="absolute top-4 right-4 bg-success/20 text-success border-success/30">
+                    LIVE NOW
+                  </Badge>
+                  <div className="flex items-start gap-4">
+                    <div className="h-14 w-14 rounded-xl bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                      <Fingerprint className="h-7 w-7 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Layer 1: Registry</h3>
+                      <p className="text-foreground-secondary mb-4">
+                        ERC-8004 identity standard. Every agent gets an on-chain identity with verifiable metadata, ownership, and attestations.
+                      </p>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-success" />
+                          <span>On-chain agent registration</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-success" />
+                          <span>Third-party attestations</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-success" />
+                          <span>GraphQL API via The Graph</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </GlassCard>
+
+                {/* Layer 2 */}
+                <GlassCard className="relative overflow-hidden" id="governor">
+                  <Badge className="absolute top-4 right-4 bg-primary/20 text-primary border-primary/30">
+                    Q2 2026
+                  </Badge>
+                  <div className="flex items-start gap-4">
+                    <div className="h-14 w-14 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
+                      <Scale className="h-7 w-7 text-foreground-secondary" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Layer 2: Governor</h3>
+                      <p className="text-foreground-secondary mb-4">
+                        AP2 policy engine. Define what agents can and cannot do. Enforce boundaries before violations happen.
+                      </p>
+                      <ul className="space-y-2 text-sm text-foreground-secondary">
+                        <li className="flex items-center gap-2">
+                          <div className="h-4 w-4 rounded-full border border-muted-foreground/30" />
+                          <span>Policy enforcement points</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="h-4 w-4 rounded-full border border-muted-foreground/30" />
+                          <span>Permission management</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="h-4 w-4 rounded-full border border-muted-foreground/30" />
+                          <span>Audit logging</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </GlassCard>
+
+                {/* Layer 3 */}
+                <GlassCard className="relative overflow-hidden" id="underwriter">
+                  <Badge className="absolute top-4 right-4 bg-muted text-foreground-secondary border-muted">
+                    Q3 2026
+                  </Badge>
+                  <div className="flex items-start gap-4">
+                    <div className="h-14 w-14 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
+                      <FileCheck className="h-7 w-7 text-foreground-secondary" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Layer 3: Underwriter</h3>
+                      <p className="text-foreground-secondary mb-4">
+                        Risk scoring and compliance certification. ISO 42001 alignment. The data insurers need.
+                      </p>
+                      <ul className="space-y-2 text-sm text-foreground-secondary">
+                        <li className="flex items-center gap-2">
+                          <div className="h-4 w-4 rounded-full border border-muted-foreground/30" />
+                          <span>Trust score computation</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="h-4 w-4 rounded-full border border-muted-foreground/30" />
+                          <span>ISO 42001 compliance</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="h-4 w-4 rounded-full border border-muted-foreground/30" />
+                          <span>Insurance API</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </GlassCard>
+
+                {/* Layer 4 */}
+                <GlassCard className="relative overflow-hidden border-success/50" id="proof">
+                  <Badge className="absolute top-4 right-4 bg-success/20 text-success border-success/30">
+                    REFERENCE
+                  </Badge>
+                  <div className="flex items-start gap-4">
+                    <div className="h-14 w-14 rounded-xl bg-gradient-success flex items-center justify-center flex-shrink-0">
+                      <Building2 className="h-7 w-7 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Layer 4: Proof</h3>
+                      <p className="text-foreground-secondary mb-4">
+                        x3o.ai Command Center. A production implementation showing the full Trust Stack in action.
+                      </p>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-success" />
+                          <span>Multi-agent orchestration</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-success" />
+                          <span>Real-time monitoring</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-success" />
+                          <span>Enterprise dashboard</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </GlassCard>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Who It's For */}
         <section className="container mx-auto px-4 py-16 md:py-24">
-          <GlassCard elevated className="max-w-4xl mx-auto bg-gradient-to-br from-primary/5 via-background to-primary/5">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Built for <GradientText>Enterprise</GradientText>
+              </h2>
+              <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
+                If you are deploying AI agents at scale, you need Trust Stack
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <GlassCard>
+                <Users className="h-10 w-10 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-2">AI-First Companies</h3>
+                <p className="text-foreground-secondary">
+                  Building products with AI agents? Register them before your competitors get regulated and you do not.
+                </p>
+              </GlassCard>
+
+              <GlassCard>
+                <Globe className="h-10 w-10 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-2">EU Market Access</h3>
+                <p className="text-foreground-secondary">
+                  Selling into Europe? EU AI Act compliance is not optional. Trust Stack provides the audit trail.
+                </p>
+              </GlassCard>
+
+              <GlassCard>
+                <Cpu className="h-10 w-10 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-2">MCP Developers</h3>
+                <p className="text-foreground-secondary">
+                  Building MCP servers? Register them with verifiable identity and build trust with enterprise buyers.
+                </p>
+              </GlassCard>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="container mx-auto px-4 py-16 md:py-24">
+          <GlassCard elevated className="max-w-4xl mx-auto bg-gradient-to-br from-primary/10 via-background to-primary/5">
             <div className="p-8 md:p-12 text-center">
               <Badge className="mb-4 px-3 py-1 text-xs bg-warning/10 border-warning/30 text-warning">
-                LIMITED TO 50 COMPANIES
+                FOUNDING COHORT - 50 COMPANIES
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Join the <GradientText>Founding Cohort</GradientText>
+                Get <GradientText>Ahead of Regulation</GradientText>
               </h2>
               <p className="text-foreground-secondary text-lg mb-8 max-w-2xl mx-auto">
-                Early access to the Trust Stack. Shape the future of compliant AI infrastructure.
+                Companies in the founding cohort get direct input on the Trust Stack roadmap, priority support, and locked-in pricing.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <GradientButton size="lg" glow className="text-base px-8 h-12" asChild>
+                <GradientButton size="lg" glow className="text-base px-8 h-14 text-lg" asChild>
                   <Link href="/early-access">
-                    <Shield className="mr-2 h-4 w-4" />
+                    <Shield className="mr-2 h-5 w-5" />
                     Apply for Early Access
                   </Link>
                 </GradientButton>
-                <Button size="lg" variant="outline" className="text-base px-8 h-12 border-primary/20 hover:border-primary/40" asChild>
-                  <Link href="/discover">
-                    Browse Registry
+                <Button size="lg" variant="outline" className="text-base px-8 h-14 text-lg border-primary/20 hover:border-primary/40" asChild>
+                  <Link href="/register">
+                    Register an Agent Now
                   </Link>
                 </Button>
               </div>
@@ -353,36 +345,35 @@ export default function HomePage() {
             <div>
               <h3 className="font-semibold mb-3">OpenConductor</h3>
               <p className="text-sm text-muted-foreground">
-                Trust infrastructure for AI agents. Identity, governance, and liability for the agentic era.
+                The identity layer for AI agents. Registration, governance, and compliance for the agentic era.
               </p>
             </div>
             <div>
               <h3 className="font-semibold mb-3">Trust Stack</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/discover" className="hover:text-foreground transition-colors">Registry</Link></li>
-                <li><span className="text-muted-foreground/50">Governor (Coming Q2)</span></li>
-                <li><span className="text-muted-foreground/50">Underwriter (Coming Q3)</span></li>
+                <li><Link href="/register" className="hover:text-foreground transition-colors">Register Agent</Link></li>
+                <li><Link href="/discover" className="hover:text-foreground transition-colors">Server Registry</Link></li>
+                <li><Link href="/early-access" className="hover:text-foreground transition-colors">Early Access</Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-3">Resources</h3>
+              <h3 className="font-semibold mb-3">Developers</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="https://github.com/epicmotionSD/openconductor" className="hover:text-foreground transition-colors">GitHub</a></li>
-                <li><a href="https://modelcontextprotocol.io" className="hover:text-foreground transition-colors">MCP Docs</a></li>
-                <li><Link href="/submit" className="hover:text-foreground transition-colors">Submit Server</Link></li>
+                <li><a href="https://sepolia.basescan.org/address/0xf8d7044d657b602194fb5745c614beb35d5d898a" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Contract</a></li>
+                <li><a href="https://thegraph.com/studio/subgraph/openconductor/" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Subgraph</a></li>
+                <li><a href="https://github.com/epicmotionSD/openconductor" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">GitHub</a></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-3">Company</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/early-access" className="hover:text-foreground transition-colors">Early Access</Link></li>
                 <li><a href="https://discord.gg/Ya5TPWeS" className="hover:text-foreground transition-colors">Discord</a></li>
                 <li><a href="https://x.com/SDexecution" className="hover:text-foreground transition-colors">X/Twitter</a></li>
               </ul>
             </div>
           </div>
           <div className="border-t pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024-2026 OpenConductor. Building the trust computer for AI agents.</p>
+            <p>&copy; 2024-2026 OpenConductor. The identity layer for AI agents.</p>
           </div>
         </div>
       </footer>

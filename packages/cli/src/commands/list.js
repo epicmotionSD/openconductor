@@ -12,10 +12,11 @@ export async function listCommand(options) {
   try {
     const platformConfig = resolvePlatformConfig(options);
     platformLabel = platformConfig.label;
-    const configManager = new ConfigManager(platformConfig.configPath);
+    const configManager = new ConfigManager(platformConfig.configPath, platformConfig);
     const config = await configManager.readConfig();
+    const serverMap = configManager.getServers(config);
 
-    if (!config.mcpServers || Object.keys(config.mcpServers).length === 0) {
+    if (Object.keys(serverMap).length === 0) {
       logger.info('No MCP servers installed.');
       console.log();
       logger.info('Discover and install servers with:');
@@ -27,7 +28,7 @@ export async function listCommand(options) {
       return;
     }
 
-    const installedServers = Object.keys(config.mcpServers);
+    const installedServers = Object.keys(serverMap);
     const spinner = ora(`Checking status of ${installedServers.length} servers...`).start();
 
     // Get detailed info from registry for installed servers
@@ -39,7 +40,7 @@ export async function listCommand(options) {
       try {
         const serverInfo = await api.getServer(serverId);
         const installStatus = await installer.getInstallStatus(serverInfo);
-        const serverConfig = config.mcpServers[serverId];
+        const serverConfig = serverMap[serverId];
         
         serverDetails.push({
           ...serverInfo,
@@ -53,9 +54,9 @@ export async function listCommand(options) {
           slug: serverId,
           name: serverId,
           category: 'custom',
-          config: config.mcpServers[serverId],
+          config: serverMap[serverId],
           installStatus: { installed: true, method: 'unknown' },
-          isRunning: await checkServerRunning(config.mcpServers[serverId]),
+          isRunning: await checkServerRunning(serverMap[serverId]),
           isRegistryServer: false
         });
       }

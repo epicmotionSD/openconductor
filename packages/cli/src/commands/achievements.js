@@ -168,7 +168,7 @@ export async function achievementsCommand(options = {}) {
   try {
     // Get user's install history
     const config = await configManager.readConfig();
-    const installedServers = Object.keys(config.mcpServers || {});
+    const installedServers = Object.keys(configManager.getServers(config));
 
     // Calculate achievements
     const userAchievements = calculateAchievements(installedServers);

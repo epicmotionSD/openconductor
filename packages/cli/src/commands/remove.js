@@ -11,7 +11,7 @@ import { logger } from '../utils/logger.js';
 export async function removeCommand(serverSlug, options) {
   try {
     const platformConfig = resolvePlatformConfig(options);
-    const configManager = new ConfigManager(platformConfig.configPath);
+    const configManager = new ConfigManager(platformConfig.configPath, platformConfig);
     const api = new ApiClient();
     const installer = new Installer();
 

@@ -11,7 +11,7 @@ import { logger } from '../utils/logger.js';
 export async function updateCommand(serverSlug, options) {
   try {
     const platformConfig = resolvePlatformConfig(options);
-    const configManager = new ConfigManager(platformConfig.configPath);
+    const configManager = new ConfigManager(platformConfig.configPath, platformConfig);
     const api = new ApiClient();
     const installer = new Installer();
 
@@ -255,7 +255,7 @@ export async function updateCommand(serverSlug, options) {
  */
 export async function checkUpdates(options = {}) {
   const platformConfig = resolvePlatformConfig(options);
-  const configManager = new ConfigManager(platformConfig.configPath);
+  const configManager = new ConfigManager(platformConfig.configPath, platformConfig);
   const api = new ApiClient();
   
   try {

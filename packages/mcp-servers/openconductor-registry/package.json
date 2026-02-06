@@ -1,6 +1,6 @@
 {
   "name": "@openconductor/mcp-registry",
-  "version": "1.1.1",
+  "version": "0.0.1",
   "description": "MCP server for discovering and searching OpenConductor's registry of 190+ MCP servers and pre-configured stacks",
   "type": "module",
   "main": "dist/index.js",

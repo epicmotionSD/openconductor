@@ -12,7 +12,7 @@ export async function initCommand(options) {
     logger.header('🚀 Initialize OpenConductor Configuration');
 
     const platformConfig = resolvePlatformConfig(options);
-    const configManager = new ConfigManager(platformConfig.configPath);
+    const configManager = new ConfigManager(platformConfig.configPath, platformConfig);
     const configInfo = configManager.getConfigInfo();
 
     // Check if config already exists
@@ -265,7 +265,8 @@ async function showExistingConfig(configManager) {
   
   try {
     const config = await configManager.readConfig();
-    const installedServers = Object.keys(config.mcpServers || {});
+    const serverMap = configManager.getServers(config);
+    const installedServers = Object.keys(serverMap);
     
     spinner.stop();
     
@@ -278,8 +279,9 @@ async function showExistingConfig(configManager) {
     if (installedServers.length > 0) {
       console.log(chalk.bold('Installed Servers:'));
       installedServers.forEach(serverName => {
-        const serverConfig = config.mcpServers[serverName];
-        console.log(`  ${chalk.cyan(serverName)}: ${serverConfig.command}`);
+        const serverConfig = serverMap[serverName];
+        const serverSummary = serverConfig.command || serverConfig.url || 'custom config';
+        console.log(`  ${chalk.cyan(serverName)}: ${serverSummary}`);
       });
       console.log();
     }
