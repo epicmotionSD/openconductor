@@ -1,0 +1,39 @@
+﻿type Agent @entity {
+  id: ID!                          # Token ID as string
+  tokenId: BigInt!                 # Token ID
+  owner: Bytes!                    # Current owner address
+  metadataURI: String!             # IPFS/HTTP URI to metadata
+  trustScore: Int!                 # 1-10 trust score
+  verificationTier: Int!           # 0=Unverified, 1=Basic, 2=Standard, 3=Advanced, 4=Enterprise
+  isActive: Boolean!               # Whether agent is active
+  registeredAt: BigInt!            # Block timestamp
+  registeredBlock: BigInt!         # Block number
+  updatedAt: BigInt!               # Last update timestamp
+  attestations: [Attestation!]! @derivedFrom(field: "agent")
+  attestationCount: Int!           # Count of attestations
+}
+
+type Attestation @entity {
+  id: ID!                          # agent-attestor combination
+  agent: Agent!                    # Reference to agent
+  attestor: Bytes!                 # Address of attestor
+  attestorName: String!            # Name/identifier from attestation
+  attestationURI: String!          # URI to attestation data
+  createdAt: BigInt!               # Block timestamp
+  blockNumber: BigInt!             # Block number
+}
+
+type RegistryStats @entity {
+  id: ID!                          # Singleton "stats"
+  totalAgents: BigInt!             # Total registered agents
+  activeAgents: BigInt!            # Active agents
+  totalAttestations: BigInt!       # Total attestations
+  lastUpdated: BigInt!             # Last update timestamp
+}
+
+type DailyStats @entity {
+  id: ID!                          # Date string YYYY-MM-DD
+  date: BigInt!                    # Timestamp of day start
+  registrations: BigInt!           # Agents registered that day
+  attestations: BigInt!            # Attestations added that day
+}

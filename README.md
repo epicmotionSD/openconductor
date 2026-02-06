@@ -1,4 +1,4 @@
-<p align="center">
+﻿<p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/brand/banner-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="assets/brand/banner-light.svg">
@@ -19,10 +19,10 @@
 </p>
 
 <p align="center">
-  <a href="https://openconductor.ai">Website</a> •
-  <a href="#quick-start">Quick Start</a> •
-  <a href="https://openconductor.ai/discover">Browse 180+ Servers</a> •
-  <a href="https://openconductor.ai/stacks">Stacks</a> •
+  <a href="https://openconductor.ai">Website</a> â€¢
+  <a href="#quick-start">Quick Start</a> â€¢
+  <a href="https://openconductor.ai/discover">Browse 180+ Servers</a> â€¢
+  <a href="https://openconductor.ai/stacks">Stacks</a> â€¢
   <a href="https://discord.gg/openconductor">Discord</a>
 </p>
 
@@ -30,7 +30,7 @@
 
 ## See the Difference
 
-**Before** — Edit `claude_desktop_config.json` manually:
+**Before** â€” Edit `claude_desktop_config.json` manually:
 
 ```json
 {
@@ -46,7 +46,7 @@
 
 Complex. Error-prone. Manual editing.
 
-**After** — One command:
+**After** â€” One command:
 
 ```bash
 openconductor install github-mcp
@@ -99,7 +99,7 @@ Everything you need to get started.
 openconductor stack install essential
 ```
 
-[Browse all stacks →](https://openconductor.ai/stacks)
+[Browse all stacks â†’](https://openconductor.ai/stacks)
 
 ---
 
@@ -129,11 +129,11 @@ openconductor analytics             # Analytics preferences
 
 | Client         | Status          |
 | -------------- | --------------- |
-| Claude Desktop | ✅ Full support |
-| Cursor         | ✅ Full support |
-| Cline          | ✅ Full support |
-| Windsurf       | ✅ Full support |
-| Continue       | 🔜 Coming soon  |
+| Claude Desktop | âœ… Full support |
+| Cursor         | âœ… Full support |
+| Cline          | âœ… Full support |
+| Windsurf       | âœ… Full support |
+| Continue       | ðŸ”œ Coming soon  |
 
 ---
 
@@ -141,11 +141,11 @@ openconductor analytics             # Analytics preferences
 
 |                      |   Manual Config   |   OpenConductor    |
 | -------------------- | :---------------: | :----------------: |
-| Edit JSON files      |    ❌ Required    |      ✅ Never      |
-| Remember syntax      |   ❌ Every time   |     ✅ Handled     |
-| Multi-client support | ❌ Configure each |    ✅ Automatic    |
-| Discover servers     | ❌ Google around  | ✅ Built-in search |
-| Pre-built workflows  |      ❌ DIY       |     ✅ Stacks      |
+| Edit JSON files      |    âŒ Required    |      âœ… Never      |
+| Remember syntax      |   âŒ Every time   |     âœ… Handled     |
+| Multi-client support | âŒ Configure each |    âœ… Automatic    |
+| Discover servers     | âŒ Google around  | âœ… Built-in search |
+| Pre-built workflows  |      âŒ DIY       |     âœ… Stacks      |
 | Time to install      |      ~5 min       |      ~10 sec       |
 
 ---
@@ -163,7 +163,7 @@ The largest registry of MCP servers, all verified and tested.
 | **AI & LLMs**        | openai, replicate, huggingface                 |
 | **Data & Analytics** | bigquery, snowflake, dbt                       |
 
-[Browse all servers →](https://openconductor.ai/discover)
+[Browse all servers â†’](https://openconductor.ai/discover)
 
 ---
 
@@ -201,28 +201,29 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ## Community
 
-- 🌐 [Website](https://openconductor.ai)
-- 💬 [Discord](https://discord.gg/openconductor)
-- 🐦 [Twitter/X](https://twitter.com/openconductor)
-- 🐛 [Issues](https://github.com/epicmotionSD/openconductor/issues)
+- ðŸŒ [Website](https://openconductor.ai)
+- ðŸ’¬ [Discord](https://discord.gg/openconductor)
+- ðŸ¦ [Twitter/X](https://twitter.com/openconductor)
+- ðŸ› [Issues](https://github.com/epicmotionSD/openconductor/issues)
 
 ---
 
 ## Resources
 
-- ⭐ [Awesome MCP](https://github.com/epicmotionSD/awesome-mcp) - Curated list of 220+ MCP servers, tools, and resources
-- 📖 [MCP Specification](https://spec.modelcontextprotocol.io/) - Official Model Context Protocol docs
-- 📚 [OpenConductor Guides](https://openconductor.ai/docs) - Tutorials and integration guides
-- 🎓 [MCP Quickstart](https://modelcontextprotocol.io/quickstart) - Get started in 5 minutes
+- â­ [Awesome MCP](https://github.com/epicmotionSD/awesome-mcp) - Curated list of 220+ MCP servers, tools, and resources
+- ðŸ“– [MCP Specification](https://spec.modelcontextprotocol.io/) - Official Model Context Protocol docs
+- ðŸ“š [OpenConductor Guides](https://openconductor.ai/docs) - Tutorials and integration guides
+- ðŸŽ“ [MCP Quickstart](https://modelcontextprotocol.io/quickstart) - Get started in 5 minutes
 
 ---
 
 ## License
 
-MIT © [OpenConductor](https://openconductor.ai)
+MIT Â© [OpenConductor](https://openconductor.ai)
 
 ---
 
 <p align="center">
   <sub>Built for developers who'd rather ship than edit JSON files.</sub>
 </p>
+

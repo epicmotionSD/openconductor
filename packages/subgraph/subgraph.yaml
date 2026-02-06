@@ -1,0 +1,39 @@
+﻿specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ERC8004Registry
+    network: base-sepolia
+    source:
+      address: "0xf8d7044d657b602194fb5745c614beb35d5d898a"
+      abi: ERC8004
+      startBlock: 21271847
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Agent
+        - Attestation
+        - RegistryStats
+        - DailyStats
+      abis:
+        - name: ERC8004
+          file: ./abis/ERC8004.json
+      eventHandlers:
+        - event: AgentRegistered(indexed uint256,indexed address,string,uint256)
+          handler: handleAgentRegistered
+        - event: AgentUpdated(indexed uint256,string,uint256)
+          handler: handleAgentUpdated
+        - event: TrustScoreUpdated(indexed uint256,uint8,uint8,indexed address)
+          handler: handleTrustScoreUpdated
+        - event: TierUpgraded(indexed uint256,uint8,uint8,indexed address)
+          handler: handleTierUpgraded
+        - event: AttestationAdded(indexed uint256,indexed address,string,string)
+          handler: handleAttestationAdded
+        - event: AgentDeactivated(indexed uint256)
+          handler: handleAgentDeactivated
+        - event: AgentReactivated(indexed uint256)
+          handler: handleAgentReactivated
+      file: ./src/mapping.ts

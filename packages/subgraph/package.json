@@ -1,0 +1,17 @@
+﻿{
+  "name": "@openconductor/subgraph",
+  "version": "0.0.1",
+  "description": "Subgraph for ERC-8004 Agent Identity Registry",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy:studio": "graph deploy --studio openconductor-registry",
+    "deploy:hosted": "graph deploy --product hosted-service epicmotionsd/openconductor-registry",
+    "create:local": "graph create --node http://localhost:8020/ openconductor/registry",
+    "deploy:local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 openconductor/registry"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.68.0",
+    "@graphprotocol/graph-ts": "^0.32.0"
+  }
+}
