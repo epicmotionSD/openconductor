@@ -1,7 +1,8 @@
-﻿import Link from 'next/link'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { SiteHeader } from '@/components/navigation/site-header'
+import { SiteFooter } from '@/components/navigation/site-footer'
 import { GradientText } from '@/components/ui/gradient-text'
 import { GradientButton } from '@/components/ui/gradient-button'
 import { GlassCard } from '@/components/ui/glass-card'
@@ -95,7 +96,7 @@ export default function HomePage() {
                 <FileWarning className="h-10 w-10 text-destructive mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Regulatory Risk</h3>
                 <p className="text-foreground-secondary">
-                  EU AI Act requires high-risk AI systems to be traceable. Violations: up to EUR 35M or 7% global revenue.
+                  EU AI Act requires high-risk AI systems to be traceable. Violations: up to €35M or 7% global revenue.
                 </p>
               </GlassCard>
 
@@ -263,6 +264,18 @@ export default function HomePage() {
                   </div>
                 </GlassCard>
               </div>
+
+              {/* Learn More Link */}
+              <div className="text-center mt-12">
+                <Link
+                  href="/trust-stack"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+                >
+                  <Shield className="h-4 w-4" />
+                  Deep dive into the Trust Stack
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -338,47 +351,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t py-12 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="font-semibold mb-3">OpenConductor</h3>
-              <p className="text-sm text-muted-foreground">
-                The identity layer for AI agents. Registration, governance, and compliance for the agentic era.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-3">Trust Stack</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/register" className="hover:text-foreground transition-colors">Register Agent</Link></li>
-                <li><Link href="/discover" className="hover:text-foreground transition-colors">Server Registry</Link></li>
-                <li><Link href="/early-access" className="hover:text-foreground transition-colors">Early Access</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-3">Developers</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="https://sepolia.basescan.org/address/0xf8d7044d657b602194fb5745c614beb35d5d898a" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Contract</a></li>
-                <li><a href="https://thegraph.com/studio/subgraph/openconductor/" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Subgraph</a></li>
-                <li><a href="https://github.com/epicmotionSD/openconductor" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">GitHub</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-3">Company</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="https://discord.gg/Ya5TPWeS" className="hover:text-foreground transition-colors">Discord</a></li>
-                <li><a href="https://x.com/SDexecution" className="hover:text-foreground transition-colors">X/Twitter</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024-2026 OpenConductor. The identity layer for AI agents.</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   )
 }
-
-

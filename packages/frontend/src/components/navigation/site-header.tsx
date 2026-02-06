@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Menu, ChevronDown, X, Shield, FileCheck, Scale, Zap } from 'lucide-react'
+import { Menu, ChevronDown, X, Shield, ArrowRight } from 'lucide-react'
 import { PROJECT_CONFIG } from '@openconductor/shared'
 import { GradientText } from '@/components/ui/gradient-text'
 
@@ -49,40 +49,44 @@ export function SiteHeader({ variant = 'default' }: SiteHeaderProps) {
                 </button>
                 <div className="absolute left-0 top-full mt-2 w-72 rounded-xl border border-primary/20 bg-background/95 backdrop-blur-md shadow-lg opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto transition">
                   <div className="p-2">
-                    <Link href="/#trust-stack" className="flex items-start gap-3 px-3 py-2 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-muted/60 transition-colors">
+                    <Link href="/trust-stack" className="flex items-start gap-3 px-3 py-2 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-muted/60 transition-colors">
                       <Shield className="h-4 w-4 mt-0.5 text-primary" />
                       <div>
                         <div className="font-medium text-foreground">Overview</div>
                         <div className="text-xs text-muted-foreground">4-layer compliance infrastructure</div>
                       </div>
                     </Link>
-                    <Link href="/#registry" className="flex items-start gap-3 px-3 py-2 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-muted/60 transition-colors">
+                    <Link href="/trust-stack#registry" className="flex items-start gap-3 px-3 py-2 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-muted/60 transition-colors">
                       <div className="h-4 w-4 mt-0.5 rounded bg-green-500/20 text-green-400 text-[10px] font-bold flex items-center justify-center">1</div>
                       <div>
                         <div className="font-medium text-foreground">Registry <span className="text-[10px] text-green-400 ml-1">LIVE</span></div>
                         <div className="text-xs text-muted-foreground">ERC-8004 on-chain identity</div>
                       </div>
                     </Link>
-                    <Link href="/#governor" className="flex items-start gap-3 px-3 py-2 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-muted/60 transition-colors">
+                    <Link href="/trust-stack#governor" className="flex items-start gap-3 px-3 py-2 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-muted/60 transition-colors">
                       <div className="h-4 w-4 mt-0.5 rounded bg-yellow-500/20 text-yellow-400 text-[10px] font-bold flex items-center justify-center">2</div>
                       <div>
                         <div className="font-medium text-foreground">Governor <span className="text-[10px] text-yellow-400 ml-1">Q2</span></div>
                         <div className="text-xs text-muted-foreground">AP2 policy engine</div>
                       </div>
                     </Link>
-                    <Link href="/#underwriter" className="flex items-start gap-3 px-3 py-2 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-muted/60 transition-colors">
+                    <Link href="/trust-stack#underwriter" className="flex items-start gap-3 px-3 py-2 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-muted/60 transition-colors">
                       <div className="h-4 w-4 mt-0.5 rounded bg-yellow-500/20 text-yellow-400 text-[10px] font-bold flex items-center justify-center">3</div>
                       <div>
                         <div className="font-medium text-foreground">Underwriter <span className="text-[10px] text-yellow-400 ml-1">Q3</span></div>
                         <div className="text-xs text-muted-foreground">Risk scoring & insurance</div>
                       </div>
                     </Link>
-                    <Link href="/#proof" className="flex items-start gap-3 px-3 py-2 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-muted/60 transition-colors">
+                    <Link href="/trust-stack#proof" className="flex items-start gap-3 px-3 py-2 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-muted/60 transition-colors">
                       <div className="h-4 w-4 mt-0.5 rounded bg-blue-500/20 text-blue-400 text-[10px] font-bold flex items-center justify-center">4</div>
                       <div>
                         <div className="font-medium text-foreground">Proof <span className="text-[10px] text-blue-400 ml-1">REF</span></div>
                         <div className="text-xs text-muted-foreground">x3o.ai Command Center</div>
                       </div>
+                    </Link>
+                    <div className="border-t border-primary/10 my-2" />
+                    <Link href="/trust-stack" className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-primary hover:bg-primary/10 transition-colors">
+                      Deep Dive <ArrowRight className="h-3 w-3" />
                     </Link>
                   </div>
                 </div>
@@ -161,7 +165,7 @@ export function SiteHeader({ variant = 'default' }: SiteHeaderProps) {
             <Link href="/register" className="text-sm font-medium text-foreground-secondary hover:text-primary transition-colors">
               Register Agent
             </Link>
-            <Link href="/#trust-stack" className="text-sm font-medium text-foreground-secondary hover:text-primary transition-colors">
+            <Link href="/trust-stack" className="text-sm font-medium text-foreground-secondary hover:text-primary transition-colors">
               Trust Stack
             </Link>
           </nav>
@@ -190,19 +194,19 @@ export function SiteHeader({ variant = 'default' }: SiteHeaderProps) {
 
             <div className="space-y-2">
               <div className="text-xs uppercase tracking-widest text-muted-foreground">Trust Stack</div>
-              <Link href="/#trust-stack" className="block text-sm text-foreground-secondary" onClick={() => setIsMobileOpen(false)}>
-                Overview
+              <Link href="/trust-stack" className="block text-sm text-foreground font-medium" onClick={() => setIsMobileOpen(false)}>
+                Overview →
               </Link>
-              <Link href="/#registry" className="flex items-center gap-2 text-sm text-foreground-secondary" onClick={() => setIsMobileOpen(false)}>
+              <Link href="/trust-stack#registry" className="flex items-center gap-2 text-sm text-foreground-secondary" onClick={() => setIsMobileOpen(false)}>
                 Layer 1: Registry <span className="text-[10px] text-green-400">LIVE</span>
               </Link>
-              <Link href="/#governor" className="flex items-center gap-2 text-sm text-foreground-secondary" onClick={() => setIsMobileOpen(false)}>
+              <Link href="/trust-stack#governor" className="flex items-center gap-2 text-sm text-foreground-secondary" onClick={() => setIsMobileOpen(false)}>
                 Layer 2: Governor <span className="text-[10px] text-yellow-400">Q2</span>
               </Link>
-              <Link href="/#underwriter" className="flex items-center gap-2 text-sm text-foreground-secondary" onClick={() => setIsMobileOpen(false)}>
+              <Link href="/trust-stack#underwriter" className="flex items-center gap-2 text-sm text-foreground-secondary" onClick={() => setIsMobileOpen(false)}>
                 Layer 3: Underwriter <span className="text-[10px] text-yellow-400">Q3</span>
               </Link>
-              <Link href="/#proof" className="flex items-center gap-2 text-sm text-foreground-secondary" onClick={() => setIsMobileOpen(false)}>
+              <Link href="/trust-stack#proof" className="flex items-center gap-2 text-sm text-foreground-secondary" onClick={() => setIsMobileOpen(false)}>
                 Layer 4: Proof <span className="text-[10px] text-blue-400">REF</span>
               </Link>
             </div>
