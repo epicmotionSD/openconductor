@@ -59,6 +59,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         s.repository_name,
         s.npm_package,
         s.pypi_package,
+        s.install_command,
         s.config_example,
         s.docs_url,
         s.homepage_url,
@@ -113,6 +114,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         installs: row.cli_installs || 0,
         downloadsWeekly: row.npm_downloads_weekly || 0,
         downloadsTotal: row.npm_downloads_total || 0
+      },
+      installation: {
+        npm: row.npm_package ? `npm install -g ${row.npm_package}` : undefined,
+        manual: row.install_command || undefined,
+        docker: undefined
       },
       packages: {
         npm: row.npm_package ? { name: row.npm_package } : undefined,
