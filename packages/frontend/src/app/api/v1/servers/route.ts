@@ -75,6 +75,8 @@ export async function GET(request: NextRequest) {
         s.repository_owner,
         s.repository_name,
         s.npm_package,
+        s.pypi_package,
+        s.install_command,
         s.verified,
         s.featured,
         st.github_stars,
@@ -114,10 +116,17 @@ export async function GET(request: NextRequest) {
         stars: row.github_stars || 0,
         installs: row.cli_installs || 0
       },
+      installation: {
+        npm: row.npm_package ? `npm install -g ${row.npm_package}` : undefined,
+        manual: row.install_command || undefined
+      },
       packages: {
         npm: row.npm_package ? {
           name: row.npm_package,
           downloadsTotal: row.npm_downloads_total || 0
+        } : undefined,
+        pypi: row.pypi_package ? {
+          name: row.pypi_package
         } : undefined
       },
       verified: row.verified,

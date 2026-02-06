@@ -55,6 +55,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         s.repository_owner,
         s.repository_name,
         s.npm_package,
+        s.pypi_package,
+        s.install_command,
         s.verified,
         s.featured,
         st.github_stars,
@@ -109,7 +111,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         lastCommit: new Date().toISOString()
       },
       installation: {
-        npm: row.npm_package ? `npm install -g ${row.npm_package}` : undefined
+        npm: row.npm_package ? `npm install -g ${row.npm_package}` : undefined,
+        manual: row.install_command || undefined
+      },
+      packages: {
+        npm: row.npm_package ? { name: row.npm_package } : undefined,
+        pypi: row.pypi_package ? { name: row.pypi_package } : undefined
       },
       verified: row.verified,
       featured: row.featured
