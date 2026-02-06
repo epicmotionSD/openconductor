@@ -3,6 +3,7 @@ import ora from 'ora';
 import inquirer from 'inquirer';
 import { Listr } from 'listr2';
 import { ConfigManager } from '../lib/config-manager.js';
+import { resolvePlatformConfig } from '../lib/platforms.js';
 import { logger } from '../utils/logger.js';
 
 export async function initCommand(options) {
@@ -10,7 +11,8 @@ export async function initCommand(options) {
     console.log();
     logger.header('🚀 Initialize OpenConductor Configuration');
 
-    const configManager = new ConfigManager(options.config);
+    const platformConfig = resolvePlatformConfig(options);
+    const configManager = new ConfigManager(platformConfig.configPath);
     const configInfo = configManager.getConfigInfo();
 
     // Check if config already exists
@@ -47,6 +49,7 @@ export async function initCommand(options) {
     console.log(chalk.bold('🖥️  Platform Information:'));
     console.log(`  OS: ${process.platform}`);
     console.log(`  Config location: ${logger.path(configInfo.path)}`);
+    console.log(`  Target: ${platformConfig.label}`);
     console.log(`  Node.js: ${process.version}`);
     console.log();
 
@@ -136,7 +139,7 @@ export async function initCommand(options) {
     // Show what was created
     console.log(chalk.bold('📁 Configuration Details:'));
     console.log(`  Location: ${logger.path(context.configPath)}`);
-    console.log(`  Platform: ${configInfo.platform}`);
+    console.log(`  Platform: ${platformConfig.label}`);
     
     if (context.backupPath) {
       console.log(`  Backup: ${logger.path(context.backupPath)}`);
@@ -153,7 +156,7 @@ export async function initCommand(options) {
         logger.progress(`   ${logger.code(`openconductor install ${server.slug}`)}`);
       });
       
-      logger.progress('2. Restart Claude Desktop');
+      logger.progress(`2. Restart ${platformConfig.label}`);
       logger.progress('3. Start using your MCP servers!');
     } else {
       console.log(chalk.bold('🚀 Next Steps:'));

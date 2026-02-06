@@ -6,12 +6,40 @@ import { ApiClient } from '../lib/api-client.js';
 import { ConfigManager } from '../lib/config-manager.js';
 import { Installer } from '../lib/installer.js';
 import { PortManager } from '../lib/port-manager.js';
+import { resolvePlatformConfig } from '../lib/platforms.js';
 import { logger } from '../utils/logger.js';
+
+function parseNpmPackage(installCommand) {
+  if (!installCommand || typeof installCommand !== 'string') {
+    return undefined;
+  }
+
+  const match = installCommand.match(/npm install (?:-g )?(@?[\w-/]+)/);
+  return match ? match[1] : undefined;
+}
+
+function resolveInstallInfo(server) {
+  const installation = server.installation || {};
+  const npmPackage = server.packages?.npm?.name || parseNpmPackage(installation.npm);
+  const dockerImage = server.packages?.docker?.image || installation.docker;
+
+  let method = null;
+  if (npmPackage) {
+    method = 'npm';
+  } else if (dockerImage) {
+    method = 'docker';
+  } else if (installation.manual) {
+    method = 'manual';
+  }
+
+  return { method, npmPackage, dockerImage };
+}
 
 export async function installCommand(serverSlug, options) {
   try {
     const api = new ApiClient();
-    const configManager = new ConfigManager(options.config);
+    const platformConfig = resolvePlatformConfig(options);
+    const configManager = new ConfigManager(platformConfig.configPath);
     const installer = new Installer();
     const portManager = new PortManager();
 
@@ -54,6 +82,26 @@ export async function installCommand(serverSlug, options) {
     
     spinner.stop();
 
+    const installInfo = resolveInstallInfo(server);
+    if (!installInfo.method) {
+      logger.error('No supported installation method found for this server in the registry.');
+      if (server.documentation?.docsUrl || server.repository?.url) {
+        logger.info('Check installation docs:');
+        logger.progress(logger.link(server.documentation?.docsUrl || server.repository?.url));
+      }
+      process.exit(1);
+    }
+
+    if (!server.installation) {
+      server.installation = {};
+    }
+    if (installInfo.method === 'npm' && !server.installation.npm) {
+      server.installation.npm = installInfo.npmPackage;
+    }
+    if (installInfo.method === 'docker' && !server.installation.docker) {
+      server.installation.docker = installInfo.dockerImage;
+    }
+
     // Check if already installed
     const isAlreadyInstalled = await configManager.isInstalled(server.slug);
     if (isAlreadyInstalled && !options.force) {
@@ -83,18 +131,18 @@ export async function installCommand(serverSlug, options) {
     // Display installation details
     console.log(chalk.bold('Installation Plan:'));
     console.log(`  Server: ${chalk.cyan(server.name)} ${server.verified ? chalk.green('✓ verified') : chalk.yellow('⚠ unverified')}`);
-    console.log(`  Method: ${server.packages.npm ? 'npm' : server.packages.docker ? 'docker' : 'manual'}`);
+    console.log(`  Method: ${installInfo.method}`);
     console.log(`  Category: ${logger.categoryIcon(server.category)} ${server.category}`);
     
-    if (server.packages.npm) {
-      console.log(`  Package: ${chalk.cyan(server.packages.npm.name)}`);
+    if (installInfo.npmPackage) {
+      console.log(`  Package: ${chalk.cyan(installInfo.npmPackage)}`);
     }
-    if (server.packages.docker) {
-      console.log(`  Image: ${chalk.cyan(server.packages.docker.image)}`);
+    if (installInfo.dockerImage) {
+      console.log(`  Image: ${chalk.cyan(installInfo.dockerImage)}`);
     }
     
     const configInfo = configManager.getConfigInfo();
-    console.log(`  Config: ${logger.path(configInfo.path)}`);
+    console.log(`  Config: ${logger.path(configInfo.path)} (${platformConfig.label})`);
     console.log();
 
     // Check requirements first
@@ -134,7 +182,7 @@ export async function installCommand(serverSlug, options) {
       const port = options.port || await portManager.allocatePort();
       
       console.log(chalk.bold('Would install:'));
-      console.log(`  Package: ${server.packages.npm?.name || server.packages.docker?.image || 'manual'}`);
+      console.log(`  Package: ${installInfo.npmPackage || installInfo.dockerImage || 'manual'}`);
       console.log(`  Port: ${port}`);
       console.log(`  Config location: ${configInfo.path}`);
       console.log();
@@ -142,9 +190,9 @@ export async function installCommand(serverSlug, options) {
       console.log(chalk.bold('MCP configuration that would be added:'));
       const mcpConfig = {
         [server.slug]: {
-          command: server.packages.npm ? 'npx' : server.packages.docker ? 'docker' : server.slug,
-          args: server.packages.npm ? ['-y', server.packages.npm.name] : 
-                server.packages.docker ? ['run', '--rm', '-i', server.packages.docker.image] : [],
+          command: installInfo.method === 'npm' ? 'npx' : installInfo.method === 'docker' ? 'docker' : server.slug,
+          args: installInfo.method === 'npm' ? ['-y', installInfo.npmPackage] : 
+                installInfo.method === 'docker' ? ['run', '--rm', '-i', installInfo.dockerImage] : [],
           env: {
             PORT: port.toString()
           }
@@ -284,7 +332,7 @@ export async function installCommand(serverSlug, options) {
     
     // Next steps
     console.log(chalk.bold('🚀 Next Steps:'));
-    logger.progress('1. Restart Claude Desktop (or your MCP client)');
+    logger.progress(`1. Restart ${platformConfig.label} (or your MCP client)`);
     logger.progress(`2. The "${server.name}" server will be available`);
     
     if (server.documentation.docsUrl) {

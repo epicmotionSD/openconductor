@@ -5,11 +5,13 @@ import { Listr } from 'listr2';
 import { ConfigManager } from '../lib/config-manager.js';
 import { ApiClient } from '../lib/api-client.js';
 import { Installer } from '../lib/installer.js';
+import { resolvePlatformConfig } from '../lib/platforms.js';
 import { logger } from '../utils/logger.js';
 
 export async function updateCommand(serverSlug, options) {
   try {
-    const configManager = new ConfigManager(options.config);
+    const platformConfig = resolvePlatformConfig(options);
+    const configManager = new ConfigManager(platformConfig.configPath);
     const api = new ApiClient();
     const installer = new Installer();
 
@@ -217,7 +219,7 @@ export async function updateCommand(serverSlug, options) {
 
     // Next steps
     console.log(chalk.bold('🚀 Next Steps:'));
-    logger.progress('1. Restart Claude Desktop (or your MCP client)');
+    logger.progress(`1. Restart ${platformConfig.label} (or your MCP client)`);
     logger.progress('2. Updated servers will use the latest versions');
     console.log();
 
@@ -252,7 +254,8 @@ export async function updateCommand(serverSlug, options) {
  * Check all installed servers and report update status
  */
 export async function checkUpdates(options = {}) {
-  const configManager = new ConfigManager(options.config);
+  const platformConfig = resolvePlatformConfig(options);
+  const configManager = new ConfigManager(platformConfig.configPath);
   const api = new ApiClient();
   
   try {

@@ -4,11 +4,15 @@ import ora from 'ora';
 import { ConfigManager } from '../lib/config-manager.js';
 import { ApiClient } from '../lib/api-client.js';
 import { Installer } from '../lib/installer.js';
+import { resolvePlatformConfig } from '../lib/platforms.js';
 import { logger } from '../utils/logger.js';
 
 export async function listCommand(options) {
+  let platformLabel = 'your MCP client';
   try {
-    const configManager = new ConfigManager(options.config);
+    const platformConfig = resolvePlatformConfig(options);
+    platformLabel = platformConfig.label;
+    const configManager = new ConfigManager(platformConfig.configPath);
     const config = await configManager.readConfig();
 
     if (!config.mcpServers || Object.keys(config.mcpServers).length === 0) {
@@ -128,7 +132,7 @@ export async function listCommand(options) {
     console.log(chalk.bold('📁 Configuration:'));
     console.log(`  File: ${logger.path(configInfo.path)}`);
     console.log(`  Exists: ${configInfo.exists ? chalk.green('✓') : chalk.red('✖')}`);
-    console.log(`  Platform: ${configInfo.platform}`);
+    console.log(`  Platform: ${platformConfig.label}`);
     console.log();
 
     // Summary stats
@@ -185,7 +189,7 @@ export async function listCommand(options) {
     logger.error('Failed to list servers:', error.message);
     
     if (error.message.includes('ENOENT')) {
-      logger.info('Claude Desktop configuration file not found.');
+      logger.info(`${platformLabel} configuration file not found.`);
       logger.progress('Initialize with: ' + logger.code('openconductor init'));
     }
     

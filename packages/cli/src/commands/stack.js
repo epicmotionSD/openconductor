@@ -1,6 +1,7 @@
 import clipboardy from 'clipboardy';
 import { ApiClient } from '../lib/api-client.js';
 import { ConfigManager } from '../lib/config-manager.js';
+import { resolvePlatformConfig } from '../lib/platforms.js';
 import { logger } from '../utils/logger.js';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -30,7 +31,7 @@ export async function stackListCommand() {
       console.log();
     });
 
-    console.log(chalk.gray('💡 Stacks include pre-configured system prompts for Claude Desktop'));
+    console.log(chalk.gray('💡 Stacks include pre-configured system prompts (optimized for Claude Desktop)'));
     console.log();
 
   } catch (error) {
@@ -45,7 +46,8 @@ export async function stackListCommand() {
  */
 export async function stackInstallCommand(stackSlug, options = {}) {
   const api = new ApiClient();
-  const config = new ConfigManager();
+  const platformConfig = resolvePlatformConfig(options);
+  const config = new ConfigManager(platformConfig.configPath);
   const spinner = ora(`Loading ${stackSlug} stack...`).start();
 
   try {
@@ -103,9 +105,9 @@ export async function stackInstallCommand(stackSlug, options = {}) {
 
       logger.info('📋 System Prompt copied to clipboard!');
       console.log();
-      console.log(chalk.bold('📝 Next step: Paste into Claude Desktop'));
+      console.log(chalk.bold(`📝 Next step: Paste into ${platformConfig.label}`));
       console.log();
-      console.log(chalk.gray('1. Open Claude Desktop'));
+      console.log(chalk.gray(`1. Open ${platformConfig.label}`));
       console.log(chalk.gray('2. Go to Settings → Custom Instructions'));
       console.log(chalk.gray('3. Paste the prompt (Cmd+V / Ctrl+V)'));
       console.log(chalk.gray('4. Save and start using your new tools!'));
@@ -117,6 +119,10 @@ export async function stackInstallCommand(stackSlug, options = {}) {
       console.log(chalk.dim('  ...'));
       console.log(chalk.dim('─'.repeat(60)));
       console.log();
+      if (platformConfig.id !== 'claude') {
+        console.log(chalk.yellow('⚠ System prompts are optimized for Claude Desktop. Adjust as needed for your client.'));
+        console.log();
+      }
       console.log(chalk.bold('💡 Try asking Claude:'));
       displayTryAsking(stackSlug);
       console.log();

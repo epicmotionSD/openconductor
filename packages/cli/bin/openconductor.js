@@ -60,6 +60,7 @@ program
   .command('install')
   .description('Install an MCP server')
   .argument('<server>', 'server name or slug')
+  .option('--platform <platform>', 'target platform (claude, cursor, vscode, windsurf)')
   .option('--config <path>', 'custom config file path')
   .option('--port <port>', 'custom port number')
   .option('--dry-run', 'simulate installation without making changes')
@@ -69,6 +70,7 @@ program
 program
   .command('list')
   .description('List installed MCP servers')
+  .option('--platform <platform>', 'target platform (claude, cursor, vscode, windsurf)')
   .option('--config <path>', 'custom config file path')
   .action(listCommand);
 
@@ -77,6 +79,7 @@ program
   .alias('uninstall')
   .description('Remove an installed MCP server')
   .argument('<server>', 'server name or slug')
+  .option('--platform <platform>', 'target platform (claude, cursor, vscode, windsurf)')
   .option('--config <path>', 'custom config file path')
   .option('-y, --yes', 'skip confirmation')
   .action(removeCommand);
@@ -85,12 +88,14 @@ program
   .command('update')
   .description('Update an installed MCP server')
   .argument('[server]', 'server name (or all if omitted)')
+  .option('--platform <platform>', 'target platform (claude, cursor, vscode, windsurf)')
   .option('--config <path>', 'custom config file path')
   .action(updateCommand);
 
 program
   .command('init')
   .description('Initialize OpenConductor configuration')
+  .option('--platform <platform>', 'target platform (claude, cursor, vscode, windsurf)')
   .option('--config <path>', 'custom config file path')
   .option('-f, --force', 'overwrite existing config')
   .action(initCommand);
@@ -108,6 +113,7 @@ stackCmd
 stackCmd
   .command('install <stack>')
   .description('Install all servers in a stack + system prompt')
+  .option('--platform <platform>', 'target platform (claude, cursor, vscode, windsurf)')
   .option('-f, --force', 'reinstall already installed servers')
   .action(stackInstallCommand);
 
