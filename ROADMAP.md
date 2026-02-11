@@ -12,12 +12,12 @@ As AI agents proliferate in 2026, enterprises need infrastructure to verify, gov
 
 ## Current Status (February 2026)
 
-### MCP Server Registry — Live ✅
-- **CLI**: 1,000+ weekly npm downloads (target: 3,000+ by end of Q1)
-- **Servers**: 220+ indexed and verified
-- **Clients**: Claude Desktop, Cursor, Cline, Windsurf
+### MCP Server Registry — Operational ✅
+- **Ecosystem Intelligence**: 220+ MCP servers indexed and categorized
+- **Clients Supported**: Claude Desktop, Cursor, Cline, Windsurf
+- **SDK v1.4.0**: Zero-config demo mode published to npm
 - **Stacks**: Pre-configured workflows with system prompts
-- **SDK v1.4.0**: Zero-config demo mode — code complete, npm publish pending
+- **Developer Channel**: MCP builders → Trust Stack enterprise customers
 
 ### Trust Stack Layer 1: Registry — Live on Testnet ✅
 
@@ -60,7 +60,7 @@ As AI agents proliferate in 2026, enterprises need infrastructure to verify, gov
 | Testnet Deploy | ✅ Complete | Base Sepolia deployment with first agent |
 | Subgraph Indexer | ✅ Complete | The Graph Studio — on-chain data queryable via GraphQL |
 | Registration UI | ✅ Complete | Wallet-connected agent registration flow |
-| CLI 1.0 | ✅ Complete | 1,000+ weekly downloads, 220+ servers indexed |
+| CLI 1.0 | ✅ Complete | 220+ servers indexed, ecosystem intelligence platform |
 | SDK v1.4.0 | ✅ Code Complete | Zero-config demo mode — `npx @openconductor/mcp-sdk demo` |
 | Empire MCP Server | ✅ Complete | Trinity AI agents operational in Claude Desktop |
 | Stripe Billing | ✅ Complete | Credits checkout, one-line monetization middleware |
@@ -89,8 +89,9 @@ x3o.ai/
 
 | Metric | Current | Q1 Target |
 |--------|---------|-----------|
-| Weekly npm downloads | 1,000+ | 3,000+ |
 | Registered agents (on-chain) | 1 | 25+ |
+| Founding cohort signups | 0 | 10+ |
+| Enterprise pilot customers | 0 | 2-3 |
 | x3o.ai monthly active users | 0 | 100+ |
 | Discord community | 0 | 200+ |
 | GitHub stars (all repos) | ~10 | 50+ |
@@ -100,7 +101,7 @@ x3o.ai/
 
 ### Q2 2026 — Govern & Grow
 
-**Goal**: Go to mainnet. Ship Layer 2 governance. Land first paying enterprise customer.
+**Goal**: Go to mainnet. Ship Layer 2 governance. Scale from pilots to production contracts.
 
 | Milestone | Status | Details |
 |-----------|--------|---------|
@@ -108,9 +109,9 @@ x3o.ai/
 | AP2 Policy Engine | 🔜 Planned | Permission management for agent operations |
 | Team Workspaces | 🔜 Planned | Multi-user agent management |
 | Attestation Framework | 🔜 Planned | Third-party verification system |
-| Enterprise Pilot | 🔜 Planned | First paying customer on Trust Stack |
+| Founding Cohort Complete | 🔜 Planned | 50 companies locked in with early pricing |
 
-**Target**: $5K MRR
+**Target**: $5K MRR (3-5 production contracts)
 
 ---
 
@@ -125,7 +126,7 @@ x3o.ai/
 | Insurance API | 🔜 Planned | Agent operation insurance integration |
 | Audit Trails | 🔜 Planned | Immutable operation logging |
 
-**Target**: $25K MRR
+**Target**: $25K MRR (10-15 production contracts)
 
 ---
 
@@ -140,19 +141,19 @@ x3o.ai/
 | Agent Marketplace | 🔜 Planned | Verified agent discovery |
 | SDK 2.0 | 🔜 Planned | Full Trust Stack SDK |
 
-**Target**: $50K MRR → path to $50M ARR
+**Target**: $50K MRR (25-30 contracts) → Series A positioning
 
 ---
 
 ## Revenue Model
 
-| Stream | Source | Monetization |
-|--------|--------|--------------|
-| **OpenConductor Pro** | Featured placements, premium analytics | Subscription |
-| **x3o.ai Subscriptions** | Dashboard access, Trinity AI chat | Tiered plans |
-| **Trust Stack** | Agent registration fees, attestations | Per-agent + enterprise |
-| **SDK Monetization** | `requirePayment` middleware commissions | Usage-based |
-| **Enterprise** | Team workspaces, SSO, compliance tooling | Annual contracts |
+| Stream | Source | Monetization | Priority |
+|--------|--------|--------------|----------|
+| **Trust Stack Enterprise** | Agent registration fees, attestations, governance | Per-agent + annual contracts | 🔥 PRIMARY |
+| **x3o.ai Subscriptions** | Dashboard access, Trinity AI chat, multi-agent management | Tiered plans ($49-$499/mo) | HIGH |
+| **OpenConductor Pro** | Featured server placements, premium analytics | Subscription ($99-$299/mo) | MEDIUM |
+| **SDK Monetization** | `requirePayment` middleware commissions | Usage-based revenue share | MEDIUM |
+| **Enterprise Workspaces** | Team features, SSO, compliance tooling | Annual contracts ($25K-$100K) | HIGH |
 
 ---
 
@@ -164,11 +165,13 @@ x3o.ai/
 - Trust Stack provides compliant infrastructure before the deadline
 
 ### Why Now
+- **6 months until EU AI Act enforcement** — August 2026 deadline is imminent
 - AI agents are proliferating faster than governance
-- Enterprises need verifiable agent identities
-- Insurance companies need risk assessment data
-- No one else is building the compliance layer at the protocol level
-- OpenConductor is already positioned at the plumbing level with 1,000+ weekly installs
+- Enterprises need verifiable agent identities to operate in EU market
+- Insurance companies need risk assessment data before providing coverage
+- **No one else is building the compliance layer at the protocol level**
+- OpenConductor has first-mover advantage with ERC-8004 standard already live
+- Founding cohort locks in early pricing before market realizes urgency
 
 ---
 
@@ -194,11 +197,11 @@ x3o.ai/
 ```
 
 **Flywheel:**
-1. Developer discovers OpenConductor → installs MCP servers
-2. Wants to manage/monitor servers → lands on x3o.ai
-3. Needs agent governance for enterprise → Trust Stack
-4. Pays for premium features → Revenue
-5. Tells others → *"x3o.ai is where you start"*
+1. Enterprise faces AI regulation risk → discovers Trust Stack
+2. Registers agents to demonstrate compliance → pays for governance features
+3. Deploys agents using OpenConductor SDK → integration deepens
+4. Needs MCP servers for agent capabilities → uses verified registry
+5. Refers other enterprises facing same deadline → *"Get ahead of Aug 2026"*
 
 ---
 
