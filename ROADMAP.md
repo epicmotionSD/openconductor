@@ -64,7 +64,7 @@ As AI agents proliferate in 2026, enterprises need infrastructure to verify, gov
 | SDK v1.4.0 | ✅ Code Complete | Zero-config demo mode — `npx @openconductor/mcp-sdk demo` |
 | Empire MCP Server | ✅ Complete | Trinity AI agents operational in Claude Desktop |
 | Stripe Billing | ✅ Complete | Credits checkout, one-line monetization middleware |
-| SDK npm Publish | 🔜 In Progress | Publish v1.4.0 to npm registry (Week 1) |
+| SDK npm Publish | ✅ Complete | v1.4.0 published to npm with zero-config demo mode |
 | Discord Community | 🔜 In Progress | Launch community server, activate contributors (Week 2-3) |
 | x3o.ai Command Center v2 | 🔜 Planned | Unified portal: Registry + SportIntel + Trust Stack + Trinity AI (Week 3-4) |
 | SportIntel Beta | 🔜 Planned | Word-of-mouth beta at Progressive Rail |
