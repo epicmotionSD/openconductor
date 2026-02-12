@@ -32,6 +32,9 @@ function WalletButton() {
   const chainId = useChainId()
   const { switchChain } = useSwitchChain()
   const isWrongNetwork = isConnected && chainId !== baseSepolia.id
+  const [showWalletHelp, setShowWalletHelp] = useState(false)
+
+  const hasWallet = connectors && connectors.length > 0
 
   if (isConnected) {
     return (
@@ -49,6 +52,35 @@ function WalletButton() {
       </div>
     )
   }
+
+  if (!hasWallet) {
+    return (
+      <div className="text-center">
+        <GradientButton onClick={() => setShowWalletHelp(!showWalletHelp)}>
+          <Wallet className="h-4 w-4 mr-2" />
+          {showWalletHelp ? 'Hide Wallet Options' : 'Install Wallet'}
+        </GradientButton>
+        {showWalletHelp && (
+          <div className="mt-4 p-4 bg-muted/50 border border-border rounded-lg text-left">
+            <p className="text-sm font-medium mb-3">No wallet detected. Install one to continue:</p>
+            <div className="space-y-2">
+              <a href="https://metamask.io/download/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                <ExternalLink className="h-3 w-3" />MetaMask (Most popular)
+              </a>
+              <a href="https://www.coinbase.com/wallet" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                <ExternalLink className="h-3 w-3" />Coinbase Wallet
+              </a>
+              <a href="https://rainbow.me/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                <ExternalLink className="h-3 w-3" />Rainbow Wallet
+              </a>
+            </div>
+            <p className="text-xs text-foreground-secondary mt-3">After installing, refresh this page to connect.</p>
+          </div>
+        )}
+      </div>
+    )
+  }
+
   return (
     <GradientButton onClick={() => connect({ connector: connectors[0] })} disabled={isPending}>
       {isPending ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Wallet className="h-4 w-4 mr-2" />}
