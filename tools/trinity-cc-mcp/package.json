@@ -1,0 +1,21 @@
+{
+  "name": "@openconductor/trinity-cc-mcp",
+  "version": "0.1.0",
+  "description": "Trinity MCP Server — oracle / sentinel / sage tool groups for OpenConductor Command Center",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["mcp", "openconductor", "command-center", "trinity"],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "@types/node": "^22.15.0"
+  }
+}

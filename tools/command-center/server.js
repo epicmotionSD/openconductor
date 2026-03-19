@@ -934,10 +934,22 @@ function jsonResponse(res, status, data) {
 }
 
 // --- HTTP Server ---
+// --- Trinity REST bridge (optional) ---
+let handleContentApi;
+try {
+  ({ handleContentApi } = require('../trinity-cc-mcp/content-api.cjs'));
+} catch { /* Trinity not built — skip */ }
+
 const server = http.createServer(async (req, res) => {
   const parsed = new URL(req.url, `http://${req.headers.host}`);
   const pathname = parsed.pathname;
   const method = req.method;
+
+  // --- Trinity API routes ---
+  if (handleContentApi && pathname.startsWith('/api/trinity')) {
+    const handled = await handleContentApi(req, res);
+    if (handled) return;
+  }
 
   // --- Dashboard ---
   if (pathname === '/' || pathname === '/index.html') {

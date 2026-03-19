@@ -68,6 +68,17 @@
       ],
       "env": {},
       "description": "Redis cache and session store"
+    },
+
+    "trinity-cc": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\shawn\\apps\\openconductor\\tools\\trinity-cc-mcp\\dist\\index.js"
+      ],
+      "env": {
+        "TRINITY_DATA_DIR": "C:\\Users\\shawn\\apps\\openconductor\\tools\\command-center\\data"
+      },
+      "description": "Trinity Command Center MCP — 11 tools for intel read/write/monitoring"
     }
   }
 }
