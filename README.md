@@ -2,13 +2,14 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/brand/banner-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="assets/brand/banner-light.svg">
-    <img src="assets/brand/banner-light.svg" alt="OpenConductor - The npm for AI Agent Tools" width="600" />
+    <img src="assets/brand/banner-light.svg" alt="OpenConductor - Identity, Compliance & Monetization for AI Agents" width="600" />
   </picture>
 </p>
 
 <p align="center">
-  Install MCP servers without the JSON hell.<br/>
-  One command. 180+ tools. Works with Claude, Cursor, Cline, and more.
+  <strong>The identity and compliance layer for the agent economy.</strong><br/>
+  220+ MCP servers. On-chain agent identity (ERC-8004). EU AI Act compliance. Agent monetization.<br/>
+  The infrastructure SaaS&#x2192;AaaS needs to go mainstream.
 </p>
 
 <p align="center">
@@ -20,11 +21,62 @@
 
 <p align="center">
   <a href="https://openconductor.ai">Website</a> â€¢
+  <a href="#trust-stack">Trust Stack</a> â€¢
   <a href="#quick-start">Quick Start</a> â€¢
-  <a href="https://openconductor.ai/discover">Browse 180+ Servers</a> â€¢
-  <a href="https://openconductor.ai/stacks">Stacks</a> â€¢
+  <a href="https://openconductor.ai/discover">Browse 220+ Servers</a> â€¢
+  <a href="https://openconductor.ai/register">Register an Agent</a> â€¢
   <a href="https://discord.gg/openconductor">Discord</a>
 </p>
+
+---
+
+## The Agent Economy Needs Infrastructure
+
+Jensen Huang called it at GTC 2026: **every company becomes an agent company.** SaaS becomes AaaS. OpenClaw is building the operating system for personal AI. NemoClaw secures the network connection.
+
+**But who secures the identity?** Who's liable when an agent acts? Who ensures EU AI Act compliance? Who handles monetization?
+
+That's OpenConductor. We're building **Trust Stack** — the identity, compliance, and monetization layer that makes agents enterprise-ready, regulator-ready, and insurable.
+
+| Layer | What It Does | Status |
+|-------|-------------|--------|
+| **Registry** | 220+ MCP servers indexed. Discovery, installation, stacks. | âœ… Live |
+| **Identity** | ERC-8004 on-chain agent identity. Verifiable, auditable, portable. | âœ… Live on Base Sepolia |
+| **Governance** | Policy engine, permission management, attestation framework. | Q2 2026 |
+| **Compliance** | EU AI Act readiness, ISO 42001, audit trails, insurance API. | Q3 2026 |
+| **Monetization** | `requirePayment()` middleware, usage metering, Stripe billing. | âœ… Billing live |
+
+> **The analogy:** OpenClaw built the highway. NemoClaw built the traffic rules. OpenConductor is the DMV — registration, licensing, insurance, accountability.
+
+---
+
+## OpenClaw + Trust Stack
+
+OpenConductor sits on top of the OpenClaw ecosystem as the compliance and identity layer. Any OpenClaw agent can be wrapped with Trust Stack to get:
+
+- **On-chain identity** via ERC-8004 — verifiable agent registration
+- **EU AI Act compliance metadata** — ready for August 2026 enforcement
+- **Audit trails** — immutable operation logging
+- **Monetization** — one-line payment middleware for agent actions
+- **Trust scores** — algorithmic reputation from attestations
+
+```bash
+npm install @openconductor/openclaw-trust-stack
+```
+
+```typescript
+import { TrustStack } from '@openconductor/openclaw-trust-stack';
+
+// Wrap any OpenClaw agent with identity and compliance
+const agent = TrustStack.wrap(myOpenClawAgent, {
+  identity: { name: 'My Agent', owner: '0x...', category: 'productivity' },
+  compliance: { euAiAct: true, riskLevel: 'limited' },
+  monetization: { perAction: 0.01, currency: 'USD' }
+});
+
+// Agent now has verifiable identity, compliance metadata, and billing
+await agent.register(); // On-chain ERC-8004 registration
+```
 
 ---
 
@@ -179,10 +231,17 @@ Submit a PR to add your server to the registry.
 - [x] 220+ server registry
 - [x] Multi-client support (Claude, Cursor, Cline)
 - [x] Pre-configured Stacks with system prompts
-- [ ] Server health monitoring
-- [ ] Team sharing & sync
-- [ ] Web dashboard
-- [ ] VS Code extension
+- [x] ERC-8004 agent identity (on-chain, Base Sepolia)
+- [x] Agent registration UI with wallet connect
+- [x] Subgraph indexer (The Graph)
+- [x] Stripe billing integration
+- [ ] OpenClaw Trust Stack integration package
+- [ ] `requirePayment()` monetization middleware
+- [ ] AP2 policy engine (governance)
+- [ ] EU AI Act compliance tooling (August 2026 deadline)
+- [ ] Base mainnet deployment
+- [ ] Agent marketplace with trust scores
+- [ ] Insurance API for agent operations
 
 ---
 
@@ -213,8 +272,9 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 - â­ [Awesome MCP](https://github.com/epicmotionSD/awesome-mcp) - Curated list of 220+ MCP servers, tools, and resources
 - ðŸ“– [MCP Specification](https://spec.modelcontextprotocol.io/) - Official Model Context Protocol docs
 - ðŸ“š [OpenConductor Guides](https://openconductor.ai/docs) - Tutorials and integration guides
-- ðŸŽ“ [MCP Quickstart](https://modelcontextprotocol.io/quickstart) - Get started in 5 minutes
-
+- ðŸŽ“ [MCP Quickstart](https://modelcontextprotocol.io/quickstart) - Get started in 5 minutes- ðŸ" [Trust Stack](https://openconductor.ai/trust-stack) - Agent identity and compliance infrastructure
+- ðŸ"— [ERC-8004 Contract](https://sepolia.basescan.org/address/0xf8d7044d657b602194fb5745c614beb35d5d898a) - On-chain agent registry
+- ðŸ"Š [Subgraph](https://thegraph.com/studio/subgraph/openconductor/) - Query agent data via GraphQL
 ---
 
 ## License
@@ -224,6 +284,6 @@ MIT Â© [OpenConductor](https://openconductor.ai)
 ---
 
 <p align="center">
-  <sub>Built for developers who'd rather ship than edit JSON files.</sub>
+  <sub>The identity, compliance, and monetization layer for the agent economy.</sub>
 </p>
 

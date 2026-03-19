@@ -12,7 +12,8 @@
     "build:api": "cd packages/api && npm run build",
     "build:frontend": "cd packages/frontend && npm run build",
     "build:cli": "cd packages/cli && npm run build",
-    "install:all": "npm install && cd packages/shared && npm install && cd ../api && npm install && cd ../frontend && npm install && cd ../cli && npm install",
+    "build:openclaw": "cd packages/openclaw-trust-stack && npm run build",
+    "install:all": "npm install && cd packages/shared && npm install && cd ../api && npm install && cd ../frontend && npm install && cd ../cli && npm install && cd ../openclaw-trust-stack && npm install",
     "clean": "rm -rf node_modules packages/*/node_modules packages/*/dist packages/frontend/.next",
     "test": "jest --passWithNoTests || true"
   },
