@@ -20,6 +20,7 @@ build/
 *.db
 *.sqlite
 data/
+!tools/command-center/data/
 
 # Logs
 logs
