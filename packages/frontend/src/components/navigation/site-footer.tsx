@@ -87,6 +87,11 @@ export function SiteFooter() {
             <h3 className="font-semibold mb-3">Community</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
+                <Link href="/blog" className="hover:text-foreground transition-colors">
+                  Blog
+                </Link>
+              </li>
+              <li>
                 <a
                   href="https://discord.gg/Ya5TPWeS"
                   target="_blank"

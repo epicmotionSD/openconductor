@@ -147,6 +147,10 @@ export function SiteHeader({ variant = 'default' }: SiteHeaderProps) {
                 </div>
               </div>
 
+              <Link href="/blog" className="text-sm font-medium text-foreground-secondary hover:text-primary transition-colors">
+                Blog
+              </Link>
+
               <Link href="/early-access" className="text-sm font-medium text-foreground-secondary hover:text-primary transition-colors">
                 Early Access
               </Link>
@@ -265,6 +269,14 @@ export function SiteHeader({ variant = 'default' }: SiteHeaderProps) {
                 Trust Stack SDK (npm) ↗
               </a>
             </div>
+
+            <Link
+              href="/blog"
+              className="text-sm font-medium text-foreground-secondary"
+              onClick={() => setIsMobileOpen(false)}
+            >
+              Blog
+            </Link>
 
             <Link
               href="/early-access"
