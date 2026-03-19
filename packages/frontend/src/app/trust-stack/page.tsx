@@ -17,7 +17,8 @@ import {
   Layers,
   GitBranch,
   Database,
-  BarChart3
+  BarChart3,
+  Package
 } from 'lucide-react'
 import { SiteHeader } from '@/components/navigation/site-header'
 import { SiteFooter } from '@/components/navigation/site-footer'
@@ -76,6 +77,45 @@ export default function TrustStackPage() {
                 >
                   View Contract
                   <ExternalLink className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* OpenClaw Ecosystem */}
+        <section className="py-12 md:py-16 border-t border-primary/10 bg-primary/5">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="grid md:grid-cols-[1fr_auto_1fr] gap-8 items-center text-center">
+                <div>
+                  <h3 className="text-xl font-bold mb-2">OpenClaw</h3>
+                  <p className="text-foreground-secondary text-sm">
+                    Open-source agent OS. Capabilities, runtime, orchestration.
+                  </p>
+                </div>
+                <div className="hidden md:flex items-center text-primary text-2xl font-bold">+</div>
+                <div>
+                  <h3 className="text-xl font-bold mb-2">Trust Stack</h3>
+                  <p className="text-foreground-secondary text-sm">
+                    Identity, compliance, risk scoring, and monetization.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 p-6 rounded-2xl bg-background border border-primary/20 text-center">
+                <p className="text-foreground-secondary mb-4">
+                  OpenClaw gives agents brains. Trust Stack gives them a birth certificate, an insurance card, and a billing address.
+                </p>
+                <a
+                  href="https://www.npmjs.com/package/@openconductor/openclaw-trust-stack"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+                >
+                  <Package className="h-4 w-4" />
+                  npm i @openconductor/openclaw-trust-stack
+                  <ExternalLink className="h-3 w-3" />
                 </a>
               </div>
             </div>
@@ -645,6 +685,15 @@ rules:
                   Register Your Agent
                   <ArrowRight className="h-4 w-4" />
                 </Link>
+                <a
+                  href="https://www.npmjs.com/package/@openconductor/openclaw-trust-stack"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-primary/30 text-foreground rounded-full font-semibold hover:bg-primary/10 transition-colors"
+                >
+                  <Package className="h-4 w-4" />
+                  Install SDK
+                </a>
                 <Link
                   href="/early-access"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-primary/30 text-foreground rounded-full font-semibold hover:bg-primary/10 transition-colors"

@@ -135,6 +135,14 @@ export function SiteHeader({ variant = 'default' }: SiteHeaderProps) {
                     >
                       MCP Server Directory
                     </Link>
+                    <a
+                      href="https://www.npmjs.com/package/@openconductor/openclaw-trust-stack"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block px-3 py-2 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-muted/60 transition-colors"
+                    >
+                      Trust Stack SDK (npm) ↗
+                    </a>
                   </div>
                 </div>
               </div>
@@ -247,6 +255,15 @@ export function SiteHeader({ variant = 'default' }: SiteHeaderProps) {
               >
                 MCP Server Directory
               </Link>
+              <a
+                href="https://www.npmjs.com/package/@openconductor/openclaw-trust-stack"
+                target="_blank"
+                rel="noreferrer"
+                className="block text-sm text-foreground-secondary"
+                onClick={() => setIsMobileOpen(false)}
+              >
+                Trust Stack SDK (npm) ↗
+              </a>
             </div>
 
             <Link

@@ -71,6 +71,16 @@ export function SiteFooter() {
                   MCP Server Directory
                 </Link>
               </li>
+              <li>
+                <a
+                  href="https://www.npmjs.com/package/@openconductor/openclaw-trust-stack"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Trust Stack SDK (npm) ↗
+                </a>
+              </li>
             </ul>
           </div>
           <div>

@@ -9,7 +9,7 @@ import { GlassCard } from '@/components/ui/glass-card'
 import {
   ArrowRight, Shield, AlertTriangle, CheckCircle,
   FileCheck, Scale, Fingerprint, Building2, ExternalLink,
-  Users, Globe, Cpu, Lock, FileWarning, Gavel
+  Users, Globe, Cpu, Lock, FileWarning, Gavel, Package, Code2
 } from 'lucide-react'
 
 export default function HomePage() {
@@ -23,8 +23,22 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-primary opacity-5 blur-3xl" />
 
           <div className="relative text-center max-w-5xl mx-auto">
-            {/* Regulatory Urgency */}
-            <div className="flex justify-center mb-8 animate-fade-in">
+            {/* OpenClaw Ecosystem Banner */}
+            <div className="flex flex-wrap justify-center gap-3 mb-8 animate-fade-in">
+              <Badge className="text-sm px-4 py-2 rounded-full border-primary/50 bg-primary/10 backdrop-blur-sm">
+                <Package className="h-3 w-3 mr-2 inline text-primary" />
+                <span className="text-foreground-secondary">
+                  Now shipping:{' '}
+                  <a
+                    href="https://www.npmjs.com/package/@openconductor/openclaw-trust-stack"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    @openconductor/openclaw-trust-stack
+                  </a>
+                </span>
+              </Badge>
               <Badge className="text-sm px-4 py-2 rounded-full border-warning/50 bg-warning/10 backdrop-blur-sm">
                 <AlertTriangle className="h-3 w-3 mr-2 inline text-warning" />
                 <span className="text-foreground-secondary">EU AI Act enforcement begins August 2026</span>
@@ -280,6 +294,88 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* OpenClaw SDK */}
+        <section className="container mx-auto px-4 py-16 md:py-24" id="sdk">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <Badge className="mb-4 px-3 py-1 text-xs bg-primary/10 border-primary/30">
+                OPENCLAW INTEGRATION
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                <GradientText>Three Lines</GradientText> to Wrap Any Agent
+              </h2>
+              <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
+                OpenClaw gives agents capabilities. Trust Stack gives them identity, compliance, and billing.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-8 items-start">
+              {/* Code Example */}
+              <div className="rounded-2xl border border-primary/20 bg-background overflow-hidden">
+                <div className="flex items-center gap-2 px-4 py-3 border-b border-primary/10 bg-muted/30">
+                  <Code2 className="h-4 w-4 text-primary" />
+                  <span className="text-sm font-mono text-foreground-secondary">trust-stack-example.ts</span>
+                </div>
+                <pre className="p-6 text-sm font-mono leading-relaxed overflow-x-auto">
+                  <code>
+{`npm i @openconductor/openclaw-trust-stack`}
+
+{`import { TrustStack } from '@openconductor/openclaw-trust-stack';`}
+
+{`const agent = TrustStack.wrap(myAgent, {
+  name: 'my-agent',
+  capabilities: ['data-analysis', 'reporting'],
+  euAiActRisk: 'limited',
+});`}
+
+{`await agent.register();  // → on-chain ERC-8004 identity
+await agent.attest();    // → compliance attestation
+await agent.monetize();  // → usage-based billing`}
+                  </code>
+                </pre>
+              </div>
+
+              {/* What you get */}
+              <div className="space-y-6">
+                <GlassCard>
+                  <Fingerprint className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="text-lg font-semibold mb-2">On-Chain Identity</h3>
+                  <p className="text-foreground-secondary text-sm">
+                    ERC-8004 registration on Base. Verifiable metadata, ownership history, and third-party attestations.
+                  </p>
+                </GlassCard>
+                <GlassCard>
+                  <Shield className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="text-lg font-semibold mb-2">EU AI Act Ready</h3>
+                  <p className="text-foreground-secondary text-sm">
+                    Risk classification, compliance metadata, and audit trails baked in. Pass enforcement checks before they begin.
+                  </p>
+                </GlassCard>
+                <GlassCard>
+                  <Scale className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="text-lg font-semibold mb-2">Monetization Middleware</h3>
+                  <p className="text-foreground-secondary text-sm">
+                    Usage-based billing, revenue tracking, and payment rails for agent-to-agent commerce.
+                  </p>
+                </GlassCard>
+              </div>
+            </div>
+
+            <div className="text-center mt-10">
+              <a
+                href="https://www.npmjs.com/package/@openconductor/openclaw-trust-stack"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+              >
+                <Package className="h-4 w-4" />
+                View on npm
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* Who It's For */}
         <section className="container mx-auto px-4 py-16 md:py-24">
           <div className="max-w-6xl mx-auto">
@@ -311,9 +407,9 @@ export default function HomePage() {
 
               <GlassCard>
                 <Cpu className="h-10 w-10 text-primary mb-4" />
-                <h3 className="text-xl font-semibold mb-2">MCP Developers</h3>
+                <h3 className="text-xl font-semibold mb-2">OpenClaw &amp; MCP Developers</h3>
                 <p className="text-foreground-secondary">
-                  Building MCP servers? Register them with verifiable identity and build trust with enterprise buyers.
+                  Building on OpenClaw or MCP? Wrap your agents with verifiable identity and unlock enterprise buyers.
                 </p>
               </GlassCard>
             </div>
