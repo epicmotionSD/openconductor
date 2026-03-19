@@ -286,7 +286,7 @@ export default function HomePage() {
                   className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
                 >
                   <Shield className="h-4 w-4" />
-                  Deep dive into the Trust Stack
+                  Deep Dive into AI Agent Trust Stack Infrastructure
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>

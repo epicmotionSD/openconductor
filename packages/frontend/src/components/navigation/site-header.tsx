@@ -19,7 +19,7 @@ export function SiteHeader({ variant = 'default' }: SiteHeaderProps) {
         <Link href="/" className="flex items-center space-x-2 group">
           <img
             src="/trust-stack-logo.svg"
-            alt="OpenConductor"
+            alt="OpenConductor Trust Stack — AI Agent Identity and Compliance"
             className="h-8 w-8"
           />
           <span className="text-2xl font-bold font-display">

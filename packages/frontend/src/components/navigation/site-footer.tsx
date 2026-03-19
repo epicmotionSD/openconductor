@@ -15,7 +15,7 @@ export function SiteFooter() {
           </div>
           <div>
             <h3 className="font-semibold mb-3">Trust Stack</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <ul className="space-y-0 text-sm text-muted-foreground [&_a]:block [&_a]:py-3">
               <li>
                 <Link href="/register" className="hover:text-foreground transition-colors">
                   Register Agent
@@ -35,7 +35,7 @@ export function SiteFooter() {
           </div>
           <div>
             <h3 className="font-semibold mb-3">Developers</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <ul className="space-y-0 text-sm text-muted-foreground [&_a]:block [&_a]:py-3">
               <li>
                 <a
                   href={`https://sepolia.basescan.org/address/${CONTRACT_ADDRESS}`}
@@ -85,7 +85,7 @@ export function SiteFooter() {
           </div>
           <div>
             <h3 className="font-semibold mb-3">Community</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <ul className="space-y-0 text-sm text-muted-foreground [&_a]:block [&_a]:py-3">
               <li>
                 <Link href="/blog" className="hover:text-foreground transition-colors">
                   Blog

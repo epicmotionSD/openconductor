@@ -9,10 +9,10 @@ const sora = Sora({ subsets: ['latin'], variable: '--font-display', display: 'sw
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.openconductor.ai'),
   title: {
-    default: 'OpenConductor - The Identity Layer for AI Agents',
+    default: 'OpenConductor | The Identity & Compliance Layer for AI Agents (ERC-8004)',
     template: '%s | OpenConductor'
   },
-  description: 'On-chain agent registration. Verifiable trust scores. EU AI Act compliance. The infrastructure that makes AI agents legal and insurable.',
+  description: 'OpenConductor provides the Trust Stack for AI agents: on-chain identity via ERC-8004, EU AI Act compliance, and risk scoring for insurable AI infrastructure.',
   keywords: [
     'ai-agent-identity',
     'erc-8004',
@@ -30,6 +30,9 @@ export const metadata: Metadata = {
     'base',
     'ethereum'
   ],
+  alternates: {
+    canonical: 'https://www.openconductor.ai',
+  },
   authors: [{ name: 'OpenConductor Team' }],
   creator: 'OpenConductor',
   publisher: 'OpenConductor',
@@ -42,8 +45,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://www.openconductor.ai',
-    title: 'OpenConductor - The Identity Layer for AI Agents',
-    description: 'On-chain agent registration. Verifiable trust scores. EU AI Act compliance. The infrastructure that makes AI agents legal and insurable.',
+    title: 'OpenConductor | The Identity & Compliance Layer for AI Agents (ERC-8004)',
+    description: 'OpenConductor provides the Trust Stack for AI agents: on-chain identity via ERC-8004, EU AI Act compliance, and risk scoring for insurable AI infrastructure.',
     siteName: 'OpenConductor',
     images: [
       {
@@ -56,8 +59,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'OpenConductor - The Identity Layer for AI Agents',
-    description: 'On-chain agent identity. EU AI Act compliance. Make your AI agents legal and insurable.',
+    title: 'OpenConductor | The Identity & Compliance Layer for AI Agents (ERC-8004)',
+    description: 'OpenConductor provides the Trust Stack for AI agents: on-chain identity via ERC-8004, EU AI Act compliance, and risk scoring for insurable AI infrastructure.',
     images: ['/og-image.png'],
     creator: '@OpenConductor',
   },
@@ -104,6 +107,37 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="OpenConductor" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "OpenConductor Trust Stack",
+              "url": "https://www.openconductor.ai",
+              "description": "OpenConductor provides the Trust Stack for AI agents: on-chain identity via ERC-8004, EU AI Act compliance, and risk scoring for insurable AI infrastructure.",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": "Blockchain / Web",
+              "featureList": [
+                "ERC-8004 Agent Registry",
+                "Policy Engine (Governor)",
+                "Risk Scoring (Underwriter)",
+                "EU AI Act Compliance"
+              ],
+              "creator": {
+                "@type": "Organization",
+                "name": "OpenConductor",
+                "url": "https://www.openconductor.ai"
+              },
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD",
+                "description": "Open-source Trust Stack for AI agent identity and compliance"
+              }
+            })
+          }}
+        />
       </head>
       <body className={`${inter.className} ${sora.variable} min-h-screen bg-background antialiased`}>
         {children}
