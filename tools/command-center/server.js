@@ -520,6 +520,102 @@ function buildDashboard() {
 
   .tab-badge { background: var(--purple); color: #fff; font-size: 11px; font-weight: 700;
     padding: 1px 7px; border-radius: 50px; margin-left: 6px; }
+
+  /* ═══ Trust Stack Desktop ═══ */
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap');
+
+  .ts-desktop {
+    position: relative; width: 100%; min-height: 520px;
+    background: #080B12; border-radius: 16px;
+    border: 1px solid rgba(139,92,246,0.15);
+    overflow: hidden; margin-bottom: 24px;
+    font-family: 'DM Mono', monospace;
+  }
+  .ts-grid-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(139,92,246,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,92,246,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: tsGridScroll 20s linear infinite;
+  }
+  @keyframes tsGridScroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 40px 40px; }
+  }
+  .ts-content { position: relative; z-index: 1; padding: 32px 24px 24px; }
+  .ts-title-bar {
+    text-align: center; margin-bottom: 8px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em;
+    color: rgba(139,92,246,0.5);
+  }
+  .ts-tier { display: flex; justify-content: center; gap: 16px; margin-bottom: 12px; position: relative; }
+  .ts-tier-label {
+    position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.15); writing-mode: vertical-rl; text-orientation: mixed;
+  }
+  .ts-connectors { position: relative; height: 32px; margin-bottom: 12px; }
+  .ts-connector {
+    position: absolute; top: 0; height: 100%;
+    border-left: 1px dashed rgba(139,92,246,0.2);
+  }
+
+  /* Node */
+  .ts-node {
+    width: 140px; padding: 14px 12px; border-radius: 12px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer; transition: all 0.2s ease; text-align: center;
+    position: relative;
+  }
+  .ts-node:hover { border-color: rgba(139,92,246,0.4); background: rgba(139,92,246,0.06); transform: translateY(-2px); }
+  .ts-node.active { border-color: var(--node-color, var(--purple)); background: rgba(139,92,246,0.08);
+    box-shadow: 0 0 20px rgba(139,92,246,0.15); }
+  .ts-node-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--node-color, var(--purple));
+    margin: 0 auto 8px; position: relative;
+  }
+  .ts-node.active .ts-node-dot::after {
+    content: ''; position: absolute; inset: -4px; border-radius: 50%;
+    border: 1px solid var(--node-color, var(--purple));
+    animation: tsRimPulse 2s ease-in-out infinite;
+  }
+  @keyframes tsRimPulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.6); }
+  }
+  .ts-node-title { font-size: 12px; font-weight: 500; color: #e4e4ed; margin-bottom: 2px; white-space: nowrap; }
+  .ts-node-sub { font-size: 9px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; }
+  .ts-node-status {
+    position: absolute; top: 8px; right: 8px;
+    width: 5px; height: 5px; border-radius: 50%;
+  }
+  .ts-node-status.status-active { background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,0.5); }
+  .ts-node-status.status-idle { background: #f59e0b; }
+
+  /* Detail Panel */
+  .ts-detail {
+    margin-top: 16px; padding: 16px 20px; border-radius: 12px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    animation: tsFadeIn 0.2s ease;
+  }
+  @keyframes tsFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .ts-detail-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .ts-detail-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .ts-detail-title { font-size: 15px; font-weight: 500; color: #e4e4ed; }
+  .ts-detail-role { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .ts-detail-meta { display: flex; gap: 16px; margin-top: 10px; }
+  .ts-detail-chip {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 3px 10px; border-radius: 50px;
+    background: rgba(139,92,246,0.1); color: rgba(139,92,246,0.7);
+    border: 1px solid rgba(139,92,246,0.15);
+  }
+
+  /* Schedule row under desktop */
+  .ts-schedule-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 900px) { .ts-schedule-row { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -549,12 +645,102 @@ function buildDashboard() {
   </div>
 
   <div id="tab-dashboard" class="tab-content active">
-    <div class="container" style="background:transparent;gap:24px;">
-      <div class="panel" style="background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);">
+    <!-- Trust Stack Desktop -->
+    <div class="ts-desktop" id="ts-desktop">
+      <div class="ts-grid-bg"></div>
+      <div class="ts-content">
+        <div class="ts-title-bar">Trust Stack Architecture</div>
+
+        <!-- Tier 0: Root -->
+        <div class="ts-tier" id="ts-tier-0">
+          <div class="ts-node active" data-node="root" style="--node-color:#8B5CF6;" onclick="tsSelect('root')">
+            <span class="ts-node-status status-active"></span>
+            <div class="ts-node-dot"></div>
+            <div class="ts-node-title">Trust Stack</div>
+            <div class="ts-node-sub">Root Orchestrator</div>
+          </div>
+        </div>
+
+        <!-- Connectors T0→T1 -->
+        <div class="ts-connectors" id="ts-conn-01"></div>
+
+        <!-- Tier 1: Pillars -->
+        <div class="ts-tier" id="ts-tier-1">
+          <div class="ts-node" data-node="registry" style="--node-color:#06b6d4;" onclick="tsSelect('registry')">
+            <span class="ts-node-status status-active"></span>
+            <div class="ts-node-dot"></div>
+            <div class="ts-node-title">MCP Registry</div>
+            <div class="ts-node-sub">Discovery</div>
+          </div>
+          <div class="ts-node" data-node="trinity" style="--node-color:#3b82f6;" onclick="tsSelect('trinity')">
+            <span class="ts-node-status status-active"></span>
+            <div class="ts-node-dot"></div>
+            <div class="ts-node-title">Trinity AI</div>
+            <div class="ts-node-sub">Intelligence</div>
+          </div>
+          <div class="ts-node" data-node="compliance" style="--node-color:#22c55e;" onclick="tsSelect('compliance')">
+            <span class="ts-node-status status-active"></span>
+            <div class="ts-node-dot"></div>
+            <div class="ts-node-title">Compliance Layer</div>
+            <div class="ts-node-sub">Governance</div>
+          </div>
+        </div>
+
+        <!-- Connectors T1→T2 -->
+        <div class="ts-connectors" id="ts-conn-12"></div>
+
+        <!-- Tier 2: Modules -->
+        <div class="ts-tier" id="ts-tier-2">
+          <div class="ts-node" data-node="blockchain" style="--node-color:#f97316;" onclick="tsSelect('blockchain')">
+            <span class="ts-node-status status-active"></span>
+            <div class="ts-node-dot"></div>
+            <div class="ts-node-title">ERC-8004</div>
+            <div class="ts-node-sub">Identity</div>
+          </div>
+          <div class="ts-node" data-node="graph" style="--node-color:#a855f7;" onclick="tsSelect('graph')">
+            <span class="ts-node-status status-idle"></span>
+            <div class="ts-node-dot"></div>
+            <div class="ts-node-title">The Graph</div>
+            <div class="ts-node-sub">Indexing</div>
+          </div>
+          <div class="ts-node" data-node="oracle" style="--node-color:#eab308;" onclick="tsSelect('oracle')">
+            <span class="ts-node-status status-active"></span>
+            <div class="ts-node-dot"></div>
+            <div class="ts-node-title">Oracle</div>
+            <div class="ts-node-sub">Analysis</div>
+          </div>
+          <div class="ts-node" data-node="sentinel" style="--node-color:#ef4444;" onclick="tsSelect('sentinel')">
+            <span class="ts-node-status status-active"></span>
+            <div class="ts-node-dot"></div>
+            <div class="ts-node-title">Sentinel</div>
+            <div class="ts-node-sub">Monitoring</div>
+          </div>
+          <div class="ts-node" data-node="sage" style="--node-color:#10b981;" onclick="tsSelect('sage')">
+            <span class="ts-node-status status-idle"></span>
+            <div class="ts-node-dot"></div>
+            <div class="ts-node-title">Sage</div>
+            <div class="ts-node-sub">Strategy</div>
+          </div>
+          <div class="ts-node" data-node="euact" style="--node-color:#6366f1;" onclick="tsSelect('euact')">
+            <span class="ts-node-status status-active"></span>
+            <div class="ts-node-dot"></div>
+            <div class="ts-node-title">Insura Layer</div>
+            <div class="ts-node-sub">EU AI Act</div>
+          </div>
+        </div>
+
+        <!-- Detail panel (shown on node click) -->
+        <div id="ts-detail" class="ts-detail" style="display:none;"></div>
+      </div>
+    </div>
+
+    <!-- Schedule row below desktop -->
+    <div class="ts-schedule-row">
+      <div class="panel" style="background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:16px;">
         <div class="panel-title"><span class="icon">📅</span> Today's Schedule</div>
         ${todayHTML}
       </div>
-      <div class="panel" style="background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);">
+      <div class="panel" style="background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:16px;">
         <div class="panel-title"><span class="icon">⏭️</span> Coming Up</div>
         ${upcomingHTML || '<p class="empty">No upcoming events.</p>'}
       </div>
@@ -687,6 +873,47 @@ function buildDashboard() {
     document.getElementById('tab-' + id).classList.add('active');
     event.target.classList.add('active');
   }
+
+  // ═══ Trust Stack Desktop Logic ═══
+  const tsNodes = {
+    root:       { title: 'Trust Stack',      sub: 'Root Orchestrator', color: '#8B5CF6', status: 'active', role: 'Core orchestration layer coordinating all Trust Stack modules — identity, compliance, intelligence, and discovery.' },
+    registry:   { title: 'MCP Registry',     sub: 'Discovery',        color: '#06b6d4', status: 'active', role: 'Curated registry of MCP servers. Search, install, and configure verified agent tools.' },
+    trinity:    { title: 'Trinity AI',       sub: 'Intelligence',     color: '#3b82f6', status: 'active', role: 'Three-headed analysis engine: Oracle (strategic), Sentinel (monitoring), Sage (advisory).' },
+    compliance: { title: 'Compliance Layer', sub: 'Governance',       color: '#22c55e', status: 'active', role: 'EU AI Act compliance automation — risk classification, audit trails, and regulatory reporting.' },
+    blockchain: { title: 'ERC-8004',         sub: 'Identity',         color: '#f97316', status: 'active', role: 'On-chain agent identity standard. Verifiable birth certificates for AI agents on Base.' },
+    graph:      { title: 'The Graph',        sub: 'Indexing',         color: '#a855f7', status: 'idle',   role: 'Decentralized indexing protocol for querying agent registrations and events.' },
+    oracle:     { title: 'Oracle',           sub: 'Analysis',         color: '#eab308', status: 'active', role: 'Deep strategic analysis — market positioning, competitive intelligence, ecosystem mapping.' },
+    sentinel:   { title: 'Sentinel',         sub: 'Monitoring',       color: '#ef4444', status: 'active', role: 'Real-time monitoring — social signals, GitHub activity, registry health, anomaly detection.' },
+    sage:       { title: 'Sage',             sub: 'Strategy',         color: '#10b981', status: 'idle',   role: 'Advisory engine for go-to-market strategy, community growth, and partnership recommendations.' },
+    euact:      { title: 'Insura Layer',     sub: 'EU AI Act',        color: '#6366f1', status: 'active', role: 'EU AI Act Article 6 compliance insurance — automated risk assessment and certification pathway.' },
+  };
+  const tsParentMap = { blockchain: 'registry', graph: 'registry', oracle: 'trinity', sentinel: 'trinity', sage: 'trinity', euact: 'compliance' };
+  let tsActive = 'root';
+
+  function tsSelect(id) {
+    tsActive = id;
+    // Update node highlight
+    document.querySelectorAll('.ts-node').forEach(el => el.classList.remove('active'));
+    const target = document.querySelector('.ts-node[data-node="' + id + '"]');
+    if (target) target.classList.add('active');
+    // Show detail panel
+    const n = tsNodes[id];
+    const detail = document.getElementById('ts-detail');
+    const parent = tsParentMap[id];
+    const chips = '<span class="ts-detail-chip">' + n.status + '</span>'
+      + (parent ? '<span class="ts-detail-chip">↑ ' + tsNodes[parent].title + '</span>' : '');
+    detail.innerHTML =
+      '<div class="ts-detail-header">' +
+        '<div class="ts-detail-dot" style="background:' + n.color + ';box-shadow:0 0 8px ' + n.color + '50;"></div>' +
+        '<div class="ts-detail-title">' + n.title + '</div>' +
+      '</div>' +
+      '<div class="ts-detail-role">' + n.role + '</div>' +
+      '<div class="ts-detail-meta">' + chips + '</div>';
+    detail.style.display = 'block';
+  }
+
+  // Show root detail on load
+  tsSelect('root');
 
   // EU AI Act countdown
   const euDate = new Date('2026-08-01T00:00:00');
