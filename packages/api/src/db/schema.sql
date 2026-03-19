@@ -335,7 +335,9 @@ CREATE TRIGGER update_background_jobs_updated_at
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Views for common queries
-CREATE VIEW servers_with_stats AS
+CREATE VIEW servers_with_stats
+  WITH (security_invoker = true)
+AS
 SELECT 
   s.*,
   st.github_stars,
@@ -357,7 +359,9 @@ LEFT JOIN server_stats st ON s.id = st.server_id
 LEFT JOIN server_versions v ON s.id = v.server_id AND v.is_latest = true;
 
 -- Popular servers view
-CREATE VIEW popular_servers AS
+CREATE VIEW popular_servers
+  WITH (security_invoker = true)
+AS
 SELECT 
   s.*,
   st.popularity_score,
@@ -369,7 +373,9 @@ WHERE s.verified = true
 ORDER BY st.popularity_score DESC;
 
 -- Trending servers view
-CREATE VIEW trending_servers AS
+CREATE VIEW trending_servers
+  WITH (security_invoker = true)
+AS
 SELECT 
   s.*,
   st.trending_score,
