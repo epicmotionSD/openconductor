@@ -46,4 +46,25 @@ function parseImport(rawText) {
   return { type: 'note', source: 'manual', sourceUrl: '', body: trimmed, author: '', tags: [] };
 }
 
-module.exports = { detectType, parseImport, DOMAIN_MAP };
+/**
+ * Parse a multi-item import blob.
+ * Splits on blank-line boundaries; each chunk may start with a URL.
+ * Returns array of parsed items (not yet saved).
+ */
+function parseMultiImport(rawText) {
+  const trimmed = (rawText || '').trim();
+  if (!trimmed) return [];
+
+  // Split on double newlines (blank line separators)
+  const chunks = trimmed.split(/\n\s*\n/).map(c => c.trim()).filter(Boolean);
+  const items = [];
+
+  for (const chunk of chunks) {
+    const parsed = parseImport(chunk);
+    if (parsed) items.push(parsed);
+  }
+
+  return items;
+}
+
+module.exports = { detectType, parseImport, parseMultiImport, DOMAIN_MAP };

@@ -15,7 +15,9 @@
     "build:openclaw": "cd packages/openclaw-trust-stack && npm run build",
     "install:all": "npm install && cd packages/shared && npm install && cd ../api && npm install && cd ../frontend && npm install && cd ../cli && npm install && cd ../openclaw-trust-stack && npm install",
     "clean": "rm -rf node_modules packages/*/node_modules packages/*/dist packages/frontend/.next",
-    "test": "jest --passWithNoTests || true"
+    "test": "jest --passWithNoTests || true",
+    "command-center": "node tools/command-center/server.js",
+    "cc:add": "node tools/command-center/cli-add.js"
   },
   "devDependencies": {
     "esbuild": "^0.27.0",

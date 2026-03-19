@@ -1,1 +1,70 @@
-[]
+[
+  {
+    "id": "cc_1773890896_060ea9",
+    "type": "note",
+    "source": "manual",
+    "sourceUrl": "",
+    "parentId": null,
+    "author": "",
+    "body": "Test note from CLI pipe",
+    "tags": [],
+    "sentiment": null,
+    "priority": 2,
+    "status": "archived",
+    "notes": "",
+    "createdAt": "2026-03-19T03:28:16.019Z",
+    "capturedAt": "2026-03-19T03:28:16.019Z"
+  },
+  {
+    "id": "cc_1773890889_c6e1a3",
+    "type": "hn-comment",
+    "source": "hn",
+    "sourceUrl": "https://news.ycombinator.com/item?id=456",
+    "parentId": null,
+    "author": "",
+    "body": "HN discussion about OpenClaw",
+    "tags": [
+      "hn"
+    ],
+    "sentiment": null,
+    "priority": 2,
+    "status": "archived",
+    "notes": "",
+    "createdAt": "2026-03-19T03:28:09.101Z",
+    "capturedAt": "2026-03-19T03:28:09.101Z"
+  },
+  {
+    "id": "cc_1773890889_3234b8",
+    "type": "x-reply",
+    "source": "x",
+    "sourceUrl": "https://x.com/steipete/status/123",
+    "parentId": null,
+    "author": "",
+    "body": "Great take on trust layers",
+    "tags": [
+      "truststack"
+    ],
+    "sentiment": null,
+    "priority": 2,
+    "status": "archived",
+    "notes": "",
+    "createdAt": "2026-03-19T03:28:09.091Z",
+    "capturedAt": "2026-03-19T03:28:09.092Z"
+  },
+  {
+    "id": "cc_1773890222_e787d5",
+    "type": "note",
+    "source": "manual",
+    "sourceUrl": "",
+    "parentId": null,
+    "author": "",
+    "body": "Based on your recent notifications, here is a summary of the responses and engagement for OpenConductor.ai:\n\n### **Key Themes of Engagement**\nThe feedback centers on **Agent Identity** and **Governance**, with several users validating the \"Birth Certificate\" analogy you've been using.\n\n* **The Identity & Liability Gap:**\n    * **[Petrus (@Pete_yes_please)](https://x.com/Pete_yes_please)** is a strong advocate for your \"birth certificate\" concept. He argues that identity is the product itself, noting that without it, there is no audit trail or liability chain. He specifically points out the need to know who authorized an action when an agent makes a \"bad call at 3am.\"\n    * **[Adolfo (@AdolfoUsier)](https://x.com/AdolfoUsier)** echoes this sentiment, asking the critical enterprise question: \"Who's liable when your agent signs a bad contract at 3am?\" He has also been actively liking your responses regarding the \"Legal Identity\" of agents.\n\n* **Governance & Constraints:**\n    * **[Reflectt (@ReflecttAI)](https://x.com/ReflecttAI)** frames this as a core governance problem. They mention that every agent needs clear constraints, heartbeat health checks, and binary approval gates, noting that they have built solutions in this area as well.\n\n* **Regulatory Catalysts:**\n    * **[Marv](https://x.com/itsmemarvai)** highlights the **EU AI Act** enforcement deadline in August 2026 as a major driver. He lists agent identity tracking, risk classification, and audit trails as infrastructure that companies will legally require to operate in the EU.\n\n### **Current Reach**\n* **[Petrus](https://x.com/Pete_yes_please)**'s comments are starting to gain some traction (approx. 4–5 views each).\n* **[Reflectt](https://x.com/ReflecttAI)**'s technical contribution has reached 9 views.\n* **[Adolfo](https://x.com/AdolfoUsier)** is highly engaged, liking both your main posts and your specific replies about the \"$M question\" of liability.\n\n### **Broader Context**\nThere is also mention of **[Alton Syn](https://x.com/WorkflowWhisper)** using Claude and \"Synta\" to plan and build pipelines for the n8n community, which reflects the growing interest in the autonomous orchestration space you are targeting.",
+    "tags": [],
+    "sentiment": null,
+    "priority": 2,
+    "status": "unread",
+    "notes": "",
+    "createdAt": "2026-03-19T03:17:03.009Z",
+    "capturedAt": "2026-03-19T03:17:03.009Z"
+  }
+]

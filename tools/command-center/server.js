@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const store = require('./lib/store');
 const { queryContent } = require('./lib/search');
-const { detectType, parseImport } = require('./lib/parser');
+const { detectType, parseImport, parseMultiImport } = require('./lib/parser');
 
 const PORT = 3333;
 const ROOT = path.resolve(__dirname, '..', '..');
@@ -440,6 +440,32 @@ function buildDashboard() {
   .btn-save { background: var(--green); color: #000; border: none; padding: 6px 18px;
     border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 13px; }
   .btn-save:hover { background: #1eac50; }
+  .btn-import { background: transparent; color: var(--purple); border: 1px solid var(--purple); padding: 8px 16px;
+    border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn-import:hover { background: var(--purple-dim); }
+  .btn-bookmarklet { background: transparent; color: var(--text2); border: 1px solid var(--border); padding: 8px 16px;
+    border-radius: 8px; font-size: 13px; cursor: pointer; }
+  .btn-bookmarklet:hover { background: var(--surface2); }
+  .btn-preview { background: var(--purple); color: #fff; border: none; padding: 6px 18px;
+    border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 13px; }
+  .btn-preview:hover { background: #7c4fe0; }
+  .qa-hint { color: var(--text2); font-size: 13px; margin: 0 0 10px; }
+  .qa-detect { padding: 8px 12px; border-radius: 6px; font-size: 12px; margin-bottom: 10px;
+    background: var(--purple-dim); color: var(--purple); border: 1px solid rgba(139,92,246,0.3); }
+  .qa-feedback { padding: 10px 14px; border-radius: 6px; font-size: 13px; margin-top: 10px; }
+  .qa-feedback.success { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+  .qa-feedback.error { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+  .bi-status { color: var(--text2); font-size: 13px; }
+  .bi-preview { margin-top: 12px; }
+  .bi-preview-item { background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 8px; font-size: 13px; }
+  .bi-preview-item .bi-type { color: var(--purple); font-weight: 600; text-transform: uppercase; font-size: 11px; }
+  .bi-preview-item .bi-body { color: var(--text); margin-top: 4px; }
+  .bi-preview-item .bi-url { color: var(--text2); font-size: 11px; margin-top: 2px; word-break: break-all; }
+  .bookmarklet-link { display: inline-block; background: var(--purple); color: #fff !important;
+    padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; text-decoration: none;
+    cursor: grab; transition: transform 0.1s; }
+  .bookmarklet-link:hover { transform: scale(1.05); background: #7c4fe0; }
 
   .intel-filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
   .filter-chip { background: transparent; border: 1px solid var(--border); color: var(--text2);
@@ -543,12 +569,15 @@ function buildDashboard() {
         <span class="stat-chip actioned"><b>${contentStats.actioned}</b> actioned</span>
       </div>
       <button class="btn-add" onclick="toggleQuickAdd()">+ Add Intel</button>
+      <button class="btn-import" onclick="toggleBulkImport()">Bulk Import</button>
+      <button class="btn-bookmarklet" onclick="toggleBookmarklet()">Bookmarklet</button>
     </div>
 
     <div id="quick-add" class="quick-add" style="display:none;">
       <div class="qa-row">
-        <textarea id="qa-body" placeholder="Paste content, URL, or write a note..." rows="3"></textarea>
+        <textarea id="qa-body" placeholder="Paste content, URL, or write a note..." rows="3" oninput="onQaBodyInput(this.value)"></textarea>
       </div>
+      <div id="qa-detect" class="qa-detect" style="display:none;"></div>
       <div class="qa-row qa-fields">
         <select id="qa-type">
           <option value="">Auto-detect</option>
@@ -570,6 +599,28 @@ function buildDashboard() {
         </select>
         <button class="btn-save" onclick="saveIntel()">Save</button>
       </div>
+      <div id="qa-feedback" class="qa-feedback" style="display:none;"></div>
+    </div>
+
+    <div id="bulk-import" class="quick-add" style="display:none;">
+      <p class="qa-hint">Paste multiple items separated by blank lines. URLs are auto-detected.</p>
+      <div class="qa-row">
+        <textarea id="bi-body" placeholder="https://x.com/steipete/status/123&#10;Great feedback on the trust layer&#10;&#10;https://news.ycombinator.com/item?id=456&#10;Interesting HN discussion&#10;&#10;A plain text note here" rows="6"></textarea>
+      </div>
+      <div class="qa-row qa-fields">
+        <button class="btn-preview" onclick="previewImport()">Preview</button>
+        <button class="btn-save" onclick="confirmImport()" id="bi-confirm" disabled>Save All</button>
+        <span id="bi-status" class="bi-status"></span>
+      </div>
+      <div id="bi-preview" class="bi-preview" style="display:none;"></div>
+    </div>
+
+    <div id="bookmarklet-panel" class="quick-add" style="display:none;">
+      <p class="qa-hint">Drag this link to your bookmarks bar. Click it on any page to capture the URL + selected text to Command Center:</p>
+      <p style="text-align:center; margin: 12px 0;">
+        <a class="bookmarklet-link" href="javascript:void(fetch('http://localhost:3333/api/content',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'link',source:'manual',sourceUrl:location.href,body:window.getSelection().toString()||document.title,tags:[]})}).then(function(r){return r.json()}).then(function(d){var n=document.createElement('div');n.style.cssText='position:fixed;top:16px;right:16px;background:#22c55e;color:#000;padding:12px 20px;border-radius:8px;z-index:999999;font:14px/1.4 system-ui;box-shadow:0 4px 12px rgba(0,0,0,.3)';n.textContent='✓ Captured to Command Center';document.body.appendChild(n);setTimeout(function(){n.remove()},2500)}).catch(function(){alert('Command Center not running on localhost:3333')}))">📌 Capture to CC</a>
+      </p>
+      <p class="qa-hint" style="font-size:11px;">Requires Command Center running on localhost:3333. Captures the page URL and any selected text.</p>
     </div>
 
     <div class="intel-filters">
@@ -654,21 +705,79 @@ function buildDashboard() {
   }
   updateCountdown();
 
-  // Auto-refresh every 30s (skip if user has unsaved quick-add content)
+  // Auto-refresh every 30s (skip if user has unsaved content)
   setInterval(() => {
     const qa = document.getElementById('qa-body');
-    if (qa && qa.value.trim()) return; // don't refresh while typing
+    const bi = document.getElementById('bi-body');
+    if ((qa && qa.value.trim()) || (bi && bi.value.trim())) return;
     location.reload();
   }, 30000);
 
   // Intel: toggle quick-add form
   function toggleQuickAdd() {
     const el = document.getElementById('quick-add');
-    el.style.display = el.style.display === 'none' ? 'block' : 'none';
-    if (el.style.display === 'block') document.getElementById('qa-body').focus();
+    const wasOpen = el.style.display !== 'none';
+    el.style.display = wasOpen ? 'none' : 'block';
+    document.getElementById('bulk-import').style.display = 'none';
+    document.getElementById('bookmarklet-panel').style.display = 'none';
+    if (!wasOpen) document.getElementById('qa-body').focus();
+  }
+  function toggleBulkImport() {
+    const el = document.getElementById('bulk-import');
+    const wasOpen = el.style.display !== 'none';
+    el.style.display = wasOpen ? 'none' : 'block';
+    document.getElementById('quick-add').style.display = 'none';
+    document.getElementById('bookmarklet-panel').style.display = 'none';
+    if (!wasOpen) document.getElementById('bi-body').focus();
+  }
+  function toggleBookmarklet() {
+    const el = document.getElementById('bookmarklet-panel');
+    el.style.display = el.style.display !== 'none' ? 'none' : 'block';
+    document.getElementById('quick-add').style.display = 'none';
+    document.getElementById('bulk-import').style.display = 'none';
   }
 
-  // Intel: save new item
+  // Auto-detect URL in quick-add body
+  function onQaBodyInput(val) {
+    const urlMatch = val.match(/https?:\\/\\/[^\\s]+/);
+    const detectEl = document.getElementById('qa-detect');
+    if (urlMatch) {
+      const url = urlMatch[0];
+      document.getElementById('qa-url').value = url;
+      // Auto-detect type from URL domain
+      const domainHints = {
+        'twitter.com': 'x-reply', 'x.com': 'x-reply',
+        'news.ycombinator.com': 'hn-comment', 'reddit.com': 'reddit-comment',
+        'discord.com': 'discord-message', 'linkedin.com': 'linkedin-comment',
+        'github.com': 'github-comment', 'dev.to': 'blog-comment'
+      };
+      let detected = null;
+      for (const [domain, type] of Object.entries(domainHints)) {
+        if (url.includes(domain)) { detected = type; break; }
+      }
+      if (detected) {
+        const sel = document.getElementById('qa-type');
+        if (!sel.value) sel.value = detected;
+        detectEl.textContent = 'Detected: ' + detected + ' from ' + url.split('/')[2];
+        detectEl.style.display = 'block';
+      } else {
+        detectEl.style.display = 'none';
+      }
+    } else {
+      detectEl.style.display = 'none';
+    }
+  }
+
+  // Show feedback message (replaces page reload for saves)
+  function showFeedback(elId, msg, isError) {
+    const el = document.getElementById(elId);
+    el.textContent = msg;
+    el.className = 'qa-feedback ' + (isError ? 'error' : 'success');
+    el.style.display = 'block';
+    if (!isError) setTimeout(() => location.reload(), 1200);
+  }
+
+  // Intel: save new item (inline feedback instead of reload)
   async function saveIntel() {
     const body = document.getElementById('qa-body').value.trim();
     const url = document.getElementById('qa-url').value.trim();
@@ -682,13 +791,74 @@ function buildDashboard() {
       sentiment: document.getElementById('qa-sentiment').value || undefined,
       priority: parseInt(document.getElementById('qa-priority').value) || 2,
     };
-    const res = await fetch('/api/content', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    if (res.ok) location.reload();
-    else alert('Error saving: ' + (await res.json()).error);
+    try {
+      const res = await fetch('/api/content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) showFeedback('qa-feedback', '✓ Saved! Refreshing...', false);
+      else showFeedback('qa-feedback', 'Error: ' + (await res.json()).error, true);
+    } catch(e) {
+      showFeedback('qa-feedback', 'Network error: ' + e.message, true);
+    }
+  }
+
+  // Bulk import: preview
+  let pendingImportItems = [];
+  async function previewImport() {
+    const raw = document.getElementById('bi-body').value.trim();
+    if (!raw) return;
+    document.getElementById('bi-status').textContent = 'Parsing...';
+    try {
+      const res = await fetch('/api/content/import?preview=1', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ raw: raw })
+      });
+      const data = await res.json();
+      pendingImportItems = data.items || [];
+      const previewEl = document.getElementById('bi-preview');
+      if (pendingImportItems.length === 0) {
+        previewEl.innerHTML = '<p style="color:var(--text2)">No items detected.</p>';
+        document.getElementById('bi-confirm').disabled = true;
+      } else {
+        previewEl.innerHTML = pendingImportItems.map(item =>
+          '<div class="bi-preview-item">' +
+          '<span class="bi-type">' + (item.type || 'note') + '</span>' +
+          (item.sourceUrl ? '<div class="bi-url">' + item.sourceUrl + '</div>' : '') +
+          '<div class="bi-body">' + (item.body || '').substring(0, 200) + '</div>' +
+          '</div>'
+        ).join('');
+        document.getElementById('bi-confirm').disabled = false;
+      }
+      previewEl.style.display = 'block';
+      document.getElementById('bi-status').textContent = pendingImportItems.length + ' item(s) detected';
+    } catch(e) {
+      document.getElementById('bi-status').textContent = 'Error: ' + e.message;
+    }
+  }
+
+  // Bulk import: confirm and save
+  async function confirmImport() {
+    if (!pendingImportItems.length) return;
+    document.getElementById('bi-status').textContent = 'Saving...';
+    try {
+      const res = await fetch('/api/content/batch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: pendingImportItems })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        document.getElementById('bi-status').textContent = '✓ Saved ' + data.saved.length + ' items! Refreshing...';
+        setTimeout(() => location.reload(), 1200);
+      } else {
+        document.getElementById('bi-status').textContent = 'Error saving';
+      }
+    } catch(e) {
+      document.getElementById('bi-status').textContent = 'Error: ' + e.message;
+    }
   }
 
   // Intel: set item status
@@ -822,22 +992,48 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // --- Import (smart parse) ---
+  // --- Import (smart parse) --- supports ?preview=1 for dry-run
   if (pathname === '/api/content/import' && method === 'POST') {
     try {
       const data = await readBody(req);
-      const parsed = parseImport(data.raw || data.body || '');
-      if (!parsed) { jsonResponse(res, 400, { error: 'Nothing to import' }); return; }
-      // Merge any overrides
-      Object.assign(parsed, {
-        tags: data.tags || parsed.tags,
-        author: data.author || parsed.author,
-        notes: data.notes || '',
-        priority: data.priority || 2,
-        sentiment: data.sentiment || null,
+      const preview = parsed.searchParams.get('preview') === '1';
+      const rawText = data.raw || data.body || '';
+      const parsedItems = parseMultiImport(rawText);
+      if (!parsedItems.length) { jsonResponse(res, 400, { error: 'Nothing to import' }); return; }
+
+      // Apply overrides to each item
+      const items = parsedItems.map(p => {
+        if (data.tags) p.tags = data.tags;
+        if (data.author) p.author = data.author;
+        if (data.notes !== undefined) p.notes = data.notes || '';
+        if (data.priority) p.priority = data.priority;
+        if (data.sentiment) p.sentiment = data.sentiment;
+        return p;
       });
-      const item = store.addItem(parsed);
-      jsonResponse(res, 201, item);
+
+      if (preview) {
+        jsonResponse(res, 200, { preview: true, count: items.length, items });
+        return;
+      }
+
+      // Save all items
+      const saved = items.map(item => store.addItem(item));
+      jsonResponse(res, 201, { saved: saved.length, items: saved });
+    } catch (e) {
+      jsonResponse(res, 400, { error: e.message });
+    }
+    return;
+  }
+
+  // --- Batch save (for confirmed previewed items) ---
+  if (pathname === '/api/content/batch' && method === 'POST') {
+    try {
+      const data = await readBody(req);
+      if (!Array.isArray(data.items) || !data.items.length) {
+        jsonResponse(res, 400, { error: 'items array required' }); return;
+      }
+      const saved = data.items.map(item => store.addItem(item));
+      jsonResponse(res, 201, { saved: saved.length, items: saved });
     } catch (e) {
       jsonResponse(res, 400, { error: e.message });
     }
@@ -897,7 +1093,14 @@ server.listen(PORT, '127.0.0.1', () => {
     • GET    /api/content/:id      — single item
     • PUT    /api/content/:id      — update item
     • DELETE /api/content/:id      — archive item
-    • POST   /api/content/import   — smart import
+    • POST   /api/content/import   — smart import (supports ?preview=1)
+    • POST   /api/content/batch    — batch save items
+  
+  Capture tools:
+    • Quick-Add form with URL auto-detect
+    • Bulk Import with preview
+    • Browser bookmarklet (drag from UI)
+    • CLI: npm run cc:add
   
   Auto-refreshes every 30 seconds.
   Press Ctrl+C to stop.
