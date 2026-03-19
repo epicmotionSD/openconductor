@@ -27,20 +27,20 @@
 - **Tags**: @OpenClaw, @NVIDIADev, @peter_steinberger, @base
 
 ### 2. Publish Blog Post
-- [ ] Publish `GTC-2026-OPENCLAW-BLOG.md` to one of:
-  - dev.to (largest dev audience, instant publish)
-  - openconductor.dev/blog (if blog exists)
-  - Ghost instance (if configured)
-- [ ] Add canonical URL to avoid duplicate content
+- [x] Published on dev.to: https://dev.to/epicmotionsd/jensen-is-right-every-company-needs-an-openclaw-strategy-heres-what-he-didnt-say-4l4p
+- [x] Mirrored on openconductor.ai/blog with full article rendering
+- [x] Blog section added to site navigation (header + footer)
+- [x] Canonical URL set in dev.to front matter
 - [ ] Submit to Hacker News (`Show HN: Trust Stack — identity layer for OpenClaw agents`)
 - [ ] Submit to r/artificial, r/MachineLearning, r/LocalLLaMA
 
 ### 3. Outreach to Peter Steinberger / OpenClaw Team
-- [ ] DM @peter_steinberger on Twitter/X
-  - Lead: "We built the identity + compliance layer for OpenClaw — ERC-8004 on-chain agent registration. 3 lines of code to wrap any agent. Would love to discuss integration."
-  - Link: npm package + GitHub
-- [ ] Open a GitHub Discussion or Issue on OpenClaw repo proposing Trust Stack integration
-- [ ] Engage with OpenClaw community posts (reply, add value, link naturally)
+- [ ] DM **@steipete** on X (Peter's actual handle)
+  - Draft ready in `docs/launch/OUTREACH-PETER-DM.md`
+- [ ] Open GitHub Discussion on **openclaw/openclaw** (their CONTRIBUTING.md recommends Discussions for new features/architecture)
+  - Draft ready in `docs/launch/OUTREACH-OPENCLAW-DISCUSSION.md`
+- [ ] Join OpenClaw Discord (https://discord.gg/qkhbAGHRBT) and engage in relevant channels
+- [ ] Engage with OpenClaw community posts on X (reply, add value, link naturally)
 
 ### 4. LinkedIn Cross-Post
 - [ ] Adapt thread into LinkedIn post format (longer paragraphs, no code blocks)
