@@ -1,10 +1,11 @@
 // import '../lib/tracing-web'  // Disabled due to XMLHttpRequest SSR errors
 import type { Metadata, Viewport } from 'next'
-import { Inter, Sora } from 'next/font/google'
+import { Inter, Sora, DM_Mono } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 const sora = Sora({ subsets: ['latin'], variable: '--font-display', display: 'swap' })
+const dmMono = DM_Mono({ weight: ['400', '500'], subsets: ['latin'], variable: '--font-mono', display: 'swap' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.openconductor.ai'),
@@ -92,7 +93,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#8B5CF6',
+  themeColor: '#00FFB2',
 }
 
 export default function RootLayout({
@@ -139,7 +140,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} ${sora.variable} min-h-screen bg-background antialiased`}>
+      <body className={`${inter.className} ${sora.variable} ${dmMono.variable} min-h-screen bg-background antialiased`}>
         {children}
       </body>
     </html>

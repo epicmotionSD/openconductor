@@ -18,6 +18,7 @@ module.exports = {
     extend: {
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "-apple-system", "Segoe UI", "sans-serif"],
+        mono: ["var(--font-mono)", "DM Mono", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -100,16 +101,16 @@ module.exports = {
         },
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%)',
+        'gradient-primary': 'linear-gradient(135deg, #00FFB2 0%, #00C2FF 100%)',
         'gradient-success': 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
         'gradient-error': 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
-        'gradient-warning': 'linear-gradient(135deg, #FFA657 0%, #F59E0B 100%)',
-        'gradient-dark': 'linear-gradient(180deg, #0F0F1A 0%, #1A1A2E 100%)',
+        'gradient-warning': 'linear-gradient(135deg, #FF9500 0%, #F59E0B 100%)',
+        'gradient-dark': 'linear-gradient(180deg, #080B12 0%, #0F131D 100%)',
       },
       boxShadow: {
-        'glow-purple': '0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3)',
-        'glow-blue': '0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3)',
-        'glow-success': '0 0 20px rgba(16, 185, 129, 0.5)',
+        'glow-purple': '0 0 20px rgba(0, 255, 178, 0.5), 0 0 40px rgba(0, 255, 178, 0.3)',
+        'glow-blue': '0 0 20px rgba(0, 194, 255, 0.5), 0 0 40px rgba(0, 194, 255, 0.3)',
+        'glow-success': '0 0 20px rgba(0, 255, 178, 0.5)',
         'glow-error': '0 0 20px rgba(239, 68, 68, 0.5)',
       },
       borderRadius: {
@@ -134,12 +135,27 @@ module.exports = {
           "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
         },
+        "grid-scroll": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(60px)" },
+        },
+        "rim-pulse": {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "1" },
+        },
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(8px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "gradient-shift": "gradient-shift 3s ease infinite",
+        "grid-scroll": "grid-scroll 8s linear infinite",
+        "rim-pulse": "rim-pulse 2s ease-in-out infinite",
+        "fade-in": "fade-in 0.6s ease-out forwards",
       },
     },
   },

@@ -19,7 +19,7 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative container mx-auto px-4 pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+        <section className="relative container mx-auto px-4 pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-grid-animated">
           <div className="absolute inset-0 bg-gradient-primary opacity-5 blur-3xl" />
 
           <div className="relative text-center max-w-5xl mx-auto">

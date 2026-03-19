@@ -228,7 +228,7 @@ export function TemplatePreview({ template, onClose, onDeploy }: TemplatePreview
           <div style="flex: 1;">
             <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; color: #1f2937;">${headline}</h1>
             <p style="font-size: 1.125rem; color: #6b7280; margin-bottom: 2rem;">${subheadline}</p>
-            <a href="#" style="display: inline-block; background: #8B5CF6; color: white; padding: 0.875rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600;">${ctaText}</a>
+            <a href="#" style="display: inline-block; background: #00FFB2; color: #080B12; padding: 0.875rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600;">${ctaText}</a>
           </div>
           <div style="flex: 1;">
             <img src="${heroImage}" alt="Hero" style="width: 100%; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);" />
@@ -416,13 +416,13 @@ export default function ${template.name.replace(/\s+/g, '')}Page() {
                         <div className="flex items-center gap-2">
                           <input
                             type="color"
-                            value={content[variable.key] || variable.defaultValue || '#8B5CF6'}
+                            value={content[variable.key] || variable.defaultValue || '#00FFB2'}
                             onChange={(e) => handleInputChange(variable.key, e.target.value)}
                             className="w-10 h-10 rounded cursor-pointer"
                           />
                           <input
                             type="text"
-                            value={content[variable.key] || variable.defaultValue || '#8B5CF6'}
+                            value={content[variable.key] || variable.defaultValue || '#00FFB2'}
                             onChange={(e) => handleInputChange(variable.key, e.target.value)}
                             className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white"
                           />

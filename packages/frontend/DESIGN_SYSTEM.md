@@ -38,6 +38,22 @@ Consistent typography hierarchy across the application.
 
 ## Color System
 
+### Brand Palette (Trust Stack Official)
+
+| Role | Hex | HSL | Usage |
+|------|-----|-----|-------|
+| Background | `#080B12` | `222 39% 5%` | Page background |
+| Surface | `#0F131D` | `222 30% 9%` | Cards, panels |
+| Primary | `#00FFB2` | `162 100% 50%` | CTAs, links, brand accent |
+| Secondary | `#00C2FF` | `194 100% 50%` | Supporting highlights |
+| Accent | `#A259FF` | `266 100% 67%` | Purple accents, Trinity |
+| Warning | `#FF9500` | `35 100% 50%` | Compliance, alerts |
+
+### Fonts
+- **Body**: Inter (sans-serif)
+- **Display**: Sora (sans-serif)
+- **Mono**: DM Mono (code, technical UI)
+
 ### Semantic Colors
 
 All colors use CSS variables for automatic dark mode support.

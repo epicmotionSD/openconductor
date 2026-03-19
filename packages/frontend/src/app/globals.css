@@ -56,66 +56,67 @@
 
   .dark {
     /* OpenConductor Brand Colors - Dark Mode */
+    /* Trust Stack Official Palette */
 
-    /* Backgrounds - Deep dark purple-blue */
-    --background: 240 17% 10%;        /* #0F0F1A */
-    --background-surface: 240 17% 18%; /* #1A1A2E */
-    --background-elevated: 240 17% 25%; /* #252541 */
-    --background-hover: 240 17% 31%;   /* #2F2F54 */
+    /* Backgrounds - Ultra-dark blue-black (#080B12) */
+    --background: 222 39% 5%;          /* #080B12 */
+    --background-surface: 222 30% 9%;  /* #0F131D */
+    --background-elevated: 222 25% 14%; /* #1A1F2C */
+    --background-hover: 222 20% 19%;   /* #262C3A */
 
     /* Text Hierarchy */
-    --foreground: 0 0% 100%;          /* #FFFFFF */
+    --foreground: 0 0% 100%;           /* #FFFFFF */
     --foreground-secondary: 220 9% 73%; /* #B8BCC8 */
-    --foreground-muted: 220 9% 46%;   /* #6B7280 */
+    --foreground-muted: 220 9% 46%;    /* #6B7280 */
     --foreground-disabled: 220 9% 29%; /* #4B5563 */
 
-    /* Brand Primary - Purple Gradient */
-    --primary: 251 91% 67%;           /* #8B5CF6 */
-    --primary-light: 251 91% 74%;     /* #A78BFA */
-    --primary-dark: 251 91% 60%;      /* #6B38FB */
-    --primary-foreground: 0 0% 100%;  /* #FFFFFF */
+    /* Brand Primary - Neon Green (#00FFB2) */
+    --primary: 162 100% 50%;           /* #00FFB2 */
+    --primary-light: 162 100% 60%;     /* brighter */
+    --primary-dark: 162 100% 40%;      /* deeper */
+    --primary-foreground: 222 39% 5%;  /* dark on bright green */
 
-    /* Brand Secondary - Blue */
-    --secondary: 213 94% 56%;         /* #3B82F6 */
-    --secondary-light: 213 94% 68%;   /* #60A5FA */
-    --secondary-dark: 213 94% 48%;    /* #2563EB */
-    --secondary-foreground: 0 0% 100%; /* #FFFFFF */
+    /* Brand Secondary - Cyan (#00C2FF) */
+    --secondary: 194 100% 50%;         /* #00C2FF */
+    --secondary-light: 194 100% 60%;   /* brighter */
+    --secondary-dark: 194 100% 40%;    /* deeper */
+    --secondary-foreground: 222 39% 5%;
 
     /* Status Colors */
-    --success: 160 84% 51%;           /* #10B981 */
-    --success-light: 160 84% 60%;     /* #34D399 */
-    --success-dark: 160 100% 20%;     /* #064E3B */
+    --success: 160 84% 51%;            /* #10B981 */
+    --success-light: 160 84% 60%;      /* #34D399 */
+    --success-dark: 160 100% 20%;      /* #064E3B */
     --success-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;         /* #EF4444 */
-    --destructive-light: 0 84% 78%;   /* #FCA5A5 */
-    --destructive-dark: 0 84% 30%;    /* #7F1D1D */
+    --destructive: 0 84% 60%;          /* #EF4444 */
+    --destructive-light: 0 84% 78%;    /* #FCA5A5 */
+    --destructive-dark: 0 84% 30%;     /* #7F1D1D */
     --destructive-foreground: 0 0% 100%;
 
-    --warning: 36 100% 67%;           /* #FFA657 */
-    --warning-light: 36 100% 89%;     /* #FED7AA */
-    --warning-dark: 36 100% 28%;      /* #92400E */
+    --warning: 35 100% 50%;            /* #FF9500 */
+    --warning-light: 35 100% 67%;      /* lighter */
+    --warning-dark: 35 100% 28%;       /* deeper */
     --warning-foreground: 0 0% 0%;
 
-    --info: 213 94% 56%;              /* #3B82F6 */
+    --info: 194 100% 50%;              /* #00C2FF */
     --info-foreground: 0 0% 100%;
 
     /* Special Colors */
-    --cta: 0 72% 73%;                 /* #FF6B6B */
-    --badge: 261 61% 86%;             /* #D2A8FF */
-    --accent: 213 94% 56%;            /* #3B82F6 */
+    --cta: 162 100% 50%;               /* #00FFB2 */
+    --badge: 194 100% 50%;             /* #00C2FF */
+    --accent: 266 100% 67%;            /* #A259FF */
     --accent-foreground: 0 0% 100%;
 
     /* UI Elements */
-    --card: 240 17% 18%;              /* #1A1A2E */
+    --card: 222 30% 9%;                /* #0F131D */
     --card-foreground: 0 0% 100%;
-    --popover: 240 17% 18%;
+    --popover: 222 30% 9%;
     --popover-foreground: 0 0% 100%;
-    --muted: 240 17% 25%;             /* #252541 */
-    --muted-foreground: 220 9% 73%;   /* #B8BCC8 */
-    --border: 251 91% 67% / 0.2;      /* rgba(139, 92, 246, 0.2) */
-    --input: 251 91% 67% / 0.2;
-    --ring: 251 91% 67%;              /* #8B5CF6 */
+    --muted: 222 25% 14%;              /* #1A1F2C */
+    --muted-foreground: 220 9% 73%;    /* #B8BCC8 */
+    --border: 162 100% 50% / 0.12;     /* subtle green border */
+    --input: 162 100% 50% / 0.12;
+    --ring: 162 100% 50%;              /* #00FFB2 */
     --radius: 0.75rem;
 
     /* Category colors remain vibrant in dark mode */
@@ -138,7 +139,7 @@
 @layer utilities {
   /* Gradient Text Utility */
   .gradient-text {
-    background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+    background: linear-gradient(135deg, #00FFB2 0%, #00C2FF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -152,42 +153,42 @@
   /* Glow Effects */
   .glow-purple {
     box-shadow:
-      0 0 20px rgba(139, 92, 246, 0.5),
-      0 0 40px rgba(139, 92, 246, 0.3),
-      0 0 60px rgba(139, 92, 246, 0.1);
+      0 0 20px rgba(0, 255, 178, 0.5),
+      0 0 40px rgba(0, 255, 178, 0.3),
+      0 0 60px rgba(0, 255, 178, 0.1);
   }
 
   .glow-blue {
     box-shadow:
-      0 0 20px rgba(59, 130, 246, 0.5),
-      0 0 40px rgba(59, 130, 246, 0.3);
+      0 0 20px rgba(0, 194, 255, 0.5),
+      0 0 40px rgba(0, 194, 255, 0.3);
   }
 
   .glow-success {
     box-shadow:
-      0 0 20px rgba(16, 185, 129, 0.5),
-      0 0 40px rgba(16, 185, 129, 0.3);
+      0 0 20px rgba(0, 255, 178, 0.5),
+      0 0 40px rgba(0, 255, 178, 0.3);
   }
 
   /* Glass Morphism */
   .glass {
-    background: rgba(26, 26, 46, 0.5);
+    background: rgba(15, 19, 29, 0.6);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(139, 92, 246, 0.2);
+    border: 1px solid rgba(0, 255, 178, 0.12);
   }
 
   .glass-elevated {
-    background: rgba(37, 37, 65, 0.5);
+    background: rgba(26, 31, 44, 0.6);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    border: 1px solid rgba(0, 255, 178, 0.2);
   }
 
   /* Gradient Borders */
   .border-gradient {
     border: 2px solid transparent;
     background-image:
-      linear-gradient(#1A1A2E, #1A1A2E),
-      linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+      linear-gradient(#0F131D, #0F131D),
+      linear-gradient(135deg, #00FFB2 0%, #00C2FF 100%);
     background-origin: border-box;
     background-clip: padding-box, border-box;
   }
@@ -205,25 +206,61 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #1A1A2E;
+  background: #0F131D;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+  background: linear-gradient(135deg, #00FFB2 0%, #00C2FF 100%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8B5CF6;
+  background: #00FFB2;
 }
 
 /* Selection Styling */
 ::selection {
-  background: rgba(139, 92, 246, 0.3);
+  background: rgba(0, 255, 178, 0.3);
   color: #FFFFFF;
 }
 
 ::-moz-selection {
-  background: rgba(139, 92, 246, 0.3);
+  background: rgba(0, 255, 178, 0.3);
   color: #FFFFFF;
+}
+
+/* Trust Stack Animations */
+@keyframes gridScroll {
+  from { transform: translateY(0); }
+  to { transform: translateY(60px); }
+}
+
+@keyframes rimPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animated Grid Background utility */
+.bg-grid-animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-grid-animated::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image:
+    linear-gradient(#00FFB2 1px, transparent 1px),
+    linear-gradient(90deg, #00FFB2 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridScroll 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
 }
