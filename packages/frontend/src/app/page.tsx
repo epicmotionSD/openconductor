@@ -47,29 +47,29 @@ export default function HomePage() {
 
             {/* Main Headline */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-[1.1] tracking-tight">
-              Your AI Agents Need
+              Your MCP Stack Needs
               <br />
-              <GradientText>An Identity</GradientText>
+              <GradientText>Payments Infrastructure</GradientText>
             </h1>
 
             {/* Value Prop */}
             <p className="text-xl md:text-2xl text-foreground-secondary mb-10 max-w-3xl mx-auto leading-relaxed">
-              On-chain registration. Verifiable trust scores. Compliance-ready.
+              API keys, usage billing, and proxy-level monetization.
               <br />
-              <span className="text-foreground">The infrastructure that makes AI agents legal and insurable.</span>
+              <span className="text-foreground">Ship from $0 to $1 with requirePayment() and zero-config proxy routing.</span>
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <GradientButton size="lg" glow className="text-base px-8 h-14 text-lg" asChild>
-                <Link href="/register">
-                  <Fingerprint className="mr-2 h-5 w-5" />
-                  Register an Agent
+                <Link href="/admin/api-keys">
+                  <Lock className="mr-2 h-5 w-5" />
+                  API Keys & Billing
                 </Link>
               </GradientButton>
               <Button size="lg" variant="outline" className="text-base px-8 h-14 text-lg border-primary/20 hover:border-primary/40" asChild>
-                <Link href="/early-access">
-                  Enterprise Early Access <ArrowRight className="ml-2 h-4 w-4" />
+                <Link href="/pricing">
+                  View Monetization Plans <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
@@ -101,32 +101,32 @@ export default function HomePage() {
                 AI Agents Are <GradientText>Everywhere</GradientText>
               </h2>
               <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
-                But they operate in a legal gray zone. No identity. No accountability. No insurance.
+                But most MCP builders still cannot monetize without custom billing glue code.
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
               <GlassCard className="border-destructive/30">
                 <FileWarning className="h-10 w-10 text-destructive mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Regulatory Risk</h3>
+                <h3 className="text-xl font-semibold mb-2">Revenue Leakage</h3>
                 <p className="text-foreground-secondary">
-                  EU AI Act requires high-risk AI systems to be traceable. Violations: up to €35M or 7% global revenue.
+                  Teams ship valuable tools but miss monetization because billing is bolted on late or never finished.
                 </p>
               </GlassCard>
 
               <GlassCard className="border-destructive/30">
                 <Gavel className="h-10 w-10 text-destructive mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Liability Exposure</h3>
+                <h3 className="text-xl font-semibold mb-2">Integration Drag</h3>
                 <p className="text-foreground-secondary">
-                  When an agent causes damage, who pays? Without identity, there is no chain of custody.
+                  Custom auth, rate limiting, checkout, and entitlements slow launches for solo and small teams.
                 </p>
               </GlassCard>
 
               <GlassCard className="border-destructive/30">
                 <Lock className="h-10 w-10 text-destructive mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Uninsurable</h3>
+                <h3 className="text-xl font-semibold mb-2">No Proxy Guardrails</h3>
                 <p className="text-foreground-secondary">
-                  Insurers will not cover anonymous AI. No identity means no policy and unlimited exposure.
+                  Direct-to-server traffic leaves billing and abuse controls fragmented across environments.
                 </p>
               </GlassCard>
             </div>
@@ -302,10 +302,10 @@ export default function HomePage() {
                 OPENCLAW INTEGRATION
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                <GradientText>Three Lines</GradientText> to Wrap Any Agent
+                <GradientText>One Command</GradientText> to Monetize Any MCP Stack
               </h2>
               <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
-                OpenClaw gives agents capabilities. Trust Stack gives them identity, compliance, and billing.
+                Deploy with managed proxy routing and enable requirePayment() without app-side billing wiring.
               </p>
             </div>
 
@@ -328,9 +328,9 @@ export default function HomePage() {
   euAiActRisk: 'limited',
 });`}
 
-{`await agent.register();  // → on-chain ERC-8004 identity
-await agent.attest();    // → compliance attestation
-await agent.monetize();  // → usage-based billing`}
+{`await openconductor.deploy({ monetize: true });
+await requirePayment({ plan: 'usage' });
+// Traffic routes through https://proxy.openconductor.ai`}
                   </code>
                 </pre>
               </div>
@@ -353,9 +353,9 @@ await agent.monetize();  // → usage-based billing`}
                 </GlassCard>
                 <GlassCard>
                   <Scale className="h-8 w-8 text-primary mb-3" />
-                  <h3 className="text-lg font-semibold mb-2">Monetization Middleware</h3>
+                  <h3 className="text-lg font-semibold mb-2">Zero-Config Proxy Monetization</h3>
                   <p className="text-foreground-secondary text-sm">
-                    Usage-based billing, revenue tracking, and payment rails for agent-to-agent commerce.
+                    proxy.openconductor.ai handles metering, rate limiting, and payment enforcement without dev-side setup.
                   </p>
                 </GlassCard>
               </div>

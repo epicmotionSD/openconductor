@@ -15,6 +15,7 @@ import { listCommand } from '../src/commands/list.js';
 import { removeCommand } from '../src/commands/remove.js';
 import { updateCommand } from '../src/commands/update.js';
 import { initCommand } from '../src/commands/init.js';
+import { deployCommand } from '../src/commands/deploy.js';
 import { analyticsCommand } from '../src/lib/analytics.js';
 import { stackListCommand, stackInstallCommand, stackShareCommand, stackShowCommand } from '../src/commands/stack.js';
 import { badgeCommand, listBadgeTemplates } from '../src/commands/badge.js';
@@ -100,6 +101,14 @@ program
   .option('-f, --force', 'overwrite existing config')
   .action(initCommand);
 
+program
+  .command('deploy')
+  .description('Deploy MCP infrastructure and optionally enable monetization')
+  .option('--monetize', 'enable requirePayment middleware and managed billing proxy')
+  .option('--proxy <url>', 'override managed proxy endpoint', 'https://proxy.openconductor.ai')
+  .option('--dry-run', 'show deployment plan without applying changes')
+  .action(deployCommand);
+
 // Stack commands - curated server collections with system prompts
 const stackCmd = program
   .command('stack')
@@ -174,8 +183,8 @@ ${chalk.bold.cyan('OpenConductor')} ${chalk.dim(`v${pkg.version}`)} - The npm fo
 ${chalk.bold('Quick Start:')}
   ${chalk.cyan('openconductor stack list')}         ${chalk.dim('# See available stacks')}
   ${chalk.cyan('openconductor stack install coder')}  ${chalk.dim('# Install Coder stack')}
-  ${chalk.cyan('openconductor discover database')}   ${chalk.dim('# Search for servers')}
-  ${chalk.cyan('openconductor install github-mcp')}  ${chalk.dim('# Install a server')}
+  ${chalk.cyan('openconductor deploy --monetize')}    ${chalk.dim('# Deploy with payments enabled')}
+  ${chalk.cyan('openconductor install github-mcp')}   ${chalk.dim('# Install a server')}
 
 ${chalk.bold('Get Help:')}
   ${chalk.cyan('openconductor --help')}              ${chalk.dim('# Show all commands')}

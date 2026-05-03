@@ -130,10 +130,10 @@ export function SiteHeader({ variant = 'default' }: SiteHeaderProps) {
                     </a>
                     <div className="border-t border-primary/10 my-2" />
                     <Link
-                      href="/servers"
+                      href="/admin/api-keys"
                       className="block px-3 py-2 rounded-lg text-sm text-foreground-secondary hover:text-foreground hover:bg-muted/60 transition-colors"
                     >
-                      MCP Server Directory
+                      API Keys & Billing
                     </Link>
                     <a
                       href="https://www.npmjs.com/package/@openconductor/openclaw-trust-stack"
@@ -253,11 +253,11 @@ export function SiteHeader({ variant = 'default' }: SiteHeaderProps) {
                 GitHub ↗
               </a>
               <Link
-                href="/servers"
+                href="/admin/api-keys"
                 className="block text-sm text-foreground-secondary"
                 onClick={() => setIsMobileOpen(false)}
               >
-                MCP Server Directory
+                API Keys & Billing
               </Link>
               <a
                 href="https://www.npmjs.com/package/@openconductor/openclaw-trust-stack"

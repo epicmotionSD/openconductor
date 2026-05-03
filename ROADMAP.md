@@ -1,8 +1,31 @@
 ﻿# OpenConductor Roadmap
 
+## Empire Feature Update
+
+- **Feature ID**: `OC-2026-PIVOT`
+- **Project**: OpenConductor
+- **Priority**: **P0** (Critical)
+- **Title**: Pivot to MCP Monetization Infrastructure
+- **Description**: Deprecate discovery-first UX and center product delivery around `requirePayment()` middleware plus zero-config proxy monetization for Vibe Coders.
+- **Tags**: `#monetization` `#infrastructure-first` `#StripeForAI`
+
+### Refactor Playbook: Stripe for AI
+
+| Phase | Task | Objective |
+| :--- | :--- | :--- |
+| **1. UI/UX Gut** | Swap "Search" for "API Keys & Billing". | Signal shift from consumer directory to developer monetization tooling. |
+| **2. Proxy Layer** | Deploy `proxy.openconductor.ai`. | Provide rate-limiting + billing enforcement with no dev-side config. |
+| **3. CLI Update** | `openconductor deploy --monetize`. | One-command deployment to managed infra with payments enabled. |
+
+### Notion Execution: Monetization Sprint
+
+- **Play 11**: Launch "The MCP Tax" landing page (focus on $0 to $1 monetization).
+- **Play 12**: Outreach to top 20 trending GitHub MCP repo owners for private beta.
+- **Play 13**: Integrate OpenConductor billing into GodotForge CI/CD logs as a demo.
+
 ## Vision
 
-OpenConductor is the **infrastructure layer for the agentic internet** — an MCP server registry evolving into **Trust Stack**, the identity and compliance layer for autonomous AI agents.
+OpenConductor is the **monetization infrastructure layer for the agentic internet** — an MCP-native platform evolving from registry roots into **Trust Stack + Billing Proxy** for autonomous AI agents.
 
 As AI agents proliferate in 2026, enterprises need infrastructure to verify, govern, and insure agent operations. OpenConductor provides the plumbing. [x3o.ai](https://x3o.ai) is the first production deployment — autonomous AI agents running on Trust Stack.
 
@@ -10,14 +33,14 @@ As AI agents proliferate in 2026, enterprises need infrastructure to verify, gov
 
 ---
 
-## Current Status (February 2026)
+## Current Status (May 2026)
 
-### MCP Server Registry — Operational ✅
-- **Ecosystem Intelligence**: 220+ MCP servers indexed and categorized
+### MCP Monetization Infrastructure — Operational ✅
+- **Billing Core**: Stripe checkout + credits + `requirePayment` middleware
+- **Proxy Strategy**: `proxy.openconductor.ai` rollout for centralized metering and rate limits
 - **Clients Supported**: Claude Desktop, Cursor, Cline, Windsurf
 - **SDK v1.4.0**: Zero-config demo mode published to npm
-- **Stacks**: Pre-configured workflows with system prompts
-- **Developer Channel**: MCP builders → Trust Stack enterprise customers
+- **Developer Channel**: MCP builders → paid usage flows + Trust Stack enterprise upsell
 
 ### Trust Stack Layer 1: Registry — Live on Testnet ✅
 
@@ -78,6 +101,7 @@ As AI agents proliferate in 2026, enterprises need infrastructure to verify, gov
 | SDK v1.4.0 | ✅ Code Complete | Zero-config demo mode — `npx @openconductor/mcp-sdk demo` |
 | Empire MCP Server | ✅ Complete | Trinity AI agents operational in Claude Desktop |
 | Stripe Billing | ✅ Complete | Credits checkout, one-line monetization middleware |
+| Monetization Pivot (OC-2026-PIVOT) | ✅ In Progress | Landing + CLI + proxy rollout focused on API keys and billing |
 | SDK npm Publish | ✅ Complete | v1.4.0 published to npm with zero-config demo mode |
 | x3o.ai Trinity AI Registration | 🔜 In Progress | Register Trinity AI agents as Token ID #1 (Week 1-2) |
 | Enterprise Marketing Launch | 🔜 Planned | LinkedIn content, founding cohort outreach, case study (Week 2-3) |
@@ -130,13 +154,13 @@ As AI agents proliferate in 2026, enterprises need infrastructure to verify, gov
 
 ### Q4 2026 — Scale & Raise
 
-**Goal**: Complete Trust Stack. Launch marketplace. Prepare for Series A.
+**Goal**: Complete Trust Stack. Scale proxy monetization. Prepare for Series A.
 
 | Milestone | Status | Details |
 |-----------|--------|---------|
 | Multi-chain | 🔜 Planned | Ethereum, Arbitrum, Optimism support |
 | Enterprise SSO | 🔜 Planned | SAML/OIDC integration |
-| Agent Marketplace | 🔜 Planned | Verified agent discovery |
+| Global Proxy Footprint | 🔜 Planned | Multi-region `proxy.openconductor.ai` for low-latency billing enforcement |
 | SDK 2.0 | 🔜 Planned | Full Trust Stack SDK |
 
 **Target**: $50K MRR (25-30 contracts) → Series A positioning
@@ -149,8 +173,8 @@ As AI agents proliferate in 2026, enterprises need infrastructure to verify, gov
 |--------|--------|--------------|----------|
 | **Trust Stack Enterprise** | Agent registration fees, attestations, governance | Per-agent + annual contracts | 🔥 PRIMARY |
 | **x3o.ai Subscriptions** | Dashboard access, Trinity AI chat, multi-agent management | Tiered plans ($49-$499/mo) | HIGH |
-| **OpenConductor Pro** | Featured server placements, premium analytics | Subscription ($99-$299/mo) | MEDIUM |
-| **SDK Monetization** | `requirePayment` middleware commissions | Usage-based revenue share | MEDIUM |
+| **OpenConductor Pro** | Proxy controls, premium analytics, billing insights | Subscription ($99-$299/mo) | HIGH |
+| **SDK Monetization** | `requirePayment` middleware + proxy commissions | Usage-based revenue share | 🔥 PRIMARY |
 | **Enterprise Workspaces** | Team features, SSO, compliance tooling | Annual contracts ($25K-$100K) | HIGH |
 
 ---
@@ -196,11 +220,11 @@ As AI agents proliferate in 2026, enterprises need infrastructure to verify, gov
 ```
 
 **Flywheel:**
-1. Enterprise faces AI regulation risk → discovers Trust Stack
-2. Registers agents to demonstrate compliance → pays for governance features
-3. Deploys agents using OpenConductor SDK → integration deepens
-4. Needs MCP servers for agent capabilities → uses verified registry
-5. Refers other enterprises facing same deadline → *"Get ahead of Aug 2026"*
+1. Builder needs monetization fast → deploys with `openconductor deploy --monetize`
+2. Proxy enforces payments and throttling → revenue starts immediately
+3. Usage grows → billing analytics + governance features become critical
+4. Team adopts Trust Stack identity/compliance layers for enterprise deals
+5. New builders onboard via proof of revenue + compliance readiness
 
 ---
 
@@ -220,7 +244,7 @@ As AI agents proliferate in 2026, enterprises need infrastructure to verify, gov
 
 - **Website**: [openconductor.ai](https://openconductor.ai)
 - **Production Deployment**: [x3o.ai](https://x3o.ai) (Trinity AI - Token ID #1)
-- **Registry**: [openconductor.ai/discover](https://openconductor.ai/discover)
+- **Proxy**: [proxy.openconductor.ai](https://proxy.openconductor.ai)
 - **Register Agent**: [openconductor.ai/register](https://openconductor.ai/register)
 - **Contract**: [BaseScan](https://sepolia.basescan.org/address/0xf8d7044d657b602194fb5745c614beb35d5d898a)
 - **Subgraph**: [The Graph Studio](https://thegraph.com/studio/subgraph/openconductor/)
@@ -228,4 +252,4 @@ As AI agents proliferate in 2026, enterprises need infrastructure to verify, gov
 
 ---
 
-*Last updated: February 11, 2026*
+*Last updated: May 2, 2026*
