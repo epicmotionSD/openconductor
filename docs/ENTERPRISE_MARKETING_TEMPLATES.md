@@ -4,6 +4,29 @@ Templates for LinkedIn content, email outreach, and founding cohort promotion ba
 
 ---
 
+## May 2026 Pivot Addendum (OC-2026-PIVOT)
+
+Use this framing across all new outbound and landing copy to align with the monetization-infrastructure strategy.
+
+### Positioning Shift
+
+- Old framing: discovery-first registry and marketplace narrative.
+- New framing: API Keys & Billing + `requirePayment()` + `proxy.openconductor.ai` as the fast path from prototype to revenue.
+
+### Core Messaging Blocks
+
+- **Headline**: "Stripe for AI Agents: monetize your MCP stack in one command."
+- **Subhead**: "Deploy with `openconductor deploy --monetize` and route traffic through managed proxy enforcement."
+- **Proof**: "No custom billing glue code, no bespoke key infra, no fragmented rate limiting."
+
+### Campaign CTA Defaults
+
+- Primary CTA: "Enable API Keys & Billing"
+- Secondary CTA: "Run `openconductor deploy --monetize`"
+- Product CTA link: `https://proxy.openconductor.ai`
+
+---
+
 ## LinkedIn Post Series (Week 1-4)
 
 ### Post 1: "We Registered the First AI Agent" (Week 1)
@@ -56,7 +79,7 @@ August 2, 2026.
 
 That's the EU AI Act enforcement deadline.
 
-180 days from now.
+Roughly 90 days from now.
 
 If you're deploying AI agents in production, here's what you need:
 
@@ -238,7 +261,7 @@ Q4: Multi-chain + enterprise SSO
 
 Why join now:
 
-180 days until EU AI Act enforcement.
+~90 days until EU AI Act enforcement.
 
 40 spots left.
 
@@ -263,7 +286,7 @@ Apply: [Link]
 
 ### Template 1: Cold Outreach (AI-First Companies)
 
-**Subject:** EU AI Act Compliance — 180 Days Until Enforcement
+**Subject:** EU AI Act Compliance + Monetization Readiness — Enforcement This Quarter
 
 **Body:**
 ```
@@ -273,7 +296,7 @@ I saw [Company] is deploying AI agents for [specific use case from LinkedIn/webs
 
 Quick question: How are you handling EU AI Act compliance?
 
-Enforcement begins August 2, 2026 (180 days away).
+Enforcement begins August 2, 2026 (about 90 days away).
 
 If your agents interact with customers or handle financial decisions, they're classified as "high-risk" under Article 6.
 
@@ -426,7 +449,7 @@ Join the Trust Stack Founding Cohort
 ✓ 10 of 50 spots filled
 ✓ First agent registered: x3o.ai Trinity AI
 ✓ $1.8-3.1K/mo revenue per deployment
-✓ 180 days until EU AI Act enforcement
+✓ ~90 days until EU AI Act enforcement
 ```
 
 ---
@@ -448,7 +471,7 @@ High-risk AI systems (customer interaction, financial decisions) require:
 
 Traditional infrastructure provides NONE of this.
 
-EU AI Act enforcement: August 2, 2026 (180 days away)
+EU AI Act enforcement: August 2, 2026 (~90 days away)
 Penalties: €35M or 7% global revenue
 
 Trust Stack is the only protocol-level solution.
@@ -647,7 +670,7 @@ ERC-8004 standard. Base L2. Immutable ownership.
 
 Why this matters: EU AI Act enforcement begins August 2, 2026.
 
-180 days away. 🧵👇
+~90 days away. 🧵👇
 
 2/ x3o.ai runs autonomous agents that book $3,100/month in revenue PER SALON.
 
@@ -711,7 +734,7 @@ What you get:
 
 Apply: [link]
 
-180 days until the deadline. Don't wait. /end
+~90 days until the deadline. Don't wait. /end
 ```
 
 ---

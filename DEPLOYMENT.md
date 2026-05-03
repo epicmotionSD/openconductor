@@ -8,6 +8,7 @@
 ## Domains
 - `openconductor.ai` (primary)
 - `www.openconductor.ai` (redirect)
+- `proxy.openconductor.ai` (managed monetization proxy)
 
 ## Backend (Supabase)
 - **Project:** `axuqrkhscyqmaglcdprd`
@@ -21,6 +22,12 @@
 | `telemetry-ingest` | Ingests SDK telemetry events |
 | `provision-key` | Provisions new API keys |
 | `usage-aggregator` | Aggregates usage stats (cron) |
+
+## Monetization Deployment Path
+
+- Primary flow: `openconductor deploy --monetize`
+- Effect: enables `requirePayment()` middleware path and routes traffic through `https://proxy.openconductor.ai`
+- Use `--dry-run` to validate deployment plan without applying changes
 
 ## Migration History
 - **2026-01-22:** Migrated from `openconductor` (bricked) to `openconductor-next`

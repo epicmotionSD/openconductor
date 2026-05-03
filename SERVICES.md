@@ -9,14 +9,14 @@ These are the core platform services that run together:
 ### 1. Frontend (Port 3000)
 - **Location**: `packages/frontend/`
 - **Tech**: Next.js 14
-- **Purpose**: Web interface for browsing and discovering MCP servers
+- **Purpose**: Web interface for API keys, billing, deployment flows, and Trust Stack surfaces
 - **URL**: http://localhost:3000
 - **Started by**: `npm run dev` (via concurrently)
 
 ### 2. API Server (Port 3002)
 - **Location**: `packages/api/`
 - **Tech**: Express.js + TypeScript
-- **Purpose**: REST API for MCP server registry
+- **Purpose**: REST API for billing, key provisioning, usage metering, and registry access
 - **URL**: http://localhost:3002
 - **Started by**: `npm run dev` (via concurrently)
 
@@ -33,10 +33,11 @@ These are published packages that users install separately:
 ### 1. OpenConductor CLI
 - **Location**: `packages/cli/`
 - **Installation**: `npm install -g @openconductor/cli`
-- **Purpose**: Command-line tool for discovering and installing MCP servers
+- **Purpose**: Command-line tool for deployment, monetization, and MCP server management
 - **Usage**:
   ```bash
-  openconductor search postgres
+  openconductor deploy --monetize
+  openconductor discover postgres
   openconductor install filesystem
   openconductor list
   ```
@@ -72,8 +73,11 @@ npm start
 # Install globally
 npm install -g @openconductor/cli
 
-# Search for MCP servers
-openconductor search database
+# Enable monetization deployment path
+openconductor deploy --monetize
+
+# Discover MCP servers
+openconductor discover database
 
 # Install an MCP server
 openconductor install postgres-mcp
@@ -134,8 +138,8 @@ A: No. The MCP server packages are meant to be installed by end users who want t
 
 **Q: What's the difference between the API and the CLI?**
 A:
-- **API**: Backend service that powers the web interface
-- **CLI**: Command-line tool for developers to install MCP servers
+- **API**: Backend service for billing, API keys, usage, and registry data
+- **CLI**: Command-line tool for deployment, monetization enablement, and MCP installation workflows
 
 ## Development
 
