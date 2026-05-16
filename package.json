@@ -17,7 +17,8 @@
     "clean": "rm -rf node_modules packages/*/node_modules packages/*/dist packages/frontend/.next",
     "test": "jest --passWithNoTests || true",
     "command-center": "node tools/command-center/server.js",
-    "cc:add": "node tools/command-center/cli-add.js"
+    "cc:add": "node tools/command-center/cli-add.js",
+    "generate:icons": "node scripts/generate-pwa-icons.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.27.0",
