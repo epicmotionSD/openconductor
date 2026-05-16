@@ -54,7 +54,7 @@ That's OpenConductor. We're building **Trust Stack + Monetization** — identity
 
 | Layer | What It Does | Status |
 |-------|-------------|--------|
-| **Registry** | 220+ MCP servers indexed. Discovery, installation, stacks. | ✅ Live |
+| **Registry** | 180+ MCP servers indexed. Discovery, installation, stacks. | ✅ Live |
 | **Identity** | ERC-8004 on-chain agent identity. Verifiable, auditable, portable. | ✅ Live on Base Sepolia |
 | **Governance** | Policy engine, permission management, attestation framework. | Q2 2026 |
 | **Compliance** | EU AI Act readiness, ISO 42001, audit trails, insurance API. | Q3 2026 |
@@ -166,7 +166,7 @@ openconductor stack install essential
 
 ```bash
 # Discovery
-openconductor discover [query]      # Search 220+ servers
+openconductor discover [query]      # Search 180+ servers
 
 # Installation
 openconductor install <server>      # Install a single server
@@ -209,7 +209,7 @@ openconductor analytics             # Analytics preferences
 
 ---
 
-## 220+ Servers
+## 180+ Servers
 
 The largest registry of MCP servers, all verified and tested.
 
@@ -235,7 +235,7 @@ Submit a PR to add your server to the registry.
 ## Roadmap
 
 - [x] CLI for MCP server installation
-- [x] 220+ server registry
+- [x] 180+ server registry
 - [x] Multi-client support (Claude, Cursor, Cline)
 - [x] Pre-configured Stacks with system prompts
 - [x] ERC-8004 agent identity (on-chain, Base Sepolia)
