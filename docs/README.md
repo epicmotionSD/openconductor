@@ -182,7 +182,7 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for development setup and contribution
 ### Installation & Setup
 - [CLI Installation](releases/CLI_v1.3.1_HOTFIX.md#installation)
 - [CONTRIBUTING.md](../CONTRIBUTING.md)
-- [SERVICES.md](../SERVICES.md)
+- [SERVICES.md](SERVICES.md)
 
 ### Badge System
 - [Badge Spec](specs/BADGE_SYSTEM.md)
@@ -207,7 +207,7 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for development setup and contribution
 ### Infrastructure
 - [Cold Start Solution](specs/COLD_START_SOLUTION.md)
 - [Deployment History](releases/DEPLOYMENT_v1.1.0.md)
-- [SERVICES.md](../SERVICES.md)
+- [SERVICES.md](SERVICES.md)
 
 ---
 
