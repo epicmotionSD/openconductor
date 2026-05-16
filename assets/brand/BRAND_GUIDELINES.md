@@ -244,7 +244,6 @@ Use [banner-dark.svg](banner-dark.svg) as the dark template; align headings on t
 | File | Purpose |
 |---|---|
 | [icon-conductor.svg](icon-conductor.svg) | Canonical brand icon — conductor wave |
-| [logo-minimal.svg](logo-minimal.svg) | Legacy compass mark (deprecated, kept for reference) |
 | [banner-dark.svg](banner-dark.svg) | Dark-mode banner template |
 | [banner-light.svg](banner-light.svg) | Light-mode banner template |
 | BRAND_GUIDELINES.md | This document |
