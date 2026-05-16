@@ -30,6 +30,20 @@
 
 ---
 
+## About This Repo
+
+OpenConductor is a monorepo. What lives here:
+
+- [`packages/api`](packages/api) — billing backend (Stripe checkout, credit packs, `/functions/v1/*` SDK routes) deployed at `api.openconductor.ai`
+- [`packages/frontend`](packages/frontend) — Next.js site deployed at `openconductor.ai`
+- [`packages/cli`](packages/cli) — the `@openconductor/cli` npm package for installing MCP servers into Claude Desktop / Cursor / Cline / Windsurf
+- [`packages/mcp-servers`](packages/mcp-servers) — first-party MCP servers (registry, sportintel)
+- [`packages/openclaw-trust-stack`](packages/openclaw-trust-stack) — ERC-8004 agent identity wrapper for OpenClaw
+
+**The SDK ships from a separate repo:** [`github.com/epicmotionSD/mcp-sdk`](https://github.com/epicmotionSD/mcp-sdk) → [`@openconductor/mcp-sdk`](https://www.npmjs.com/package/@openconductor/mcp-sdk) on npm. That's where `requirePayment()`, `createPaidTool()`, and the demo-mode runtime live.
+
+---
+
 ## The Agent Economy Needs Infrastructure
 
 Jensen Huang called it at GTC 2026: **every company becomes an agent company.** SaaS becomes AaaS. OpenClaw is building the operating system for personal AI. NemoClaw secures the network connection.

@@ -116,6 +116,7 @@ claude_desktop_config.json
 *.temp
 *-backup.*
 tmpclaude-*
+git_*.txt
 
 # Launch and setup scripts (archived)
 launch-*.html

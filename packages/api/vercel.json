@@ -22,6 +22,7 @@
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api" },
     { "source": "/functions/v1/(.*)", "destination": "/api" },
-    { "source": "/v1/(.*)", "destination": "/api" }
+    { "source": "/v1/(.*)", "destination": "/api" },
+    { "source": "/", "destination": "/api" }
   ]
 }
