@@ -1,0 +1,14 @@
+﻿{
+  "base-sepolia": {
+    "ERC8004Registry": {
+      "address": "0xf8d7044d657b602194fb5745c614beb35d5d898a",
+      "startBlock": 21271847
+    }
+  },
+  "base": {
+    "ERC8004Registry": {
+      "address": "TODO_MAINNET_ADDRESS",
+      "startBlock": 0
+    }
+  }
+}

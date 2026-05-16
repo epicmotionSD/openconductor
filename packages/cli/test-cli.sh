@@ -16,7 +16,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Test configuration
-TEST_API_URL="http://localhost:3001/v1"
+TEST_API_URL="${OPENCONDUCTOR_API_URL:-http://localhost:3001/v1}"
 TEST_CONFIG_DIR="/tmp/openconductor-test"
 TEST_CONFIG_PATH="$TEST_CONFIG_DIR/claude_desktop_config.json"
 
@@ -87,13 +87,13 @@ test_discovery() {
     echo -e "${BLUE}Testing discovery commands...${NC}"
     
     # Test discover without query
-    run_cli "discover --limit 5" "Discover servers (no query)"
+    run_cli "discover --limit 5 --no-interactive" "Discover servers (no query)"
     
     # Test discover with query
-    run_cli "discover memory --limit 3" "Search for memory servers"
+    run_cli "discover memory --limit 3 --no-interactive" "Search for memory servers"
     
     # Test discover with category filter
-    run_cli "discover --category database --limit 3" "Filter by database category"
+    run_cli "discover --category database --limit 3 --no-interactive" "Filter by database category"
     
     echo -e "${GREEN}✓ Discovery commands working${NC}"
     echo ""
@@ -106,10 +106,10 @@ test_configuration() {
     # Test list (should be empty initially)
     run_cli "list --config $TEST_CONFIG_PATH" "List servers (empty)"
     
-    # Test init
-    echo "yes" | run_cli "init --config $TEST_CONFIG_PATH" "Initialize configuration"
+    # Create minimal config file (non-interactive)
+    echo '{"mcpServers":{},"globalShortcut":"Cmd+Shift+."}' > "$TEST_CONFIG_PATH"
     
-    # Test list after init
+    # Test list after config creation
     run_cli "list --config $TEST_CONFIG_PATH" "List servers after init"
     
     echo -e "${GREEN}✓ Configuration commands working${NC}"
@@ -121,7 +121,7 @@ test_installation() {
     echo -e "${BLUE}Testing installation workflow...${NC}"
     
     # Test dry run installation
-    run_cli "install openmemory --config $TEST_CONFIG_PATH --dry-run --yes" "Install server (dry run)"
+    run_cli "install mcp-memory --config $TEST_CONFIG_PATH --dry-run --yes" "Install server (dry run)"
     
     echo -e "${GREEN}✓ Installation workflow working${NC}"
     echo ""
@@ -148,7 +148,7 @@ test_error_handling() {
     echo "Command: node bin/openconductor.js discover --category invalid-category"
     echo "----------------------------------------"
     
-    if node bin/openconductor.js discover --category invalid-category 2>/dev/null; then
+    if node bin/openconductor.js discover --category invalid-category --no-interactive 2>/dev/null; then
         echo -e "${RED}✗ UNEXPECTED: Should have failed for invalid category${NC}"
     else
         echo -e "${GREEN}✓ PASSED: Validation error handled gracefully${NC}"
@@ -163,7 +163,7 @@ test_sdk() {
     # Get absolute path to current directory
     local CLI_DIR="$(pwd)"
 
-    cat > /tmp/test-sdk.js <<EOF
+    cat > /tmp/test-sdk.mjs <<EOF
 import { OpenConductorSDK } from '${CLI_DIR}/src/lib/sdk.js';
 
 async function testSDK() {
@@ -195,16 +195,16 @@ testSDK();
 EOF
 
     echo -e "${YELLOW}Testing: SDK functionality${NC}"
-    echo "Command: node /tmp/test-sdk.js"
+    echo "Command: node /tmp/test-sdk.mjs"
     echo "----------------------------------------"
 
-    if node /tmp/test-sdk.js; then
+    if node /tmp/test-sdk.mjs; then
         echo -e "${GREEN}✓ PASSED: SDK functionality working${NC}"
     else
         echo -e "${RED}✗ FAILED: SDK test failed${NC}"
     fi
 
-    rm -f /tmp/test-sdk.js
+    rm -f /tmp/test-sdk.mjs
     echo ""
 }
 

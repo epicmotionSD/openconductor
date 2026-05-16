@@ -20,6 +20,7 @@ build/
 *.db
 *.sqlite
 data/
+!tools/command-center/data/
 
 # Logs
 logs
@@ -114,6 +115,8 @@ claude_desktop_config.json
 *.tmp
 *.temp
 *-backup.*
+tmpclaude-*
+git_*.txt
 
 # Launch and setup scripts (archived)
 launch-*.html
@@ -148,3 +151,5 @@ coverage/
 mcp-registry-discovery/
 seed-data/
 trinity-ai/
+node_modules
+.env*.local

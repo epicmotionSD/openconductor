@@ -34,7 +34,7 @@ interface APIKey {
   userId?: string;
 }
 
-interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest extends Request {
   apiKey?: APIKey;
   user?: {
     id: string;
@@ -48,10 +48,11 @@ interface AuthenticatedRequest extends Request {
  * API Key authentication middleware
  */
 export const authenticateAPIKey = async (
-  req: AuthenticatedRequest, 
+  req: Request, 
   res: Response, 
   next: NextFunction
 ) => {
+  const authReq = req as AuthenticatedRequest;
   try {
     const authHeader = req.headers.authorization;
     
@@ -95,7 +96,7 @@ export const authenticateAPIKey = async (
     );
 
     // Attach API key info to request
-    req.apiKey = {
+    authReq.apiKey = {
       id: apiKeyData.id,
       name: apiKeyData.name,
       permissions: apiKeyData.permissions,
@@ -125,8 +126,9 @@ export const authenticateAPIKey = async (
 /**
  * Require authentication middleware
  */
-export const requireAuth = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-  if (!req.apiKey && !req.user) {
+export const requireAuth = (req: Request, res: Response, next: NextFunction) => {
+  const authReq = req as AuthenticatedRequest;
+  if (!authReq.apiKey && !authReq.user) {
     throw createError(
       'Authentication required. Please provide a valid API key.',
       401,
@@ -141,8 +143,9 @@ export const requireAuth = (req: AuthenticatedRequest, res: Response, next: Next
  * Permission check middleware factory
  */
 export const requirePermission = (permission: keyof APIKey['permissions']) => {
-  return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    if (!req.apiKey?.permissions[permission]) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const authReq = req as AuthenticatedRequest;
+    if (!authReq.apiKey?.permissions[permission]) {
       throw createError(
         `Permission denied. Required permission: ${permission}`,
         403,
@@ -157,8 +160,9 @@ export const requirePermission = (permission: keyof APIKey['permissions']) => {
 /**
  * Admin-only middleware
  */
-export const requireAdmin = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-  const hasAdminPermission = req.apiKey?.permissions.admin || req.user?.role === 'admin';
+export const requireAdmin = (req: Request, res: Response, next: NextFunction) => {
+  const authReq = req as AuthenticatedRequest;
+  const hasAdminPermission = authReq.apiKey?.permissions.admin || authReq.user?.role === 'admin';
   
   if (!hasAdminPermission) {
     throw createError(
@@ -175,13 +179,14 @@ export const requireAdmin = (req: AuthenticatedRequest, res: Response, next: Nex
  * Server ownership verification middleware
  */
 export const requireServerOwnership = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
+  const authReq = req as AuthenticatedRequest;
   try {
     const { slug } = req.params;
-    const userId = req.user?.id || req.apiKey?.userId;
+    const userId = authReq.user?.id || authReq.apiKey?.userId;
     
     if (!userId) {
       throw createError('User identification required for ownership verification', 401);
@@ -202,7 +207,7 @@ export const requireServerOwnership = async (
 
     // For now, check if user has admin permission
     // In production, would verify GitHub ownership or explicit ownership records
-    const hasOwnership = req.apiKey?.permissions.admin || req.user?.role === 'admin';
+    const hasOwnership = authReq.apiKey?.permissions.admin || authReq.user?.role === 'admin';
     
     if (!hasOwnership) {
       throw createError(

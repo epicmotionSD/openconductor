@@ -15,6 +15,7 @@ import { listCommand } from '../src/commands/list.js';
 import { removeCommand } from '../src/commands/remove.js';
 import { updateCommand } from '../src/commands/update.js';
 import { initCommand } from '../src/commands/init.js';
+import { deployCommand } from '../src/commands/deploy.js';
 import { analyticsCommand } from '../src/lib/analytics.js';
 import { stackListCommand, stackInstallCommand, stackShareCommand, stackShowCommand } from '../src/commands/stack.js';
 import { badgeCommand, listBadgeTemplates } from '../src/commands/badge.js';
@@ -53,12 +54,14 @@ program
   .option('-c, --category <category>', 'filter by category')
   .option('-t, --tags <tags...>', 'filter by tags')
   .option('-l, --limit <number>', 'number of results', '10')
+  .option('--no-interactive', 'skip interactive menu')
   .action(discoverCommand);
 
 program
   .command('install')
   .description('Install an MCP server')
   .argument('<server>', 'server name or slug')
+  .option('--platform <platform>', 'target platform (claude, cursor, vscode, windsurf)')
   .option('--config <path>', 'custom config file path')
   .option('--port <port>', 'custom port number')
   .option('--dry-run', 'simulate installation without making changes')
@@ -68,6 +71,7 @@ program
 program
   .command('list')
   .description('List installed MCP servers')
+  .option('--platform <platform>', 'target platform (claude, cursor, vscode, windsurf)')
   .option('--config <path>', 'custom config file path')
   .action(listCommand);
 
@@ -76,6 +80,7 @@ program
   .alias('uninstall')
   .description('Remove an installed MCP server')
   .argument('<server>', 'server name or slug')
+  .option('--platform <platform>', 'target platform (claude, cursor, vscode, windsurf)')
   .option('--config <path>', 'custom config file path')
   .option('-y, --yes', 'skip confirmation')
   .action(removeCommand);
@@ -84,15 +89,25 @@ program
   .command('update')
   .description('Update an installed MCP server')
   .argument('[server]', 'server name (or all if omitted)')
+  .option('--platform <platform>', 'target platform (claude, cursor, vscode, windsurf)')
   .option('--config <path>', 'custom config file path')
   .action(updateCommand);
 
 program
   .command('init')
   .description('Initialize OpenConductor configuration')
+  .option('--platform <platform>', 'target platform (claude, cursor, vscode, windsurf)')
   .option('--config <path>', 'custom config file path')
   .option('-f, --force', 'overwrite existing config')
   .action(initCommand);
+
+program
+  .command('deploy')
+  .description('Deploy MCP infrastructure and optionally enable monetization')
+  .option('--monetize', 'enable requirePayment middleware and managed billing proxy')
+  .option('--proxy <url>', 'override managed proxy endpoint', 'https://proxy.openconductor.ai')
+  .option('--dry-run', 'show deployment plan without applying changes')
+  .action(deployCommand);
 
 // Stack commands - curated server collections with system prompts
 const stackCmd = program
@@ -107,6 +122,7 @@ stackCmd
 stackCmd
   .command('install <stack>')
   .description('Install all servers in a stack + system prompt')
+  .option('--platform <platform>', 'target platform (claude, cursor, vscode, windsurf)')
   .option('-f, --force', 'reinstall already installed servers')
   .action(stackInstallCommand);
 
@@ -167,8 +183,8 @@ ${chalk.bold.cyan('OpenConductor')} ${chalk.dim(`v${pkg.version}`)} - The npm fo
 ${chalk.bold('Quick Start:')}
   ${chalk.cyan('openconductor stack list')}         ${chalk.dim('# See available stacks')}
   ${chalk.cyan('openconductor stack install coder')}  ${chalk.dim('# Install Coder stack')}
-  ${chalk.cyan('openconductor discover database')}   ${chalk.dim('# Search for servers')}
-  ${chalk.cyan('openconductor install github-mcp')}  ${chalk.dim('# Install a server')}
+  ${chalk.cyan('openconductor deploy --monetize')}    ${chalk.dim('# Deploy with payments enabled')}
+  ${chalk.cyan('openconductor install github-mcp')}   ${chalk.dim('# Install a server')}
 
 ${chalk.bold('Get Help:')}
   ${chalk.cyan('openconductor --help')}              ${chalk.dim('# Show all commands')}

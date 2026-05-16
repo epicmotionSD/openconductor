@@ -1,0 +1,51 @@
+{
+  "name": "@openconductor/openclaw-trust-stack",
+  "version": "0.1.0",
+  "description": "Identity, compliance, and monetization layer for OpenClaw agents. Wraps any agent with ERC-8004 on-chain identity, EU AI Act compliance metadata, audit trails, and payment middleware.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "openclaw",
+    "nemoclaw",
+    "trust-stack",
+    "erc-8004",
+    "agent-identity",
+    "ai-compliance",
+    "eu-ai-act",
+    "mcp",
+    "agent-monetization",
+    "openconductor",
+    "agentic-ai",
+    "agent-governance"
+  ],
+  "author": "OpenConductor",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/epicmotionSD/openconductor",
+    "directory": "packages/openclaw-trust-stack"
+  },
+  "homepage": "https://openconductor.ai/trust-stack",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "viem": "^2.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+}

@@ -139,9 +139,10 @@ export class PortManager {
    */
   getAllocatedPorts(config) {
     const ports = [];
-    
-    if (config.mcpServers) {
-      for (const serverConfig of Object.values(config.mcpServers)) {
+
+    const serverMap = config.mcpServers || config.servers || {};
+    if (serverMap && typeof serverMap === 'object') {
+      for (const serverConfig of Object.values(serverMap)) {
         if (serverConfig.env?.PORT) {
           ports.push(parseInt(serverConfig.env.PORT, 10));
         }

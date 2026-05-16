@@ -12,8 +12,9 @@ import { parse, stringify } from 'comment-json';
  * - Windows: %APPDATA%\Claude\claude_desktop_config.json
  */
 export class ConfigManager {
-  constructor(customPath) {
+  constructor(customPath, options = {}) {
     this.configPath = customPath || this.getDefaultConfigPath();
+    this.serversKey = options.serversKey || 'mcpServers';
   }
 
   getDefaultConfigPath() {
@@ -40,12 +41,18 @@ export class ConfigManager {
     try {
       await access(this.configPath);
       const content = await readFile(this.configPath, 'utf-8');
-      return parse(content);
+      const config = parse(content);
+
+      if (!config[this.serversKey]) {
+        config[this.serversKey] = {};
+      }
+
+      return config;
     } catch (error) {
       if (error.code === 'ENOENT') {
         // Config doesn't exist, return default
         return {
-          mcpServers: {}
+          [this.serversKey]: {}
         };
       }
       throw error;
@@ -73,11 +80,11 @@ export class ConfigManager {
   async addServer(serverId, serverConfig) {
     const config = await this.readConfig();
     
-    if (!config.mcpServers) {
-      config.mcpServers = {};
+    if (!config[this.serversKey]) {
+      config[this.serversKey] = {};
     }
     
-    config.mcpServers[serverId] = serverConfig;
+    config[this.serversKey][serverId] = serverConfig;
     
     await this.writeConfig(config);
   }
@@ -88,8 +95,8 @@ export class ConfigManager {
   async removeServer(serverId) {
     const config = await this.readConfig();
     
-    if (config.mcpServers && config.mcpServers[serverId]) {
-      delete config.mcpServers[serverId];
+    if (config[this.serversKey] && config[this.serversKey][serverId]) {
+      delete config[this.serversKey][serverId];
       await this.writeConfig(config);
       return true;
     }
@@ -103,9 +110,9 @@ export class ConfigManager {
   async updateServer(serverId, updates) {
     const config = await this.readConfig();
     
-    if (config.mcpServers && config.mcpServers[serverId]) {
-      config.mcpServers[serverId] = {
-        ...config.mcpServers[serverId],
+    if (config[this.serversKey] && config[this.serversKey][serverId]) {
+      config[this.serversKey][serverId] = {
+        ...config[this.serversKey][serverId],
         ...updates
       };
       await this.writeConfig(config);
@@ -120,7 +127,7 @@ export class ConfigManager {
    */
   async isInstalled(serverId) {
     const config = await this.readConfig();
-    return config.mcpServers && !!config.mcpServers[serverId];
+    return config[this.serversKey] && !!config[this.serversKey][serverId];
   }
 
   /**
@@ -128,7 +135,7 @@ export class ConfigManager {
    */
   async getInstalledServers() {
     const config = await this.readConfig();
-    return Object.keys(config.mcpServers || {});
+    return Object.keys(config[this.serversKey] || {});
   }
 
   /**
@@ -136,7 +143,7 @@ export class ConfigManager {
    */
   async getServerConfig(serverId) {
     const config = await this.readConfig();
-    return config.mcpServers?.[serverId] || null;
+    return config[this.serversKey]?.[serverId] || null;
   }
 
   /**
@@ -150,15 +157,23 @@ export class ConfigManager {
       throw new Error('Config must be an object');
     }
     
-    if (config.mcpServers && typeof config.mcpServers !== 'object') {
-      throw new Error('mcpServers must be an object');
+    if (config[this.serversKey] && typeof config[this.serversKey] !== 'object') {
+      throw new Error(`${this.serversKey} must be an object`);
     }
     
     // Validate each server config
-    if (config.mcpServers) {
-      for (const [serverId, serverConfig] of Object.entries(config.mcpServers)) {
-        if (!serverConfig.command) {
-          throw new Error(`Server "${serverId}" missing required "command" field`);
+    if (config[this.serversKey]) {
+      for (const [serverId, serverConfig] of Object.entries(config[this.serversKey])) {
+        if (!serverConfig.command && !serverConfig.url) {
+          throw new Error(`Server "${serverId}" missing required "command" or "url" field`);
+        }
+
+        if (serverConfig.args && !Array.isArray(serverConfig.args)) {
+          throw new Error(`Server "${serverId}" has invalid "args" field (must be array)`);
+        }
+
+        if (serverConfig.env && typeof serverConfig.env !== 'object') {
+          throw new Error(`Server "${serverId}" has invalid "env" field (must be object)`);
         }
       }
     }
@@ -201,12 +216,18 @@ export class ConfigManager {
     }
 
     const defaultConfig = {
-      mcpServers: {},
-      globalShortcut: "Cmd+Shift+.",
-      // Add any other default Claude Desktop settings
+      [this.serversKey]: {}
     };
+
+    if (this.serversKey === 'mcpServers') {
+      defaultConfig.globalShortcut = "Cmd+Shift+.";
+    }
 
     await this.writeConfig(defaultConfig);
     return this.configPath;
+  }
+
+  getServers(config) {
+    return config?.[this.serversKey] || {};
   }
 }

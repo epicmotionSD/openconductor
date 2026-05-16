@@ -6,12 +6,19 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/home/roizen/projects/openconductor/packages/api",
-        "/home/roizen/projects/openconductor/packages/cli",
-        "/home/roizen/projects/openconductor/packages/frontend",
-        "/home/roizen/projects/openconductor/packages/shared"
+        "C:\\Users\\shawn\\apps\\openconductor"
       ],
       "env": {}
+    },
+
+    "openconductor-registry": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@openconductor/mcp-registry"
+      ],
+      "env": {},
+      "description": "OpenConductor registry MCP for discovery/search"
     },
 
     "openconductor-database-local": {
@@ -36,6 +43,10 @@
       "description": "Production Supabase PostgreSQL database"
     },
 
+    "supabase": {
+      "url": "https://mcp.supabase.com/mcp?project_ref=${SUPABASE_PROJECT_REF}"
+    },
+
     "github": {
       "command": "npx",
       "args": [
@@ -57,6 +68,17 @@
       ],
       "env": {},
       "description": "Redis cache and session store"
+    },
+
+    "trinity-cc": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\shawn\\apps\\openconductor\\tools\\trinity-cc-mcp\\dist\\index.js"
+      ],
+      "env": {
+        "TRINITY_DATA_DIR": "C:\\Users\\shawn\\apps\\openconductor\\tools\\command-center\\data"
+      },
+      "description": "Trinity Command Center MCP — 11 tools for intel read/write/monitoring"
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "openconductor",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "The orchestration platform for modern AI development. Deploy AI agents alongside your Vercel, v0, Supabase, and BaseHub workflow.",
   "private": true,
   "scripts": {
@@ -12,12 +12,16 @@
     "build:api": "cd packages/api && npm run build",
     "build:frontend": "cd packages/frontend && npm run build",
     "build:cli": "cd packages/cli && npm run build",
-    "install:all": "npm install && cd packages/shared && npm install && cd ../api && npm install && cd ../frontend && npm install && cd ../cli && npm install",
+    "build:openclaw": "cd packages/openclaw-trust-stack && npm run build",
+    "install:all": "npm install && cd packages/shared && npm install && cd ../api && npm install && cd ../frontend && npm install && cd ../cli && npm install && cd ../openclaw-trust-stack && npm install",
     "clean": "rm -rf node_modules packages/*/node_modules packages/*/dist packages/frontend/.next",
-    "test": "jest --passWithNoTests || true"
+    "test": "jest --passWithNoTests || true",
+    "command-center": "node tools/command-center/server.js",
+    "cc:add": "node tools/command-center/cli-add.js",
+    "generate:icons": "node scripts/generate-pwa-icons.mjs"
   },
   "devDependencies": {
-    "@esbuild/linux-x64": "^0.27.0",
+    "esbuild": "^0.27.0",
     "@types/inquirer": "^9.0.9",
     "@types/node": "^20.0.0",
     "concurrently": "^8.2.0",

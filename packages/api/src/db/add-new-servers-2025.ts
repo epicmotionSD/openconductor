@@ -21,6 +21,22 @@ function calculatePopularityScore(stats: { github_stars: number; cli_installs: n
   return Math.round((starWeight * normalizedStars + installWeight * normalizedInstalls) * 100) / 100;
 }
 
+function generateInstallCommand(server: { install_command?: string | null; npm_package?: string | null; pypi_package?: string | null }) {
+  if (server.install_command) {
+    return server.install_command;
+  }
+
+  if (server.npm_package) {
+    return `npx -y ${server.npm_package}`;
+  }
+
+  if (server.pypi_package) {
+    return `uvx ${server.pypi_package}`;
+  }
+
+  return null;
+}
+
 export async function addNewServers2025(db: DatabaseManager): Promise<void> {
   logger.info(`Starting to add ${newServers2025.length} new servers to database`);
 
@@ -32,7 +48,7 @@ export async function addNewServers2025(db: DatabaseManager): Promise<void> {
       for (const serverData of newServers2025) {
         // Add default fields if missing
         const server = {
-          install_command: null,
+          install_command: generateInstallCommand(serverData) || null,
           config_example: null,
           stats: {
             github_stars: 0,
@@ -50,6 +66,16 @@ export async function addNewServers2025(db: DatabaseManager): Promise<void> {
           );
 
           if (existing.rows.length > 0) {
+            const installCommand = generateInstallCommand(server);
+            const existingId = existing.rows[0].id;
+
+            if (installCommand) {
+              await client.query(
+                'UPDATE mcp_servers SET install_command = COALESCE(install_command, $1), npm_package = COALESCE(npm_package, $2), pypi_package = COALESCE(pypi_package, $3) WHERE id = $4',
+                [installCommand, server.npm_package || null, server.pypi_package || null, existingId]
+              );
+            }
+
             logger.info(`Skipping existing server: ${server.slug} (duplicate slug or repository URL)`);
             skippedCount++;
             continue;
@@ -61,9 +87,9 @@ export async function addNewServers2025(db: DatabaseManager): Promise<void> {
             const serverResult = await client.query(`
               INSERT INTO mcp_servers (
                 slug, name, tagline, description, repository_url, repository_owner,
-                repository_name, npm_package, category, tags, install_command,
+                repository_name, npm_package, pypi_package, category, tags, install_command,
                 config_example, verified, featured
-              ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+              ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
               RETURNING id
             `, [
               server.slug,
@@ -74,6 +100,7 @@ export async function addNewServers2025(db: DatabaseManager): Promise<void> {
               server.repository_owner,
               server.repository_name,
               server.npm_package,
+              server.pypi_package || null,
               server.category,
               server.tags,
               server.install_command || null,
