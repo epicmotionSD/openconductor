@@ -94,27 +94,29 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for development setup and contribution
 
 ---
 
-## 📊 Current Status (Nov 23, 2025)
+## 📊 Current Status (May 2026)
 
 **Platform**:
-- ✅ CLI v1.3.1 published to npm
-- ✅ API live at api.openconductor.ai
+- ✅ CLI v1.3.5 published to npm (`@openconductor/cli`)
+- ✅ SDK v1.4.0 published to npm (`@openconductor/mcp-sdk`) with `requirePayment()` middleware
+- ✅ API live at api.openconductor.ai (serves `/v1/billing/*` + `/functions/v1/*`)
 - ✅ Frontend live at openconductor.ai
-- ✅ 190+ MCP servers indexed
-- ✅ Badge system operational
-- ✅ Stacks system operational
-- ✅ Achievement system operational
+- ✅ 182 MCP servers indexed
+- ✅ Stripe billing operational: subscriptions ($29/$99/mo) + credit packs ($9.99/$39.99/$119.99)
+- ✅ Trust Stack Layer 1 live on Base Sepolia (ERC-8004 contract, subgraph indexer, registration UI)
+- ✅ x3o.ai Trinity AI registered as Token ID #1
 
 **In Progress**:
-- 🟡 Developer outreach (0/20 badges live)
-- 🟡 Analytics dashboard UI
-- 🟡 Demo video production
-- 🟡 Product Hunt launch prep
+- 🟡 Self-serve API key issuance (currently manual via DB)
+- 🟡 Enterprise marketing launch (founding cohort)
+- 🟡 SportIntel beta
 
-**Planned**:
-- ⏳ Doctor command implementation (3-5 days)
-- ⏳ Client integration partnerships
-- ⏳ Premium analytics features
+**Planned / Known Gaps**:
+- ⏳ `proxy.openconductor.ai` (host returns 404 — no application deployed)
+- ⏳ `openconductor deploy --monetize` real implementation (currently a stub)
+- ⏳ RLS + policies on 15 public Supabase tables (incl. `api_keys`, `credit_transactions`)
+- ⏳ Base mainnet deployment, AP2 policy engine (Q2)
+- ⏳ Risk scoring, insurance API (Q3)
 
 ---
 
@@ -263,7 +265,7 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for development setup and contribution
 
 ---
 
-**Last Updated**: November 23, 2025
+**Last Updated**: May 16, 2026
 **Status**: ✅ Documentation organized and up-to-date
 **Next Review**: After major milestone or weekly
 

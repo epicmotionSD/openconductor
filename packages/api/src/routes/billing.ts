@@ -193,12 +193,37 @@ router.post('/webhook', async (req: Request, res: Response) => {
     switch (event.type) {
       case 'checkout.session.completed': {
         const session = event.data.object;
+        const apiKeyId = session.metadata?.api_key_id;
+        const creditPack = session.metadata?.credit_pack;
+        const creditsRaw = session.metadata?.credits;
+
+        if (apiKeyId && creditsRaw) {
+          const credits = parseInt(creditsRaw, 10);
+          if (Number.isFinite(credits) && credits > 0) {
+            await db.transaction(async (client) => {
+              await client.query(
+                `UPDATE api_keys
+                   SET credits_balance = credits_balance + $1,
+                       credits_granted = credits_granted + $1
+                 WHERE id = $2`,
+                [credits, apiKeyId]
+              );
+              await client.query(
+                `INSERT INTO credit_transactions (api_key_id, kind, amount, metadata)
+                 VALUES ($1, 'purchase', $2, $3)`,
+                [apiKeyId, credits, JSON.stringify({ session_id: session.id, pack: creditPack })]
+              );
+            });
+            console.log(`✅ Granted ${credits} credits to api_key ${apiKeyId} (pack: ${creditPack})`);
+          }
+          break;
+        }
+
         const serverId = session.metadata?.server_id;
         const serverSlug = session.metadata?.server_slug;
-        
+
         console.log(`✅ Checkout completed for server: ${serverSlug} (${serverId})`);
-        
-        // Update server tier in database
+
         if (serverId) {
           // Determine tier from line items
           const lineItems = await stripe.checkout.sessions.listLineItems(session.id);

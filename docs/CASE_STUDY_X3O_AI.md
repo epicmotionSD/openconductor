@@ -218,9 +218,9 @@ x3o.ai is the first of **50 companies** in the Trust Stack founding cohort.
 # Confirm transaction
 ```
 
-**Option 2: SDK Integration (Q2)**
+**Option 2: SDK Integration (Q2 — planned, package not yet published)**
 ```typescript
-import { TrustStack } from '@openconductor/mcp-sdk'
+import { TrustStack } from '@openconductor/openclaw-trust-stack'
 
 const agent = await TrustStack.registerAgent({
   name: 'Trinity AI',
@@ -231,7 +231,9 @@ const agent = await TrustStack.registerAgent({
 // Returns: Token ID, transaction hash, metadata CID
 ```
 
-**Option 3: API Integration (Q2)**
+Note: `TrustStack.registerAgent()` is the planned shape — current `@openconductor/openclaw-trust-stack` ships a `TrustStack.wrap()` for agent metadata; on-chain registration is wallet-based today (Option 1).
+
+**Option 3: API Integration (Q2 — planned, endpoint not yet implemented)**
 ```bash
 curl -X POST https://api.openconductor.ai/v1/agents/register \
   -H "Authorization: Bearer YOUR_API_KEY" \
@@ -240,6 +242,8 @@ curl -X POST https://api.openconductor.ai/v1/agents/register \
     "metadata": {...}
   }'
 ```
+
+Note: `api.openconductor.ai` is live (serves `/v1/billing/*` and `/functions/v1/*` for the monetization SDK), but `/v1/agents/register` is not yet implemented — use Option 1 today.
 
 ---
 

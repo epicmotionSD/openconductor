@@ -13,6 +13,7 @@ import ecosystemAnalyticsRouter from './routes/ecosystem-analytics';
 import { discoveryRouter } from './routes/discovery';
 import stacksRouter from './routes/stacks.js';
 import billingRouter from './routes/billing';
+import sdkRouter from './routes/sdk';
 // Board of Directors - Revenue Sniper routes
 import { createAgentRoutes } from './routes/agents';
 import { createIntelligenceRoutes } from './routes/intelligence';
@@ -101,6 +102,7 @@ app.use('/v1/feedback', feedbackRouter);
 app.use('/v1/analytics', ecosystemAnalyticsRouter);
 app.use('/v1/discovery', discoveryRouter);
 app.use('/v1/billing', billingRouter);
+app.use('/functions/v1', sdkRouter);
 
 // Board of Directors - Revenue Sniper API routes
 const pool = db.getPool();

@@ -364,9 +364,9 @@ x3o.ai is the first of **50 companies** in the Trust Stack founding cohort.
 # Time: 2 hours (first registration), 30 mins (subsequent)
 ```
 
-**Option 2: SDK Integration (Q2 2026)**
+**Option 2: SDK Integration (Q2 2026 — planned)**
 ```typescript
-import { TrustStack } from '@openconductor/mcp-sdk'
+import { TrustStack } from '@openconductor/openclaw-trust-stack'
 
 const agent = await TrustStack.registerAgent({
   name: 'Trinity AI',

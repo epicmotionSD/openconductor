@@ -29,11 +29,17 @@ try {
   });
 }
 
-// Wrapper to strip /api prefix for Express routing
+// Wrapper to normalize the request URL for Express routing.
+// Vercel may invoke this function for any of these paths (via vercel.json rewrites):
+//   /api/v1/...           -> strip /api so Express sees /v1/...
+//   /api/functions/v1/... -> strip /api so Express sees /functions/v1/...
+//   /v1/...               -> already correct
+//   /functions/v1/...     -> already correct
 module.exports = (req, res) => {
-  // Strip /api prefix since Express routes are defined under /v1/
-  if (req.url.startsWith('/api')) {
-    req.url = req.url.slice(4) || '/';
+  if (req.url.startsWith('/api/')) {
+    req.url = req.url.slice(4);
+  } else if (req.url === '/api') {
+    req.url = '/';
   }
   return app(req, res);
 };

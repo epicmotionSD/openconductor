@@ -6,24 +6,50 @@ Templates for LinkedIn content, email outreach, and founding cohort promotion ba
 
 ## May 2026 Pivot Addendum (OC-2026-PIVOT)
 
-Use this framing across all new outbound and landing copy to align with the monetization-infrastructure strategy.
+Use this framing across all new outbound and landing copy to align with the monetization-infrastructure strategy. Reality-aligned 2026-05-16: copy must reflect what ships today, not the proxy/CLI roadmap items still in flight.
 
 ### Positioning Shift
 
 - Old framing: discovery-first registry and marketplace narrative.
-- New framing: API Keys & Billing + `requirePayment()` + `proxy.openconductor.ai` as the fast path from prototype to revenue.
+- New framing: one-line `requirePayment()` monetization for MCP servers, backed by a hosted billing API and Stripe credit packs.
+
+### What's Live (use freely in copy)
+
+- `@openconductor/mcp-sdk@1.4.0` on npm — zero-config demo mode, `requirePayment()` middleware, `createPaidTool()`, typed JSON-RPC error classes.
+- Hosted billing backend at `https://api.openconductor.ai` — production-mode SDK calls reach it with no `apiUrl` override.
+- Stripe credit packs (starter 100 / pro 500 / business 2000 credits) with webhook-driven credit grants.
+- Per-API-key credit balance + per-call deduction stored in Postgres; idempotent via `callId`.
+
+### What's NOT Live (do NOT mention in copy)
+
+- ~~`proxy.openconductor.ai`~~ — host returns 404 on every path. Drop from headlines, CTAs, and product diagrams until something is deployed there.
+- ~~`openconductor deploy --monetize`~~ — CLI command exists but is a stub (prints fake success). Do not put in CTAs or demos.
+- ~~Self-serve API key issuance~~ — keys are currently issued manually in Postgres. Do not advertise "sign up and get a key in 30 seconds" until a dashboard or `openconductor keys create` flow ships.
 
 ### Core Messaging Blocks
 
-- **Headline**: "Stripe for AI Agents: monetize your MCP stack in one command."
-- **Subhead**: "Deploy with `openconductor deploy --monetize` and route traffic through managed proxy enforcement."
-- **Proof**: "No custom billing glue code, no bespoke key infra, no fragmented rate limiting."
+- **Headline**: "Monetize your MCP server in one line: `requirePayment({ credits: 5 })`."
+- **Subhead**: "Hosted billing API + Stripe credit packs. Demo mode for prototyping, production mode with a real key — same code path."
+- **Proof**: "Drop one decorator on a tool handler. Credits deduct from Postgres on each call. Insufficient credits returns a typed JSON-RPC error with an upgrade URL — your MCP client handles it."
+
+### Code Snippet (drop-in for landing, blog, README)
+
+```ts
+import { requirePayment } from '@openconductor/mcp-sdk';
+
+const analyze = requirePayment({ credits: 5 }, { toolName: 'analyze-data' })(
+  async (input) => ({ summary: await summarize(input.text) })
+);
+// In demo mode: always allowed, mock 9999 credits, logs to console.
+// In production: deducts 5 credits per call, throws InsufficientCreditsError when out.
+```
 
 ### Campaign CTA Defaults
 
-- Primary CTA: "Enable API Keys & Billing"
-- Secondary CTA: "Run `openconductor deploy --monetize`"
-- Product CTA link: `https://proxy.openconductor.ai`
+- Primary CTA: "Try demo mode" → `npx @openconductor/mcp-sdk demo` (or link to npm package page).
+- Secondary CTA: "Get a production API key" → contact form / waitlist (NOT self-serve yet — route to your inbox).
+- Product CTA link: `https://www.npmjs.com/package/@openconductor/mcp-sdk` for SDK installs; `https://openconductor.ai` for everything else.
+- Avoid: `proxy.openconductor.ai`, `openconductor deploy --monetize`, any "one-command deploy" phrasing.
 
 ---
 

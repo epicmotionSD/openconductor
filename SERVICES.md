@@ -33,15 +33,15 @@ These are published packages that users install separately:
 ### 1. OpenConductor CLI
 - **Location**: `packages/cli/`
 - **Installation**: `npm install -g @openconductor/cli`
-- **Purpose**: Command-line tool for deployment, monetization, and MCP server management
+- **Purpose**: Command-line tool for MCP server discovery, installation, and management across Claude Desktop / Cursor / Cline / Windsurf
 - **Usage**:
   ```bash
-  openconductor deploy --monetize
   openconductor discover postgres
+  openconductor stack install coder
   openconductor install filesystem
   openconductor list
   ```
-- **Note**: This is a CLI tool, NOT a running service
+- **Note**: This is a CLI tool, NOT a running service. The `openconductor deploy --monetize` command exists but is currently a stub — do not document it as working until it's implemented.
 
 ### 2. OpenConductor Registry MCP Server
 - **Location**: `packages/mcp-servers/openconductor-registry/`
@@ -73,18 +73,36 @@ npm start
 # Install globally
 npm install -g @openconductor/cli
 
-# Enable monetization deployment path
-openconductor deploy --monetize
-
 # Discover MCP servers
 openconductor discover database
 
-# Install an MCP server
+# Install a single MCP server
 openconductor install postgres-mcp
+
+# Or install a curated stack with a matching system prompt
+openconductor stack install coder
 
 # List installed servers
 openconductor list
 ```
+
+### Monetizing an MCP Server You're Building
+
+Use the SDK, not the CLI — the `requirePayment()` middleware deducts credits from the hosted billing API at `api.openconductor.ai` on every paid tool call.
+
+```bash
+npm install @openconductor/mcp-sdk
+```
+
+```ts
+import { requirePayment } from '@openconductor/mcp-sdk';
+
+const analyze = requirePayment({ credits: 5 }, { toolName: 'analyze-data' })(
+  async (input) => ({ summary: await summarize(input.text) })
+);
+```
+
+In demo mode (no API key set) the SDK mocks 9999 credits and logs every check; in production mode (with `OPENCONDUCTOR_API_KEY`) it deducts real credits from Postgres.
 
 ### Using MCP Servers in Claude Desktop
 ```bash
@@ -138,8 +156,9 @@ A: No. The MCP server packages are meant to be installed by end users who want t
 
 **Q: What's the difference between the API and the CLI?**
 A:
-- **API**: Backend service for billing, API keys, usage, and registry data
-- **CLI**: Command-line tool for deployment, monetization enablement, and MCP installation workflows
+- **API**: Backend service for billing, API keys, usage metering, and registry data
+- **CLI**: Command-line tool for discovering and installing MCP servers into Claude Desktop / Cursor / Cline / Windsurf
+- **SDK** (`@openconductor/mcp-sdk`): library MCP server authors use to add `requirePayment()` to their tool handlers — this is the actual monetization surface, not the CLI
 
 ## Development
 

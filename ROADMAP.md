@@ -27,7 +27,7 @@
 
 OpenConductor is the **monetization infrastructure layer for the agentic internet** — an MCP-native platform evolving from registry roots into **Trust Stack + Billing Proxy** for autonomous AI agents.
 
-As AI agents proliferate in 2026, enterprises need infrastructure to verify, govern, and insure agent operations. OpenConductor provides the plumbing. [x3o.ai](https://x3o.ai) is the first production deployment — autonomous AI agents running on Trust Stack.
+As AI agent in 2026, enterprises need infrastructure to verify, govern, and insure agent operations. OpenConductor provides the plumbing. [x3o.ai](https://x3o.ai) is the first production deployment — autonomous AI agents running on Trust Stack.
 
 **OpenConductor = engine. x3o.ai = proof. Trust Stack = moat.**
 
@@ -35,12 +35,21 @@ As AI agents proliferate in 2026, enterprises need infrastructure to verify, gov
 
 ## Current Status (May 2026)
 
-### MCP Monetization Infrastructure — Operational ✅
-- **Billing Core**: Stripe checkout + credits + `requirePayment` middleware
-- **Proxy Strategy**: `proxy.openconductor.ai` rollout for centralized metering and rate limits
-- **Clients Supported**: Claude Desktop, Cursor, Cline, Windsurf
-- **SDK v1.4.0**: Zero-config demo mode published to npm
-- **Developer Channel**: MCP builders → paid usage flows + Trust Stack enterprise upsell
+### MCP Monetization Infrastructure — Operational ✅ (proxy/CLI pending)
+
+Verified by end-to-end probe on 2026-05-16. The SDK's default `apiUrl` now reaches a live backend; `requirePayment()` deducts credits from Postgres and fails closed with the right JSON-RPC errors when balance or tier is insufficient.
+
+- **SDK `@openconductor/mcp-sdk@1.4.0`** ✅ — Published to npm. Demo mode and production mode both verified end-to-end. Source lives in separate repo `epicmotionSD/mcp-sdk`. JSON-RPC errors: `PaymentRequiredError` -32011, `InsufficientCreditsError` -32012, `SubscriptionRequiredError` -32013.
+- **Backend** ✅ — Live at `https://api.openconductor.ai`. Two route families:
+  - `/v1/billing/*` ([packages/api/src/routes/billing.ts](packages/api/src/routes/billing.ts)) — marketplace subscription checkout (PRO_SERVER $29/mo, FEATURED_SERVER $99/mo) + Stripe webhook.
+  - `/functions/v1/*` ([packages/api/src/routes/sdk.ts](packages/api/src/routes/sdk.ts)) — SDK-shaped endpoints: `billing-status/:userId`, `billing-check`, `billing-deduct` (atomic + idempotent via `call_id`), `credit-packs`, `stripe-checkout-credits`, `usage-analytics/:userId`.
+- **Credits storage** ✅ — `api_keys.credits_balance` + `credit_transactions` table ([packages/api/src/db/migrations/002_add_sdk_credits.sql](packages/api/src/db/migrations/002_add_sdk_credits.sql)). Bearer-token auth: SHA-256 hash → `api_keys.key_hash` lookup. New keys default to 100 free credits.
+- **Credit pack purchases** ✅ — Stripe webhook (`checkout.session.completed` with `metadata.api_key_id`) atomically grants credits and logs a `'purchase'` transaction. Three packs: starter (100/$9.99), pro (500/$39.99), business (2000/$119.99).
+- **Clients supported**: Claude Desktop, Cursor, Cline, Windsurf (demo or production via real API key).
+- **`proxy.openconductor.ai`** ❌ — Host responds, all paths return 404. No proxy application deployed. No source code in this repo.
+- **CLI `openconductor deploy --monetize`** ⚠️ — Stub only ([packages/cli/src/commands/deploy.js](packages/cli/src/commands/deploy.js) — `setTimeout` + `console.log`). Prints "OpenConductor is live" without performing any deployment.
+
+**Remaining gaps:** (1) Deploy something real behind `proxy.openconductor.ai` or remove the references. (2) Replace CLI `deploy --monetize` stub with a real deployer or remove the flag. (3) Ship an API-key self-serve flow (dashboard or CLI) — currently keys are issued manually in Postgres. (4) Enable RLS + policies on the 15 public Supabase tables flagged by the advisor (`api_keys`, `credit_transactions`, etc. currently world-readable with the anon key).
 
 ### Trust Stack Layer 1: Registry — Live on Testnet ✅
 
@@ -100,9 +109,15 @@ As AI agents proliferate in 2026, enterprises need infrastructure to verify, gov
 | CLI 1.0 | ✅ Complete | 220+ servers indexed, ecosystem intelligence platform |
 | SDK v1.4.0 | ✅ Code Complete | Zero-config demo mode — `npx @openconductor/mcp-sdk demo` |
 | Empire MCP Server | ✅ Complete | Trinity AI agents operational in Claude Desktop |
-| Stripe Billing | ✅ Complete | Credits checkout, one-line monetization middleware |
-| Monetization Pivot (OC-2026-PIVOT) | ✅ In Progress | Landing + CLI + proxy rollout focused on API keys and billing |
+| Stripe Billing | ✅ Complete | Subscription checkout + credit-pack checkout + webhook credit grants |
+| Monetization Pivot (OC-2026-PIVOT) | 🚧 In Progress | Backend + SDK done; proxy + CLI deployer still pending |
 | SDK npm Publish | ✅ Complete | v1.4.0 published to npm with zero-config demo mode |
+| `api.openconductor.ai` Live | ✅ Complete | Production endpoint serving `/v1/billing/*` and `/functions/v1/*` |
+| SDK → Backend Wired | ✅ Complete | Production-mode `requirePayment()` deducts real credits from Postgres |
+| `proxy.openconductor.ai` | ❌ Not Started | Host responds, all paths 404 — no application deployed |
+| CLI `deploy --monetize` real impl | ❌ Not Started | Currently a stub printing fake success |
+| API Key Self-Serve | ❌ Not Started | Keys must be issued manually in DB; needs dashboard or CLI flow |
+| RLS Hardening | ❌ Not Started | 15 public tables incl. `api_keys` + `credit_transactions` have RLS disabled |
 | x3o.ai Trinity AI Registration | 🔜 In Progress | Register Trinity AI agents as Token ID #1 (Week 1-2) |
 | Enterprise Marketing Launch | 🔜 Planned | LinkedIn content, founding cohort outreach, case study (Week 2-3) |
 | SportIntel Beta | 🔜 Planned | Word-of-mouth beta at Progressive Rail |

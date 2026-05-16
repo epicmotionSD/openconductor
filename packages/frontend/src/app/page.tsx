@@ -54,9 +54,9 @@ export default function HomePage() {
 
             {/* Value Prop */}
             <p className="text-xl md:text-2xl text-foreground-secondary mb-10 max-w-3xl mx-auto leading-relaxed">
-              API keys, usage billing, and proxy-level monetization.
+              API keys, usage billing, and Stripe credit packs.
               <br />
-              <span className="text-foreground">Ship from $0 to $1 with requirePayment() and zero-config proxy routing.</span>
+              <span className="text-foreground">Ship from $0 to $1 with one-line requirePayment() and a hosted billing API.</span>
             </p>
 
             {/* CTAs */}
@@ -124,9 +124,9 @@ export default function HomePage() {
 
               <GlassCard className="border-destructive/30">
                 <Lock className="h-10 w-10 text-destructive mb-4" />
-                <h3 className="text-xl font-semibold mb-2">No Proxy Guardrails</h3>
+                <h3 className="text-xl font-semibold mb-2">Auth & Metering Drift</h3>
                 <p className="text-foreground-secondary">
-                  Direct-to-server traffic leaves billing and abuse controls fragmented across environments.
+                  Every team rebuilds API keys, credit ledgers, and Stripe webhook plumbing — slightly differently each time.
                 </p>
               </GlassCard>
             </div>
@@ -294,18 +294,18 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* OpenClaw SDK */}
+        {/* MCP SDK */}
         <section className="container mx-auto px-4 py-16 md:py-24" id="sdk">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <Badge className="mb-4 px-3 py-1 text-xs bg-primary/10 border-primary/30">
-                OPENCLAW INTEGRATION
+                MCP MONETIZATION SDK
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                <GradientText>One Command</GradientText> to Monetize Any MCP Stack
+                <GradientText>One Line</GradientText> to Monetize Any MCP Server
               </h2>
               <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
-                Deploy with managed proxy routing and enable requirePayment() without app-side billing wiring.
+                Wrap a tool handler with requirePayment(). Credits deduct from a hosted Postgres on every call.
               </p>
             </div>
 
@@ -314,23 +314,24 @@ export default function HomePage() {
               <div className="rounded-2xl border border-primary/20 bg-background overflow-hidden">
                 <div className="flex items-center gap-2 px-4 py-3 border-b border-primary/10 bg-muted/30">
                   <Code2 className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-mono text-foreground-secondary">trust-stack-example.ts</span>
+                  <span className="text-sm font-mono text-foreground-secondary">paid-tool.ts</span>
                 </div>
                 <pre className="p-6 text-sm font-mono leading-relaxed overflow-x-auto">
                   <code>
-{`npm i @openconductor/openclaw-trust-stack`}
+{`npm i @openconductor/mcp-sdk`}
 
-{`import { TrustStack } from '@openconductor/openclaw-trust-stack';`}
+{`import { requirePayment } from '@openconductor/mcp-sdk';`}
 
-{`const agent = TrustStack.wrap(myAgent, {
-  name: 'my-agent',
-  capabilities: ['data-analysis', 'reporting'],
-  euAiActRisk: 'limited',
-});`}
+{`const analyze = requirePayment(
+  { credits: 5 },
+  { toolName: 'analyze-data' },
+)(async (input) => ({
+  summary: await summarize(input.text),
+}));`}
 
-{`await openconductor.deploy({ monetize: true });
-await requirePayment({ plan: 'usage' });
-// Traffic routes through https://proxy.openconductor.ai`}
+{`// Demo mode (no API key): mocks 9999 credits.
+// Production: deducts from api.openconductor.ai.
+// Insufficient credits → typed JSON-RPC error.`}
                   </code>
                 </pre>
               </div>
@@ -338,24 +339,24 @@ await requirePayment({ plan: 'usage' });
               {/* What you get */}
               <div className="space-y-6">
                 <GlassCard>
-                  <Fingerprint className="h-8 w-8 text-primary mb-3" />
-                  <h3 className="text-lg font-semibold mb-2">On-Chain Identity</h3>
+                  <Code2 className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="text-lg font-semibold mb-2">Demo Mode Out of the Box</h3>
                   <p className="text-foreground-secondary text-sm">
-                    ERC-8004 registration on Base. Verifiable metadata, ownership history, and third-party attestations.
+                    No API key? SDK mocks 9999 credits and logs every check. Ship examples and tests with the same code path as production.
                   </p>
                 </GlassCard>
                 <GlassCard>
-                  <Shield className="h-8 w-8 text-primary mb-3" />
-                  <h3 className="text-lg font-semibold mb-2">EU AI Act Ready</h3>
+                  <Lock className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="text-lg font-semibold mb-2">Hosted Billing API</h3>
                   <p className="text-foreground-secondary text-sm">
-                    Risk classification, compliance metadata, and audit trails baked in. Pass enforcement checks before they begin.
+                    api.openconductor.ai handles atomic credit deduction with per-call idempotency. Bearer-token auth against your API key.
                   </p>
                 </GlassCard>
                 <GlassCard>
                   <Scale className="h-8 w-8 text-primary mb-3" />
-                  <h3 className="text-lg font-semibold mb-2">Zero-Config Proxy Monetization</h3>
+                  <h3 className="text-lg font-semibold mb-2">Stripe Credit Packs</h3>
                   <p className="text-foreground-secondary text-sm">
-                    proxy.openconductor.ai handles metering, rate limiting, and payment enforcement without dev-side setup.
+                    Starter (100), Pro (500), Business (2000) credit packs via Stripe checkout. Webhook grants credits the moment payment succeeds.
                   </p>
                 </GlassCard>
               </div>
@@ -363,7 +364,7 @@ await requirePayment({ plan: 'usage' });
 
             <div className="text-center mt-10">
               <a
-                href="https://www.npmjs.com/package/@openconductor/openclaw-trust-stack"
+                href="https://www.npmjs.com/package/@openconductor/mcp-sdk"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
