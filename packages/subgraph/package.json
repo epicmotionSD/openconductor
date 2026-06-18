@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "@openconductor/subgraph",
   "version": "0.0.1",
   "description": "Subgraph for ERC-8004 Agent Identity Registry",
