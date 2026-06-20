@@ -14,8 +14,17 @@
 | Phase | Task | Objective |
 | :--- | :--- | :--- |
 | **1. UI/UX Gut** | Swap "Search" for "API Keys & Billing". | Signal shift from consumer directory to developer monetization tooling. |
-| **2. Proxy Layer** | Deploy `proxy.openconductor.ai`. | Provide rate-limiting + billing enforcement with no dev-side config. |
-| **3. CLI Update** | `openconductor deploy --monetize`. | One-command deployment to managed infra with payments enabled. |
+| **2. Proxy Layer** | Deploy `proxy.openconductor.ai` *in front of* `api.openconductor.ai` (additive — not a migration). | Add rate-limiting, ERC-8004 attestation checks, and AP2 policy enforcement at the edge while the canonical credit ledger stays in [packages/api/src/routes/sdk.ts](../packages/api/src/routes/sdk.ts). |
+| **3. CLI Update** | Replace stubbed `openconductor deploy --monetize` with a real deployer. | One-command deployment to managed infra with payments enabled. |
+
+#### Phase 2 — Proxy build-out (corrected scope)
+
+The first version of this plan listed "implement `callId` idempotency" as a Phase 2 play. That work is already shipped in [packages/api/src/routes/sdk.ts:103-145](../packages/api/src/routes/sdk.ts#L103-L145) — atomic deduct, replay returns `{ idempotent: true }`. The remaining edge-layer plays are:
+
+1. **Proxy → API auth handshake.** HMAC-signed requests (or mTLS) so `proxy.openconductor.ai` can prove identity to the ledger and the ledger can refuse direct public calls. Keeps deductions one network hop from canonical Postgres — no race-condition surface from a distributed ledger.
+2. **Edge policy evaluation.** ERC-8004 attestation lookup (cache the Subgraph response) + AP2 rule check happens at the proxy *before* the request reaches the ledger. Failed checks return typed JSON-RPC errors (`-32011/-32012/-32013` family) without touching `api_keys.credits_balance`.
+3. **Rate-limit token bucket.** Per-`api_key_id`, configurable per tier. The bucket lives at the edge; the ledger only sees requests that survived it.
+4. **Hardening pass on `api.openconductor.ai`.** Once the proxy is the only legitimate caller, lock down the API's CORS/origin allowlist and start the RLS pass on the 15 public Supabase tables flagged in the Current Status section.
 
 ### Notion Execution: Monetization Sprint
 
@@ -47,7 +56,7 @@ Verified by end-to-end probe on 2026-05-16. The SDK's default `apiUrl` now reach
 - **Credit pack purchases** ✅ — Stripe webhook (`checkout.session.completed` with `metadata.api_key_id`) atomically grants credits and logs a `'purchase'` transaction. Three packs: starter (100/$9.99), pro (500/$39.99), business (2000/$119.99).
 - **Clients supported**: Claude Desktop, Cursor, Cline, Windsurf (demo or production via real API key).
 - **`proxy.openconductor.ai`** ❌ — Host responds, all paths return 404. No proxy application deployed. No source code in this repo.
-- **CLI `openconductor deploy --monetize`** ⚠️ — Stub only ([packages/cli/src/commands/deploy.js](packages/cli/src/commands/deploy.js) — `setTimeout` + `console.log`). Prints "OpenConductor is live" without performing any deployment.
+- **CLI `openconductor deploy --monetize`** ⚠️ — Not implemented. Bare command exits 1 with "not yet implemented" pointing to the roadmap; `--dry-run` prints the planned steps. Real deployer is still pending. Source: [packages/cli/src/commands/deploy.js](../packages/cli/src/commands/deploy.js).
 
 **Remaining gaps:** (1) Deploy something real behind `proxy.openconductor.ai` or remove the references. (2) Replace CLI `deploy --monetize` stub with a real deployer or remove the flag. (3) Ship an API-key self-serve flow (dashboard or CLI) — currently keys are issued manually in Postgres. (4) Enable RLS + policies on the 15 public Supabase tables flagged by the advisor (`api_keys`, `credit_transactions`, etc. currently world-readable with the anon key).
 
@@ -115,7 +124,7 @@ Verified by end-to-end probe on 2026-05-16. The SDK's default `apiUrl` now reach
 | `api.openconductor.ai` Live | ✅ Complete | Production endpoint serving `/v1/billing/*` and `/functions/v1/*` |
 | SDK → Backend Wired | ✅ Complete | Production-mode `requirePayment()` deducts real credits from Postgres |
 | `proxy.openconductor.ai` | ❌ Not Started | Host responds, all paths 404 — no application deployed |
-| CLI `deploy --monetize` real impl | ❌ Not Started | Currently a stub printing fake success |
+| CLI `deploy --monetize` real impl | ❌ Not Started | Honest "not yet implemented" exit shipped 2026-05-16; real deployer still pending |
 | API Key Self-Serve | ❌ Not Started | Keys must be issued manually in DB; needs dashboard or CLI flow |
 | RLS Hardening | ❌ Not Started | 15 public tables incl. `api_keys` + `credit_transactions` have RLS disabled |
 | x3o.ai Trinity AI Registration | 🔜 In Progress | Register Trinity AI agents as Token ID #1 (Week 1-2) |
@@ -267,4 +276,4 @@ Verified by end-to-end probe on 2026-05-16. The SDK's default `apiUrl` now reach
 
 ---
 
-*Last updated: May 2, 2026*
+Last updated: May 16, 2026
