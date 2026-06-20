@@ -1,74 +1,26 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import {
-  Users, TrendingUp, AlertTriangle, Rocket,
-  DollarSign, Target, Zap, Activity,
+  Users, AlertTriangle, Rocket, Zap, Activity,
   Brain, RefreshCw, Power, PowerOff,
   CheckCircle, XCircle, Loader2
 } from 'lucide-react'
 import { BoardPanel } from '@/components/command-center/board-panel'
-import { RevenueSniperWidget } from '@/components/command-center/revenue-sniper'
-import { AdBleedAlerts } from '@/components/command-center/ad-bleed-alert'
-import { TemplateSelector } from '@/components/command-center/template-selector'
+import { RegistryPulse } from '@/components/command-center/registry-pulse'
+import { BillingHygiene } from '@/components/command-center/billing-hygiene'
+import { StackDeploy } from '@/components/command-center/stack-deploy'
 import { DecisionLog } from '@/components/command-center/decision-log'
 import {
   getCommandCenterSummary,
   startOrchestrator,
   stopOrchestrator,
   type CommandCenterSummary,
-  type Agent
 } from '@/lib/command-center-api'
-
-// Map API agent data to BoardMember format
-interface BoardMember {
-  id: string
-  name: string
-  role: 'ceo' | 'cto' | 'cmo' | 'cfo'
-  title: string
-  status: 'idle' | 'active' | 'paused' | 'error' | 'offline'
-  avatar: string
-  currentTask?: string
-  metrics: {
-    decisionsToday: number
-    successRate: number
-    avgResponseTime: number
-  }
-}
-
-const roleTitles: Record<string, string> = {
-  ceo: 'Chief Executive Officer',
-  cto: 'Chief Technology Officer',
-  cmo: 'Chief Marketing Officer',
-  cfo: 'Chief Financial Officer'
-}
-
-const roleAvatars: Record<string, string> = {
-  ceo: '🎯',
-  cto: '🔧',
-  cmo: '📈',
-  cfo: '💰'
-}
-
-function mapAgentToBoardMember(agent: Agent): BoardMember {
-  return {
-    id: agent.id,
-    name: agent.name,
-    role: agent.role,
-    title: roleTitles[agent.role] || agent.description,
-    status: agent.status,
-    avatar: roleAvatars[agent.role] || agent.avatar,
-    currentTask: agent.status === 'active' ? 'Processing tasks...' : undefined,
-    metrics: {
-      decisionsToday: agent.metrics.tasksCompleted,
-      successRate: agent.metrics.successRate || 100,
-      avgResponseTime: agent.metrics.avgResponseTime || 0
-    }
-  }
-}
+import { mapAgentToBoardMember } from '@/lib/board'
+import { formatUptime } from '@/lib/time'
 
 export default function CommandCenterPage() {
   const [summary, setSummary] = useState<CommandCenterSummary | null>(null)
@@ -140,10 +92,10 @@ export default function CommandCenterPage() {
         <div>
           <h1 className="text-3xl font-bold text-foreground flex items-center gap-3">
             <Brain className="h-8 w-8 text-primary" />
-            Revenue Command Center
+            Agent Economy Command Center
           </h1>
           <p className="text-muted-foreground mt-1">
-            Board of Directors - Autonomous Revenue Operations
+            Board of Directors — Registry, Trust & Monetization
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -304,37 +256,16 @@ export default function CommandCenterPage() {
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Left Column - Intelligence */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Revenue Sniper - Trend Detection */}
-          <RevenueSniperWidget />
-
-          {/* Ad Bleed Alerts */}
-          <AdBleedAlerts />
+          <RegistryPulse />
+          <BillingHygiene />
         </div>
 
         {/* Right Column - Actions & Log */}
         <div className="space-y-6">
-          {/* Template Selector */}
-          <TemplateSelector />
-
-          {/* Decision Log - Connected to API */}
+          <StackDeploy />
           <DecisionLog />
         </div>
       </div>
     </div>
   )
-}
-
-function formatUptime(startedAt: string): string {
-  const start = new Date(startedAt)
-  const now = new Date()
-  const diffMs = now.getTime() - start.getTime()
-
-  const hours = Math.floor(diffMs / (1000 * 60 * 60))
-  const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
-  const seconds = Math.floor((diffMs % (1000 * 60)) / 1000)
-
-  if (hours > 0) {
-    return `${hours}h ${minutes}m`
-  }
-  return `${minutes}m ${seconds}s`
 }

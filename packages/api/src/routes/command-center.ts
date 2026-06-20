@@ -239,13 +239,7 @@ export function createCommandCenterRoutes(pool: Pool): Router {
           orchestrator: {
             isRunning: false,
             startedAt: null,
-            agents: agents.map(a => ({
-              role: a.role,
-              name: a.name,
-              status: a.status,
-              metrics: a.metrics,
-              lastActiveAt: a.lastActiveAt
-            })),
+            agents,
             summary: {
               totalAgents: agents.length,
               activeAgents: dbSummary.activeAgents,

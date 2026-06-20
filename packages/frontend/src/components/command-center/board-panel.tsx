@@ -1,24 +1,9 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { AgentCard } from './agent-card'
 import { Users, Activity, CheckCircle, Clock } from 'lucide-react'
-
-interface BoardMember {
-  id: string
-  name: string
-  role: 'ceo' | 'cto' | 'cmo' | 'cfo'
-  title: string
-  status: 'idle' | 'active' | 'paused' | 'error' | 'offline'
-  avatar: string
-  currentTask?: string
-  metrics: {
-    decisionsToday: number
-    successRate: number
-    avgResponseTime: number
-  }
-}
+import type { BoardMember } from '@/lib/board'
 
 interface BoardPanelProps {
   members: BoardMember[]

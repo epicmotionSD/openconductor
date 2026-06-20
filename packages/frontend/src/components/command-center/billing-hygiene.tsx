@@ -9,97 +9,97 @@ import {
   ShieldAlert, Crosshair, CheckCircle, X
 } from 'lucide-react'
 
-type AdBleedType =
-  | 'intent_mismatch'
-  | 'cannibalization'
-  | 'dead_trend'
-  | 'negative_keyword'
-  | 'competitor_gap'
+type BillingIssueType =
+  | 'demo_mode_in_prod'
+  | 'tier_mismatch'
+  | 'abandoned_server'
+  | 'unbilled_calls'
+  | 'missing_attestation'
 
-interface AdBleedAlert {
+interface BillingAlert {
   id: string
-  bleedType: AdBleedType
-  keyword: string
+  issueType: BillingIssueType
+  serverName: string
   severity: 'low' | 'medium' | 'high' | 'critical'
-  wastedSpend: number
-  wastedSpendPeriod: string
-  currentCpc: number
-  conversionRate: number
-  organicRank?: number
+  leakedRevenue: number
+  leakedRevenuePeriod: string
+  costPerCall: number
+  billThruRate: number
+  installRank?: number
   recommendation: string
   autoFixAvailable: boolean
   resolved: boolean
 }
 
-// Mock alerts
-const mockAlerts: AdBleedAlert[] = [
+// Mock alerts — billing hygiene + Trust Stack signals across hosted MCP servers
+const mockAlerts: BillingAlert[] = [
   {
     id: '1',
-    bleedType: 'cannibalization',
-    keyword: 'kelati salon houston',
+    issueType: 'demo_mode_in_prod',
+    serverName: 'mcp-prod-search',
     severity: 'high',
-    wastedSpend: 85,
-    wastedSpendPeriod: '7d',
-    currentCpc: 2.50,
-    conversionRate: 1.2,
-    organicRank: 1,
-    recommendation: 'Pause ad - already ranking #1 organically',
+    leakedRevenue: 85,
+    leakedRevenuePeriod: '7d',
+    costPerCall: 2.50,
+    billThruRate: 1.2,
+    installRank: 1,
+    recommendation: 'Server is in demo mode but receiving paid traffic — set OPENCONDUCTOR_API_KEY to enable credit deduction',
     autoFixAvailable: true,
     resolved: false
   },
   {
     id: '2',
-    bleedType: 'intent_mismatch',
-    keyword: 'how to loc hair',
+    issueType: 'tier_mismatch',
+    serverName: 'memory-bank-mcp',
     severity: 'medium',
-    wastedSpend: 42,
-    wastedSpendPeriod: '7d',
-    currentCpc: 1.80,
-    conversionRate: 0.3,
-    recommendation: 'Add to negative keywords - informational intent',
+    leakedRevenue: 42,
+    leakedRevenuePeriod: '7d',
+    costPerCall: 1.80,
+    billThruRate: 0.3,
+    recommendation: 'Hobby-tier customer averaging pro-tier usage — upsell or rate-limit',
     autoFixAvailable: true,
     resolved: false
   },
   {
     id: '3',
-    bleedType: 'negative_keyword',
-    keyword: 'diy locs tutorial',
+    issueType: 'unbilled_calls',
+    serverName: 'trends-mcp',
     severity: 'low',
-    wastedSpend: 18,
-    wastedSpendPeriod: '7d',
-    currentCpc: 0.90,
-    conversionRate: 0.1,
-    recommendation: 'Add "diy" and "tutorial" to negative list',
+    leakedRevenue: 18,
+    leakedRevenuePeriod: '7d',
+    costPerCall: 0.90,
+    billThruRate: 0.1,
+    recommendation: 'Calls falling through to the demo-mode 9999-credit pool — verify customer key rotation',
     autoFixAvailable: true,
     resolved: false
   }
 ]
 
-const bleedTypeConfig = {
-  intent_mismatch: {
-    label: 'Intent Mismatch',
+const issueTypeConfig = {
+  tier_mismatch: {
+    label: 'Tier Mismatch',
     icon: Crosshair,
-    description: 'Informational keyword with transactional ad'
+    description: 'Customer usage exceeds plan tier'
   },
-  cannibalization: {
-    label: 'Cannibalization',
+  demo_mode_in_prod: {
+    label: 'Demo Mode in Prod',
     icon: ShieldAlert,
-    description: 'Paid ad competing with top organic ranking'
+    description: 'Production traffic served by a demo-mode server (no credits deducted)'
   },
-  dead_trend: {
-    label: 'Dead Trend',
+  abandoned_server: {
+    label: 'Abandoned Server',
     icon: TrendingDown,
-    description: 'High spend on declining keyword'
+    description: 'High provisioned spend, low active installs'
   },
-  negative_keyword: {
-    label: 'Negative Keyword',
+  unbilled_calls: {
+    label: 'Unbilled Calls',
     icon: X,
-    description: 'Low-intent traffic leakage'
+    description: 'Tool invocations falling through to demo fallback'
   },
-  competitor_gap: {
-    label: 'Competitor Gap',
+  missing_attestation: {
+    label: 'Missing Attestation',
     icon: AlertTriangle,
-    description: 'Missing keyword where competitor appears'
+    description: 'Registered agent without ERC-8004 attestation'
   }
 }
 
@@ -110,10 +110,10 @@ const severityColors = {
   critical: 'bg-red-500/10 text-red-500 border-red-500/20'
 }
 
-export function AdBleedAlerts() {
-  const [alerts, setAlerts] = useState<AdBleedAlert[]>(mockAlerts)
+export function BillingHygiene() {
+  const [alerts, setAlerts] = useState<BillingAlert[]>(mockAlerts)
 
-  const totalWasted = alerts.reduce((sum, a) => sum + a.wastedSpend, 0)
+  const totalLeaked = alerts.reduce((sum, a) => sum + a.leakedRevenue, 0)
   const unresolvedCount = alerts.filter(a => !a.resolved).length
 
   const handleAutoFix = (alertId: string) => {
@@ -132,13 +132,13 @@ export function AdBleedAlerts() {
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">
             <AlertTriangle className="h-5 w-5 text-warning" />
-            Ad Bleed Detection
+            Billing Hygiene
           </CardTitle>
           <div className="flex items-center gap-3 text-sm">
             <div className="flex items-center gap-1">
               <DollarSign className="h-4 w-4 text-warning" />
-              <span className="font-semibold text-warning">${totalWasted}</span>
-              <span className="text-muted-foreground">wasted (7d)</span>
+              <span className="font-semibold text-warning">${totalLeaked}</span>
+              <span className="text-muted-foreground">leaked (7d)</span>
             </div>
             <Badge variant="outline" className={severityColors.high}>
               {unresolvedCount} alerts
@@ -146,28 +146,28 @@ export function AdBleedAlerts() {
           </div>
         </div>
         <p className="text-sm text-muted-foreground">
-          Automated detection of ad spend inefficiencies
+          Revenue leaks across the monetization layer — demo-mode prod traffic, tier mismatches, missed attestations
         </p>
       </CardHeader>
       <CardContent>
         {alerts.length === 0 ? (
           <div className="text-center py-8">
             <CheckCircle className="h-12 w-12 text-success mx-auto mb-3" />
-            <p className="text-foreground font-medium">No ad bleed detected</p>
-            <p className="text-sm text-muted-foreground">Your campaigns are running efficiently</p>
+            <p className="text-foreground font-medium">No billing leaks detected</p>
+            <p className="text-sm text-muted-foreground">Every paid call is being credited cleanly</p>
           </div>
         ) : (
           <div className="space-y-3">
             {alerts.map((alert) => {
-              const bleedType = bleedTypeConfig[alert.bleedType]
-              const BleedIcon = bleedType.icon
+              const issue = issueTypeConfig[alert.issueType]
+              const IssueIcon = issue.icon
 
               if (alert.resolved) {
                 return (
                   <div key={alert.id} className="p-3 rounded-lg bg-success/5 border border-success/20">
                     <div className="flex items-center gap-2 text-success">
                       <CheckCircle className="h-4 w-4" />
-                      <span className="font-medium">Resolved: {alert.keyword}</span>
+                      <span className="font-medium">Resolved: {alert.serverName}</span>
                     </div>
                   </div>
                 )
@@ -181,34 +181,34 @@ export function AdBleedAlerts() {
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <Badge variant="outline" className={severityColors[alert.severity]}>
-                        <BleedIcon className="h-3 w-3 mr-1" />
-                        {bleedType.label}
+                        <IssueIcon className="h-3 w-3 mr-1" />
+                        {issue.label}
                       </Badge>
-                      <span className="font-medium text-foreground">{alert.keyword}</span>
+                      <span className="font-medium text-foreground">{alert.serverName}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-warning font-bold">
-                        -${alert.wastedSpend}
+                        -${alert.leakedRevenue}
                       </span>
                       <span className="text-xs text-muted-foreground">
-                        /{alert.wastedSpendPeriod}
+                        /{alert.leakedRevenuePeriod}
                       </span>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-3 gap-4 mb-3 text-sm">
                     <div>
-                      <p className="text-muted-foreground">CPC</p>
-                      <p className="font-medium">${alert.currentCpc.toFixed(2)}</p>
+                      <p className="text-muted-foreground">Cost / call</p>
+                      <p className="font-medium">${alert.costPerCall.toFixed(2)}</p>
                     </div>
                     <div>
-                      <p className="text-muted-foreground">Conv. Rate</p>
-                      <p className="font-medium">{alert.conversionRate}%</p>
+                      <p className="text-muted-foreground">Bill-thru rate</p>
+                      <p className="font-medium">{alert.billThruRate}%</p>
                     </div>
-                    {alert.organicRank && (
+                    {alert.installRank && (
                       <div>
-                        <p className="text-muted-foreground">Organic Rank</p>
-                        <p className="font-medium text-success">#{alert.organicRank}</p>
+                        <p className="text-muted-foreground">Install rank</p>
+                        <p className="font-medium text-success">#{alert.installRank}</p>
                       </div>
                     )}
                   </div>

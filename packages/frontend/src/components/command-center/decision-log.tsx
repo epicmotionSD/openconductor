@@ -5,38 +5,23 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
-  History, CheckCircle, AlertTriangle, Clock,
-  Brain, Wrench, TrendingUp, Calculator,
-  ChevronRight, RotateCcw, Loader2, XCircle
+  History, CheckCircle, Clock, Brain,
+  Loader2, XCircle,
 } from 'lucide-react'
 import {
   getRecentDecisions,
   approveDecision,
   rejectDecision,
-  type Decision
+  type Decision,
 } from '@/lib/command-center-api'
-
-type AgentRole = 'ceo' | 'cto' | 'cmo' | 'cfo'
-
-const roleIcons = {
-  ceo: Brain,
-  cto: Wrench,
-  cmo: TrendingUp,
-  cfo: Calculator
-}
-
-const roleColors = {
-  ceo: 'text-purple-500',
-  cto: 'text-blue-500',
-  cmo: 'text-green-500',
-  cfo: 'text-amber-500'
-}
+import { ROLE_CONFIG, type RoleId } from '@/lib/board'
+import { formatTimeAgo } from '@/lib/time'
 
 const impactColors = {
   low: 'bg-gray-500/10 text-gray-500',
   medium: 'bg-blue-500/10 text-blue-500',
   high: 'bg-orange-500/10 text-orange-500',
-  critical: 'bg-red-500/10 text-red-500'
+  critical: 'bg-red-500/10 text-red-500',
 }
 
 const decisionTypeLabels: Record<string, string> = {
@@ -46,21 +31,7 @@ const decisionTypeLabels: Record<string, string> = {
   create_campaign: 'Campaign',
   flag_ad_bleed: 'Alert',
   recommend_action: 'Recommend',
-  escalate_to_human: 'Escalate'
-}
-
-function formatTimeAgo(dateString: string): string {
-  const date = new Date(dateString)
-  const now = new Date()
-  const diffMs = now.getTime() - date.getTime()
-  const diffMins = Math.floor(diffMs / 60000)
-  const diffHours = Math.floor(diffMs / 3600000)
-  const diffDays = Math.floor(diffMs / 86400000)
-
-  if (diffMins < 1) return 'just now'
-  if (diffMins < 60) return `${diffMins} min ago`
-  if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`
-  return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`
+  escalate_to_human: 'Escalate',
 }
 
 export function DecisionLog() {
@@ -183,8 +154,9 @@ export function DecisionLog() {
         ) : (
           <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2">
             {filteredDecisions.map((decision) => {
-              const RoleIcon = roleIcons[decision.agentRole as AgentRole] || Brain
-              const roleColor = roleColors[decision.agentRole as AgentRole] || 'text-gray-500'
+              const role = ROLE_CONFIG[decision.agentRole as RoleId]
+              const RoleIcon = role?.icon ?? Brain
+              const roleColor = role?.color ?? 'text-gray-500'
               const impact = (decision.impact || 'medium') as keyof typeof impactColors
 
               return (

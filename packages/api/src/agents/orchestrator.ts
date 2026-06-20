@@ -17,8 +17,11 @@ export interface OrchestratorConfig {
 }
 
 export interface AgentInfo {
+  id: string;
   role: AgentRole;
   name: string;
+  description: string;
+  avatar: string;
   status: AgentStatus;
   metrics: {
     tasksCompleted: number;
@@ -250,8 +253,11 @@ export class AgentOrchestrator extends EventEmitter {
       const dbAgent = await this.agentService.getAgentByRole(role);
 
       agentInfos.push({
+        id: dbAgent?.id ?? role,
         role,
         name: agent.name,
+        description: dbAgent?.description ?? '',
+        avatar: dbAgent?.avatar ?? '',
         status,
         metrics,
         lastActiveAt: dbAgent?.lastActiveAt || null

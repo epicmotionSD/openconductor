@@ -9,66 +9,66 @@ import {
   Search, Globe, Clock, Rocket
 } from 'lucide-react'
 
-interface TrendSignal {
+interface ServerSignal {
   id: string
-  keyword: string
+  serverName: string
   category: 'rising' | 'breakout' | 'declining' | 'stable'
   growthRate: number
-  currentVolume: number
+  installs: number
   competitionLevel: 'low' | 'medium' | 'high'
-  recommendedAction: 'attack' | 'defend' | 'monitor' | 'ignore'
-  geo: string
+  recommendedAction: 'feature' | 'promote' | 'monitor' | 'ignore'
+  source: string
   timeframe: string
   detectedAt: string
 }
 
-// Mock trend signals
-const mockSignals: TrendSignal[] = [
+// Mock signals — trending MCP servers across the ecosystem
+const mockSignals: ServerSignal[] = [
   {
     id: '1',
-    keyword: 'butterfly locs houston',
+    serverName: 'playwright-mcp',
     category: 'breakout',
     growthRate: 450,
-    currentVolume: 2400,
+    installs: 2400,
     competitionLevel: 'low',
-    recommendedAction: 'attack',
-    geo: 'US-TX-Houston',
+    recommendedAction: 'feature',
+    source: 'npm + Cursor',
     timeframe: '7d',
     detectedAt: '2 hours ago'
   },
   {
     id: '2',
-    keyword: 'sisterlocks retightening near me',
+    serverName: 'memory-bank-mcp',
     category: 'rising',
     growthRate: 180,
-    currentVolume: 5200,
+    installs: 5200,
     competitionLevel: 'medium',
-    recommendedAction: 'attack',
-    geo: 'US-TX-Houston',
+    recommendedAction: 'feature',
+    source: 'Claude Desktop',
     timeframe: '7d',
     detectedAt: '4 hours ago'
   },
   {
     id: '3',
-    keyword: 'loc repair specialist',
+    serverName: 'cloudflare-mcp',
     category: 'rising',
     growthRate: 120,
-    currentVolume: 1800,
+    installs: 1800,
     competitionLevel: 'low',
-    recommendedAction: 'attack',
-    geo: 'US-TX-Houston',
+    recommendedAction: 'promote',
+    source: 'GitHub stars',
     timeframe: '7d',
     detectedAt: '6 hours ago'
   },
   {
     id: '4',
-    keyword: 'microlocs cost houston',
+    serverName: 'slack-mcp',
     category: 'stable',
     growthRate: 15,
-    currentVolume: 3600,
+    installs: 3600,
     competitionLevel: 'high',
     recommendedAction: 'monitor',
-    geo: 'US-TX-Houston',
+    source: 'npm registry',
     timeframe: '7d',
     detectedAt: '1 day ago'
   }
@@ -98,8 +98,8 @@ const categoryConfig = {
 }
 
 const actionConfig = {
-  attack: { label: 'Attack', color: 'bg-green-500 hover:bg-green-600' },
-  defend: { label: 'Defend', color: 'bg-blue-500 hover:bg-blue-600' },
+  feature: { label: 'Feature', color: 'bg-green-500 hover:bg-green-600' },
+  promote: { label: 'Promote', color: 'bg-blue-500 hover:bg-blue-600' },
   monitor: { label: 'Monitor', color: 'bg-gray-500 hover:bg-gray-600' },
   ignore: { label: 'Ignore', color: 'bg-gray-400 hover:bg-gray-500' }
 }
@@ -110,8 +110,8 @@ const competitionColors = {
   high: 'text-red-500'
 }
 
-export function RevenueSniperWidget() {
-  const [signals] = useState<TrendSignal[]>(mockSignals)
+export function RegistryPulse() {
+  const [signals] = useState<ServerSignal[]>(mockSignals)
   const [expandedId, setExpandedId] = useState<string | null>(null)
 
   const breakoutCount = signals.filter(s => s.category === 'breakout').length
@@ -123,7 +123,7 @@ export function RevenueSniperWidget() {
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">
             <Target className="h-5 w-5 text-primary" />
-            Revenue Sniper
+            Registry Pulse
             <Badge variant="secondary" className="ml-2">
               Live
             </Badge>
@@ -142,7 +142,7 @@ export function RevenueSniperWidget() {
           </div>
         </div>
         <p className="text-sm text-muted-foreground">
-          Real-time trend detection via Google Trends arbitrage
+          Trending MCP servers across npm, GitHub, and connected clients
         </p>
       </CardHeader>
       <CardContent>
@@ -169,7 +169,7 @@ export function RevenueSniperWidget() {
                       <CategoryIcon className="h-3 w-3 mr-1" />
                       {category.label}
                     </Badge>
-                    <span className="font-medium text-foreground">{signal.keyword}</span>
+                    <span className="font-medium text-foreground">{signal.serverName}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className={`text-sm font-bold ${
@@ -187,8 +187,8 @@ export function RevenueSniperWidget() {
                   <div className="mt-4 pt-4 border-t border-border">
                     <div className="grid grid-cols-4 gap-4 mb-4">
                       <div>
-                        <p className="text-xs text-muted-foreground">Volume</p>
-                        <p className="font-semibold">{signal.currentVolume.toLocaleString()}</p>
+                        <p className="text-xs text-muted-foreground">Installs (7d)</p>
+                        <p className="font-semibold">{signal.installs.toLocaleString()}</p>
                       </div>
                       <div>
                         <p className="text-xs text-muted-foreground">Competition</p>
@@ -197,10 +197,10 @@ export function RevenueSniperWidget() {
                         </p>
                       </div>
                       <div>
-                        <p className="text-xs text-muted-foreground">Location</p>
+                        <p className="text-xs text-muted-foreground">Source</p>
                         <p className="font-semibold flex items-center gap-1">
                           <Globe className="h-3 w-3" />
-                          {signal.geo.split('-').pop()}
+                          {signal.source}
                         </p>
                       </div>
                       <div>
@@ -217,14 +217,14 @@ export function RevenueSniperWidget() {
                         className={`flex-1 ${action.color}`}
                         onClick={(e) => {
                           e.stopPropagation()
-                          // TODO: Trigger deployment
+                          // TODO: Promote to Discover page
                         }}
                       >
                         <Rocket className="h-4 w-4 mr-2" />
-                        Deploy Landing Page
+                        Feature on Discover
                       </Button>
                       <Button variant="outline" size="sm">
-                        View Details
+                        View Server
                       </Button>
                     </div>
                   </div>

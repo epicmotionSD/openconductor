@@ -5,63 +5,19 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
-  Play, Pause, Square, Settings, Activity,
-  Brain, Wrench, TrendingUp, Calculator, Loader2
+  Play, Pause, Square, Settings, Loader2
 } from 'lucide-react'
 import {
   startAgent,
   stopAgent,
   pauseAgent,
-  resumeAgent
+  resumeAgent,
 } from '@/lib/command-center-api'
-
-interface AgentMetrics {
-  decisionsToday: number
-  successRate: number
-  avgResponseTime: number
-}
-
-interface Agent {
-  id: string
-  name: string
-  role: 'ceo' | 'cto' | 'cmo' | 'cfo'
-  title: string
-  status: 'idle' | 'active' | 'paused' | 'error' | 'offline'
-  avatar: string
-  currentTask?: string
-  metrics: AgentMetrics
-}
+import { ROLE_CONFIG, type BoardMember } from '@/lib/board'
 
 interface AgentCardProps {
-  agent: Agent
+  agent: BoardMember
   onAction?: () => void
-}
-
-const roleConfig = {
-  ceo: {
-    icon: Brain,
-    color: 'text-purple-500',
-    bgColor: 'bg-purple-500/10',
-    borderColor: 'border-purple-500/20'
-  },
-  cto: {
-    icon: Wrench,
-    color: 'text-blue-500',
-    bgColor: 'bg-blue-500/10',
-    borderColor: 'border-blue-500/20'
-  },
-  cmo: {
-    icon: TrendingUp,
-    color: 'text-green-500',
-    bgColor: 'bg-green-500/10',
-    borderColor: 'border-green-500/20'
-  },
-  cfo: {
-    icon: Calculator,
-    color: 'text-amber-500',
-    bgColor: 'bg-amber-500/10',
-    borderColor: 'border-amber-500/20'
-  }
 }
 
 const statusConfig = {
@@ -74,9 +30,8 @@ const statusConfig = {
 
 export function AgentCard({ agent, onAction }: AgentCardProps) {
   const [loading, setLoading] = useState<string | null>(null)
-  const role = roleConfig[agent.role]
+  const role = ROLE_CONFIG[agent.role]
   const status = statusConfig[agent.status]
-  const RoleIcon = role.icon
 
   const handleAction = async (action: 'start' | 'stop' | 'pause' | 'resume') => {
     setLoading(action)
