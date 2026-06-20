@@ -33,10 +33,12 @@ const logger = winston.createLogger({
   transports: loggerTransports
 });
 
-// Database configuration - Use Supabase if POSTGRES_URL is provided
+// Database configuration — uses POSTGRES_URL if provided.
+// Local Postgres doesn't speak SSL, so disable it when POSTGRES_URL targets localhost/127.0.0.1.
+const isLocalUrl = process.env.POSTGRES_URL?.includes('localhost') || process.env.POSTGRES_URL?.includes('127.0.0.1');
 const dbConfig: PoolConfig = process.env.POSTGRES_URL ? {
   connectionString: process.env.POSTGRES_URL,
-  ssl: { rejectUnauthorized: false },
+  ssl: isLocalUrl ? false : { rejectUnauthorized: false },
   max: parseInt(process.env.DB_MAX_CONNECTIONS || '10'),
   min: 2, // Keep minimum connections alive
   idleTimeoutMillis: 60000, // Keep connections alive longer (60s)
