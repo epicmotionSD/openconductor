@@ -1,5 +1,8 @@
 #!/usr/bin/env tsx
 
+// DEPRECATED — one-off exporter that wrote top-50-servers.json (now archived).
+// The source of truth is src/db/seed-data/mcp-servers.json. Kept for reference.
+
 /**
  * Export Top 50 MCP servers for production deployment
  *

@@ -21,8 +21,19 @@ export async function listStacks(
   apiClient: OpenConductorAPIClient
 ) {
   try {
-    const response = await apiClient.get('/stacks');
-    const stacks = response.data.stacks.slice(0, args.limit);
+    const response = await apiClient.get('/v1/stacks');
+    const stacks = (response.data?.stacks ?? []).slice(0, args.limit);
+
+    if (stacks.length === 0) {
+      return {
+        content: [
+          {
+            type: 'text',
+            text: 'No stacks are available yet. Stacks are curated collections of MCP servers — check back soon, or browse individual servers with `discover_servers`.',
+          },
+        ],
+      };
+    }
 
     const stackList = stacks.map((stack: any) =>
       `${stack.icon} **${stack.name}** (${stack.slug})
@@ -69,7 +80,7 @@ export async function getStackDetails(
   apiClient: OpenConductorAPIClient
 ) {
   try {
-    const response = await apiClient.get(`/stacks/${args.slug}`);
+    const response = await apiClient.get(`/v1/stacks/${args.slug}`);
     const stack = response.data;
 
     const serverList = stack.servers.map((server: any, index: number) =>
@@ -150,7 +161,7 @@ export async function shareStack(
   apiClient: OpenConductorAPIClient
 ) {
   try {
-    const response = await apiClient.get(`/stacks/${args.slug}`);
+    const response = await apiClient.get(`/v1/stacks/${args.slug}`);
     const stack = response.data;
 
     return {

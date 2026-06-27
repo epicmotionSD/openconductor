@@ -215,23 +215,18 @@ export class DatabaseManager {
     }
   }
 
+  /**
+   * @deprecated Registry seeding now lives in `seed-supabase.ts`, which reads the
+   * single source of truth `seed-data/mcp-servers.json` and writes via the Supabase
+   * client. Run `npm run seed:supabase` (or `npm run db:seed` in packages/api).
+   * The old SQLite/raw-pg seed (`seed.js`, `seed-all-servers.ts`) is archived under
+   * `src/db/archive/`. This method is kept only so callers don't break at compile time.
+   */
   public async seed(): Promise<void> {
-    logger.info('Starting database seeding');
-    
-    // Check if data already exists
-    const result = await this.query('SELECT COUNT(*) FROM mcp_servers');
-    const count = parseInt(result.rows[0].count);
-    
-    if (count > 0) {
-      logger.info(`Database already contains ${count} servers, skipping seed`);
-      return;
-    }
-
-    // Import and run seeding logic
-    const { seedDatabase } = await import('./seed');
-    await seedDatabase(this);
-    
-    logger.info('Database seeding completed successfully');
+    logger.warn(
+      'DatabaseManager.seed() is deprecated. Run `npm run seed:supabase` instead ' +
+      '(reads seed-data/mcp-servers.json via the Supabase client).'
+    );
   }
 
   public async healthCheck(): Promise<{ postgres: boolean; redis: boolean }> {

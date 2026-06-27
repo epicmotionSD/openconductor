@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# ============================================================================
+# DEPRECATED — local-Postgres JSON import path.
+# The canonical registry seed is now `npm run seed:supabase` (repo root), which
+# reads packages/api/src/db/seed-data/mcp-servers.json and writes to Supabase.
+# This script imported the now-archived seed-data/*.json into a local Postgres
+# cache and is kept only for historical reference. See README "Seeding the
+# registry" and docs/SEED.md.
+# ============================================================================
+
 # Import seed data from JSON files into local PostgreSQL
 
 set -e

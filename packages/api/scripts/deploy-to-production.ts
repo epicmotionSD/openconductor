@@ -1,5 +1,9 @@
 #!/usr/bin/env tsx
 
+// DEPRECATED — superseded by `npm run seed:supabase` (src/db/seed-supabase.ts).
+// Imports the now-archived seed-new-servers-2025.ts and seed-*.json (src/db/archive/);
+// will fail at import time. Kept for historical reference only.
+
 /**
  * Deploy All Servers to Production Supabase
  *

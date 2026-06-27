@@ -1,5 +1,8 @@
 /**
  * Get Category Statistics Tool
+ *
+ * Reads category counts the API already aggregates in
+ * `data.filters.availableCategories` on every server list response.
  */
 
 import { z } from 'zod';
@@ -25,23 +28,18 @@ export async function getCategoryStats(
       };
     }
 
-    const categoriesText = categories
-      .sort((a, b) => b.count - a.count)
-      .map((cat) => {
-        return `**${cat.category}**
-   Servers: ${cat.count}
-   Total Stars: ⭐ ${cat.total_stars.toLocaleString()}
-   Total Installs: 📦 ${cat.total_installs.toLocaleString()}`;
-      })
-      .join('\n\n');
+    const sorted = [...categories].sort((a, b) => b.count - a.count);
+
+    const categoriesText = sorted
+      .map((cat) => `**${cat.category}** — ${cat.count} server${cat.count === 1 ? '' : 's'}`)
+      .join('\n');
 
     const totalServers = categories.reduce((sum, cat) => sum + cat.count, 0);
-    const totalStars = categories.reduce((sum, cat) => sum + cat.total_stars, 0);
 
     const summary = `📊 **MCP Server Categories Overview**
 
 Total Servers: ${totalServers}
-Total GitHub Stars: ⭐ ${totalStars.toLocaleString()}
+Categories: ${categories.length}
 
 ${categoriesText}
 

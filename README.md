@@ -228,7 +228,30 @@ The largest registry of MCP servers, all verified and tested.
 
 ## Add Your Server
 
-Submit a PR to add your server to the registry.
+Submit a PR to add your server to the registry. Maintainers: add the entry to
+`packages/api/src/db/seed-data/mcp-servers.json` (the single source of truth) and
+run the seed — see **Seeding the registry** below.
+
+---
+
+## Seeding the registry
+
+The MCP registry (`mcp_servers` in Supabase) is populated from one file by one script.
+
+- **Source of truth:** `packages/api/src/db/seed-data/mcp-servers.json`
+  (alphabetically sorted, de-duplicated by `slug`). Add new servers here.
+- **Run it (repo root):**
+  ```bash
+  npm run seed:supabase:dry     # preview, writes nothing
+  npm run seed:supabase         # insert servers not already present (idempotent)
+  ```
+- **Required env** (`packages/api/.env` / `.env.local`): `SUPABASE_URL`,
+  `SUPABASE_SERVICE_ROLE_KEY` (service-role auth via `@supabase/supabase-js`).
+
+The legacy local SQLite (`seed.js`) and local-Postgres (`scripts/import-seed-data.sh`)
+seed flows are **retired**; their data and scripts live in
+`packages/api/src/db/archive/`. Full details and the shared-monorepo caveat are in
+[docs/SEED.md](./docs/SEED.md).
 
 ---
 
