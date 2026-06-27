@@ -1,4 +1,33 @@
-import { Pool } from 'pg';
+import { Pool, PoolConfig } from 'pg';
+
+/**
+ * Build a pg PoolConfig that survives Vercel's Supabase env injection.
+ *
+ * The Vercel-Supabase integration sets POSTGRES_URL with `?sslmode=require`.
+ * Modern `pg-connection-string` upgrades `sslmode=require|prefer|verify-ca` to
+ * `verify-full` semantics, which OVERRIDES the Pool's explicit
+ * `ssl: { rejectUnauthorized: false }` and forces CA chain verification.
+ * Verification then fails against Supabase's pooler cert chain with
+ * `SELF_SIGNED_CERT_IN_CHAIN`, and every route that touches Postgres returns 500.
+ *
+ * Fix: strip `sslmode` from the URL so our explicit `ssl` option is the only
+ * source of truth.
+ */
+export function buildPoolConfig(extra: PoolConfig = {}): PoolConfig {
+  const raw = process.env.POSTGRES_URL ?? '';
+  const cleaned = raw
+    .replace(/[?&]sslmode=[^&]*/g, '')
+    .replace(/\?&/, '?')
+    .replace(/[?&]$/, '');
+
+  const isLocal = /(?:localhost|127\.0\.0\.1)/.test(cleaned);
+
+  return {
+    connectionString: cleaned,
+    ssl: isLocal ? false : { rejectUnauthorized: false },
+    ...extra,
+  };
+}
 
 // Singleton database connection pool for optimal performance
 class DatabaseService {
@@ -6,18 +35,13 @@ class DatabaseService {
   private pool: Pool;
 
   private constructor() {
-    const connectionString = process.env.POSTGRES_URL;
-    const isLocalhost = connectionString?.includes('localhost') || connectionString?.includes('127.0.0.1');
-
-    this.pool = new Pool({
-      connectionString,
-      ssl: isLocalhost ? false : { rejectUnauthorized: false },
-      // Optimized connection pool settings for Vercel Edge Functions
-      max: 3, // Maximum connections (Vercel Edge has connection limits)
+    this.pool = new Pool(buildPoolConfig({
+      // Optimized connection pool settings for Vercel serverless functions
+      max: 3, // Maximum connections (Vercel functions have connection limits)
       min: 1, // Minimum connections to maintain
       idleTimeoutMillis: 30000, // Close connections after 30s idle
       connectionTimeoutMillis: 5000, // Connection timeout
-    });
+    }));
 
     // Handle pool errors
     this.pool.on('error', (err) => {

@@ -1,14 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Pool } from 'pg';
+import { dbPool as pool } from '@/lib/database';
 
 // Force dynamic rendering for this route
 export const dynamic = 'force-dynamic';
-
-// Create PostgreSQL connection pool
-const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL,
-  ssl: { rejectUnauthorized: false }
-});
 
 export async function GET(request: NextRequest) {
   try {

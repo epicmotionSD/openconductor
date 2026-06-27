@@ -1,15 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Pool } from 'pg';
 import { Octokit } from '@octokit/rest';
+import { dbPool as pool } from '@/lib/database';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300; // 5 minutes for Vercel Pro
-
-// PostgreSQL connection
-const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL,
-  ssl: { rejectUnauthorized: false }
-});
 
 // GitHub client
 const octokit = new Octokit({
