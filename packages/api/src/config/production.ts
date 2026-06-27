@@ -46,7 +46,7 @@ export const PRODUCTION_CONFIG: ProductionConfig = {
     corsOrigins: [
       'https://openconductor.ai',
       'https://www.openconductor.ai',
-      ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000', 'http://localhost:3001'] : [])
+      ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://localhost:3003'] : [])
     ],
     rateLimitEnabled: true,
     analyticsEnabled: true

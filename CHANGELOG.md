@@ -1,4 +1,24 @@
-# Changelog
+﻿# Changelog
+
+## [Unreleased]
+
+### Added - Trust Stack Infrastructure
+- **ERC-8004 Agent Identity Registry** deployed to Base Sepolia testnet
+  - Contract: `0xf8d7044d657b602194fb5745c614beb35d5d898a`
+  - First agent registered (Token ID #1)
+- **Subgraph Indexer** deployed to The Graph Studio
+  - Indexes agent registrations, attestations, trust scores
+  - GraphQL API for querying on-chain agent data
+- **Registration UI** at `/register` with wallet integration
+  - MetaMask, Coinbase Wallet, WalletConnect support
+  - On-chain agent registration with metadata
+- **Trust Stack Roadmap** documentation
+
+### Changed
+- Updated homepage with live on-chain status banner
+- Removed deprecated OpenTelemetry dependencies
+- Upgraded Next.js to 15.1.0 (security fixes)
+
 
 All notable changes to OpenConductor will be documented in this file.
 
@@ -42,7 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Repository cleanup**: Archived temporary documentation and scripts to `/docs/archive/` and `/scripts/archive/`
 - Consolidated database seeding: `db:seed` now uses `seed-all-servers.ts` as the primary seeding script
-- Updated server counts throughout documentation (120+ → 190+)
+- Updated server counts throughout documentation (120+ â†’ 190+)
 - CLI API client now uses `https://www.openconductor.ai` (with www) for better reliability
 - Increased API client timeout from 10s to 30s to handle slower responses
 - Added `maxRedirects: 5` to axios configuration for better redirect handling
@@ -74,3 +94,4 @@ See git history for older releases.
 
 [Unreleased]: https://github.com/epicmotionSD/openconductor/compare/main...HEAD
 [1.0.3]: https://github.com/epicmotionSD/openconductor/releases/tag/v1.0.3
+

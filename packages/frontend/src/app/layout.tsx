@@ -1,18 +1,39 @@
 // import '../lib/tracing-web'  // Disabled due to XMLHttpRequest SSR errors
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Sora, DM_Mono } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
+const sora = Sora({ subsets: ['latin'], variable: '--font-display', display: 'swap' })
+const dmMono = DM_Mono({ weight: ['400', '500'], subsets: ['latin'], variable: '--font-mono', display: 'swap' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.openconductor.ai'),
   title: {
-    default: 'OpenConductor - The npm for AI agent tools',
+    default: 'OpenConductor | The Identity & Compliance Layer for AI Agents (ERC-8004)',
     template: '%s | OpenConductor'
   },
-  description: 'Install MCP servers without the JSON hell. Discover and install 190+ AI agent tools with one command. Free, open source, and built for developers.',
-  keywords: ['mcp', 'model-context-protocol', 'claude', 'ai-agents', 'package-manager', 'cli', 'developer-tools', 'ai', 'anthropic', 'ai-tools', 'mcp-server', 'mcp-registry', 'claude-desktop', 'json-config', 'stacks'],
+  description: 'OpenConductor provides the Trust Stack for AI agents: on-chain identity via ERC-8004, EU AI Act compliance, and risk scoring for insurable AI infrastructure.',
+  keywords: [
+    'ai-agent-identity',
+    'erc-8004',
+    'agent-registry',
+    'eu-ai-act',
+    'ai-compliance',
+    'trust-stack',
+    'agent-attestation',
+    'verifiable-agents',
+    'ai-governance',
+    'agent-insurance',
+    'mcp',
+    'model-context-protocol',
+    'on-chain-agents',
+    'base',
+    'ethereum'
+  ],
+  alternates: {
+    canonical: 'https://www.openconductor.ai',
+  },
   authors: [{ name: 'OpenConductor Team' }],
   creator: 'OpenConductor',
   publisher: 'OpenConductor',
@@ -25,24 +46,24 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://www.openconductor.ai',
-    title: 'OpenConductor - The npm for AI agent tools',
-    description: 'Install MCP servers without the JSON hell. 190+ servers, one command. Includes stacks, badges, and achievements.',
+    title: 'OpenConductor | The Identity & Compliance Layer for AI Agents (ERC-8004)',
+    description: 'OpenConductor provides the Trust Stack for AI agents: on-chain identity via ERC-8004, EU AI Act compliance, and risk scoring for insurable AI infrastructure.',
     siteName: 'OpenConductor',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'OpenConductor - The npm for AI agent tools',
+        alt: 'OpenConductor Trust Stack - Identity Layer for AI Agents',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'OpenConductor - The npm for AI agent tools',
-    description: 'Install MCP servers without the JSON hell. 190+ servers, one command.',
+    title: 'OpenConductor | The Identity & Compliance Layer for AI Agents (ERC-8004)',
+    description: 'OpenConductor provides the Trust Stack for AI agents: on-chain identity via ERC-8004, EU AI Act compliance, and risk scoring for insurable AI infrastructure.',
     images: ['/og-image.png'],
-    creator: '@SDexecution',
+    creator: '@OpenConductor',
   },
   robots: {
     index: true,
@@ -72,7 +93,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#8B5CF6', // OpenConductor brand purple
+  themeColor: '#00FFB2',
 }
 
 export default function RootLayout({
@@ -87,8 +108,39 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="OpenConductor" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "OpenConductor Trust Stack",
+              "url": "https://www.openconductor.ai",
+              "description": "OpenConductor provides the Trust Stack for AI agents: on-chain identity via ERC-8004, EU AI Act compliance, and risk scoring for insurable AI infrastructure.",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": "Blockchain / Web",
+              "featureList": [
+                "ERC-8004 Agent Registry",
+                "Policy Engine (Governor)",
+                "Risk Scoring (Underwriter)",
+                "EU AI Act Compliance"
+              ],
+              "creator": {
+                "@type": "Organization",
+                "name": "OpenConductor",
+                "url": "https://www.openconductor.ai"
+              },
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD",
+                "description": "Open-source Trust Stack for AI agent identity and compliance"
+              }
+            })
+          }}
+        />
       </head>
-      <body className={`${inter.className} min-h-screen bg-background antialiased`}>
+      <body className={`${inter.className} ${sora.variable} ${dmMono.variable} min-h-screen bg-background antialiased`}>
         {children}
       </body>
     </html>

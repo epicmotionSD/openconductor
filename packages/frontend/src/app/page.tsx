@@ -1,15 +1,16 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
 import { SiteHeader } from '@/components/navigation/site-header'
-import { TryNowHero } from '@/components/homepage/try-now-hero'
-import { StackPreview } from '@/components/homepage/stack-preview'
-import { LiveActivityFeed } from '@/components/homepage/live-activity-feed'
+import { SiteFooter } from '@/components/navigation/site-footer'
 import { GradientText } from '@/components/ui/gradient-text'
 import { GradientButton } from '@/components/ui/gradient-button'
 import { GlassCard } from '@/components/ui/glass-card'
-import { ArrowRight, Terminal, Zap, Shield, Package, Github, Search, Download } from 'lucide-react'
+import {
+  ArrowRight, Shield, AlertTriangle, CheckCircle,
+  FileCheck, Scale, Fingerprint, Building2, ExternalLink,
+  Users, Globe, Cpu, Lock, FileWarning, Gavel, Package, Code2
+} from 'lucide-react'
 
 export default function HomePage() {
   return (
@@ -18,186 +19,427 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative container mx-auto px-4 pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
-          {/* Background gradient glow */}
+        <section className="relative container mx-auto px-4 pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-grid-animated">
           <div className="absolute inset-0 bg-gradient-primary opacity-5 blur-3xl" />
 
           <div className="relative text-center max-w-5xl mx-auto">
-            {/* Launch Badge */}
-            <div className="flex justify-center mb-8 animate-fade-in">
-              <Badge className="text-sm px-4 py-2 rounded-full border-primary/30 bg-primary/10 backdrop-blur-sm">
-                <Zap className="h-3 w-3 mr-2 inline text-primary" />
-                <span className="text-foreground-secondary">190+ Servers • Free & Open Source • MIT Licensed</span>
+            {/* OpenClaw Ecosystem Banner */}
+            <div className="flex flex-wrap justify-center gap-3 mb-8 animate-fade-in">
+              <Badge className="text-sm px-4 py-2 rounded-full border-primary/50 bg-primary/10 backdrop-blur-sm">
+                <Package className="h-3 w-3 mr-2 inline text-primary" />
+                <span className="text-foreground-secondary">
+                  Now shipping:{' '}
+                  <a
+                    href="https://www.npmjs.com/package/@openconductor/openclaw-trust-stack"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    @openconductor/openclaw-trust-stack
+                  </a>
+                </span>
+              </Badge>
+              <Badge className="text-sm px-4 py-2 rounded-full border-warning/50 bg-warning/10 backdrop-blur-sm">
+                <AlertTriangle className="h-3 w-3 mr-2 inline text-warning" />
+                <span className="text-foreground-secondary">EU AI Act enforcement begins August 2026</span>
               </Badge>
             </div>
 
-            {/* Heading */}
+            {/* Main Headline */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-[1.1] tracking-tight">
-              The <GradientText>npm</GradientText> for
+              Your MCP Stack Needs
               <br />
-              AI Agent Tools
+              <GradientText>Payments Infrastructure</GradientText>
             </h1>
 
-            {/* Description */}
-            <p className="text-lg md:text-xl text-foreground-secondary mb-10 max-w-2xl mx-auto leading-relaxed">
-              Install MCP servers <strong className="text-foreground">without the JSON hell</strong>.
+            {/* Value Prop */}
+            <p className="text-xl md:text-2xl text-foreground-secondary mb-10 max-w-3xl mx-auto leading-relaxed">
+              API keys, usage billing, and Stripe credit packs.
               <br />
-              One command. 190+ tools. Works with Claude, Cursor, Cline, and more.
+              <span className="text-foreground">Ship from $0 to $1 with one-line requirePayment() and a hosted billing API.</span>
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <GradientButton size="lg" glow className="text-base px-8 h-12" asChild>
-                <Link href="/install">
-                  <Terminal className="mr-2 h-4 w-4" />
-                  Get Started
+              <GradientButton size="lg" glow className="text-base px-8 h-14 text-lg" asChild>
+                <Link href="/admin/api-keys">
+                  <Lock className="mr-2 h-5 w-5" />
+                  API Keys & Billing
                 </Link>
               </GradientButton>
-              <Button size="lg" variant="outline" className="text-base px-8 h-12 border-primary/20 hover:border-primary/40" asChild>
-                <Link href="/discover">
-                  Browse 190+ Servers <ArrowRight className="ml-2 h-4 w-4" />
+              <Button size="lg" variant="outline" className="text-base px-8 h-14 text-lg border-primary/20 hover:border-primary/40" asChild>
+                <Link href="/pricing">
+                  View Monetization Plans <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
 
-            {/* Try Now Hero - Instant Value */}
-            <TryNowHero />
-
-            {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-foreground-secondary">
-              <div className="flex items-center gap-2">
-                <Package className="h-4 w-4 text-primary" />
-                <span>190+ Servers</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Terminal className="h-4 w-4 text-primary" />
-                <span>One Command</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-success" />
-                <span>MIT Licensed</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Github className="h-4 w-4 text-foreground" />
-                <span>Open Source</span>
-              </div>
+            {/* Live Contract Proof */}
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-success/10 border border-success/30">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+              </span>
+              <span className="text-sm text-foreground-secondary">Live on Base</span>
+              <a
+                href="https://sepolia.basescan.org/address/0xf8d7044d657b602194fb5745c614beb35d5d898a"
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm text-primary hover:underline inline-flex items-center gap-1"
+              >
+                View Contract <ExternalLink className="h-3 w-3" />
+              </a>
             </div>
           </div>
         </section>
 
-        {/* Features Section */}
-        <section className="container mx-auto px-4 pb-16 md:pb-24">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Why <GradientText>OpenConductor</GradientText>?
-            </h2>
-            <p className="text-foreground-secondary text-lg max-w-2xl mx-auto">
-              Built for developers who want a seamless experience managing MCP servers
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <GlassCard className="hover:border-primary/50 transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 shadow-glow-purple">
-                <Zap className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">Instant Value</h3>
-              <p className="text-foreground-secondary">
-                Install curated stacks with system prompts. Claude becomes a specialized assistant in 10 seconds.
-              </p>
-            </GlassCard>
-
-            <GlassCard className="hover:border-primary/50 transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 shadow-glow-blue">
-                <Package className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">220+ Servers</h3>
-              <p className="text-foreground-secondary">
-                Access the largest registry of MCP servers. Search, discover, and install any tool you need.
-              </p>
-            </GlassCard>
-
-            <GlassCard className="hover:border-primary/50 transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-gradient-success flex items-center justify-center mb-4 shadow-glow-success">
-                <Shield className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">Verified Quality</h3>
-              <p className="text-foreground-secondary">
-                All servers validated with automated testing. Stacks curated by experts for best practices.
-              </p>
-            </GlassCard>
-          </div>
-        </section>
-
-        {/* Live Activity Section - Social Proof */}
-        <section className="container mx-auto px-4 pb-16 md:pb-24">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Join <GradientText>Developers Worldwide</GradientText>
-            </h2>
-            <p className="text-foreground-secondary text-lg max-w-2xl mx-auto">
-              See what's happening right now on OpenConductor
-            </p>
-          </div>
-
-          <div className="max-w-2xl mx-auto">
-            <LiveActivityFeed />
-          </div>
-        </section>
-
-        {/* Stacks Section - Interactive Preview */}
-        <StackPreview />
-
-        {/* Stats Section */}
-        <section className="container mx-auto px-4 py-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold mb-2">
-                <GradientText>190+</GradientText>
-              </div>
-              <div className="text-foreground-secondary text-sm">MCP Servers</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold mb-2">
-                <GradientText>1</GradientText>
-              </div>
-              <div className="text-foreground-secondary text-sm">Command</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold mb-2">
-                <GradientText>10s</GradientText>
-              </div>
-              <div className="text-foreground-secondary text-sm">Setup Time</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold mb-2">
-                <GradientText>Free</GradientText>
-              </div>
-              <div className="text-foreground-secondary text-sm">Forever</div>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
+        {/* The Problem */}
         <section className="container mx-auto px-4 py-16 md:py-24">
-          <GlassCard elevated className="max-w-4xl mx-auto bg-gradient-to-br from-primary/5 via-background to-primary/5">
-            <div className="p-8 md:p-12 text-center">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 font-display">
+                AI Agents Are <GradientText>Everywhere</GradientText>
+              </h2>
+              <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
+                But most MCP builders still cannot monetize without custom billing glue code.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <GlassCard className="border-destructive/30">
+                <FileWarning className="h-10 w-10 text-destructive mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Revenue Leakage</h3>
+                <p className="text-foreground-secondary">
+                  Teams ship valuable tools but miss monetization because billing is bolted on late or never finished.
+                </p>
+              </GlassCard>
+
+              <GlassCard className="border-destructive/30">
+                <Gavel className="h-10 w-10 text-destructive mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Integration Drag</h3>
+                <p className="text-foreground-secondary">
+                  Custom auth, rate limiting, checkout, and entitlements slow launches for solo and small teams.
+                </p>
+              </GlassCard>
+
+              <GlassCard className="border-destructive/30">
+                <Lock className="h-10 w-10 text-destructive mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Auth & Metering Drift</h3>
+                <p className="text-foreground-secondary">
+                  Every team rebuilds API keys, credit ledgers, and Stripe webhook plumbing — slightly differently each time.
+                </p>
+              </GlassCard>
+            </div>
+          </div>
+        </section>
+
+        {/* The Solution: Trust Stack */}
+        <section className="bg-muted/30 py-16 md:py-24" id="trust-stack">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-16">
+                <Badge className="mb-4 px-3 py-1 text-xs bg-primary/10 border-primary/30">
+                  THE SOLUTION
+                </Badge>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  The <GradientText>Trust Stack</GradientText>
+                </h2>
+                <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
+                  Four layers that transform rogue AI into compliant, insurable infrastructure
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Layer 1 */}
+                <GlassCard className="relative overflow-hidden border-success/50" id="registry">
+                  <Badge className="absolute top-4 right-4 bg-success/20 text-success border-success/30">
+                    LIVE NOW
+                  </Badge>
+                  <div className="flex items-start gap-4">
+                    <div className="h-14 w-14 rounded-xl bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                      <Fingerprint className="h-7 w-7 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Layer 1: Registry</h3>
+                      <p className="text-foreground-secondary mb-4">
+                        ERC-8004 identity standard. Every agent gets an on-chain identity with verifiable metadata, ownership, and attestations.
+                      </p>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-success" />
+                          <span>On-chain agent registration</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-success" />
+                          <span>Third-party attestations</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-success" />
+                          <span>GraphQL API via The Graph</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </GlassCard>
+
+                {/* Layer 2 */}
+                <GlassCard className="relative overflow-hidden" id="governor">
+                  <Badge className="absolute top-4 right-4 bg-primary/20 text-primary border-primary/30">
+                    Q2 2026
+                  </Badge>
+                  <div className="flex items-start gap-4">
+                    <div className="h-14 w-14 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
+                      <Scale className="h-7 w-7 text-foreground-secondary" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Layer 2: Governor</h3>
+                      <p className="text-foreground-secondary mb-4">
+                        AP2 policy engine. Define what agents can and cannot do. Enforce boundaries before violations happen.
+                      </p>
+                      <ul className="space-y-2 text-sm text-foreground-secondary">
+                        <li className="flex items-center gap-2">
+                          <div className="h-4 w-4 rounded-full border border-muted-foreground/30" />
+                          <span>Policy enforcement points</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="h-4 w-4 rounded-full border border-muted-foreground/30" />
+                          <span>Permission management</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="h-4 w-4 rounded-full border border-muted-foreground/30" />
+                          <span>Audit logging</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </GlassCard>
+
+                {/* Layer 3 */}
+                <GlassCard className="relative overflow-hidden" id="underwriter">
+                  <Badge className="absolute top-4 right-4 bg-muted text-foreground-secondary border-muted">
+                    Q3 2026
+                  </Badge>
+                  <div className="flex items-start gap-4">
+                    <div className="h-14 w-14 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
+                      <FileCheck className="h-7 w-7 text-foreground-secondary" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Layer 3: Underwriter</h3>
+                      <p className="text-foreground-secondary mb-4">
+                        Risk scoring and compliance certification. ISO 42001 alignment. The data insurers need.
+                      </p>
+                      <ul className="space-y-2 text-sm text-foreground-secondary">
+                        <li className="flex items-center gap-2">
+                          <div className="h-4 w-4 rounded-full border border-muted-foreground/30" />
+                          <span>Trust score computation</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="h-4 w-4 rounded-full border border-muted-foreground/30" />
+                          <span>ISO 42001 compliance</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="h-4 w-4 rounded-full border border-muted-foreground/30" />
+                          <span>Insurance API</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </GlassCard>
+
+                {/* Layer 4 */}
+                <GlassCard className="relative overflow-hidden border-success/50" id="proof">
+                  <Badge className="absolute top-4 right-4 bg-success/20 text-success border-success/30">
+                    REFERENCE
+                  </Badge>
+                  <div className="flex items-start gap-4">
+                    <div className="h-14 w-14 rounded-xl bg-gradient-success flex items-center justify-center flex-shrink-0">
+                      <Building2 className="h-7 w-7 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Layer 4: Proof</h3>
+                      <p className="text-foreground-secondary mb-4">
+                        x3o.ai Command Center. A production implementation showing the full Trust Stack in action.
+                      </p>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-success" />
+                          <span>Multi-agent orchestration</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-success" />
+                          <span>Real-time monitoring</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-success" />
+                          <span>Enterprise dashboard</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </GlassCard>
+              </div>
+
+              {/* Learn More Link */}
+              <div className="text-center mt-12">
+                <Link
+                  href="/trust-stack"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+                >
+                  <Shield className="h-4 w-4" />
+                  Deep Dive into AI Agent Trust Stack Infrastructure
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* MCP SDK */}
+        <section className="container mx-auto px-4 py-16 md:py-24" id="sdk">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <Badge className="mb-4 px-3 py-1 text-xs bg-primary/10 border-primary/30">
+                MCP MONETIZATION SDK
+              </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to <GradientText>get started</GradientText>?
+                <GradientText>One Line</GradientText> to Monetize Any MCP Server
+              </h2>
+              <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
+                Wrap a tool handler with requirePayment(). Credits deduct from a hosted Postgres on every call.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-8 items-start">
+              {/* Code Example */}
+              <div className="rounded-2xl border border-primary/20 bg-background overflow-hidden">
+                <div className="flex items-center gap-2 px-4 py-3 border-b border-primary/10 bg-muted/30">
+                  <Code2 className="h-4 w-4 text-primary" />
+                  <span className="text-sm font-mono text-foreground-secondary">paid-tool.ts</span>
+                </div>
+                <pre className="p-6 text-sm font-mono leading-relaxed overflow-x-auto">
+                  <code>
+{`npm i @openconductor/mcp-sdk`}
+
+{`import { requirePayment } from '@openconductor/mcp-sdk';`}
+
+{`const analyze = requirePayment(
+  { credits: 5 },
+  { toolName: 'analyze-data' },
+)(async (input) => ({
+  summary: await summarize(input.text),
+}));`}
+
+{`// Demo mode (no API key): mocks 9999 credits.
+// Production: deducts from api.openconductor.ai.
+// Insufficient credits → typed JSON-RPC error.`}
+                  </code>
+                </pre>
+              </div>
+
+              {/* What you get */}
+              <div className="space-y-6">
+                <GlassCard>
+                  <Code2 className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="text-lg font-semibold mb-2">Demo Mode Out of the Box</h3>
+                  <p className="text-foreground-secondary text-sm">
+                    No API key? SDK mocks 9999 credits and logs every check. Ship examples and tests with the same code path as production.
+                  </p>
+                </GlassCard>
+                <GlassCard>
+                  <Lock className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="text-lg font-semibold mb-2">Hosted Billing API</h3>
+                  <p className="text-foreground-secondary text-sm">
+                    api.openconductor.ai handles atomic credit deduction with per-call idempotency. Bearer-token auth against your API key.
+                  </p>
+                </GlassCard>
+                <GlassCard>
+                  <Scale className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="text-lg font-semibold mb-2">Stripe Credit Packs</h3>
+                  <p className="text-foreground-secondary text-sm">
+                    Starter (100), Pro (500), Business (2000) credit packs via Stripe checkout. Webhook grants credits the moment payment succeeds.
+                  </p>
+                </GlassCard>
+              </div>
+            </div>
+
+            <div className="text-center mt-10">
+              <a
+                href="https://www.npmjs.com/package/@openconductor/mcp-sdk"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+              >
+                <Package className="h-4 w-4" />
+                View on npm
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Who It's For */}
+        <section className="container mx-auto px-4 py-16 md:py-24">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Built for <GradientText>Enterprise</GradientText>
+              </h2>
+              <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
+                If you are deploying AI agents at scale, you need Trust Stack
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <GlassCard>
+                <Users className="h-10 w-10 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-2">AI-First Companies</h3>
+                <p className="text-foreground-secondary">
+                  Building products with AI agents? Register them before your competitors get regulated and you do not.
+                </p>
+              </GlassCard>
+
+              <GlassCard>
+                <Globe className="h-10 w-10 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-2">EU Market Access</h3>
+                <p className="text-foreground-secondary">
+                  Selling into Europe? EU AI Act compliance is not optional. Trust Stack provides the audit trail.
+                </p>
+              </GlassCard>
+
+              <GlassCard>
+                <Cpu className="h-10 w-10 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-2">OpenClaw &amp; MCP Developers</h3>
+                <p className="text-foreground-secondary">
+                  Building on OpenClaw or MCP? Wrap your agents with verifiable identity and unlock enterprise buyers.
+                </p>
+              </GlassCard>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="container mx-auto px-4 py-16 md:py-24">
+          <GlassCard elevated className="max-w-4xl mx-auto bg-gradient-to-br from-primary/10 via-background to-primary/5">
+            <div className="p-8 md:p-12 text-center">
+              <Badge className="mb-4 px-3 py-1 text-xs bg-warning/10 border-warning/30 text-warning">
+                FOUNDING COHORT - 50 COMPANIES
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Get <GradientText>Ahead of Regulation</GradientText>
               </h2>
               <p className="text-foreground-secondary text-lg mb-8 max-w-2xl mx-auto">
-                Join developers using OpenConductor to supercharge their AI workflows
+                Companies in the founding cohort get direct input on the Trust Stack roadmap, priority support, and locked-in pricing.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <GradientButton size="lg" glow className="text-base px-8 h-12" asChild>
-                  <Link href="/install">
-                    <Terminal className="mr-2 h-4 w-4" />
-                    Install a Stack (10s)
+                <GradientButton size="lg" glow className="text-base px-8 h-14 text-lg" asChild>
+                  <Link href="/early-access">
+                    <Shield className="mr-2 h-5 w-5" />
+                    Apply for Early Access
                   </Link>
                 </GradientButton>
-                <Button size="lg" variant="outline" className="text-base px-8 h-12 border-primary/20 hover:border-primary/40" asChild>
-                  <Link href="/submit">
-                    Submit Your Server
+                <Button size="lg" variant="outline" className="text-base px-8 h-14 text-lg border-primary/20 hover:border-primary/40" asChild>
+                  <Link href="/register">
+                    Register an Agent Now
                   </Link>
                 </Button>
               </div>
@@ -206,43 +448,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t py-12 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="font-semibold mb-3">OpenConductor</h3>
-              <p className="text-sm text-muted-foreground">
-                The npm registry for Model Context Protocol servers
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-3">Product</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/discover" className="hover:text-foreground transition-colors">Discover</Link></li>
-                <li><Link href="/submit" className="hover:text-foreground transition-colors">Submit Server</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-3">Resources</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="https://github.com/epicmotionSD/openconductor" className="hover:text-foreground transition-colors">GitHub</a></li>
-                <li><a href="https://modelcontextprotocol.io" className="hover:text-foreground transition-colors">MCP Docs</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-3">Community</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="https://discord.gg/Ya5TPWeS" className="hover:text-foreground transition-colors">Discord</a></li>
-                <li><a href="https://x.com/SDexecution" className="hover:text-foreground transition-colors">X/Twitter</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 OpenConductor. MIT Licensed. Built for the MCP community.</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   )
 }

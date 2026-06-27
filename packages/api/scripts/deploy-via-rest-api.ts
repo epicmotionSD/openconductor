@@ -1,5 +1,9 @@
 #!/usr/bin/env tsx
 
+// DEPRECATED — superseded by `npm run seed:supabase` (src/db/seed-supabase.ts).
+// Imports the now-archived seed-new-servers-2025.ts and seed-*.json (src/db/archive/);
+// will fail at import time. Kept for historical reference only.
+
 /**
  * Deploy All Servers to Production Supabase via REST API
  *
@@ -44,9 +48,13 @@ interface ServerData {
   };
 }
 
-// Supabase REST API configuration
-const SUPABASE_URL = "https://fjmzvcipimpctqnhhfrr.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqbXp2Y2lwaW1wY3RxbmhoZnJyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzNjYzMTAsImV4cCI6MjA3NDk0MjMxMH0.zFLo3tHYMR9-ctFbGFNwquAfs6TWK0p1RzXICDXvj_E";
+// Supabase REST API configuration (requires environment variables)
+const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+  throw new Error('SUPABASE_URL and SUPABASE_ANON_KEY environment variables are required');
+}
 
 // Parse command line args
 const isDryRun = process.argv.includes('--dry-run');

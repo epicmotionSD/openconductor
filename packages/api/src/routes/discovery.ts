@@ -40,7 +40,7 @@ discoveryRouter.post('/run', asyncHandler(async (req, res) => {
   try {
     // Import the GitHubDiscoveryService dynamically to avoid circular dependencies
     const { GitHubDiscoveryService } = await import('../services/GitHubDiscoveryService');
-    const discoveryService = new GitHubDiscoveryService();
+    const discoveryService = GitHubDiscoveryService.getInstance();
 
     // Run daily discovery (searches GitHub, adds to queue)
     const discoveryResult = await discoveryService.runDailyDiscovery();
@@ -89,7 +89,7 @@ discoveryRouter.post('/run', asyncHandler(async (req, res) => {
 discoveryRouter.get('/status', asyncHandler(async (req, res) => {
   try {
     const { GitHubDiscoveryService } = await import('../services/GitHubDiscoveryService');
-    const discoveryService = new GitHubDiscoveryService();
+    const discoveryService = GitHubDiscoveryService.getInstance();
 
     const stats = await discoveryService.getDiscoveryStats();
 
@@ -117,7 +117,7 @@ discoveryRouter.get('/status', asyncHandler(async (req, res) => {
 discoveryRouter.get('/queue', asyncHandler(async (req, res) => {
   try {
     const { GitHubDiscoveryService } = await import('../services/GitHubDiscoveryService');
-    const discoveryService = new GitHubDiscoveryService();
+    const discoveryService = GitHubDiscoveryService.getInstance();
 
     const limit = parseInt(req.query.limit as string) || 20;
     const queueItems = await discoveryService.getQueueItems({ limit });
@@ -144,7 +144,7 @@ discoveryRouter.post('/process', asyncHandler(async (req, res) => {
 
   try {
     const { GitHubDiscoveryService } = await import('../services/GitHubDiscoveryService');
-    const discoveryService = new GitHubDiscoveryService();
+    const discoveryService = GitHubDiscoveryService.getInstance();
 
     const result = await discoveryService.processQueue({ limit });
 

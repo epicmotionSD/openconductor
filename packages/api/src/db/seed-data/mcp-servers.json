@@ -1,0 +1,4187 @@
+[
+  {
+    "slug": "1mcpserver",
+    "name": "1MCPServer",
+    "tagline": "MCP of MCPs - Server discovery",
+    "description": "Automatic discovery and configuration of MCP servers with a meta-MCP server approach.",
+    "repository_url": "https://github.com/particlefuture/1mcpserver",
+    "repository_owner": "particlefuture",
+    "repository_name": "1mcpserver",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "discovery",
+      "meta",
+      "orchestration"
+    ],
+    "verified": false,
+    "featured": false
+  },
+  {
+    "slug": "adobe-creative",
+    "name": "Adobe Creative Cloud",
+    "tagline": "Creative applications suite",
+    "description": "Adobe Creative Cloud API integration for creative workflows.",
+    "repository_url": "https://github.com/adobe/mcp-creative-cloud",
+    "repository_owner": "adobe",
+    "repository_name": "mcp-creative-cloud",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "adobe",
+      "creative",
+      "design"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "agentmode",
+    "name": "AgentMode",
+    "tagline": "Multi-database connector",
+    "description": "Connect to dozens of databases from a single MCP server.",
+    "repository_url": "https://github.com/agentmode/mcp-agentmode",
+    "repository_owner": "agentmode",
+    "repository_name": "mcp-agentmode",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "database",
+      "connector",
+      "multi-db"
+    ],
+    "verified": false,
+    "featured": false
+  },
+  {
+    "slug": "airbnb",
+    "name": "Airbnb",
+    "tagline": "Vacation rental platform",
+    "description": "Airbnb integration for property search and booking management.",
+    "repository_url": "https://github.com/airbnb/mcp-airbnb",
+    "repository_owner": "airbnb",
+    "repository_name": "mcp-airbnb",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "airbnb",
+      "rentals",
+      "travel",
+      "accommodation"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "airtable",
+    "name": "Airtable",
+    "tagline": "Spreadsheet-database hybrid",
+    "description": "Airtable integration for spreadsheet-database operations and automation.",
+    "repository_url": "https://github.com/airtable/mcp-airtable",
+    "repository_owner": "airtable",
+    "repository_name": "mcp-airtable",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "airtable",
+      "spreadsheet",
+      "database"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "algolia",
+    "name": "Algolia",
+    "tagline": "Hosted search API",
+    "description": "Algolia integration for fast, relevant search experiences across web and mobile.",
+    "repository_url": "https://github.com/algolia/mcp-algolia",
+    "repository_owner": "algolia",
+    "repository_name": "mcp-algolia",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "algolia",
+      "search",
+      "api"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "alpaca",
+    "name": "Alpaca",
+    "tagline": "Commission-free trading API",
+    "description": "Alpaca integration for stock trading and market data.",
+    "repository_url": "https://github.com/alpacahq/mcp-alpaca",
+    "repository_owner": "alpacahq",
+    "repository_name": "mcp-alpaca",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "alpaca",
+      "trading",
+      "stocks",
+      "finance"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "alpha-vantage",
+    "name": "Alpha Vantage",
+    "tagline": "Financial market data",
+    "description": "Alpha Vantage integration for stock, forex, and cryptocurrency data.",
+    "repository_url": "https://github.com/alphavantage/mcp-alphavantage",
+    "repository_owner": "alphavantage",
+    "repository_name": "mcp-alphavantage",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "finance",
+      "stocks",
+      "forex",
+      "market-data"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "anthropic",
+    "name": "Anthropic",
+    "tagline": "Claude AI integration",
+    "description": "Anthropic Claude API integration for advanced AI capabilities.",
+    "repository_url": "https://github.com/anthropics/mcp-anthropic",
+    "repository_owner": "anthropics",
+    "repository_name": "mcp-anthropic",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "anthropic",
+      "claude",
+      "ai",
+      "llm"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "apify-mcp",
+    "name": "Apify",
+    "tagline": "6,000+ pre-built scrapers",
+    "description": "Use 6,000+ pre-built cloud tools to extract data from any website. Comprehensive web automation.",
+    "repository_url": "https://github.com/apify/apify-mcp-server",
+    "repository_owner": "apify",
+    "repository_name": "apify-mcp-server",
+    "npm_package": "@apify/mcp-server",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "apify",
+      "scraping",
+      "automation"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "apollo-graphql-mcp",
+    "name": "Apollo GraphQL",
+    "tagline": "GraphQL API integration",
+    "description": "Connect GraphQL APIs to AI agents. Query and mutate GraphQL endpoints.",
+    "repository_url": "https://github.com/apollographql/apollo-mcp-server",
+    "repository_owner": "apollographql",
+    "repository_name": "apollo-mcp-server",
+    "npm_package": "@apollo/mcp-server",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "graphql",
+      "apollo",
+      "api"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "arxiv",
+    "name": "arXiv",
+    "tagline": "Scientific paper repository",
+    "description": "arXiv integration for accessing scientific research papers and preprints.",
+    "repository_url": "https://github.com/arxiv/mcp-arxiv",
+    "repository_owner": "arxiv",
+    "repository_name": "mcp-arxiv",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "arxiv",
+      "research",
+      "papers",
+      "science"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "asana",
+    "name": "Asana",
+    "tagline": "Work management platform",
+    "description": "Asana integration for task and project management workflows.",
+    "repository_url": "https://github.com/asana/mcp-asana",
+    "repository_owner": "asana",
+    "repository_name": "mcp-asana",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "asana",
+      "project-management",
+      "tasks"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "atlassian-mcp",
+    "name": "Atlassian",
+    "tagline": "Jira and Confluence integration",
+    "description": "Interact with Jira and Confluence. Manage issues, projects, and documentation.",
+    "repository_url": "https://github.com/atlassian/mcp-server",
+    "repository_owner": "atlassian",
+    "repository_name": "mcp-server",
+    "npm_package": "@atlassian/mcp-server",
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "jira",
+      "confluence",
+      "atlassian"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "auth0",
+    "name": "Auth0",
+    "tagline": "Authentication platform",
+    "description": "Auth0 integration for authentication, authorization, and user management.",
+    "repository_url": "https://github.com/auth0/mcp-auth0",
+    "repository_owner": "auth0",
+    "repository_name": "mcp-auth0",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "auth0",
+      "authentication",
+      "security"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "auth0-mcp",
+    "name": "Auth0",
+    "tagline": "Authentication management",
+    "description": "Manage Auth0 tenant operations. Handle authentication and authorization.",
+    "repository_url": "https://github.com/auth0/auth0-mcp-server",
+    "repository_owner": "auth0",
+    "repository_name": "auth0-mcp-server",
+    "npm_package": "@auth0/mcp-server",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "auth",
+      "authentication",
+      "auth0"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "aws-kb-retrieval",
+    "name": "AWS Knowledge Base",
+    "tagline": "AWS Knowledge Base retrieval",
+    "description": "Connect to AWS Knowledge Bases for intelligent document retrieval and Q&A.",
+    "repository_url": "https://github.com/awslabs/mcp",
+    "repository_owner": "awslabs",
+    "repository_name": "mcp",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "aws",
+      "knowledge-base",
+      "retrieval"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "aws-lambda",
+    "name": "AWS Lambda",
+    "tagline": "Serverless compute service",
+    "description": "AWS Lambda integration for serverless function deployment and management.",
+    "repository_url": "https://github.com/aws/mcp-lambda",
+    "repository_owner": "aws",
+    "repository_name": "mcp-lambda",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "aws",
+      "lambda",
+      "serverless"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "aws-mcp",
+    "name": "AWS MCP Server",
+    "tagline": "AWS services integration",
+    "description": "Comprehensive AWS services integration including CDK, documentation, and cost analysis. Manage AWS resources with AI.",
+    "repository_url": "https://github.com/awslabs/mcp",
+    "repository_owner": "awslabs",
+    "repository_name": "mcp",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "aws",
+      "cloud",
+      "infrastructure"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "aws-s3",
+    "name": "AWS S3",
+    "tagline": "Object storage service",
+    "description": "AWS S3 integration for object storage, file management, and cloud data operations.",
+    "repository_url": "https://github.com/aws/mcp-s3",
+    "repository_owner": "aws",
+    "repository_name": "mcp-s3",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "filesystem",
+    "tags": [
+      "aws",
+      "s3",
+      "storage",
+      "cloud"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "azure-functions",
+    "name": "Azure Functions",
+    "tagline": "Serverless compute platform",
+    "description": "Azure Functions integration for event-driven serverless computing.",
+    "repository_url": "https://github.com/Azure/mcp-azure-functions",
+    "repository_owner": "Azure",
+    "repository_name": "mcp-azure-functions",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "azure",
+      "serverless",
+      "functions"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "azure-mcp",
+    "name": "Azure MCP Server",
+    "tagline": "Microsoft Azure integration",
+    "description": "Access Azure Storage, Cosmos DB, and Azure CLI. Complete Azure services integration for AI agents.",
+    "repository_url": "https://github.com/microsoft/mcp",
+    "repository_owner": "microsoft",
+    "repository_name": "mcp",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "azure",
+      "microsoft",
+      "cloud"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "azure-storage",
+    "name": "Azure Storage",
+    "tagline": "Microsoft cloud storage",
+    "description": "Azure Storage integration for blob storage, files, and cloud data management.",
+    "repository_url": "https://github.com/Azure/mcp-azure-storage",
+    "repository_owner": "Azure",
+    "repository_name": "mcp-azure-storage",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "filesystem",
+    "tags": [
+      "azure",
+      "storage",
+      "cloud",
+      "microsoft"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "bigquery",
+    "name": "BigQuery",
+    "tagline": "Google Cloud data warehouse",
+    "description": "Google BigQuery integration for serverless data warehouse and analytics.",
+    "repository_url": "https://github.com/GoogleCloudPlatform/mcp-bigquery",
+    "repository_owner": "GoogleCloudPlatform",
+    "repository_name": "mcp-bigquery",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "bigquery",
+      "google",
+      "data-warehouse",
+      "analytics"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "bigquery-mcp",
+    "name": "BigQuery",
+    "tagline": "Google BigQuery data warehouse",
+    "description": "Google BigQuery MCP server for natural language queries. Secure, read-only access to datasets with schema inspection.",
+    "repository_url": "https://github.com/ergut/mcp-bigquery-server",
+    "repository_owner": "ergut",
+    "repository_name": "mcp-bigquery-server",
+    "npm_package": "@ergut/mcp-bigquery-server",
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "bigquery",
+      "google-cloud",
+      "data-warehouse",
+      "analytics"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "bigquery-python-mcp",
+    "name": "BigQuery (Python)",
+    "tagline": "BigQuery access via Python",
+    "description": "Python-based BigQuery MCP server with schema inspection and query execution. Alternative implementation for BigQuery access.",
+    "repository_url": "https://github.com/LucasHild/mcp-server-bigquery",
+    "repository_owner": "LucasHild",
+    "repository_name": "mcp-server-bigquery",
+    "npm_package": null,
+    "pypi_package": "mcp-server-bigquery",
+    "category": "database",
+    "tags": [
+      "bigquery",
+      "google-cloud",
+      "data-warehouse",
+      "python"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "binance",
+    "name": "Binance",
+    "tagline": "Crypto trading platform",
+    "description": "Binance API integration for cryptocurrency trading and market data.",
+    "repository_url": "https://github.com/binance/mcp-binance",
+    "repository_owner": "binance",
+    "repository_name": "mcp-binance",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "binance",
+      "crypto",
+      "trading"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "booking-com",
+    "name": "Booking.com",
+    "tagline": "Hotel and travel bookings",
+    "description": "Booking.com integration for hotel search, booking, and travel services.",
+    "repository_url": "https://github.com/bookingcom/mcp-booking",
+    "repository_owner": "bookingcom",
+    "repository_name": "mcp-booking",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "booking",
+      "hotels",
+      "travel"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "brave-search",
+    "name": "Brave Search",
+    "tagline": "Privacy-focused web search",
+    "description": "Web search capabilities powered by Brave Search API with privacy-focused results and ad-free searching.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-brave-search",
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "search",
+      "web",
+      "privacy",
+      "brave"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "brave-search-mcp",
+    "name": "Brave Search",
+    "tagline": "Privacy-focused search",
+    "description": "Privacy-focused web search engine. Search the web without tracking.",
+    "repository_url": "https://github.com/brave/mcp-server",
+    "repository_owner": "brave",
+    "repository_name": "mcp-server",
+    "npm_package": "@brave/mcp-server",
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "search",
+      "privacy",
+      "web"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "bright-data-mcp",
+    "name": "Bright Data",
+    "tagline": "Web data extraction",
+    "description": "Web data discovery and extraction at scale. Comprehensive web scraping capabilities.",
+    "repository_url": "https://github.com/luminati-io/mcp-server",
+    "repository_owner": "luminati-io",
+    "repository_name": "mcp-server",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "scraping",
+      "data-extraction",
+      "web-data"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "browserbase",
+    "name": "Browserbase",
+    "tagline": "Headless browser control",
+    "description": "Browserbase MCP server for headless browser control with Stagehand integration.",
+    "repository_url": "https://github.com/browserbase/mcp-server-browserbase",
+    "repository_owner": "browserbase",
+    "repository_name": "mcp-server-browserbase",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "browser",
+      "automation",
+      "headless"
+    ],
+    "verified": false,
+    "featured": false
+  },
+  {
+    "slug": "browserbase-mcp",
+    "name": "Browserbase",
+    "tagline": "Cloud browser automation",
+    "description": "Cloud browser automation service. Run browsers in the cloud for AI agents.",
+    "repository_url": "https://github.com/browserbase/mcp-server",
+    "repository_owner": "browserbase",
+    "repository_name": "mcp-server",
+    "npm_package": "@browserbase/mcp-server",
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "browser",
+      "automation",
+      "cloud"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "calendly",
+    "name": "Calendly",
+    "tagline": "Scheduling automation",
+    "description": "Calendly integration for automated scheduling and calendar management.",
+    "repository_url": "https://github.com/calendly/mcp-calendly",
+    "repository_owner": "calendly",
+    "repository_name": "mcp-calendly",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "calendly",
+      "scheduling",
+      "calendar"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "canva",
+    "name": "Canva",
+    "tagline": "Graphic design platform",
+    "description": "Canva integration for graphic design and content creation.",
+    "repository_url": "https://github.com/canva/mcp-canva",
+    "repository_owner": "canva",
+    "repository_name": "mcp-canva",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "canva",
+      "design",
+      "graphics"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "chroma",
+    "name": "Chroma",
+    "tagline": "AI-native embedding database",
+    "description": "Chroma vector database for AI applications with embeddings.",
+    "repository_url": "https://github.com/chroma-core/mcp-chroma",
+    "repository_owner": "chroma-core",
+    "repository_name": "mcp-chroma",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "vector",
+      "embeddings",
+      "ai",
+      "database"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "circleci",
+    "name": "CircleCI",
+    "tagline": "Continuous integration platform",
+    "description": "CircleCI integration for continuous integration and delivery workflows.",
+    "repository_url": "https://github.com/circleci/mcp-circleci",
+    "repository_owner": "circleci",
+    "repository_name": "mcp-circleci",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "circleci",
+      "cicd",
+      "deployment"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "circleci-mcp",
+    "name": "CircleCI",
+    "tagline": "CI/CD build analysis",
+    "description": "CI/CD build failure analysis and management. Debug failed builds with AI.",
+    "repository_url": "https://github.com/circleci/mcp-server",
+    "repository_owner": "circleci",
+    "repository_name": "mcp-server",
+    "npm_package": "@circleci/mcp-server",
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "cicd",
+      "circleci",
+      "builds"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "clerk",
+    "name": "Clerk",
+    "tagline": "User management platform",
+    "description": "Clerk integration for user authentication and management for developers.",
+    "repository_url": "https://github.com/clerkinc/mcp-clerk",
+    "repository_owner": "clerkinc",
+    "repository_name": "mcp-clerk",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "clerk",
+      "authentication",
+      "users"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "clickhouse",
+    "name": "ClickHouse",
+    "tagline": "Fast SQL analytics database",
+    "description": "Official ClickHouse MCP server for high-performance SQL query execution and analytics.",
+    "repository_url": "https://github.com/ClickHouse/mcp-clickhouse",
+    "repository_owner": "ClickHouse",
+    "repository_name": "mcp-clickhouse",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "clickhouse",
+      "database",
+      "analytics",
+      "SQL"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "clickhouse-mcp",
+    "name": "ClickHouse",
+    "tagline": "Time-series data warehouse",
+    "description": "ClickHouse time-series and analytical database. Fast OLAP queries.",
+    "repository_url": "https://github.com/ClickHouse/mcp-server",
+    "repository_owner": "ClickHouse",
+    "repository_name": "mcp-server",
+    "npm_package": "@clickhouse/mcp-server",
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "clickhouse",
+      "analytics",
+      "time-series"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "cloudflare",
+    "name": "Cloudflare",
+    "tagline": "Web platform resource deployment",
+    "description": "Official Cloudflare MCP server for Workers, KV, R2, D1, and other Cloudflare services management.",
+    "repository_url": "https://github.com/cloudflare/mcp-server-cloudflare",
+    "repository_owner": "cloudflare",
+    "repository_name": "mcp-server-cloudflare",
+    "npm_package": "@cloudflare/mcp-server-cloudflare",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "cloudflare",
+      "cdn",
+      "workers",
+      "deployment"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "cloudflare-mcp",
+    "name": "Cloudflare MCP",
+    "tagline": "CDN and edge computing",
+    "description": "Manage Cloudflare resources including CDN, Workers, and edge computing. Full Cloudflare integration.",
+    "repository_url": "https://github.com/cloudflare/mcp-server-cloudflare",
+    "repository_owner": "cloudflare",
+    "repository_name": "mcp-server-cloudflare",
+    "npm_package": "@cloudflare/mcp-server-cloudflare",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "cloudflare",
+      "cdn",
+      "edge"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "cloudinary",
+    "name": "Cloudinary",
+    "tagline": "Media management platform",
+    "description": "Cloudinary integration for image and video management and transformation.",
+    "repository_url": "https://github.com/cloudinary/mcp-cloudinary",
+    "repository_owner": "cloudinary",
+    "repository_name": "mcp-cloudinary",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "cloudinary",
+      "media",
+      "images",
+      "video"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "coinbase",
+    "name": "Coinbase",
+    "tagline": "Cryptocurrency exchange",
+    "description": "Coinbase API integration for cryptocurrency trading and wallet management.",
+    "repository_url": "https://github.com/coinbase/mcp-coinbase",
+    "repository_owner": "coinbase",
+    "repository_name": "mcp-coinbase",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "coinbase",
+      "crypto",
+      "trading"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "coingecko",
+    "name": "CoinGecko",
+    "tagline": "Cryptocurrency market data",
+    "description": "CoinGecko API integration for cryptocurrency prices, market data, and analytics.",
+    "repository_url": "https://github.com/coingecko/mcp-coingecko",
+    "repository_owner": "coingecko",
+    "repository_name": "mcp-coingecko",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "crypto",
+      "market-data",
+      "cryptocurrency"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "confluence",
+    "name": "Confluence",
+    "tagline": "Team documentation and knowledge base",
+    "description": "Atlassian Confluence integration for team documentation and knowledge management.",
+    "repository_url": "https://github.com/atlassian/mcp-confluence",
+    "repository_owner": "atlassian",
+    "repository_name": "mcp-confluence",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "confluence",
+      "atlassian",
+      "documentation",
+      "wiki"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "contentful",
+    "name": "Contentful",
+    "tagline": "Headless CMS",
+    "description": "Contentful integration for content management and delivery.",
+    "repository_url": "https://github.com/contentful/mcp-contentful",
+    "repository_owner": "contentful",
+    "repository_name": "mcp-contentful",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "contentful",
+      "cms",
+      "headless"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "databricks",
+    "name": "Databricks",
+    "tagline": "Unified analytics platform",
+    "description": "Databricks integration for unified analytics, ML, and data lakehouse operations.",
+    "repository_url": "https://github.com/databricks/mcp-databricks",
+    "repository_owner": "databricks",
+    "repository_name": "mcp-databricks",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "databricks",
+      "analytics",
+      "ml",
+      "spark"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "datadog",
+    "name": "Datadog",
+    "tagline": "Monitoring and analytics",
+    "description": "Datadog integration for infrastructure monitoring, APM, and log management.",
+    "repository_url": "https://github.com/DataDog/mcp-datadog",
+    "repository_owner": "DataDog",
+    "repository_name": "mcp-datadog",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "monitoring",
+    "tags": [
+      "datadog",
+      "monitoring",
+      "apm",
+      "logs"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "dataproduct-mcp",
+    "name": "Data Product MCP",
+    "tagline": "Data mesh with governance",
+    "description": "Data mesh MCP server for discovering data products in Data Mesh Manager. Supports Snowflake, Databricks, and BigQuery.",
+    "repository_url": "https://github.com/entropy-data/dataproduct-mcp",
+    "repository_owner": "entropy-data",
+    "repository_name": "dataproduct-mcp",
+    "npm_package": null,
+    "pypi_package": "dataproduct-mcp",
+    "category": "database",
+    "tags": [
+      "data-mesh",
+      "governance",
+      "snowflake",
+      "databricks",
+      "bigquery",
+      "python"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "dbt",
+    "name": "dbt",
+    "tagline": "Data transformation workflow tool",
+    "description": "dbt Labs MCP server for data transformation workflows and analytics engineering.",
+    "repository_url": "https://github.com/dbt-labs/dbt-mcp",
+    "repository_owner": "dbt-labs",
+    "repository_name": "dbt-mcp",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "dbt",
+      "data",
+      "transformation",
+      "analytics"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "discord",
+    "name": "Discord",
+    "tagline": "Community platform",
+    "description": "Discord integration for bot creation, messaging, and community management.",
+    "repository_url": "https://github.com/discord/mcp-discord",
+    "repository_owner": "discord",
+    "repository_name": "mcp-discord",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "discord",
+      "messaging",
+      "bots",
+      "community"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "docker",
+    "name": "Docker",
+    "tagline": "Container management and orchestration",
+    "description": "Docker integration for container management, image building, and orchestration.",
+    "repository_url": "https://github.com/docker/mcp-docker",
+    "repository_owner": "docker",
+    "repository_name": "mcp-docker",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "docker",
+      "containers",
+      "deployment"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "dropbox",
+    "name": "Dropbox",
+    "tagline": "Cloud file storage and sharing",
+    "description": "Dropbox integration for cloud file storage, sharing, and collaboration.",
+    "repository_url": "https://github.com/dropbox/mcp-dropbox",
+    "repository_owner": "dropbox",
+    "repository_name": "mcp-dropbox",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "filesystem",
+    "tags": [
+      "dropbox",
+      "cloud",
+      "storage",
+      "files"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "e2b",
+    "name": "E2B",
+    "tagline": "Secure code execution sandbox",
+    "description": "E2B code execution sandbox for running code in isolated environments via MCP.",
+    "repository_url": "https://github.com/e2b-dev/mcp-server",
+    "repository_owner": "e2b-dev",
+    "repository_name": "mcp-server",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "sandbox",
+      "execution",
+      "code"
+    ],
+    "verified": false,
+    "featured": false
+  },
+  {
+    "slug": "e2b-mcp",
+    "name": "E2B Code Sandbox",
+    "tagline": "Secure code execution sandbox",
+    "description": "Secure cloud sandbox for executing code. Run code safely with AI agents.",
+    "repository_url": "https://github.com/e2b-dev/mcp-server",
+    "repository_owner": "e2b-dev",
+    "repository_name": "mcp-server",
+    "npm_package": "@e2b/mcp-server",
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "sandbox",
+      "code-execution",
+      "security"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "elasticsearch",
+    "name": "Elasticsearch",
+    "tagline": "Search and analytics engine",
+    "description": "Elasticsearch integration for full-text search, analytics, and log management.",
+    "repository_url": "https://github.com/elastic/mcp-elasticsearch",
+    "repository_owner": "elastic",
+    "repository_name": "mcp-elasticsearch",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "elasticsearch",
+      "search",
+      "analytics",
+      "logs"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "elevenlabs",
+    "name": "ElevenLabs",
+    "tagline": "AI voice generation",
+    "description": "ElevenLabs integration for text-to-speech and voice cloning.",
+    "repository_url": "https://github.com/elevenlabs/mcp-elevenlabs",
+    "repository_owner": "elevenlabs",
+    "repository_name": "mcp-elevenlabs",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "ai",
+      "voice",
+      "tts",
+      "speech"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "elevenlabs-mcp",
+    "name": "ElevenLabs",
+    "tagline": "Text-to-speech synthesis",
+    "description": "ElevenLabs text-to-speech synthesis. Generate realistic voice audio.",
+    "repository_url": "https://github.com/elevenlabs/mcp-server",
+    "repository_owner": "elevenlabs",
+    "repository_name": "mcp-server",
+    "npm_package": "@elevenlabs/mcp-server",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "tts",
+      "voice",
+      "audio"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "ethereum",
+    "name": "Ethereum",
+    "tagline": "Blockchain interaction",
+    "description": "Ethereum blockchain integration for smart contracts and Web3 operations.",
+    "repository_url": "https://github.com/ethereum/mcp-ethereum",
+    "repository_owner": "ethereum",
+    "repository_name": "mcp-ethereum",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "ethereum",
+      "blockchain",
+      "web3",
+      "crypto"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "everything",
+    "name": "Everything",
+    "tagline": "Reference server with prompts, resources, and tools",
+    "description": "Official reference and test server demonstrating all MCP features including prompts, resources, and tools.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-everything",
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "reference",
+      "testing",
+      "demo"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "exa",
+    "name": "Exa",
+    "tagline": "Advanced web search capabilities",
+    "description": "Exa Labs web search server with advanced search capabilities and AI-optimized results.",
+    "repository_url": "https://github.com/exa-labs/exa-mcp-server",
+    "repository_owner": "exa-labs",
+    "repository_name": "exa-mcp-server",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "search",
+      "web",
+      "ai"
+    ],
+    "verified": false,
+    "featured": false
+  },
+  {
+    "slug": "exa-mcp",
+    "name": "Exa Search",
+    "tagline": "Search engine for AI",
+    "description": "Search engine designed specifically for artificial intelligence. Semantic search capabilities.",
+    "repository_url": "https://github.com/exa-labs/mcp-server",
+    "repository_owner": "exa-labs",
+    "repository_name": "mcp-server",
+    "npm_package": "@exa/mcp-server",
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "search",
+      "semantic",
+      "ai"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "excel",
+    "name": "Microsoft Excel",
+    "tagline": "Spreadsheet application",
+    "description": "Microsoft Excel API integration for spreadsheet operations via Microsoft Graph.",
+    "repository_url": "https://github.com/microsoft/mcp-excel",
+    "repository_owner": "microsoft",
+    "repository_name": "mcp-excel",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "excel",
+      "microsoft",
+      "spreadsheet"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "facebook",
+    "name": "Facebook",
+    "tagline": "Social media platform API",
+    "description": "Facebook Graph API integration for social media management and marketing.",
+    "repository_url": "https://github.com/facebook/mcp-facebook",
+    "repository_owner": "facebook",
+    "repository_name": "mcp-facebook",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "facebook",
+      "social-media",
+      "marketing"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "fetch",
+    "name": "Fetch",
+    "tagline": "Web content retrieval and conversion",
+    "description": "Web content fetching and conversion for efficient LLM usage with intelligent parsing and formatting.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-fetch",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "web",
+      "fetch",
+      "content",
+      "parser"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "figma",
+    "name": "Figma",
+    "tagline": "Collaborative design tool",
+    "description": "Figma API integration for design collaboration and file management.",
+    "repository_url": "https://github.com/figma/mcp-figma",
+    "repository_owner": "figma",
+    "repository_name": "mcp-figma",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "figma",
+      "design",
+      "collaboration"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "filesystem",
+    "name": "Filesystem",
+    "tagline": "Secure file operations with access controls",
+    "description": "Secure file system operations for AI agents with configurable access controls and sandboxed access to read, write, and manage files.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-filesystem",
+    "pypi_package": null,
+    "category": "filesystem",
+    "tags": [
+      "filesystem",
+      "files",
+      "security",
+      "sandbox"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "finnhub",
+    "name": "Finnhub",
+    "tagline": "Stock market data",
+    "description": "Finnhub integration for stock prices, news, and financial data.",
+    "repository_url": "https://github.com/finnhub/mcp-finnhub",
+    "repository_owner": "finnhub",
+    "repository_name": "mcp-finnhub",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "finnhub",
+      "stocks",
+      "finance",
+      "market-data"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "firebase",
+    "name": "Firebase",
+    "tagline": "Google's app development platform",
+    "description": "Firebase integration for backend services, authentication, and real-time database.",
+    "repository_url": "https://github.com/firebase/mcp-firebase",
+    "repository_owner": "firebase",
+    "repository_name": "mcp-firebase",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "firebase",
+      "google",
+      "backend",
+      "realtime"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "firecrawl",
+    "name": "Firecrawl",
+    "tagline": "Web scraping for AI assistants",
+    "description": "Firecrawl MCP server for intelligent web scraping and content extraction for AI assistants.",
+    "repository_url": "https://github.com/mendableai/firecrawl-mcp-server",
+    "repository_owner": "mendableai",
+    "repository_name": "firecrawl-mcp-server",
+    "npm_package": "@mendable/firecrawl-mcp",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "scraping",
+      "web",
+      "crawling"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "firecrawl-mcp",
+    "name": "Firecrawl",
+    "tagline": "Web data extraction service",
+    "description": "Advanced web data extraction and crawling service. Extract structured data from websites.",
+    "repository_url": "https://github.com/mendableai/firecrawl-mcp",
+    "repository_owner": "mendableai",
+    "repository_name": "firecrawl-mcp",
+    "npm_package": "@mendable/firecrawl-mcp",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "crawling",
+      "extraction",
+      "web"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "flight-aware",
+    "name": "FlightAware",
+    "tagline": "Flight tracking data",
+    "description": "FlightAware integration for real-time flight tracking and aviation data.",
+    "repository_url": "https://github.com/flightaware/mcp-flightaware",
+    "repository_owner": "flightaware",
+    "repository_name": "mcp-flightaware",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "flights",
+      "aviation",
+      "tracking"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "foursquare",
+    "name": "Foursquare",
+    "tagline": "Location intelligence",
+    "description": "Foursquare Places API for location data and venue information.",
+    "repository_url": "https://github.com/foursquare/mcp-foursquare",
+    "repository_owner": "foursquare",
+    "repository_name": "mcp-foursquare",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "foursquare",
+      "location",
+      "places"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "freshbooks",
+    "name": "FreshBooks",
+    "tagline": "Invoicing and accounting",
+    "description": "FreshBooks integration for invoicing, time tracking, and accounting.",
+    "repository_url": "https://github.com/freshbooks/mcp-freshbooks",
+    "repository_owner": "freshbooks",
+    "repository_name": "mcp-freshbooks",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "freshbooks",
+      "invoicing",
+      "accounting"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "freshdesk",
+    "name": "Freshdesk",
+    "tagline": "Customer support software",
+    "description": "Freshdesk integration for helpdesk and customer support operations.",
+    "repository_url": "https://github.com/freshworks/mcp-freshdesk",
+    "repository_owner": "freshworks",
+    "repository_name": "mcp-freshdesk",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "freshdesk",
+      "support",
+      "helpdesk"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "gdrive",
+    "name": "Google Drive",
+    "tagline": "Google Drive file management",
+    "description": "Google Drive integration for file management, sharing, and collaborative document operations.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-gdrive",
+    "pypi_package": null,
+    "category": "filesystem",
+    "tags": [
+      "google-drive",
+      "cloud",
+      "documents"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "ghost",
+    "name": "Ghost",
+    "tagline": "Professional publishing platform",
+    "description": "Ghost CMS integration for modern publishing and newsletter management.",
+    "repository_url": "https://github.com/tryghost/mcp-ghost",
+    "repository_owner": "tryghost",
+    "repository_name": "mcp-ghost",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "ghost",
+      "cms",
+      "publishing"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "git",
+    "name": "Git",
+    "tagline": "Repository manipulation and searching",
+    "description": "Tools to read, search, and manipulate Git repositories with support for commits, branches, and diffs.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": null,
+    "pypi_package": "mcp-server-git",
+    "category": "development",
+    "tags": [
+      "git",
+      "version-control",
+      "repositories",
+      "python"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "github",
+    "name": "GitHub",
+    "tagline": "Official GitHub integration",
+    "description": "GitHub's official MCP server with access to 100+ GitHub API tools for repository management, issues, and PRs.",
+    "repository_url": "https://github.com/github/github-mcp-server",
+    "repository_owner": "github",
+    "repository_name": "github-mcp-server",
+    "npm_package": "@modelcontextprotocol/server-github",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "github",
+      "git",
+      "repositories",
+      "API"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "github-actions-mcp",
+    "name": "GitHub Actions",
+    "tagline": "Workflow automation",
+    "description": "GitHub Actions workflow automation integration. Manage CI/CD workflows.",
+    "repository_url": "https://github.com/github/actions-mcp",
+    "repository_owner": "github",
+    "repository_name": "actions-mcp",
+    "npm_package": "@github/actions-mcp",
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "github-actions",
+      "automation",
+      "workflow"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "gitlab",
+    "name": "GitLab",
+    "tagline": "GitLab repository and CI/CD management",
+    "description": "Official GitLab integration for repository management, CI/CD pipelines, and DevOps workflows.",
+    "repository_url": "https://github.com/gitlab/mcp-gitlab",
+    "repository_owner": "gitlab",
+    "repository_name": "mcp-gitlab",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "gitlab",
+      "git",
+      "cicd",
+      "devops"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "gitlab-mcp",
+    "name": "GitLab",
+    "tagline": "GitLab repository management",
+    "description": "GitLab repository management and CI/CD. Complete GitLab integration.",
+    "repository_url": "https://github.com/gitlab-org/mcp-server",
+    "repository_owner": "gitlab-org",
+    "repository_name": "mcp-server",
+    "npm_package": "@gitlab/mcp-server",
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "gitlab",
+      "git",
+      "cicd"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "google-analytics",
+    "name": "Google Analytics",
+    "tagline": "Web analytics platform",
+    "description": "Google Analytics integration for website analytics, tracking, and insights.",
+    "repository_url": "https://github.com/google/mcp-analytics",
+    "repository_owner": "google",
+    "repository_name": "mcp-analytics",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "analytics",
+      "google",
+      "tracking",
+      "metrics"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "google-calendar",
+    "name": "Google Calendar",
+    "tagline": "Calendar management",
+    "description": "Google Calendar API integration for event and schedule management.",
+    "repository_url": "https://github.com/google/mcp-calendar",
+    "repository_owner": "google",
+    "repository_name": "mcp-calendar",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "google",
+      "calendar",
+      "scheduling"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "google-cloud-run",
+    "name": "Google Cloud Run",
+    "tagline": "Deployment to Google serverless",
+    "description": "Deploy applications to Google Cloud Run. Manage serverless deployments with AI.",
+    "repository_url": "https://github.com/googlecloudplatform/mcp-server-cloudrun",
+    "repository_owner": "googlecloudplatform",
+    "repository_name": "mcp-server-cloudrun",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "google-cloud",
+      "serverless",
+      "deployment"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "google-maps",
+    "name": "Google Maps",
+    "tagline": "Location and mapping services",
+    "description": "Google Maps integration for location services, geocoding, and mapping capabilities.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-google-maps",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "maps",
+      "location",
+      "google",
+      "geocoding"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "google-sheets",
+    "name": "Google Sheets",
+    "tagline": "Cloud spreadsheet platform",
+    "description": "Google Sheets API integration for spreadsheet automation and data management.",
+    "repository_url": "https://github.com/google/mcp-sheets",
+    "repository_owner": "google",
+    "repository_name": "mcp-sheets",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "google",
+      "sheets",
+      "spreadsheet"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "gradle",
+    "name": "Gradle",
+    "tagline": "Build automation tool",
+    "description": "Gradle integration for build automation, dependency management, and testing.",
+    "repository_url": "https://github.com/gradle/mcp-gradle",
+    "repository_owner": "gradle",
+    "repository_name": "mcp-gradle",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "gradle",
+      "build",
+      "java"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "here-maps",
+    "name": "HERE Maps",
+    "tagline": "Location platform services",
+    "description": "HERE Maps integration for mapping, routing, and location services.",
+    "repository_url": "https://github.com/heremaps/mcp-here",
+    "repository_owner": "heremaps",
+    "repository_name": "mcp-here",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "here",
+      "maps",
+      "routing",
+      "location"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "heroku",
+    "name": "Heroku",
+    "tagline": "Cloud platform as a service",
+    "description": "Heroku integration for application deployment and management.",
+    "repository_url": "https://github.com/heroku/mcp-heroku",
+    "repository_owner": "heroku",
+    "repository_name": "mcp-heroku",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "heroku",
+      "paas",
+      "deployment"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "hubspot",
+    "name": "HubSpot",
+    "tagline": "CRM and marketing platform",
+    "description": "HubSpot integration for CRM, marketing automation, and sales tools.",
+    "repository_url": "https://github.com/hubspot/mcp-hubspot",
+    "repository_owner": "hubspot",
+    "repository_name": "mcp-hubspot",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "hubspot",
+      "crm",
+      "marketing"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "huggingface",
+    "name": "Hugging Face",
+    "tagline": "AI model hub and inference",
+    "description": "Hugging Face integration for AI models, datasets, and inference APIs.",
+    "repository_url": "https://github.com/huggingface/mcp-huggingface",
+    "repository_owner": "huggingface",
+    "repository_name": "mcp-huggingface",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "ai",
+      "ml",
+      "models",
+      "huggingface"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "imgix",
+    "name": "imgix",
+    "tagline": "Image optimization platform",
+    "description": "imgix integration for real-time image processing and optimization.",
+    "repository_url": "https://github.com/imgix/mcp-imgix",
+    "repository_owner": "imgix",
+    "repository_name": "mcp-imgix",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "imgix",
+      "images",
+      "optimization"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "instagram",
+    "name": "Instagram",
+    "tagline": "Photo and video sharing",
+    "description": "Instagram Graph API integration for media sharing and engagement.",
+    "repository_url": "https://github.com/instagram/mcp-instagram",
+    "repository_owner": "instagram",
+    "repository_name": "mcp-instagram",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "instagram",
+      "social-media",
+      "photos"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "intercom",
+    "name": "Intercom",
+    "tagline": "Customer messaging platform",
+    "description": "Intercom integration for customer support and messaging.",
+    "repository_url": "https://github.com/intercom/mcp-intercom",
+    "repository_owner": "intercom",
+    "repository_name": "mcp-intercom",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "intercom",
+      "support",
+      "messaging"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "jenkins",
+    "name": "Jenkins",
+    "tagline": "Automation server",
+    "description": "Jenkins integration for CI/CD pipelines and build automation.",
+    "repository_url": "https://github.com/jenkinsci/mcp-jenkins",
+    "repository_owner": "jenkinsci",
+    "repository_name": "mcp-jenkins",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "jenkins",
+      "cicd",
+      "automation"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "jira",
+    "name": "Jira",
+    "tagline": "Project and issue tracking",
+    "description": "Atlassian Jira integration for project management, issue tracking, and agile workflows.",
+    "repository_url": "https://github.com/atlassian/mcp-jira",
+    "repository_owner": "atlassian",
+    "repository_name": "mcp-jira",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "jira",
+      "atlassian",
+      "project-management",
+      "agile"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "kraken",
+    "name": "Kraken",
+    "tagline": "Cryptocurrency exchange",
+    "description": "Kraken API integration for crypto trading and exchange operations.",
+    "repository_url": "https://github.com/kraken/mcp-kraken",
+    "repository_owner": "kraken",
+    "repository_name": "mcp-kraken",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "kraken",
+      "crypto",
+      "exchange"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "kubernetes",
+    "name": "Kubernetes",
+    "tagline": "Kubernetes cluster management",
+    "description": "Kubernetes integration for cluster management, deployments, and orchestration.",
+    "repository_url": "https://github.com/kubernetes/mcp-kubernetes",
+    "repository_owner": "kubernetes",
+    "repository_name": "mcp-kubernetes",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "kubernetes",
+      "k8s",
+      "orchestration",
+      "cloud"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "langchain",
+    "name": "LangChain",
+    "tagline": "LLM application framework",
+    "description": "LangChain integration for building LLM-powered applications.",
+    "repository_url": "https://github.com/langchain-ai/mcp-langchain",
+    "repository_owner": "langchain-ai",
+    "repository_name": "mcp-langchain",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "langchain",
+      "llm",
+      "ai",
+      "framework"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "linear",
+    "name": "Linear",
+    "tagline": "Modern issue tracking",
+    "description": "Linear integration for streamlined issue tracking and project management.",
+    "repository_url": "https://github.com/linear/mcp-linear",
+    "repository_owner": "linear",
+    "repository_name": "mcp-linear",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "linear",
+      "issue-tracking",
+      "project-management"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "linkedin",
+    "name": "LinkedIn",
+    "tagline": "Professional networking",
+    "description": "LinkedIn API integration for professional networking and content sharing.",
+    "repository_url": "https://github.com/linkedin/mcp-linkedin",
+    "repository_owner": "linkedin",
+    "repository_name": "mcp-linkedin",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "linkedin",
+      "professional",
+      "networking"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "llamaindex",
+    "name": "LlamaIndex",
+    "tagline": "Data framework for LLMs",
+    "description": "LlamaIndex integration for connecting LLMs with external data sources.",
+    "repository_url": "https://github.com/run-llama/mcp-llamaindex",
+    "repository_owner": "run-llama",
+    "repository_name": "mcp-llamaindex",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "llm",
+      "ai",
+      "data",
+      "framework"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "logto",
+    "name": "Logto",
+    "tagline": "Customer identity platform",
+    "description": "Logto integration for customer identity and access management.",
+    "repository_url": "https://github.com/logto-io/mcp-logto",
+    "repository_owner": "logto-io",
+    "repository_name": "mcp-logto",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "logto",
+      "authentication",
+      "identity"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "lyft",
+    "name": "Lyft",
+    "tagline": "Transportation network",
+    "description": "Lyft API integration for ride-sharing and transportation services.",
+    "repository_url": "https://github.com/lyft/mcp-lyft",
+    "repository_owner": "lyft",
+    "repository_name": "mcp-lyft",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "lyft",
+      "rides",
+      "transportation"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "mailchimp",
+    "name": "Mailchimp",
+    "tagline": "Email marketing platform",
+    "description": "Mailchimp integration for email marketing campaigns and automation.",
+    "repository_url": "https://github.com/mailchimp/mcp-mailchimp",
+    "repository_owner": "mailchimp",
+    "repository_name": "mcp-mailchimp",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "mailchimp",
+      "email",
+      "marketing"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "mailgun-mcp",
+    "name": "Mailgun",
+    "tagline": "Email service integration",
+    "description": "Mailgun email service integration. Send transactional and marketing emails.",
+    "repository_url": "https://github.com/mailgun/mcp-server",
+    "repository_owner": "mailgun",
+    "repository_name": "mcp-server",
+    "npm_package": "@mailgun/mcp-server",
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "email",
+      "mailgun",
+      "messaging"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "make",
+    "name": "Make (Integromat)",
+    "tagline": "Visual automation platform",
+    "description": "Make (formerly Integromat) integration for visual workflow automation.",
+    "repository_url": "https://github.com/make/mcp-make",
+    "repository_owner": "make",
+    "repository_name": "mcp-make",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "make",
+      "integromat",
+      "automation"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "mapbox",
+    "name": "Mapbox",
+    "tagline": "Location and mapping platform",
+    "description": "Mapbox integration for maps, geocoding, and navigation services.",
+    "repository_url": "https://github.com/mapbox/mcp-mapbox",
+    "repository_owner": "mapbox",
+    "repository_name": "mcp-mapbox",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "mapbox",
+      "maps",
+      "location",
+      "navigation"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "mapbox-mcp",
+    "name": "Mapbox",
+    "tagline": "Geospatial data and mapping",
+    "description": "Mapbox geospatial data and mapping services. Maps, geocoding, and routing.",
+    "repository_url": "https://github.com/mapbox/mcp-server",
+    "repository_owner": "mapbox",
+    "repository_name": "mcp-server",
+    "npm_package": "@mapbox/mcp-server",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "maps",
+      "geospatial",
+      "location"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "mariadb",
+    "name": "MariaDB",
+    "tagline": "Open source relational database",
+    "description": "MariaDB database integration for MySQL-compatible SQL operations.",
+    "repository_url": "https://github.com/mariadb/mcp-mariadb",
+    "repository_owner": "mariadb",
+    "repository_name": "mcp-mariadb",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "mariadb",
+      "mysql",
+      "database",
+      "SQL"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "mastodon",
+    "name": "Mastodon",
+    "tagline": "Decentralized social network",
+    "description": "Mastodon API integration for federated social networking.",
+    "repository_url": "https://github.com/mastodon/mcp-mastodon",
+    "repository_owner": "mastodon",
+    "repository_name": "mcp-mastodon",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "mastodon",
+      "social",
+      "fediverse"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "mattermost",
+    "name": "Mattermost",
+    "tagline": "Open-source collaboration",
+    "description": "Mattermost integration for team messaging and collaboration.",
+    "repository_url": "https://github.com/mattermost/mcp-mattermost",
+    "repository_owner": "mattermost",
+    "repository_name": "mcp-mattermost",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "mattermost",
+      "messaging",
+      "collaboration"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "mcp-fetch",
+    "name": "MCP Fetch",
+    "tagline": "Web content fetching and conversion",
+    "description": "Web content fetching and conversion for efficient LLM usage. Extracts and formats web pages for AI consumption.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-fetch",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "fetch",
+      "web",
+      "scraping",
+      "official"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "mcp-git",
+    "name": "MCP Git",
+    "tagline": "Git repository operations",
+    "description": "Tools to read, search, and manipulate Git repositories. Full Git integration for AI agents.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": null,
+    "pypi_package": "mcp-server-git",
+    "category": "development",
+    "tags": [
+      "git",
+      "version-control",
+      "repository",
+      "official",
+      "python"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "mcp-memory",
+    "name": "MCP Memory",
+    "tagline": "Knowledge graph-based persistent memory",
+    "description": "Knowledge graph-based persistent memory system for AI agents. Stores and retrieves information across sessions.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-memory",
+    "pypi_package": null,
+    "category": "memory",
+    "tags": [
+      "memory",
+      "knowledge-graph",
+      "persistence",
+      "official"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "mcp-sequential-thinking",
+    "name": "Sequential Thinking",
+    "tagline": "Dynamic problem-solving through thought sequences",
+    "description": "Enables dynamic and reflective problem-solving through thought sequences. Allows AI to think step-by-step.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-sequentialthinking",
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "thinking",
+      "problem-solving",
+      "reasoning",
+      "official"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "mcp-time",
+    "name": "MCP Time",
+    "tagline": "Time and timezone conversion capabilities",
+    "description": "Provides time and timezone conversion capabilities. Handle time zones, conversions, and date calculations.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-time",
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "time",
+      "timezone",
+      "conversion",
+      "official"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "medium",
+    "name": "Medium",
+    "tagline": "Publishing platform",
+    "description": "Medium API integration for story publishing and content management.",
+    "repository_url": "https://github.com/medium/mcp-medium",
+    "repository_owner": "medium",
+    "repository_name": "mcp-medium",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "medium",
+      "publishing",
+      "writing"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "meilisearch",
+    "name": "Meilisearch",
+    "tagline": "Lightning-fast search engine",
+    "description": "Meilisearch integration for instant search-as-you-type experiences.",
+    "repository_url": "https://github.com/meilisearch/mcp-meilisearch",
+    "repository_owner": "meilisearch",
+    "repository_name": "mcp-meilisearch",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "meilisearch",
+      "search",
+      "instant"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "memory",
+    "name": "Memory",
+    "tagline": "Knowledge graph-based persistent memory",
+    "description": "Knowledge graph-based persistent memory system for AI agents with semantic search and long-term storage.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-memory",
+    "pypi_package": null,
+    "category": "memory",
+    "tags": [
+      "memory",
+      "knowledge-graph",
+      "persistence"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "midjourney",
+    "name": "Midjourney",
+    "tagline": "AI image creation",
+    "description": "Midjourney integration for AI-powered image generation and creation.",
+    "repository_url": "https://github.com/midjourney/mcp-midjourney",
+    "repository_owner": "midjourney",
+    "repository_name": "mcp-midjourney",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "ai",
+      "image-generation",
+      "art"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "mixpanel",
+    "name": "Mixpanel",
+    "tagline": "Product analytics",
+    "description": "Mixpanel integration for product analytics and user behavior tracking.",
+    "repository_url": "https://github.com/mixpanel/mcp-mixpanel",
+    "repository_owner": "mixpanel",
+    "repository_name": "mcp-mixpanel",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "analytics",
+      "product",
+      "tracking"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "monday",
+    "name": "Monday.com",
+    "tagline": "Work operating system",
+    "description": "Monday.com integration for team collaboration and work management.",
+    "repository_url": "https://github.com/mondaycom/mcp-monday",
+    "repository_owner": "mondaycom",
+    "repository_name": "mcp-monday",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "monday",
+      "project-management",
+      "collaboration"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "mongodb",
+    "name": "MongoDB",
+    "tagline": "MongoDB NoSQL database",
+    "description": "MongoDB integration for NoSQL document database operations and aggregations.",
+    "repository_url": "https://github.com/mongodb/mcp-mongodb",
+    "repository_owner": "mongodb",
+    "repository_name": "mcp-mongodb",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "mongodb",
+      "database",
+      "nosql",
+      "documents"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "mysql",
+    "name": "MySQL",
+    "tagline": "MySQL database integration",
+    "description": "MySQL database integration for SQL query execution and data management.",
+    "repository_url": "https://github.com/mysql/mcp-mysql",
+    "repository_owner": "mysql",
+    "repository_name": "mcp-mysql",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "mysql",
+      "database",
+      "SQL"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "n8n",
+    "name": "n8n",
+    "tagline": "Workflow automation tool",
+    "description": "n8n integration for fair-code licensed workflow automation.",
+    "repository_url": "https://github.com/n8n-io/mcp-n8n",
+    "repository_owner": "n8n-io",
+    "repository_name": "mcp-n8n",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "n8n",
+      "automation",
+      "workflows"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "nasa",
+    "name": "NASA APIs",
+    "tagline": "Space and astronomy data",
+    "description": "NASA Open APIs for space, astronomy, and Earth science data.",
+    "repository_url": "https://github.com/nasa/mcp-nasa",
+    "repository_owner": "nasa",
+    "repository_name": "mcp-nasa",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "nasa",
+      "space",
+      "astronomy",
+      "science"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "neo4j",
+    "name": "Neo4j",
+    "tagline": "Graph database platform",
+    "description": "Neo4j graph database integration for relationship-based data queries and analysis.",
+    "repository_url": "https://github.com/neo4j/mcp-neo4j",
+    "repository_owner": "neo4j",
+    "repository_name": "mcp-neo4j",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "neo4j",
+      "graph",
+      "database",
+      "relationships"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "neo4j-mcp",
+    "name": "Neo4j",
+    "tagline": "Graph database with cypher",
+    "description": "Neo4j graph database with cypher query support. Build knowledge graphs.",
+    "repository_url": "https://github.com/neo4j/mcp-server",
+    "repository_owner": "neo4j",
+    "repository_name": "mcp-server",
+    "npm_package": "@neo4j/mcp-server",
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "neo4j",
+      "graph",
+      "cypher"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "neon-mcp",
+    "name": "Neon Postgres",
+    "tagline": "Serverless Postgres",
+    "description": "Neon serverless Postgres database. Scalable PostgreSQL with branching.",
+    "repository_url": "https://github.com/neondatabase/mcp-server-neon",
+    "repository_owner": "neondatabase",
+    "repository_name": "mcp-server-neon",
+    "npm_package": "@neondatabase/mcp-server",
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "postgres",
+      "serverless",
+      "neon"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "netlify",
+    "name": "Netlify",
+    "tagline": "Web development platform",
+    "description": "Netlify integration for deployment, serverless functions, and hosting.",
+    "repository_url": "https://github.com/netlify/mcp-netlify",
+    "repository_owner": "netlify",
+    "repository_name": "mcp-netlify",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "netlify",
+      "deployment",
+      "hosting",
+      "jamstack"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "newrelic",
+    "name": "New Relic",
+    "tagline": "Application performance monitoring",
+    "description": "New Relic integration for APM, infrastructure monitoring, and observability.",
+    "repository_url": "https://github.com/newrelic/mcp-newrelic",
+    "repository_owner": "newrelic",
+    "repository_name": "mcp-newrelic",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "monitoring",
+    "tags": [
+      "newrelic",
+      "apm",
+      "monitoring"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "news-api",
+    "name": "News API",
+    "tagline": "Global news aggregation",
+    "description": "News API integration for accessing news articles from 80,000+ sources.",
+    "repository_url": "https://github.com/newsapi/mcp-newsapi",
+    "repository_owner": "newsapi",
+    "repository_name": "mcp-newsapi",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "news",
+      "media",
+      "articles"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "notion",
+    "name": "Notion",
+    "tagline": "Workspace database and document management",
+    "description": "Official Notion MCP server for workspace databases, pages, and collaborative document management.",
+    "repository_url": "https://github.com/makenotion/notion-mcp-server",
+    "repository_owner": "makenotion",
+    "repository_name": "notion-mcp-server",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "notion",
+      "workspace",
+      "documents"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "notion-mcp",
+    "name": "Notion",
+    "tagline": "Workspace and document management",
+    "description": "Notion workspace and document management. Create, read, and update Notion pages.",
+    "repository_url": "https://github.com/makenotion/notion-mcp",
+    "repository_owner": "makenotion",
+    "repository_name": "notion-mcp",
+    "npm_package": "@notionhq/mcp-server",
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "notion",
+      "documents",
+      "workspace"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "okta",
+    "name": "Okta",
+    "tagline": "Identity management",
+    "description": "Okta integration for identity and access management.",
+    "repository_url": "https://github.com/okta/mcp-okta",
+    "repository_owner": "okta",
+    "repository_name": "mcp-okta",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "okta",
+      "identity",
+      "authentication"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "openai",
+    "name": "OpenAI",
+    "tagline": "AI model APIs",
+    "description": "OpenAI API integration for GPT models, embeddings, and AI capabilities.",
+    "repository_url": "https://github.com/openai/mcp-openai",
+    "repository_owner": "openai",
+    "repository_name": "mcp-openai",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "openai",
+      "gpt",
+      "ai",
+      "llm"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "openstreetmap",
+    "name": "OpenStreetMap",
+    "tagline": "Collaborative mapping project",
+    "description": "OpenStreetMap integration for open geographic data and mapping.",
+    "repository_url": "https://github.com/openstreetmap/mcp-osm",
+    "repository_owner": "openstreetmap",
+    "repository_name": "mcp-osm",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "osm",
+      "maps",
+      "geographic",
+      "open-data"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "openweathermap",
+    "name": "OpenWeatherMap",
+    "tagline": "Global weather service",
+    "description": "OpenWeatherMap integration for weather data, maps, and forecasts.",
+    "repository_url": "https://github.com/openweathermap/mcp-openweather",
+    "repository_owner": "openweathermap",
+    "repository_name": "mcp-openweather",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "weather",
+      "openweather",
+      "forecast"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "paypal",
+    "name": "PayPal",
+    "tagline": "Payment processing",
+    "description": "PayPal integration for payment processing, invoicing, and transactions.",
+    "repository_url": "https://github.com/paypal/mcp-paypal",
+    "repository_owner": "paypal",
+    "repository_name": "mcp-paypal",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "paypal",
+      "payments",
+      "transactions"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "perplexity",
+    "name": "Perplexity",
+    "tagline": "AI-powered web search",
+    "description": "Perplexity AI search without leaving your AI ecosystem for real-time web information.",
+    "repository_url": "https://github.com/ppl-ai/modelcontextprotocol",
+    "repository_owner": "ppl-ai",
+    "repository_name": "modelcontextprotocol",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "search",
+      "ai",
+      "web"
+    ],
+    "verified": false,
+    "featured": true
+  },
+  {
+    "slug": "pinecone",
+    "name": "Pinecone",
+    "tagline": "Vector database for AI",
+    "description": "Pinecone vector database integration for semantic search and AI applications.",
+    "repository_url": "https://github.com/pinecone-io/mcp-pinecone",
+    "repository_owner": "pinecone-io",
+    "repository_name": "mcp-pinecone",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "vector",
+      "ai",
+      "semantic-search",
+      "embeddings"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "plaid",
+    "name": "Plaid",
+    "tagline": "Financial data network",
+    "description": "Plaid integration for banking and financial data connectivity.",
+    "repository_url": "https://github.com/plaid/mcp-plaid",
+    "repository_owner": "plaid",
+    "repository_name": "mcp-plaid",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "plaid",
+      "banking",
+      "financial",
+      "fintech"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "playwright",
+    "name": "Playwright",
+    "tagline": "Modern web app automation",
+    "description": "Playwright MCP server for modern web application automation and end-to-end testing.",
+    "repository_url": "https://github.com/Automata-Labs-team/MCP-Server-Playwright",
+    "repository_owner": "Automata-Labs-team",
+    "repository_name": "MCP-Server-Playwright",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "playwright",
+      "automation",
+      "testing",
+      "browser"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "polygon-io",
+    "name": "Polygon.io",
+    "tagline": "Stock market data APIs",
+    "description": "Polygon.io integration for real-time and historical stock market data.",
+    "repository_url": "https://github.com/polygon-io/mcp-polygon",
+    "repository_owner": "polygon-io",
+    "repository_name": "mcp-polygon",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "polygon",
+      "stocks",
+      "market-data",
+      "finance"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "postgres",
+    "name": "PostgreSQL",
+    "tagline": "PostgreSQL database integration",
+    "description": "Database integration for PostgreSQL with secure query execution and schema management capabilities.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-postgres",
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "database",
+      "postgresql",
+      "SQL"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "postman",
+    "name": "Postman",
+    "tagline": "API development and testing",
+    "description": "Postman integration for API development, testing, and documentation workflows.",
+    "repository_url": "https://github.com/postmanlabs/postman-mcp-server",
+    "repository_owner": "postmanlabs",
+    "repository_name": "postman-mcp-server",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "api",
+      "testing",
+      "postman",
+      "development"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "prismic",
+    "name": "Prismic",
+    "tagline": "Headless website builder",
+    "description": "Prismic integration for content slicing and website building.",
+    "repository_url": "https://github.com/prismicio/mcp-prismic",
+    "repository_owner": "prismicio",
+    "repository_name": "mcp-prismic",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "prismic",
+      "cms",
+      "headless"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "pubmed",
+    "name": "PubMed",
+    "tagline": "Medical literature database",
+    "description": "PubMed integration for biomedical and life sciences literature search.",
+    "repository_url": "https://github.com/ncbi/mcp-pubmed",
+    "repository_owner": "ncbi",
+    "repository_name": "mcp-pubmed",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "pubmed",
+      "medical",
+      "research",
+      "health"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "pulumi",
+    "name": "Pulumi",
+    "tagline": "Modern infrastructure as code",
+    "description": "Pulumi integration for modern infrastructure as code with multi-cloud support.",
+    "repository_url": "https://github.com/pulumi/pulumi-mcp",
+    "repository_owner": "pulumi",
+    "repository_name": "pulumi-mcp",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "pulumi",
+      "infrastructure",
+      "iac",
+      "cloud"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "puppeteer",
+    "name": "Puppeteer",
+    "tagline": "Browser automation and scraping",
+    "description": "Browser automation and web scraping using Puppeteer for controlled web interactions.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-puppeteer",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "browser",
+      "automation",
+      "scraping"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "qdrant",
+    "name": "Qdrant",
+    "tagline": "Vector similarity search",
+    "description": "Qdrant vector database for similarity search and neural network applications.",
+    "repository_url": "https://github.com/qdrant/mcp-qdrant",
+    "repository_owner": "qdrant",
+    "repository_name": "mcp-qdrant",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "vector",
+      "similarity",
+      "ai",
+      "neural"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "quickbooks",
+    "name": "QuickBooks",
+    "tagline": "Accounting software",
+    "description": "QuickBooks Online API integration for accounting and bookkeeping.",
+    "repository_url": "https://github.com/intuit/mcp-quickbooks",
+    "repository_owner": "intuit",
+    "repository_name": "mcp-quickbooks",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "quickbooks",
+      "accounting",
+      "finance"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "railway",
+    "name": "Railway",
+    "tagline": "Infrastructure platform",
+    "description": "Railway integration for deployment and infrastructure management.",
+    "repository_url": "https://github.com/railwayapp/mcp-railway",
+    "repository_owner": "railwayapp",
+    "repository_name": "mcp-railway",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "railway",
+      "deployment",
+      "infrastructure"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "reddit",
+    "name": "Reddit",
+    "tagline": "Social news aggregation",
+    "description": "Reddit API integration for posts, comments, and community interaction.",
+    "repository_url": "https://github.com/reddit/mcp-reddit",
+    "repository_owner": "reddit",
+    "repository_name": "mcp-reddit",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "reddit",
+      "social",
+      "community"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "redis",
+    "name": "Redis",
+    "tagline": "In-memory data structure store",
+    "description": "Redis integration for caching, session management, and real-time data operations.",
+    "repository_url": "https://github.com/redis/mcp-redis",
+    "repository_owner": "redis",
+    "repository_name": "mcp-redis",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "redis",
+      "cache",
+      "memory",
+      "database"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "render",
+    "name": "Render",
+    "tagline": "Cloud application platform",
+    "description": "Render integration for web services, databases, and static sites.",
+    "repository_url": "https://github.com/render/mcp-render",
+    "repository_owner": "render",
+    "repository_name": "mcp-render",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "render",
+      "deployment",
+      "hosting"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "render-mcp",
+    "name": "Render",
+    "tagline": "Cloud platform deployment",
+    "description": "Render cloud platform deployment. Deploy apps, databases, and static sites.",
+    "repository_url": "https://github.com/render-com/mcp-server",
+    "repository_owner": "render-com",
+    "repository_name": "mcp-server",
+    "npm_package": "@render/mcp-server",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "render",
+      "deployment",
+      "hosting"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "replicate",
+    "name": "Replicate",
+    "tagline": "Run AI models in the cloud",
+    "description": "Replicate integration for running open-source AI models via API.",
+    "repository_url": "https://github.com/replicate/mcp-replicate",
+    "repository_owner": "replicate",
+    "repository_name": "mcp-replicate",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "ai",
+      "models",
+      "cloud",
+      "replicate"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "riza-mcp",
+    "name": "Riza Code Execution",
+    "tagline": "Arbitrary code execution for LLMs",
+    "description": "Execute arbitrary code safely for LLMs. Platform for running code from AI agents.",
+    "repository_url": "https://github.com/riza-io/mcp-server",
+    "repository_owner": "riza-io",
+    "repository_name": "mcp-server",
+    "npm_package": "@riza-io/mcp-server",
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "code-execution",
+      "runtime",
+      "llm"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "rocketchat",
+    "name": "Rocket.Chat",
+    "tagline": "Open-source team chat",
+    "description": "Rocket.Chat integration for customizable team communication.",
+    "repository_url": "https://github.com/RocketChat/mcp-rocketchat",
+    "repository_owner": "RocketChat",
+    "repository_name": "mcp-rocketchat",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "rocketchat",
+      "messaging",
+      "chat"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "rube",
+    "name": "Rube",
+    "tagline": "Connect to 500+ apps",
+    "description": "Universal connector to 500+ apps including Gmail, Slack, GitHub, and Notion.",
+    "repository_url": "https://github.com/rube-ai/rube-mcp",
+    "repository_owner": "rube-ai",
+    "repository_name": "rube-mcp",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "integration",
+      "connector",
+      "automation"
+    ],
+    "verified": false,
+    "featured": true
+  },
+  {
+    "slug": "salesforce",
+    "name": "Salesforce",
+    "tagline": "Enterprise CRM platform",
+    "description": "Salesforce integration for CRM, sales, and customer management.",
+    "repository_url": "https://github.com/salesforce/mcp-salesforce",
+    "repository_owner": "salesforce",
+    "repository_name": "mcp-salesforce",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "salesforce",
+      "crm",
+      "sales",
+      "enterprise"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "sanity",
+    "name": "Sanity",
+    "tagline": "Structured content platform",
+    "description": "Sanity.io integration for structured content management.",
+    "repository_url": "https://github.com/sanity-io/mcp-sanity",
+    "repository_owner": "sanity-io",
+    "repository_name": "mcp-sanity",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "sanity",
+      "cms",
+      "content"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "segment",
+    "name": "Segment",
+    "tagline": "Customer data platform",
+    "description": "Segment integration for customer data collection and routing.",
+    "repository_url": "https://github.com/segmentio/mcp-segment",
+    "repository_owner": "segmentio",
+    "repository_name": "mcp-segment",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "segment",
+      "analytics",
+      "customer-data"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "semantic-scholar",
+    "name": "Semantic Scholar",
+    "tagline": "AI-powered research tool",
+    "description": "Semantic Scholar API for academic paper search and citation analysis.",
+    "repository_url": "https://github.com/allenai/mcp-semantic-scholar",
+    "repository_owner": "allenai",
+    "repository_name": "mcp-semantic-scholar",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "research",
+      "papers",
+      "citations",
+      "academic"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "semgrep-mcp",
+    "name": "Semgrep",
+    "tagline": "Code security scanning",
+    "description": "Semgrep code security scanning. Find bugs and security vulnerabilities.",
+    "repository_url": "https://github.com/semgrep/mcp-server",
+    "repository_owner": "semgrep",
+    "repository_name": "mcp-server",
+    "npm_package": "@semgrep/mcp-server",
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "security",
+      "scanning",
+      "sast"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "sendgrid",
+    "name": "SendGrid",
+    "tagline": "Email delivery service",
+    "description": "SendGrid integration for transactional and marketing email delivery.",
+    "repository_url": "https://github.com/sendgrid/mcp-sendgrid",
+    "repository_owner": "sendgrid",
+    "repository_name": "mcp-sendgrid",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "sendgrid",
+      "email",
+      "delivery"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "sentry",
+    "name": "Sentry",
+    "tagline": "Error tracking and monitoring",
+    "description": "Sentry integration for error tracking, performance monitoring, and debugging.",
+    "repository_url": "https://github.com/getsentry/mcp-sentry",
+    "repository_owner": "getsentry",
+    "repository_name": "mcp-sentry",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "monitoring",
+    "tags": [
+      "sentry",
+      "errors",
+      "monitoring"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "sequential-thinking",
+    "name": "Sequential Thinking",
+    "tagline": "Dynamic problem-solving through sequences",
+    "description": "Dynamic and reflective problem-solving through thought sequences for complex reasoning tasks.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-sequentialthinking",
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "reasoning",
+      "problem-solving",
+      "ai"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "shopify",
+    "name": "Shopify",
+    "tagline": "E-commerce platform",
+    "description": "Shopify integration for store management, products, and orders.",
+    "repository_url": "https://github.com/shopify/mcp-shopify",
+    "repository_owner": "shopify",
+    "repository_name": "mcp-shopify",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "shopify",
+      "ecommerce",
+      "store"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "slack",
+    "name": "Slack",
+    "tagline": "Slack workspace integration",
+    "description": "Slack workspace integration for messaging, channel management, and team communication automation.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-slack",
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "slack",
+      "messaging",
+      "team"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "snowflake",
+    "name": "Snowflake",
+    "tagline": "Cloud data warehouse",
+    "description": "Snowflake data warehouse integration for analytics and data management at scale.",
+    "repository_url": "https://github.com/snowflakedb/mcp-snowflake",
+    "repository_owner": "snowflakedb",
+    "repository_name": "mcp-snowflake",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "snowflake",
+      "data-warehouse",
+      "analytics",
+      "cloud"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "snowflake-mcp",
+    "name": "Snowflake",
+    "tagline": "Data warehouse with Cortex AI",
+    "description": "Snowflake data warehouse with Cortex AI, object management, and SQL orchestration. Query structured and unstructured data.",
+    "repository_url": "https://github.com/Snowflake-Labs/mcp",
+    "repository_owner": "Snowflake-Labs",
+    "repository_name": "mcp",
+    "npm_package": null,
+    "pypi_package": "snowflake-labs-mcp",
+    "category": "database",
+    "tags": [
+      "snowflake",
+      "data-warehouse",
+      "analytics",
+      "cortex-ai",
+      "python"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "spotify",
+    "name": "Spotify",
+    "tagline": "Music streaming API",
+    "description": "Spotify integration for music playback, playlists, and recommendations.",
+    "repository_url": "https://github.com/spotify/mcp-spotify",
+    "repository_owner": "spotify",
+    "repository_name": "mcp-spotify",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "spotify",
+      "music",
+      "streaming"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "square",
+    "name": "Square",
+    "tagline": "Payment and commerce platform",
+    "description": "Square integration for payments, point-of-sale, and commerce operations.",
+    "repository_url": "https://github.com/square/mcp-square",
+    "repository_owner": "square",
+    "repository_name": "mcp-square",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "square",
+      "payments",
+      "pos",
+      "commerce"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "square-mcp",
+    "name": "Square",
+    "tagline": "Point-of-sale and payments",
+    "description": "Square point-of-sale and payment solutions. Process transactions and manage inventory.",
+    "repository_url": "https://github.com/square/mcp-server",
+    "repository_owner": "square",
+    "repository_name": "mcp-server",
+    "npm_package": "@square/mcp-server",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "payments",
+      "pos",
+      "square"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "stability-ai",
+    "name": "Stability AI",
+    "tagline": "Image generation models",
+    "description": "Stability AI integration for Stable Diffusion and image generation.",
+    "repository_url": "https://github.com/stability-ai/mcp-stability",
+    "repository_owner": "stability-ai",
+    "repository_name": "mcp-stability",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "ai",
+      "image-generation",
+      "stable-diffusion"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "strapi",
+    "name": "Strapi",
+    "tagline": "Open-source headless CMS",
+    "description": "Strapi integration for API-first content management.",
+    "repository_url": "https://github.com/strapi/mcp-strapi",
+    "repository_owner": "strapi",
+    "repository_name": "mcp-strapi",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "strapi",
+      "cms",
+      "headless"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "stripe",
+    "name": "Stripe",
+    "tagline": "Payment processing and billing",
+    "description": "Official Stripe MCP server for payment processing, billing operations, and customer management.",
+    "repository_url": "https://github.com/stripe/agent-toolkit",
+    "repository_owner": "stripe",
+    "repository_name": "agent-toolkit",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "payments",
+      "stripe",
+      "billing"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "stripe-mcp",
+    "name": "Stripe",
+    "tagline": "Payment processing integration",
+    "description": "Stripe payment processing integration. Handle payments, subscriptions, and billing.",
+    "repository_url": "https://github.com/stripe/stripe-mcp",
+    "repository_owner": "stripe",
+    "repository_name": "stripe-mcp",
+    "npm_package": "@stripe/mcp-server",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "payments",
+      "stripe",
+      "billing"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "substack",
+    "name": "Substack",
+    "tagline": "Newsletter platform",
+    "description": "Substack integration for newsletter publishing and subscription management.",
+    "repository_url": "https://github.com/substack/mcp-substack",
+    "repository_owner": "substack",
+    "repository_name": "mcp-substack",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "substack",
+      "newsletter",
+      "publishing"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "supabase",
+    "name": "Supabase",
+    "tagline": "Backend-as-a-service database access",
+    "description": "Supabase integration for backend-as-a-service database operations and authentication.",
+    "repository_url": "https://github.com/supabase-community/supabase-mcp",
+    "repository_owner": "supabase-community",
+    "repository_name": "supabase-mcp",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "supabase",
+      "database",
+      "backend"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "supabase-mcp",
+    "name": "Supabase",
+    "tagline": "PostgreSQL with authentication",
+    "description": "Supabase PostgreSQL database with built-in authentication. Complete backend solution.",
+    "repository_url": "https://github.com/supabase/mcp-server",
+    "repository_owner": "supabase",
+    "repository_name": "mcp-server",
+    "npm_package": "@supabase/mcp-server",
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "supabase",
+      "postgres",
+      "auth"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "tavily",
+    "name": "Tavily",
+    "tagline": "Real-time web data access",
+    "description": "Tavily search API for real-time web data access and information retrieval.",
+    "repository_url": "https://github.com/tavily-ai/tavily-mcp",
+    "repository_owner": "tavily-ai",
+    "repository_name": "tavily-mcp",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "search",
+      "web",
+      "real-time"
+    ],
+    "verified": false,
+    "featured": false
+  },
+  {
+    "slug": "tavily-mcp",
+    "name": "Tavily Search",
+    "tagline": "AI-optimized search engine",
+    "description": "AI-optimized search engine for comprehensive web research. Built specifically for AI agents.",
+    "repository_url": "https://github.com/tavily-ai/mcp-server",
+    "repository_owner": "tavily-ai",
+    "repository_name": "mcp-server",
+    "npm_package": "@tavily/mcp-server",
+    "pypi_package": null,
+    "category": "search",
+    "tags": [
+      "search",
+      "research",
+      "ai-optimized"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "teams",
+    "name": "Microsoft Teams",
+    "tagline": "Team collaboration platform",
+    "description": "Microsoft Teams integration for messaging, calls, and team collaboration.",
+    "repository_url": "https://github.com/microsoft/mcp-teams",
+    "repository_owner": "microsoft",
+    "repository_name": "mcp-teams",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "teams",
+      "microsoft",
+      "collaboration",
+      "messaging"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "telegram",
+    "name": "Telegram",
+    "tagline": "Messaging platform",
+    "description": "Telegram Bot API integration for messaging and automation.",
+    "repository_url": "https://github.com/telegram/mcp-telegram",
+    "repository_owner": "telegram",
+    "repository_name": "mcp-telegram",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "telegram",
+      "messaging",
+      "bots"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "terraform",
+    "name": "Terraform",
+    "tagline": "Infrastructure as code management",
+    "description": "Terraform integration for infrastructure as code deployment and management.",
+    "repository_url": "https://github.com/hashicorp/terraform-mcp",
+    "repository_owner": "hashicorp",
+    "repository_name": "terraform-mcp",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "terraform",
+      "infrastructure",
+      "iac",
+      "cloud"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "tiktok",
+    "name": "TikTok",
+    "tagline": "Short-form video platform",
+    "description": "TikTok API integration for video management and analytics.",
+    "repository_url": "https://github.com/tiktok/mcp-tiktok",
+    "repository_owner": "tiktok",
+    "repository_name": "mcp-tiktok",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "tiktok",
+      "video",
+      "social-media"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "time",
+    "name": "Time",
+    "tagline": "Time and timezone conversion",
+    "description": "Time and timezone conversion capabilities for working with dates and times across regions.",
+    "repository_url": "https://github.com/modelcontextprotocol/servers",
+    "repository_owner": "modelcontextprotocol/repositories",
+    "repository_name": "servers",
+    "npm_package": "@modelcontextprotocol/server-time",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "time",
+      "timezone",
+      "dates"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "timescaledb",
+    "name": "TimescaleDB",
+    "tagline": "Time-series database",
+    "description": "TimescaleDB integration for time-series data management and analytics built on PostgreSQL.",
+    "repository_url": "https://github.com/timescale/mcp-timescaledb",
+    "repository_owner": "timescale",
+    "repository_name": "mcp-timescaledb",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "timeseries",
+      "database",
+      "analytics",
+      "postgresql"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "tripadvisor",
+    "name": "TripAdvisor",
+    "tagline": "Travel reviews and bookings",
+    "description": "TripAdvisor integration for reviews, ratings, and travel recommendations.",
+    "repository_url": "https://github.com/tripadvisor/mcp-tripadvisor",
+    "repository_owner": "tripadvisor",
+    "repository_name": "mcp-tripadvisor",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "tripadvisor",
+      "travel",
+      "reviews"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "twilio",
+    "name": "Twilio",
+    "tagline": "Communications platform",
+    "description": "Twilio integration for SMS, voice, video, and messaging APIs.",
+    "repository_url": "https://github.com/twilio/mcp-twilio",
+    "repository_owner": "twilio",
+    "repository_name": "mcp-twilio",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "twilio",
+      "sms",
+      "voice",
+      "messaging"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "twitter",
+    "name": "X (Twitter)",
+    "tagline": "Social media platform",
+    "description": "X (Twitter) API integration for tweets, timelines, and social interactions.",
+    "repository_url": "https://github.com/twitter/mcp-twitter",
+    "repository_owner": "twitter",
+    "repository_name": "mcp-twitter",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "twitter",
+      "x",
+      "social-media"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "uber",
+    "name": "Uber",
+    "tagline": "Ride-hailing platform",
+    "description": "Uber API integration for ride requests, trip management, and delivery.",
+    "repository_url": "https://github.com/uber/mcp-uber",
+    "repository_owner": "uber",
+    "repository_name": "mcp-uber",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "uber",
+      "rides",
+      "transportation"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "vercel",
+    "name": "Vercel",
+    "tagline": "Frontend cloud platform",
+    "description": "Vercel integration for deployment, edge functions, and hosting.",
+    "repository_url": "https://github.com/vercel/mcp-vercel",
+    "repository_owner": "vercel",
+    "repository_name": "mcp-vercel",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "development",
+    "tags": [
+      "vercel",
+      "deployment",
+      "hosting",
+      "frontend"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "vercel-mcp",
+    "name": "Vercel",
+    "tagline": "Deployment and hosting",
+    "description": "Vercel deployment and hosting management. Deploy and manage web applications.",
+    "repository_url": "https://github.com/vercel/mcp-server",
+    "repository_owner": "vercel",
+    "repository_name": "mcp-server",
+    "npm_package": "@vercel/mcp-server",
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "vercel",
+      "deployment",
+      "hosting"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "vimeo",
+    "name": "Vimeo",
+    "tagline": "Video hosting platform",
+    "description": "Vimeo API integration for video hosting, streaming, and management.",
+    "repository_url": "https://github.com/vimeo/mcp-vimeo",
+    "repository_owner": "vimeo",
+    "repository_name": "mcp-vimeo",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "vimeo",
+      "video",
+      "streaming"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "weather-api",
+    "name": "Weather API",
+    "tagline": "Weather data and forecasts",
+    "description": "Weather API integration for current weather, forecasts, and historical data.",
+    "repository_url": "https://github.com/weatherapi/mcp-weather",
+    "repository_owner": "weatherapi",
+    "repository_name": "mcp-weather",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "weather",
+      "forecast",
+      "climate"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "weaviate",
+    "name": "Weaviate",
+    "tagline": "Vector search engine",
+    "description": "Weaviate integration for AI-native vector search and semantic retrieval.",
+    "repository_url": "https://github.com/weaviate/mcp-weaviate",
+    "repository_owner": "weaviate",
+    "repository_name": "mcp-weaviate",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "database",
+    "tags": [
+      "vector",
+      "ai",
+      "search",
+      "semantic"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "what3words",
+    "name": "what3words",
+    "tagline": "Location addressing system",
+    "description": "what3words integration for precise location addressing with 3-word combinations.",
+    "repository_url": "https://github.com/what3words/mcp-what3words",
+    "repository_owner": "what3words",
+    "repository_name": "mcp-what3words",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "what3words",
+      "location",
+      "addressing"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "whatsapp",
+    "name": "WhatsApp Business",
+    "tagline": "Business messaging API",
+    "description": "WhatsApp Business API integration for customer communication.",
+    "repository_url": "https://github.com/whatsapp/mcp-whatsapp",
+    "repository_owner": "whatsapp",
+    "repository_name": "mcp-whatsapp",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "whatsapp",
+      "messaging",
+      "business"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "whisper",
+    "name": "Whisper",
+    "tagline": "Speech recognition",
+    "description": "OpenAI Whisper integration for speech-to-text transcription.",
+    "repository_url": "https://github.com/openai/mcp-whisper",
+    "repository_owner": "openai",
+    "repository_name": "mcp-whisper",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "ai",
+      "speech",
+      "transcription",
+      "stt"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "wolfram-alpha",
+    "name": "Wolfram Alpha",
+    "tagline": "Computational knowledge engine",
+    "description": "Wolfram Alpha integration for computational knowledge and answers.",
+    "repository_url": "https://github.com/wolframalpha/mcp-wolfram",
+    "repository_owner": "wolframalpha",
+    "repository_name": "mcp-wolfram",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "wolfram",
+      "computation",
+      "knowledge",
+      "math"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "woocommerce",
+    "name": "WooCommerce",
+    "tagline": "WordPress e-commerce",
+    "description": "WooCommerce integration for WordPress e-commerce stores.",
+    "repository_url": "https://github.com/woocommerce/mcp-woocommerce",
+    "repository_owner": "woocommerce",
+    "repository_name": "mcp-woocommerce",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "woocommerce",
+      "wordpress",
+      "ecommerce"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "wordpress",
+    "name": "WordPress",
+    "tagline": "Content management system",
+    "description": "WordPress REST API integration for content management and publishing.",
+    "repository_url": "https://github.com/wordpress/mcp-wordpress",
+    "repository_owner": "wordpress",
+    "repository_name": "mcp-wordpress",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "wordpress",
+      "cms",
+      "blogging"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "xero",
+    "name": "Xero",
+    "tagline": "Cloud accounting software",
+    "description": "Xero integration for online accounting and financial management.",
+    "repository_url": "https://github.com/xeroapi/mcp-xero",
+    "repository_owner": "xeroapi",
+    "repository_name": "mcp-xero",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "xero",
+      "accounting",
+      "finance"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "yelp",
+    "name": "Yelp",
+    "tagline": "Local business reviews",
+    "description": "Yelp Fusion API integration for business search, reviews, and ratings.",
+    "repository_url": "https://github.com/yelp/mcp-yelp",
+    "repository_owner": "yelp",
+    "repository_name": "mcp-yelp",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "yelp",
+      "reviews",
+      "local",
+      "business"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "youtube",
+    "name": "YouTube",
+    "tagline": "Video platform API",
+    "description": "YouTube Data API integration for video management, search, and analytics.",
+    "repository_url": "https://github.com/youtube/mcp-youtube",
+    "repository_owner": "youtube",
+    "repository_name": "mcp-youtube",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "youtube",
+      "video",
+      "media"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "zapier",
+    "name": "Zapier",
+    "tagline": "Workflow automation",
+    "description": "Zapier integration for connecting apps and automating workflows.",
+    "repository_url": "https://github.com/zapier/mcp-zapier",
+    "repository_owner": "zapier",
+    "repository_name": "mcp-zapier",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "api",
+    "tags": [
+      "zapier",
+      "automation",
+      "workflows"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "slug": "zendesk",
+    "name": "Zendesk",
+    "tagline": "Customer service platform",
+    "description": "Zendesk integration for customer support, tickets, and service management.",
+    "repository_url": "https://github.com/zendesk/mcp-zendesk",
+    "repository_owner": "zendesk",
+    "repository_name": "mcp-zendesk",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "zendesk",
+      "support",
+      "tickets"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "slug": "zoom",
+    "name": "Zoom",
+    "tagline": "Video conferencing platform",
+    "description": "Zoom API integration for meetings, webinars, and video communications.",
+    "repository_url": "https://github.com/zoom/mcp-zoom",
+    "repository_owner": "zoom",
+    "repository_name": "mcp-zoom",
+    "npm_package": null,
+    "pypi_package": null,
+    "category": "communication",
+    "tags": [
+      "zoom",
+      "video",
+      "meetings"
+    ],
+    "verified": true,
+    "featured": false
+  }
+]

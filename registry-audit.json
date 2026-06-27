@@ -1,0 +1,236 @@
+{
+  "summary": {
+    "baseUrl": "https://openconductor.ai/api/v1",
+    "totalServers": 25,
+    "withInstall": 25,
+    "missingInstall": 0
+  },
+  "missingInstall": [],
+  "withInstall": [
+    {
+      "id": "3452e60b-db55-474f-8219-514c8a2921f6",
+      "slug": "foursquare",
+      "name": "Foursquare",
+      "category": "api",
+      "repositoryUrl": "https://github.com/foursquare/mcp-foursquare",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "91208c9c-902a-493a-b35d-a8069e4f17a7",
+      "slug": "yelp",
+      "name": "Yelp",
+      "category": "api",
+      "repositoryUrl": "https://github.com/yelp/mcp-yelp",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "0149d5f2-6a6a-43f5-bd47-1b5be8a7e05e",
+      "slug": "tripadvisor",
+      "name": "TripAdvisor",
+      "category": "api",
+      "repositoryUrl": "https://github.com/tripadvisor/mcp-tripadvisor",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "83543b94-c176-486b-8cba-58e8d6dc25b3",
+      "slug": "airbnb",
+      "name": "Airbnb",
+      "category": "api",
+      "repositoryUrl": "https://github.com/airbnb/mcp-airbnb",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "71548592-4e26-4d5f-b709-1efd74d3e012",
+      "slug": "booking-com",
+      "name": "Booking.com",
+      "category": "api",
+      "repositoryUrl": "https://github.com/bookingcom/mcp-booking",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "dd40a7d2-b38f-4e48-9d3f-493a6bddd64b",
+      "slug": "flight-aware",
+      "name": "FlightAware",
+      "category": "api",
+      "repositoryUrl": "https://github.com/flightaware/mcp-flightaware",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "f8ea71de-33bf-4735-9c74-7c756da8417f",
+      "slug": "lyft",
+      "name": "Lyft",
+      "category": "api",
+      "repositoryUrl": "https://github.com/lyft/mcp-lyft",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "12b65e68-f83c-4f0b-bbd1-ed8c5f707a2e",
+      "slug": "uber",
+      "name": "Uber",
+      "category": "api",
+      "repositoryUrl": "https://github.com/uber/mcp-uber",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "9d0a74a4-516a-4f97-a3d2-f7e9dd927c77",
+      "slug": "what3words",
+      "name": "what3words",
+      "category": "api",
+      "repositoryUrl": "https://github.com/what3words/mcp-what3words",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "7e3ae0dd-b52d-4213-8be0-defb4c6fdfa9",
+      "slug": "openstreetmap",
+      "name": "OpenStreetMap",
+      "category": "api",
+      "repositoryUrl": "https://github.com/openstreetmap/mcp-osm",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "53ae137a-69f2-4ab2-b1e3-5292cff1314a",
+      "slug": "here-maps",
+      "name": "HERE Maps",
+      "category": "api",
+      "repositoryUrl": "https://github.com/heremaps/mcp-here",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "07c1e0a1-4671-4152-a56e-aca9aadb965c",
+      "slug": "mapbox",
+      "name": "Mapbox",
+      "category": "api",
+      "repositoryUrl": "https://github.com/mapbox/mcp-mapbox",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "da3f5526-2a64-4ee3-98f8-d1cd8fce8f65",
+      "slug": "alpha-vantage",
+      "name": "Alpha Vantage",
+      "category": "api",
+      "repositoryUrl": "https://github.com/alphavantage/mcp-alphavantage",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "7d002641-296b-456c-914d-736762fe076b",
+      "slug": "finnhub",
+      "name": "Finnhub",
+      "category": "api",
+      "repositoryUrl": "https://github.com/finnhub/mcp-finnhub",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "bee1b7b4-943b-42d5-927e-af7e81c8679e",
+      "slug": "polygon-io",
+      "name": "Polygon.io",
+      "category": "api",
+      "repositoryUrl": "https://github.com/polygon-io/mcp-polygon",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "c2d53150-7284-4db2-8334-cc3f15d5a276",
+      "slug": "alpaca",
+      "name": "Alpaca",
+      "category": "api",
+      "repositoryUrl": "https://github.com/alpacahq/mcp-alpaca",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "6137f519-defb-4c17-938e-55271e2a88a8",
+      "slug": "kraken",
+      "name": "Kraken",
+      "category": "api",
+      "repositoryUrl": "https://github.com/kraken/mcp-kraken",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "59d6bcd4-fdac-4c94-9c89-c16a02952a7d",
+      "slug": "binance",
+      "name": "Binance",
+      "category": "api",
+      "repositoryUrl": "https://github.com/binance/mcp-binance",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "4756cf2a-9326-4f6d-86c6-efc1b133b9d7",
+      "slug": "coinbase",
+      "name": "Coinbase",
+      "category": "api",
+      "repositoryUrl": "https://github.com/coinbase/mcp-coinbase",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "6f4eb701-e35d-4ceb-9222-96f38addc3e5",
+      "slug": "freshbooks",
+      "name": "FreshBooks",
+      "category": "api",
+      "repositoryUrl": "https://github.com/freshbooks/mcp-freshbooks",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "e8847650-9a5b-4999-9dd4-f3ed2b73aa21",
+      "slug": "xero",
+      "name": "Xero",
+      "category": "api",
+      "repositoryUrl": "https://github.com/xeroapi/mcp-xero",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "b9c9e356-7679-4246-9131-7c577fafbc37",
+      "slug": "quickbooks",
+      "name": "QuickBooks",
+      "category": "api",
+      "repositoryUrl": "https://github.com/intuit/mcp-quickbooks",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "910d1c0f-0d82-4023-a351-81014fc92eca",
+      "slug": "plaid",
+      "name": "Plaid",
+      "category": "api",
+      "repositoryUrl": "https://github.com/plaid/mcp-plaid",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "fc994fad-c580-4ee8-956e-36453f1e8ed6",
+      "slug": "logto",
+      "name": "Logto",
+      "category": "api",
+      "repositoryUrl": "https://github.com/logto-io/mcp-logto",
+      "installCommand": null,
+      "installMethod": "manual"
+    },
+    {
+      "id": "66c7358b-ba55-42b1-a097-da240829d55f",
+      "slug": "clerk",
+      "name": "Clerk",
+      "category": "api",
+      "repositoryUrl": "https://github.com/clerkinc/mcp-clerk",
+      "installCommand": null,
+      "installMethod": "manual"
+    }
+  ]
+}

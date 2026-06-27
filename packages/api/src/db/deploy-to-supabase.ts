@@ -60,8 +60,20 @@ async function deployToSupabase() {
       
       // Ask if we should drop existing tables
       logger.info('🗑️  Dropping existing tables to ensure clean deployment...');
+
+      // Drop views first (they depend on tables)
+      const viewsToDrop = ['servers_with_stats', 'popular_servers', 'trending_servers'];
+      for (const view of viewsToDrop) {
+        try {
+          await client.query(`DROP VIEW IF EXISTS ${view} CASCADE`);
+          logger.info(`   Dropped view: ${view}`);
+        } catch (error) {
+          logger.warn(`   Could not drop view ${view}: ${error.message}`);
+        }
+      }
       
       const tablesToDrop = [
+        'server_embeddings', 'stacks', 'stack_servers', 'server_submissions', 'server_validations',
         'mcp_servers', 'server_stats', 'server_versions', 'server_dependencies',
         'user_interactions', 'server_reviews', 'github_webhook_logs', 'api_usage',
         'api_keys', 'background_jobs', 'server_analytics_snapshots'
@@ -157,36 +169,14 @@ async function deployToSupabase() {
   }
 }
 
+/**
+ * @deprecated Seeding has moved out of this schema-deploy script. The canonical
+ * seeder is `seed-supabase.ts` (run `npm run seed:supabase`), which reads
+ * `seed-data/mcp-servers.json` via the Supabase client. This script now only
+ * deploys the schema and verifies it; seeding is a separate, explicit step.
+ */
 async function seedSupabase() {
-  const pool = new Pool(supabaseConfig);
-  
-  try {
-    logger.info('🌱 Seeding Supabase database...');
-
-    const client = await pool.connect();
-
-    // Import seed data from our seed.ts
-    const { seedDatabase } = await import('./seed');
-    
-    // Create a mock DatabaseManager for seeding
-    const mockDb = {
-      transaction: async (callback: any) => {
-        return callback(client);
-      },
-      query: (sql: string, params?: any[]) => client.query(sql, params)
-    };
-
-    await seedDatabase(mockDb as any);
-    
-    client.release();
-    logger.info('✅ Supabase seeding completed');
-
-  } catch (error) {
-    logger.error('❌ Supabase seeding failed:', error.message);
-    throw error;
-  } finally {
-    await pool.end();
-  }
+  logger.info('ℹ️  Skipping inline seed. Run `npm run seed:supabase` to populate mcp_servers.');
 }
 
 async function verifyDeployment() {

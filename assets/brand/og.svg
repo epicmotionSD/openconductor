@@ -1,0 +1,30 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="OpenConductor — social card">
+  <defs>
+    <linearGradient id="oc-baton" x1="0.05" y1="0.95" x2="0.95" y2="0.05">
+      <stop offset="0%" stop-color="#00FFB2"/>
+      <stop offset="100%" stop-color="#00C2FF"/>
+    </linearGradient>
+    <linearGradient id="oc-edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00FFB2"/>
+      <stop offset="100%" stop-color="#00C2FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#080B12"/>
+
+  <g transform="translate(96, 195) scale(2.5)">
+    <rect x="8" y="8" width="80" height="80" rx="20" fill="#0F131D"/>
+    <circle cx="24" cy="72" r="4" fill="url(#oc-baton)"/>
+    <path d="M24 72 Q48 58 76 64" stroke="url(#oc-baton)" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.45"/>
+    <path d="M24 72 Q48 40 76 42" stroke="url(#oc-baton)" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.75"/>
+    <path d="M24 72 Q44 22 72 20"  stroke="url(#oc-baton)" stroke-width="6" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <text x="380" y="298" font-family="Sora, Inter, 'Segoe UI', Arial, sans-serif" font-size="80" font-weight="700" fill="#FFFFFF">OpenConductor</text>
+  <text x="380" y="354" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="30" fill="#B8BCC8">Identity, compliance &amp; monetization</text>
+  <text x="380" y="394" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="30" fill="#B8BCC8">for the AI agent economy</text>
+
+  <text x="380" y="488" font-family="'DM Mono', 'Consolas', monospace" font-size="22" fill="#00FFB2">npm install @openconductor/mcp-sdk</text>
+  <text x="380" y="522" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="20" fill="#6B7280">openconductor.ai</text>
+
+  <rect x="0" y="624" width="1200" height="6" fill="url(#oc-edge)"/>
+</svg>

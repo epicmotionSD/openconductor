@@ -18,7 +18,6 @@ import { OpenConductorAPIClient } from './api-client.js';
 import { discoverServers, discoverServersSchema } from './tools/discover.js';
 import { searchServers, searchServersSchema } from './tools/search.js';
 import { getServerDetails, getServerDetailsSchema } from './tools/details.js';
-import { getTrendingServers, getTrendingServersSchema } from './tools/trending.js';
 import { getCategoryStats, getCategoryStatsSchema } from './tools/categories.js';
 import { listStacks, listStacksSchema, getStackDetails, getStackDetailsSchema, shareStack, shareStackSchema } from './tools/stacks.js';
 
@@ -29,7 +28,7 @@ const apiClient = new OpenConductorAPIClient();
 const server = new Server(
   {
     name: 'openconductor-registry',
-    version: '1.1.0',
+    version: '1.1.2',
   },
   {
     capabilities: {
@@ -95,20 +94,6 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             },
           },
           required: ['slug'],
-        },
-      },
-      {
-        name: 'get_trending_servers',
-        description: 'Get the most popular and trending MCP servers based on GitHub stars, recent installs, and community activity. Great for discovering what the community is using.',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            limit: {
-              type: 'number',
-              description: 'Maximum number of trending servers to return (default: 10)',
-              default: 10,
-            },
-          },
         },
       },
       {
@@ -184,11 +169,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case 'get_server_details': {
         const validatedArgs = getServerDetailsSchema.parse(args);
         return await getServerDetails(validatedArgs, apiClient);
-      }
-
-      case 'get_trending_servers': {
-        const validatedArgs = getTrendingServersSchema.parse(args);
-        return await getTrendingServers(validatedArgs, apiClient);
       }
 
       case 'get_category_stats': {

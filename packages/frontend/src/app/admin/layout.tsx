@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
-import { 
-  Terminal, BarChart3, Database, Megaphone, Calendar, Key, LogOut
+import {
+  Terminal, BarChart3, Database, Megaphone, Calendar, Key, LogOut, Brain
 } from 'lucide-react'
 
 interface AdminLayoutProps {
@@ -17,6 +17,8 @@ interface AdminLayoutProps {
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [adminKey, setAdminKey] = useState('')
+  const [keyInput, setKeyInput] = useState('')
+  const [keyError, setKeyError] = useState<string | null>(null)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -32,6 +34,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   const navigationItems = [
     { name: 'Dashboard', href: '/admin', icon: BarChart3 },
+    { name: 'Command Center', href: '/admin/command-center', icon: Brain, badge: 'NEW' },
     { name: 'Servers', href: '/admin/servers', icon: Database },
     { name: 'Marketing', href: '/admin/marketing', icon: Megaphone },
     { name: 'Roadmap', href: '/admin/roadmap', icon: Calendar },
@@ -39,15 +42,16 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     { name: 'API Keys', href: '/admin/api-keys', icon: Key }
   ]
 
-  const handleSetApiKey = () => {
-    const key = prompt('Enter your admin API key:')
-    if (key && key.startsWith('oc_admin_')) {
+  const handleSetApiKey = (e?: React.FormEvent) => {
+    e?.preventDefault()
+    const key = keyInput.trim()
+    if (key.startsWith('oc_admin_')) {
       localStorage.setItem('admin-api-key', key)
       setIsAuthenticated(true)
       setAdminKey(key.substring(0, 20) + '...')
       window.location.reload()
     } else {
-      alert('Invalid admin API key format')
+      setKeyError('Key must start with "oc_admin_"')
     }
   }
 
@@ -69,17 +73,34 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               Enter your admin API key to access the management interface
             </p>
 
-            <div className="space-y-4">
-              <Button onClick={handleSetApiKey} className="w-full">
+            <form onSubmit={handleSetApiKey} className="space-y-4">
+              <div className="text-left">
+                <label htmlFor="admin-key" className="text-sm font-medium text-foreground">
+                  Admin API key
+                </label>
+                <input
+                  id="admin-key"
+                  type="password"
+                  autoComplete="off"
+                  spellCheck={false}
+                  placeholder="oc_admin_..."
+                  value={keyInput}
+                  onChange={(e) => { setKeyInput(e.target.value); setKeyError(null) }}
+                  className="mt-1 w-full px-3 py-2 rounded-md border border-border bg-background text-sm font-mono"
+                />
+                {keyError && <p className="text-xs text-destructive mt-1">{keyError}</p>}
+              </div>
+
+              <Button type="submit" className="w-full" disabled={!keyInput}>
                 <Key className="mr-2 h-4 w-4" />
-                Enter Admin Key
+                Enter
               </Button>
 
               <div className="text-sm text-muted-foreground">
                 <p>Need your API key?</p>
-                <code className="bg-muted px-2 py-1 rounded mt-1 block text-xs">
-                  oc_admin_78736a4a7469d09858a283a024a4de4a9f07025cb350a2282127a1412876acf2
-                </code>
+                <p className="text-xs mt-1">
+                  Retrieve it from your password manager or the <code className="bg-muted px-1 rounded">ADMIN_API_KEY</code> entry in your secrets store.
+                </p>
               </div>
 
               <Button variant="outline" asChild className="w-full">
@@ -87,7 +108,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   Back to Homepage
                 </Link>
               </Button>
-            </div>
+            </form>
           </CardContent>
         </Card>
       </div>
@@ -135,21 +156,28 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           {/* Sidebar Navigation */}
           <nav className="flex-1 p-4 space-y-2">
             {navigationItems.map((item) => {
-              const isActive = pathname === item.href
+              const isActive = pathname === item.href || (item.href !== '/admin' && pathname?.startsWith(item.href))
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={`
-                    flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors
+                    flex items-center justify-between px-3 py-2 rounded-lg transition-colors
                     ${isActive
                       ? 'bg-primary/10 text-primary'
                       : 'text-foreground hover:bg-muted'
                     }
                   `}
                 >
-                  <item.icon className="h-5 w-5" />
-                  <span className="font-medium">{item.name}</span>
+                  <div className="flex items-center space-x-3">
+                    <item.icon className="h-5 w-5" />
+                    <span className="font-medium">{item.name}</span>
+                  </div>
+                  {item.badge && (
+                    <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                      {item.badge}
+                    </Badge>
+                  )}
                 </Link>
               )
             })}

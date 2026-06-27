@@ -169,10 +169,10 @@ npx @openconductor/cli install ${serverSlug}
 \`\`\`
 
 OpenConductor will:
-- ✅ Automatically detect and install dependencies
-- ✅ Configure your \`claude_desktop_config.json\`
-- ✅ Handle port conflicts and validation
-- ✅ Restart Claude Desktop for you
+ - ✅ Automatically detect and install dependencies
+ - ✅ Configure your MCP client config
+ - ✅ Handle port conflicts and validation
+ - ✅ Provide restart instructions for your MCP client
 
 [![Install with OpenConductor](${badgeUrl})](${serverUrl})
 

@@ -6,29 +6,30 @@
 
 import { db } from '../src/db/connection.js';
 
-// Define which servers belong to which stack
+// Stack server slugs use the canonical bare names from the
+// modelcontextprotocol/servers monorepo, not the legacy *-mcp variants.
 const STACK_CONFIGS = {
   essential: [
-    'filesystem-mcp',      // Filesystem access
-    'brave-search-mcp',    // Web search
-    'fetch-mcp',           // HTTP requests
-    'time-mcp',            // Time utilities
+    'filesystem',          // Filesystem access
+    'brave-search',        // Web search
+    'fetch',               // HTTP requests
+    'time',                // Time utilities
     'mcp-memory'           // Persistent memory
   ],
   coder: [
-    'github-mcp',          // GitHub integration
-    'postgresql-mcp',      // PostgreSQL database
-    'filesystem-mcp',      // Filesystem access
+    'github',              // GitHub integration
+    'postgres',            // PostgreSQL database
+    'filesystem',          // Filesystem access
     'mcp-memory',          // Persistent memory
     'sequential-thinking', // Sequential thinking
-    'brave-search-mcp'     // Web search
+    'brave-search'         // Web search
   ],
   writer: [
-    'brave-search-mcp',    // Web research
-    'fetch-mcp',           // HTTP requests
-    'filesystem-mcp',      // Filesystem access
+    'brave-search',        // Web research
+    'fetch',               // HTTP requests
+    'filesystem',          // Filesystem access
     'mcp-memory',          // Persistent memory
-    'google-drive-mcp'     // Google Drive
+    'gdrive'               // Google Drive
   ]
 };
 

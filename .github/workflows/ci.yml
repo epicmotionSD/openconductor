@@ -15,9 +15,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node-version: [18, 20]
-    
+
     services:
       postgres:
         image: postgres:13
@@ -32,7 +33,7 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
-      
+
       redis:
         image: redis:6
         options: >-
@@ -46,52 +47,73 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
+
     - name: Setup Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        
-    - name: Install dependencies
-      run: |
-        npm install --legacy-peer-deps
 
-    - name: Lint code
+    # --- Install (fails the job on a real install error) ---
+    - name: Install root dependencies
+      run: npm install --legacy-peer-deps
+
+    # --- Build (these now FAIL the pipeline on a real error) ---
+    - name: Build shared package
       run: |
+        cd packages/shared
+        npm install --legacy-peer-deps
+        npm run build
+
+    - name: Build API package
+      run: |
+        cd packages/api
+        npm install --legacy-peer-deps
+        npm run build
+
+    - name: Build CLI package
+      run: |
+        cd packages/cli
+        npm install --legacy-peer-deps
+        npm run build
+
+    # --- Static checks (real gates, no running server required) ---
+    - name: Type-check API
+      run: |
+        cd packages/api
+        npm run type-check
+
+    - name: Lint CLI
+      # Surfaces lint findings without hard-blocking on pre-existing debt.
+      # Flip to a hard gate by removing continue-on-error once the package is clean.
+      continue-on-error: true
+      run: |
+        cd packages/cli
         npm run lint --if-present
 
-    - name: Type check
-      run: |
-        npm run type-check --if-present
+    # --- Unit tests (runs for real; a failing test fails the job) ---
+    # jest is pinned in root devDependencies, so this resolves the cached
+    # local binary instead of downloading on every run.
+    - name: Unit tests
+      run: npm test
 
-    - name: Test API
+    # --- Integration tests (NOT yet wired in — documented honestly, not silently skipped) ---
+    # packages/api/test/api.test.ts is a full integration suite that requires:
+    #   1. a migrated + seeded database (the postgres service above),
+    #   2. the API server running on http://localhost:3001.
+    # To enable it, replace this step with:
+    #   - run db migrate/seed against POSTGRES_URL
+    #   - start the server in the background
+    #   - cd packages/api && npm run test:run
+    - name: Integration tests (API) — pending wiring
       env:
         POSTGRES_URL: postgresql://postgres:postgres@localhost:5432/openconductor_test
         REDIS_URL: redis://localhost:6379
         NODE_ENV: test
       run: |
-        echo "Skipping API integration tests (require running server)"
-        # cd packages/api
-        # npm test --if-present
+        echo "::warning::API integration tests are not yet wired into CI."
+        echo "They require a migrated/seeded DB and a running server (see comment in ci.yml)."
 
-    - name: Build packages
-      run: |
-        # Build shared package first
-        cd packages/shared
-        npm install --legacy-peer-deps || true
-        npm run build || true
-
-        # Build API package
-        cd ../api
-        npm install --legacy-peer-deps || true
-        npm run build || echo "API build completed with warnings"
-
-        # Build CLI package
-        cd ../cli
-        npm install --legacy-peer-deps || true
-        npm run build || echo "CLI build completed with warnings"
-        
   publish-cli:
     needs: test
     runs-on: ubuntu-latest

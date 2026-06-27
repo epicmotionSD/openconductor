@@ -20,6 +20,7 @@ build/
 *.db
 *.sqlite
 data/
+!tools/command-center/data/
 
 # Logs
 logs
@@ -114,6 +115,8 @@ claude_desktop_config.json
 *.tmp
 *.temp
 *-backup.*
+tmpclaude-*
+git_*.txt
 
 # Launch and setup scripts (archived)
 launch-*.html
@@ -147,4 +150,14 @@ coverage/
 .venv-video/
 mcp-registry-discovery/
 seed-data/
+!packages/api/src/db/seed-data/
 trinity-ai/
+node_modules
+.env*.local
+
+# External/unrelated projects that live in this folder but are not part of OpenConductor
+# kelatic-booking is a git worktree of a separate repo in ~/Downloads (see audit)
+kelatic-booking/
+
+# Claude Code per-user harness state (settings.local.json is per-user; do not commit)
+.claude/
