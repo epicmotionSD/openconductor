@@ -137,4 +137,32 @@ jobs:
         npm install --legacy-peer-deps
 
     - name: Build CLI
-      run: 
+      run: |
+        cd packages/cli
+        npm run build --if-present
+
+    - name: Check if version is already published
+      id: check-version
+      run: |
+        cd packages/cli
+        PACKAGE_VERSION=$(node -p "require('./package.json').version")
+        if npm view @openconductor/cli@$PACKAGE_VERSION version 2>/dev/null; then
+          echo "Version $PACKAGE_VERSION already exists on npm"
+          echo "should_publish=false" >> $GITHUB_OUTPUT
+        else
+          echo "Version $PACKAGE_VERSION is new"
+          echo "should_publish=true" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Publish to npm
+      if: steps.check-version.outputs.should_publish == 'true'
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: |
+        cd packages/cli
+        npm publish
+
+    - name: Skip publishing (version exists)
+      if: steps.check-version.outputs.should_publish == 'false'
+      run: |
+        echo "Skipping publish - version already exists on npm"

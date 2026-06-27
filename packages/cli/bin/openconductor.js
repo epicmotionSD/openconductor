@@ -183,7 +183,7 @@ ${chalk.bold.cyan('OpenConductor')} ${chalk.dim(`v${pkg.version}`)} - The npm fo
 ${chalk.bold('Quick Start:')}
   ${chalk.cyan('openconductor stack list')}         ${chalk.dim('# See available stacks')}
   ${chalk.cyan('openconductor stack install coder')}  ${chalk.dim('# Install Coder stack')}
-  ${chalk.cyan('openconductor deploy --monetize')}    ${chalk.dim('# Deploy with payments enabled')}
+  ${chalk.cyan('openconductor deploy --dry-run')}     ${chalk.dim('# Preview managed-proxy deployment plan')}
   ${chalk.cyan('openconductor install github-mcp')}   ${chalk.dim('# Install a server')}
 
 ${chalk.bold('Get Help:')}
