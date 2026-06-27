@@ -28,25 +28,32 @@ went from HTTP 500 → HTTP 200 with `server_count` 6/5/5.
   `telemetry_events`, `telemetry_hourly`.
 - API still serves 200 (raw `pg` superuser bypasses RLS).
 
-## Pending
+### `20260626000002_close_rls_and_security_definer_gap.sql` ✅
 
-### `20260626000002_close_rls_and_security_definer_gap.sql` ⚠️ NOT APPLIED
-
-Closes the gap migration 009 didn't cover:
+Closed everything 009 didn't cover.
 
 - RLS on 12 more tables (`stacks`, `stack_servers`, `templates`, the 4 BoD
   agent tables, ad/revenue analytics, `credit_transactions`, `deployments`).
 - Public-read policies for `stacks` / `stack_servers` / `templates`; the rest
   are service-role only.
-- Recreates `command_center_summary` as `security_invoker = true`.
+- Recreated `command_center_summary` with `security_invoker = true`.
 - `REVOKE EXECUTE` on `compute_build_duration` and `handle_new_user` from
   anon/authenticated (they stay `SECURITY DEFINER` for trigger use, but the
-  direct `/rest/v1/rpc/{name}` calls get locked).
-- Pins `update_updated_at_column.search_path` to `''`.
+  direct `/rest/v1/rpc/{name}` calls are locked).
+- Pinned `update_updated_at_column.search_path` to `''`.
 
-Review the per-table reasoning in the migration header before applying. If
-`public.templates` is *not* meant to be public-readable, drop the
-"Public read templates" policy block before running.
+**Result:** all ERROR-level Supabase security advisories now zero
+(rls_disabled_in_public 12→0, security_definer_view 1→0,
+security_definer_function_executable 4→0, function_search_path_mutable 1→0).
+Live API still 200.
+
+## Pending
+
+None at present. Two items deliberately deferred:
+
+- `vector` extension lives in `public` — needs a coordinated rebuild
+  migration to move it to its own schema.
+- Supabase Auth → "Leaked password protection" — dashboard toggle, not SQL.
 
 ---
 

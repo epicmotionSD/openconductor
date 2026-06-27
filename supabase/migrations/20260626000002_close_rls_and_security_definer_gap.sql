@@ -2,8 +2,11 @@
 -- Migration 010 — Close the RLS + SECURITY DEFINER gap left by 009
 -- =============================================================================
 --
--- STATUS: ⚠️ NOT YET APPLIED. Review and apply via Supabase MCP `apply_migration`
---         or psql once you're comfortable with the policy choices below.
+-- STATUS: ✅ APPLIED 2026-06-26 via Supabase MCP. All ERROR-level security
+--         advisories cleared (rls_disabled_in_public 12→0, security_definer_view
+--         1→0, security_definer_function_executable 4→0,
+--         function_search_path_mutable 1→0). API still serves 200 (superuser
+--         bypass intact, as predicted).
 --
 -- WHY:
 --   Migration 009 (already applied 2026-06-26) cleared the RLS / SECURITY DEFINER
